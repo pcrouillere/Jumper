@@ -1,0 +1,72 @@
+body
+{
+	/*body background setting*/
+	background:FFFFCC;
+}
+header
+{
+	/*Header bordure setting*/
+	background:white;
+	border:3px #33FFFF groove;
+	height:40px;
+}
+
+header h2
+{
+	/*#Jumper setting */
+	font-family: Trebuchet MS;
+	color:red;
+	text-align: center;
+	margin-top:5px;
+}
+
+header img
+{
+	/*user profil picture setting */
+	position:fixed;
+	width: 30px;
+	top:17px;
+	right: 132px;
+}
+
+#user_name
+{
+	/*user name bordure setting setting */
+	font-family: Trebuchet MS;
+	color : black;
+	border-radius: 15px;
+	border:2px #33FFFF groove;
+	position:fixed;
+	top:14px;
+	right: 20px;
+	height:30px;
+	width:100px;
+	background:#CCFFFF;
+}
+#user_name p
+{
+	/*user name text setting */
+	color:gray;
+	text-align:center;
+	margin-top:4px;
+}
+section
+{
+	/*section setting setting */
+	background:#CCFFFF;
+	border:3px #33FFFF groove;
+	margin-top:1px;
+}
+#content_page
+{
+	/*content eg text setting*/
+	height:440px;
+	text-align:center;
+}
+footer
+{
+	/*footer (eg:copyright) setting */
+	font-family: Trebuchet MS;
+	text-align:center;
+	color:black;
+}
