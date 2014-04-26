@@ -1,6 +1,4 @@
 Jumper
 ======
-
 NF28 - Project
-How to deal with bookmarks.
-Advanced search with Venne
+bc5fc58ccfb19ef9860b9e5c53c8da600df73253
