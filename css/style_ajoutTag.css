@@ -1,0 +1,40 @@
+#tag_list
+{
+	width: 250px;
+	height:350px;
+	border-radius: 15px;
+	border:2px groove;
+	border-color:rgba(124,188,174,0.8);
+	position: absolute;
+	top:120px;
+	right: 20px;
+	display : block;
+	text-align:center;
+}
+
+#input_tag
+{
+	position:absolute;
+	top:320px;
+}
+
+p#tag_names
+{
+	display : flex;
+	color:red;
+}
+
+#tag_names
+{
+	width: 170px;
+	height:250px;
+	border: 2px groove;
+	border-color:rgba(124,188,174,0.8);
+	position: absolute;
+	top:50px;
+	right:35px;
+	overflow-y:auto;
+	overflow-x:auto;
+	text-align:center;
+	color:black;
+}
