@@ -1,41 +1,28 @@
 	/* ******************************************************************* */
-	/* *********************** TEST DATA - Jumper ************************ */
+	/* ***********************  REQUEST - Jumper  ************************ */
 	/* ***********************          v1        ************************ */
 	/* ******************************************************************* */
 	
-	
-insert into jpUser (userMail, userPassword) values ('pcrouillere@gmail.com','123456789');
-insert into jpUser (userMail, userPassword) values ('pauline.cuche@gmail.com','azertyuiop');
-insert into jpUser (userMail, userPassword) values ('metachenyiyan@gmail.com', 'qsdfghjklm');
-insert into jpUser (userMail, userPassword) values ('blackstronedrummer@gmail.com', 'wxcvbn');
-	
+/* Requête simple */
+
+/* AJOUT */
+/* Ajouter un tag */
 Insert into jpTag(tagUserId, tagName) values(1, 'Musique');
-Insert into jpTag(tagUserId, tagName) values(1, 'Sport');
-Insert into jpTag(tagUserId, tagName) values(1, 'Jeux');
-Insert into jpTag(tagUserId, tagName) values(1, 'IHM');
-Insert into jpTag(tagUserId, tagName) values(1, 'NF28');
-Insert into jpTag(tagUserId, tagName) values(1, 'DIY');
-Insert into jpTag(tagUserId, tagName) values(1, 'Cinema');
 
+/* Ajouter un utilisateur */
+insert into jpUser (userMail, userPassword) values ('pcrouillere@gmail.com','123456789');
 
+/* Ajotuer une URL */
 Insert into jpUrl(urlUri) values(1, 'http://grooveshark.com/#!/masterofsoundtrack/broadcast');
-Insert into jpUrl(urlUri) values(1, 'http://lifehacker.com/5540019/five-best-bookmark-management-tools/all');
-Insert into jpUrl(urlUri) values(1, 'https://docs.google.com/forms/d/1Q8u2oobP1PhWBgsmvrDp61WWnKp9NF39qibDe0MmVv4/viewanalytics');
-Insert into jpUrl(urlUri) values(1, 'http://www.noomuseum.net/');
-Insert into jpUrl(urlUri) values(1, 'http://www.unclegram.fr/categories#photogram');
-Insert into jpUrl(urlUri) values(1, 'http://ecrans.liberation.fr/');
-Insert into jpUrl(urlUri) values(1, 'http://www.vertcerise.com/');
-Insert into jpUrl(urlUri) values(1, 'http://www.madmoizelle.com/films-2014-218292');
 
+/* Retrouver l'ID du compte */
+/* Exemple with pcrouillere@gmail.com */
+Select userId from jpUser where userMail = 'pcrouillere@gmail.com';
 
-insert into jpTagMap(tagMapUserId, tagMapUrlId, tagMapTagId) values(1, 1, 1);
-insert into jpTagMap(tagMapUserId, tagMapUrlId, tagMapTagId) values(1, 2, 5);
-insert into jpTagMap(tagMapUserId, tagMapUrlId, tagMapTagId) values(1, 2, 4);
-insert into jpTagMap(tagMapUserId, tagMapUrlId, tagMapTagId) values(1, 3, 5);
-insert into jpTagMap(tagMapUserId, tagMapUrlId, tagMapTagId) values(1, 4, 6);
-insert into jpTagMap(tagMapUserId, tagMapUrlId, tagMapTagId) values(1, 4, 7);
-insert into jpTagMap(tagMapUserId, tagMapUrlId, tagMapTagId) values(1, 3, 5);
-insert into jpTagMap(tagMapUserId, tagMapUrlId, tagMapTagId) values(1, 4, 6);
-insert into jpTagMap(tagMapUserId, tagMapUrlId, tagMapTagId) values(1, 4, 7);
+/* Retrouver l'ensemble des tags  (name et id) d'un utilisateur */
+/* Exemple avec le user 1 */
+select * from jpTag where tagUserId=1;
 
-
+/* Retrouver l'ensemble des url pour un tag donné */
+/* Exemple avec le tag n°1 */
+select tagMapUrlId from jpTagMap where tagMapTagId=1;
