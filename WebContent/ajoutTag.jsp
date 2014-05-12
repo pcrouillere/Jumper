@@ -1,11 +1,13 @@
 <%@ page pageEncoding="UTF-8" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <!DOCTYPE html >
 <html>
         <head>
 			<meta http-equiv="Content-Type" content"text/html;charset=UTF-8">
-			<link rel="stylesheet" href="../css/style.css"/>
-			<link rel="stylesheet" href="../css/style_ajoutTag.css"/>
-			<link rel="stylesheet" href="../css/style_accueil.css"/>
+			<link type="text/css" rel="stylesheet" href="<c:url value="/css/style.css"/>" />	
+			<link type="text/css" rel="stylesheet" href="<c:url value="/css/style_ajoutTag.css"/>" />	
+			<link type="text/css" rel="stylesheet" href="<c:url value="/css/style_accueil.css"/>" />	
 			<title>Welcome to #Jumper</title>
 		</head>
         
@@ -16,8 +18,7 @@
 					<div id="user_name">
 						<p>Pauline</p>
 					</div>
-					<img src="../img/user_img.png"/></img>
-			
+					<img src="<c:url value="/img/user_img.png"/>"/>			
 			</header>
 			<!--Les section, c'est la partie coeur, c'est la ou on doit developper les differentes fonctionnalit�es -->
 			<section>
@@ -26,21 +27,21 @@
 					<table> <!-- Corps du tableau -->
 						<tr>
 							<td>
-								<img src="../img/apercu_site/ent.png" ondrop="drop(event)" ondragover="allowDrop(event)" id="1" />
+								<img src="<c:url value="/img/apercu_site/ent.png"/>" ondrop="drop(event)" ondragover="allowDrop(event)" id="1" />
 								<p>Ent</p>
 							</td>
 						    <td>
-								<img src="../img/apercu_site/deezer.jpg"  ondrop="drop(event)" ondragover="allowDrop(event)" id="2"/>
+								<img src="<c:url value="/img/apercu_site/deezer.jpg"/>"  ondrop="drop(event)" ondragover="allowDrop(event)" id="2"/>
 								<p>Deezer</p>
 							</td>	
 						    <td>
-								<img src="../img/apercu_site/allocine.png"  ondrop="drop(event)" ondragover="allowDrop(event)" id="3"/>
+								<img src="<c:url value="/img/apercu_site/allocine.png"/>"  ondrop="drop(event)" ondragover="allowDrop(event)" id="3"/>
 								<p>Allocine</p>
 						    </td>
 					    </tr>
 					    <tr>
 							<td>
-								<img src="../img/apercu_site/allocine.png"  ondrop="drop(event)" ondragover="allowDrop(event)" id="4"/>
+								<img src="<c:url value="/img/apercu_site/allocine.png"/>"  ondrop="drop(event)" ondragover="allowDrop(event)" id="4"/>
 								<p>Allocine</p>
 							</td>
 					    </tr>

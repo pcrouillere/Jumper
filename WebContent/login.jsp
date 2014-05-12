@@ -1,4 +1,5 @@
 <%@ page pageEncoding="UTF-8" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <!doctype html>
 <html lang="en-US">
@@ -7,9 +8,8 @@
 	<meta charset="utf-8">
 
 	<title>Login</title>
-
 	<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Varela+Round">
-	<link rel="stylesheet" href="../css/style_login.css"/>
+	<link type="text/css" rel="stylesheet" href="<c:url value="/css/style_login.css"/>" />	
 
 	<!--[if lt IE 9]>
 		<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>

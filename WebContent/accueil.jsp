@@ -1,11 +1,12 @@
 <%@ page pageEncoding="UTF-8" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <!DOCTYPE html >
 <html>
         <head>
 			<meta http-equiv="Content-Type" content"text/html;charset=UTF-8">
-			<link rel="stylesheet" href="../css/style.css"/>
-			<link rel="stylesheet" href="../css/style_accueil.css"/>
-
+			<link type="text/css" rel="stylesheet" href="<c:url value="/css/style.css"/>" />	
+			<link type="text/css" rel="stylesheet" href="<c:url value="/css/style_accueil.css"/>" />
 			<title>Welcome to #Jumper</title>
 		</head>
         
@@ -16,7 +17,7 @@
 					<div id="user_name">
 						<p>Pauline</p>
 					</div>
-					<img src="../img/user_img.png"/>
+					<img src="<c:url value="/img/user_img.png"/>"/>
 			
 			</header>
 			<!--Les section, c'est la partie coeur, c'est la ou on doit developp� les differents fonctionnalit� -->
@@ -24,7 +25,7 @@
 				<ul id="menu_horizontal">
 						<li>15 tags</li>
 						<li>35 favoris</li>
-						<li>2 tags a trier</li>
+						<li>2 favoris à trier</li>
 				</ul>
 				<div id="content_page">
 					
@@ -32,37 +33,37 @@
 					<table> <!-- Corps du tableau -->
 						<tr>
 							<td>
-									<img src="../img/apercu_site/ent.png"/>
+									<img src="<c:url value="/img/apercu_site/ent.png"/>"/>
 									<p>Ent</p>
 							</td>
 						    <td>
-									<img src="../img/apercu_site/deezer.jpg"/>
+									<img src="<c:url value="/img/apercu_site/deezer.jpg"/>"/>
 									<p>Deezer</p>
 							</td>	
 						    <td>
-									<img src="../img/apercu_site/allocine.png"/>
+									<img src="<c:url value="/img/apercu_site/allocine.png"/>"/>
 									<p>Allocine</p>
 						    </td>
 							<td>
-									<img src="../img/apercu_site/allocine.png"/>
+									<img src="<c:url value="/img/apercu_site/allocine.png"/>"/>
 									<p>Allocine</p>
 							</td>
 					    </tr>
 					    <tr>
 							<td>
-									<img src="../img/apercu_site/allocine.png"/>
+									<img src="<c:url value="/img/apercu_site/allocine.png"/>"/>
 									<p>Allocine</p>
 							</td>
 							<td>
-									<img src="../img/apercu_site/allocine.png"/>
+									<img src="<c:url value="/img/apercu_site/allocine.png"/>"/>
 									<p>Allocine</p>
 							</td>
 							<td>
-									<img src="../img/apercu_site/allocine.png"/>
+									<img src="<c:url value="/img/apercu_site/allocine.png"/>"/>
 									<p>Allocine</p>
 							</td>
 							<td>
-									<img src="../img/apercu_site/allocine.png"/>
+									<img src="<c:url value="/img/apercu_site/allocine.png"/>"/>
 									<p>Allocine</p>
 							</td>
 					    </tr>
