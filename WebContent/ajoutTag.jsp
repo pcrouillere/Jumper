@@ -1,5 +1,6 @@
 <%@ page pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ page import="java.util.List, java.util.Date, java.util.Vector"  %>
 
 <!DOCTYPE html >
 <html>
@@ -26,57 +27,66 @@
 			<section>
 				<div id="content_page">
 					<div class="head_content_page">
-						<h1>Ajouter un tags</h1>
+						<h1>Ajouter des tags</h1>
 						<div id="how_to_do">
 								<div class="alert alert-info"><p>Drop all tags you want over the link</p></div>
 						</div>
+					</div>				
+					<div id="all_links">
+					<!-- This part should be loaded from Database, this is just an exemple -->
+						<% 
+							Vector<String> imgList=new Vector<String>();
+							Vector<String> pBalise=new Vector<String>();
+							int i=0;
+							imgList.add("/img/apercu_site/ent.png");
+							imgList.add("/img/apercu_site/deezer.jpg");
+							imgList.add("/img/apercu_site/allocine.png");
+							pBalise.add("ENT");
+							pBalise.add("Deezer");
+							pBalise.add("Allocine");
+							imgList.add("/img/apercu_site/ent.png");
+							imgList.add("/img/apercu_site/deezer.jpg");
+							imgList.add("/img/apercu_site/allocine.png");
+							pBalise.add("ENT");
+							pBalise.add("Deezer");
+							pBalise.add("Allocine");
+							while ( i<imgList.size())
+							{
+						%>
+							<div class="row" id="<%="link_"+String.valueOf(i+1)%>">
+								<div class="col-sm-6 col-md-4">
+									<div class="thumbnail">
+										<img src="<c:url value="<%= imgList.get(i) %>"/>" ondrop="drop(event)" ondragover="allowDrop(event)" id="<%=String.valueOf(i+1)%>" class="img-thumbnail"/>
+										<div class="caption">
+											<p><%= pBalise.get(i)%></p>
+											<p><a href="#" class="btn btn-primary" role="button" id="<%=String.valueOf(i+1)%>"  onclick="done_callback(event)">Done</a></p>
+										</div>
+									</div>
+								</div>
+							</div>
+						<% 
+								i++;
+							}
+						%>
 					</div>
-					<span class="all_links">
-						<div class="row" id="link_1">
-							<div class="col-sm-6 col-md-4">
-								<div class="thumbnail">
-									<img src="<c:url value="/img/apercu_site/ent.png"/>" ondrop="drop(event)" ondragover="allowDrop(event)" id="1" class="img-thumbnail"/>
-									<div class="caption">
-										<p>ENT</p>
-										<p><a href="#" class="btn btn-primary" role="button" id="1"  onclick="done_callback(event)">Done</a></p>
-									</div>
-								</div>
-							</div>
-						</div>
-						
-						<div class="row" id="link_2">
-							<div class="col-sm-6 col-md-4">
-								<div class="thumbnail">
-									<img src="<c:url value="/img/apercu_site/deezer.jpg"/>" ondrop="drop(event)" ondragover="allowDrop(event)" id="2" class="img-thumbnail"/>
-									<div class="caption">
-										<p>Deezer</p>
-										<p><a href="#" class="btn btn-primary" role="button" id="2"  onclick="done_callback(event)">Done</a></p>
-									</div>
-								</div>
-							</div>
-						</div>
-						
-						<div class="row" id="link_3">
-							<div class="col-sm-6 col-md-4">
-								<div class="thumbnail">
-									<img src="<c:url value="/img/apercu_site/deezer.jpg"/>" ondrop="drop(event)" ondragover="allowDrop(event)" id ="3" class="img-thumbnail"/>
-									<div class="caption">
-										<p>Allocine</p>
-										<p><a href="#" class="btn btn-primary" role="button" id="3" onclick="done_callback(event)">Done</a></p>
-									</div>
-								</div>
-							</div>
-						</div>
-					</span>
 				</div>
 				<aside>
 					<div id="tag_list">
-						<h2>Liste des tags</h2>
-						<div id="tag_names"/>
-						</div>
+						<div class="panel panel-default">
+							  <div class="panel-heading">
+							    <h3 class="panel-title">Liste des tags</h3>
+							  </div>
+							    <div class="panel-body" style="height:283px;">
+									<div id="tag_names"/>									
+										<!-- Load all tag names from the database here -->							
+									</div>
+								</div>
+							</div>
 						<div id="input_tag">
-							<label for="tag_name">nom du tag</label>
-							<input type="text" id="tag_name" size="14">
+							<div class="input-group">
+							  <span class="input-group-addon">Add tags</span>
+							  <input type="text" class="form-control" placeholder="Tag name" id="tag_name">
+							</div>
 						</div>
 					</div>
 					<script language="javascript" type="text/javascript">
@@ -130,12 +140,12 @@
 							var targetToRemove=document.getElementById(ele);
 							targetToRemove.parentNode.removeChild(targetToRemove);
 						}
-						
 					</script>
 				</aside>			
 			</section>
 			<footer>
 			<!-- c'est un exemple de footer, on peux le changer plus tard -->
+				<p><%="last check "+new Date().toLocaleString() %></p>
 				<p>Copyright</p>
 			</footer>
         </body>
