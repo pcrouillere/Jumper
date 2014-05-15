@@ -25,4 +25,14 @@
 	    <filter-name>Set Character Encoding</filter-name>
     	<url-pattern>/*</url-pattern>
 	</filter-mapping>
+	
+	<servlet>
+		<servlet-name>tableauBord</servlet-name>
+		<servlet-class>jump.servlets.tableauBord</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>tableauBord</servlet-name>
+		<url-pattern>/tableauBord</url-pattern>
+	</servlet-mapping>
 </web-app>
