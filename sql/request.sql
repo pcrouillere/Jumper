@@ -13,7 +13,7 @@ Insert into jpTag(tagUserId, tagName) values(1, 'Musique');
 insert into jpUser (userMail, userPassword) values ('pcrouillere@gmail.com','123456789');
 
 /* Ajotuer une URL */
-Insert into jpUrl(urlUri) values(1, 'http://grooveshark.com/#!/masterofsoundtrack/broadcast');
+Insert into jpUrl(urlUserId, urlUri, urlTitle) values(1, 'http://grooveshark.com/#!/masterofsoundtrack/broadcast', 'Groov');
 
 /* Retrouver l'ID du compte */
 /* Exemple with pcrouillere@gmail.com */

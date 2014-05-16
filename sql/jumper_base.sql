@@ -31,8 +31,10 @@
 	urlId INT NOT NULL AUTO_INCREMENT,
 	urlUserId INT,
 	urlUri VARCHAR(255) UNIQUE NOT NULL,
+	urlTitle VARCHAR(255),
 	PRIMARY KEY (urlId)
 	);
+	
 	
 	/* * COUPLE TAG - URL **/
 	CREATE TABLE jpTagMap(
