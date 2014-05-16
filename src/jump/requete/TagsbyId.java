@@ -22,7 +22,7 @@ public class TagsbyId {
     	userId = utilisateurId;
     }
 
-    public List<String> executerTests( HttpServletRequest request ) {
+    public List<String> executer() {
     	/* Connexion à la base de données */
     	String url = "jdbc:mysql://localhost:3306/jumperdatabase";
     	Connection connexion = null;
@@ -52,7 +52,7 @@ public class TagsbyId {
     	        
 
     	        /* Traiter ici les valeurs récupérées. */
-    	        tags.add( tag);
+    	        tags.add(tag);
     	    }
     	    
     	} catch ( SQLException e ) {
@@ -81,7 +81,8 @@ public class TagsbyId {
     	        }
     	    }
     	}
-
-        return tags;
+    	
+    	if(errors.isEmpty()) return tags;
+    	return errors;
     }
 }

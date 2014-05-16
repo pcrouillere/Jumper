@@ -1,6 +1,6 @@
 <%@ page pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-
+<%@ page import="java.util.*" %>
 <!DOCTYPE html >
 <html>
         <head>
@@ -35,13 +35,20 @@
 				
 					<div class="row">
   
-					<c:forEach items="${tags}" var="tag" varStatus="boucle">
-						<div class="col-xs-6 col-md-3">
-							<div class="jumbotron">
-							<p> ${ tag }</p>
-							</div>    					
-  						</div>            			
-        			</c:forEach>
+  
+  					
+    				
+    				
+
+					<c:forEach items="${mainMenu}" var="myMenu">
+					    tag : ${myMenu.key}  <br>
+					    <c:forEach items="${myMenu.value}" var="item" varStatus="loop">
+					         site : ${item} <br>
+					    </c:forEach>                                            
+					    
+					</c:forEach>
+					
+					
 				</div>
 				</div>
 			
