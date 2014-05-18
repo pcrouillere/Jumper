@@ -40,9 +40,8 @@ public abstract class Dao implements Serializable {
  * Map<String, String> attr 	: Ensemble des attributs
  *  */
 	
-	static protected ResultSet request(String sql, Map<String, String> attr){
+	static protected ResultSet freeRequest(String sql, Map<String, String> attr){
 		return Base.getInstance().executeQuery(sql,  attr);
-		
 	}
 	
 	static protected ResultSet search(String tableName, Map<String, String> attr, String orderBy){

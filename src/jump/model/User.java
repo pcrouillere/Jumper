@@ -1,71 +1,136 @@
 package jump.model;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-public class User {
+public class User extends Dao {
+	
+	private static User instance = null;
 	private String uEmail;
 	private String uPassword;
 	private int uId;
 	private Base uCon;
-	private Tag[] uTags;
+	private List<Tag> uTags;
 	private int nbTag;
-	private int nbMaxTag;
-	private Url[] uUrls;
+	private List<Url> uUrls;
 	private int nbUrl;
-	private int nbMaxUrl;
+	private List<TagMap> uTagMap;
+	private int nbTagMap;
+	
+	public static User getInstance(){
+		if (instance == null)
+			instance = new User();
+		return instance;
+	}
+	
+	public static User getInstance(int id, String email, String pass){
+		if (instance == null)
+			instance = new User(id, email, pass);
+		return instance;
+	}
 	
 	/* Créer un nouveau user */
-	public User() {
-		uTags = new Tag[150];
-		uUrls = new Url[150];
+	private User() {
+		uTags = new ArrayList<Tag>();
+		uUrls = new ArrayList<Url>();
+		uTagMap = new ArrayList<TagMap>();
 		nbTag = 0;
 		nbUrl = 0;
 	}
-	
+
 	/* Créer un nouveau user */	
-	public User(int id, String email, String pass){
+	private User(int id, String email, String pass){
 		super();
 		uCon = new Base();
-		uTags = new Tag[150];
-		uUrls = new Url[150];
+		uTags = new ArrayList<Tag>();
+		uUrls = new ArrayList<Url>();
+		uTagMap = new ArrayList<TagMap>();
 		setuEmail(email);
 		setuPassword(pass);
 		nbTag = 0;
 		nbUrl = 0;
-		nbMaxTag = 50;
-		nbMaxUrl = 50;
+		nbTagMap = 0;
 	}
 	
-	/* Fonction pour ajouter un tag dans le tableau des tags de l'utilisateur */
-	private void AddTag(Tag tag) {
-		int i;
-		if (nbTag==nbMaxTag) {
-			Tag[] uNewTags = new Tag[nbMaxTag + 50]; 
-			for (i=0; i <= nbMaxTag; i++) {
-				uNewTags[i] = uTags[i]; 
-			}
-			uTags = uNewTags;
-			nbMaxTag += 50;
+	/* Fonction qui retourne le tag recherché en fonctiond de son ID */
+	public Tag getTagById(int id) {
+		for (int i=0; i<= uTags.size(); i++) {
+			if(uTags.get(i).getTid()==id)
+				return uTags.get(i);
 		}
-		uTags[nbTag]=tag;
+		return null;
+	}
+	
+	public Url getUrlById(int id){
+		for(int i=0; i<= uUrls.size(); i++){
+			if(uUrls.get(i).getuId()==id)
+				return uUrls.get(i);
+		}
+		return null;
+	}
+	
+	/* Fonction pour ajouter un tag dans la liste des tags de l'utilisateur */
+	private void addOneTag(Tag tag) {
+		uTags.add(tag);
 		nbTag++;
 	}
 	
-	/* Fonction pour ajouter une URL dans le tableau d'URL de l'utilisateur */
-	@SuppressWarnings("unused")
-	private void AddUrl(Url url) {
-		if (nbUrl==nbMaxUrl) {
-			Url[] uNewUrls = new Url[nbMaxUrl + 50]; 
-			for (int i=0; i <= nbMaxUrl; i++) {
-				uNewUrls[i] = uUrls[i]; 
-			}
-			uUrls = uNewUrls;
-			nbMaxUrl += 50;
-		}
-		uUrls[nbTag]=url;
+	/* Fonction pour ajouter une URL dans la liste d'URL de l'utilisateur */
+	private void addOneUrl(Url url) {
+		uUrls.add(url);
 		nbUrl++;
 	}
 	
+	private void addOneMap(TagMap tagMap){
+		uTagMap.add(tagMap);
+		nbTagMap++;
+	}
+	
+	// TODO : Enlever les variables temporaires
+	// TODO : Ajouter les commentaires expliquant les fonctions
+
+	private void addAllTag() throws SQLException{
+		ResultSet resultat;
+		Map<String, String> attr = new HashMap<String, String>();
+		attr.put("tagUserId", Integer.toString(this.uId));
+		resultat = Dao.search("jpTag", attr, null);
+		while(resultat.next()){
+			int tagId = resultat.getInt("tagId");
+			String tagName = resultat.getString("tagName");
+			Tag tag = new Tag(tagName, tagId, this.uId);
+			addOneTag(tag);
+		}
+	}
+	
+	private void addAllUrl() throws SQLException {
+		ResultSet resultat;
+		Map<String, String> attr = new HashMap<String, String>();
+		attr.put("urlUserId", Integer.toString(this.uId));
+		resultat = Dao.search("jpUrl", attr, null);
+		while(resultat.next()){
+			int urlId = resultat.getInt("urlId");
+			String urlTitle = resultat.getString("urlTitle");
+			String urlUri = resultat.getString("urlUri");
+			Url url = new Url(urlId, this.uId, urlUri, urlTitle);
+			addOneUrl(url);
+		}
+	}
+
+	private void addAllMap() throws SQLException {
+		ResultSet resultat;
+		Map<String, String> attr = new HashMap<String, String>();
+		attr.put("tagMapUserId", Integer.toString(this.uId));
+		resultat = Dao.search("jpTagMap", attr, null);
+		while(resultat.next()){
+			TagMap tagMap = new TagMap(resultat.getInt("tagMapId"), getTagById(resultat.getInt("tagMapTagId")), getUrlById(resultat.getInt("tagMapUrlId")));
+			addOneMap(tagMap);
+		}
+	}
+
 	/* Fonction pour ajouter un user
 	 * @param
 	 * sql_data		: Contient les informations sur le User */

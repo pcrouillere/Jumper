@@ -1,51 +1,49 @@
 package jump.model;
 
-public class Tag {
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.Map;
+
+public class Tag extends Dao {
 	private String tName;
 	private int tid;
 	private int tUserId;
-	private Url[] urlTag;
-	private int nbUrl;
-	private int maxnbUrl;
+
 	
 	Tag(String n, int id, int uid) {
 		tName = n;
 		tid = id;
 		tUserId = id;
-		nbUrl = 0;
-		maxnbUrl = 50;
-		urlTag = new Url[maxnbUrl];
 	}
-	
-	public void addUrl(Url url){
-		if (nbUrl == maxnbUrl - 1){
-			Url[] newUrlTag = new Url[maxnbUrl + 50];
-			for (int i=0; i <= maxnbUrl; i++) {
-				newUrlTag = urlTag;
-			}
-			maxnbUrl += 50;
-			urlTag = newUrlTag;
-		}
-		urlTag[nbUrl] = url;
-		nbUrl++;
+
+
+	public String gettName() {
+		return tName;
 	}
-	
-	public void deleteUrl(Url url){
-		int j = 0;
-		for (int i=0; i <= nbUrl; i++){
-			if (urlTag[i] == url) {
-				j = i;
-			}
-		for (int k=0; k <= nbUrl - j; k++){
-			urlTag[j+k] = urlTag[j+k+1];
-		}
-		urlTag[nbUrl] = null;
-		nbUrl--;
-		}
+
+
+	public void settName(String tName) {
+		this.tName = tName;
 	}
-	
-	public findUrl(){
-		
+
+
+	public int getTid() {
+		return tid;
+	}
+
+
+	public void setTid(int tid) {
+		this.tid = tid;
+	}
+
+
+	public int gettUserId() {
+		return tUserId;
+	}
+
+
+	public void settUserId(int tUserId) {
+		this.tUserId = tUserId;
 	}
 	
 }
