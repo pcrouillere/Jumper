@@ -1,4 +1,13 @@
-package jump.model;
+package dao;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import framework.Dao;
 
 public class Url extends Dao {
 	private int uId;
@@ -12,6 +21,22 @@ public class Url extends Dao {
 		uUri = uri;
 		uTitle = title;
 	}
+	
+	public List<Tag> getTags() throws SQLException{
+		List<Tag> allTags = new ArrayList<Tag>();
+		User u = User.getInstance();
+		ResultSet resultId;
+		Map<String, String> attr = new HashMap<String, String>();
+		attr.put("tagMapUrlId", Integer.toString(this.uId));
+		attr.put("tagMapUserId", Integer.toString(u.getuId()));
+		resultId = Dao.search("jpTagMap", attr);
+		
+		while(resultId.next()){
+			allTags.add(u.getTagById(resultId.getInt("tagMapTagId")));
+		}
+		return null;
+	}
+	
 	public int getuId() {
 		return uId;
 	}
@@ -43,9 +68,5 @@ public class Url extends Dao {
 	public void setuTitle(String uTitle) {
 		this.uTitle = uTitle;
 	}
-
-
-	/* Table de String contenant tous les names des tags assignés à l'url */
-	
 
 }

@@ -1,4 +1,4 @@
-package jump.model;
+package dao;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -6,6 +6,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import framework.Base;
+import framework.Dao;
 
 public class User extends Dao {
 	
@@ -32,6 +35,31 @@ public class User extends Dao {
 			instance = new User(id, email, pass);
 		return instance;
 	}
+	
+	public static User getInstance(String email, String pass) throws SQLException{
+		boolean realUser = false;
+		int id = 0;
+		if (instance == null){
+			Map<String, String> attr = new HashMap<String, String>();
+			ResultSet result;
+			attr.put("userMail", email);
+			result = Dao.search("jpUser", attr);
+			while (result.next()){
+				System.out.println(result.getString("userPassword"));
+				if(result.getString("userPassword").equals(pass)){
+					realUser=true;
+					id = result.getInt("userId");
+				}
+			}
+			if (realUser){
+			instance = new User(id, email, pass);
+			return instance;
+			}
+		}
+		return null;
+	}
+	
+
 	
 	/* Créer un nouveau user */
 	private User() {
@@ -97,7 +125,7 @@ public class User extends Dao {
 		ResultSet resultat;
 		Map<String, String> attr = new HashMap<String, String>();
 		attr.put("tagUserId", Integer.toString(this.uId));
-		resultat = Dao.search("jpTag", attr, null);
+		resultat = Dao.search("jpTag", attr);
 		while(resultat.next()){
 			int tagId = resultat.getInt("tagId");
 			String tagName = resultat.getString("tagName");
@@ -110,7 +138,7 @@ public class User extends Dao {
 		ResultSet resultat;
 		Map<String, String> attr = new HashMap<String, String>();
 		attr.put("urlUserId", Integer.toString(this.uId));
-		resultat = Dao.search("jpUrl", attr, null);
+		resultat = Dao.search("jpUrl", attr);
 		while(resultat.next()){
 			int urlId = resultat.getInt("urlId");
 			String urlTitle = resultat.getString("urlTitle");
@@ -124,29 +152,31 @@ public class User extends Dao {
 		ResultSet resultat;
 		Map<String, String> attr = new HashMap<String, String>();
 		attr.put("tagMapUserId", Integer.toString(this.uId));
-		resultat = Dao.search("jpTagMap", attr, null);
+		resultat = Dao.search("jpTagMap", attr);
 		while(resultat.next()){
 			TagMap tagMap = new TagMap(resultat.getInt("tagMapId"), getTagById(resultat.getInt("tagMapTagId")), getUrlById(resultat.getInt("tagMapUrlId")));
 			addOneMap(tagMap);
 		}
 	}
 
-	/* Fonction pour ajouter un user
+	/** Fonction pour ajouter un user
 	 * @param
-	 * sql_data		: Contient les informations sur le User */
+	 * sql_data		: Contient les informations sur le User **/
 	
 	static public boolean insert(String [] sql_data){
 		return Dao.insert("jpuser", sql_data);
 	}
 	
-	/* Fonction pour retrouver tous les tags d'un utilisateur
-	 * @param
-	 *  */
+	/* Fonction qui retourne tous les tags de l'utilisateur  */
 	
-	public List<Tag> findAllTag() {
-		return null;
+	public List<Tag> getAllTag() {
+		return uTags;
 	}
 
+	/* Fonction qui retourne toutes les URLs de l'utilisateur  */
+	public List<Url> getAllUrl(){
+		return uUrls;
+	}
 	
 	/* Getter & Setter */
 	public Base getuCon() {

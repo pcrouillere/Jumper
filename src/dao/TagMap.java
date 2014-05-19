@@ -1,4 +1,6 @@
-package jump.model;
+package dao;
+
+import framework.Dao;
 
 public class TagMap extends Dao {
 	private int tmId;
