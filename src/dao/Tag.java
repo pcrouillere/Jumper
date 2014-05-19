@@ -23,7 +23,7 @@ public class Tag extends Dao {
 	/** getUrls() : fonction qui retourne l'ensemble des urls taggees avec le tag 
 	 * @return List<Url>
 	 * **/
-	public List<Url> getUrls() throws SQLException{
+	public List<Url> getUrls() {
 		List<Url> allUrls = new ArrayList<Url>();
 		User u = User.getInstance();
 		ResultSet resultId;
@@ -32,8 +32,13 @@ public class Tag extends Dao {
 		attr.put("tagMapUserId", Integer.toString(u.getuId()));
 		resultId = Dao.search("jpTagMap", attr);
 		
-		while(resultId.next()){
-			allUrls.add(u.getUrlById(resultId.getInt("tagMapUrlId")));
+		try {
+			while(resultId.next()){
+				allUrls.add(u.getUrlById(resultId.getInt("tagMapUrlId")));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		return allUrls;
 	}
