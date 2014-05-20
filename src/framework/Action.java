@@ -2,11 +2,13 @@ package framework;
 
 import java.sql.SQLException;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import sun.security.jca.GetInstance;
 import dao.*;
 
 /**
@@ -37,6 +39,37 @@ public class Action
 		return req;
 	}
 	
+	public HttpServletRequest accueil(HttpServletRequest req){
+		
+		System.out.println("je rentre dans accueil :)");
+		User user = User.getInstance();
+		List<Tag> tags = user.getAllTag();
+		int nbTags = tags.size();
+		List<Url> urls = user.getAllUrl();
+		int nbUrls = urls.size();
+		List<Url> untaggedUrls = user.getUntaggedUrl();
+		int nbUntaggedUrls = untaggedUrls.size();
+		Map<Tag, List<Url>> mapTagUrls = new HashMap<Tag, List<Url>>();
+		
+		if (tags != null){
+			Iterator<Tag> it = tags.iterator();
+			while(it.hasNext()){
+				Tag tag = it.next();
+				mapTagUrls.put(tag, tag.getUrls());
+			}
+		}
+		
+		req.setAttribute("tags", tags);
+		req.setAttribute("urls", urls);
+		req.setAttribute("untaggedurls", untaggedUrls);
+		req.setAttribute("mapTagUrls", mapTagUrls);
+		req.setAttribute("nbTags", nbTags);
+		req.setAttribute("nbUrls", nbUrls);
+		req.setAttribute("nbUntaggedUrls", nbUntaggedUrls);
+		
+		return req;
+	}
+	
 	/** Fonction login
 	 * Gere la connexion de l'utilisateur lors de son arrivee dans l'application
 	 * @param req	: HttpServletRequest **/
@@ -47,22 +80,21 @@ public class Action
 		String mdp = req.getParameter("password");
 		boolean access = false;
 		User user;
+		if(email!=null) {
 		try {
 			user = User.getInstance(email, mdp);
 			System.out.println(email);
 			System.out.println(mdp);
 			if (user!=null) {
-				System.out.println("Good User");
-				this.parent.message("Bienvenue ! ");
 				this.parent.session().open(user);
-				this.parent.redirect("accueil");
+				this.parent.redirect("accueil", true);
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		}
 		
 	return req;
 	}
-	
 	}

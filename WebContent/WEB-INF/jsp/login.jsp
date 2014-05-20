@@ -9,12 +9,6 @@
 
 	<title>Login</title>
 	<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Varela+Round">
-	<link type="text/css" rel="stylesheet" href="<c:url value="/css/style_login.css"/>" />	
-
-	<!--[if lt IE 9]>
-		<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-	<![endif]-->
-
 </head>
 
 <body>

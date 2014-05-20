@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import sun.security.util.Length;
 import framework.Base;
 import framework.Dao;
 
@@ -79,12 +80,17 @@ public class User extends Dao {
 		uTagMap = new ArrayList<TagMap>();
 		setuEmail(email);
 		setuPassword(pass);
+		setuId(id);
 		nbTag = 0;
 		nbUrl = 0;
 		nbTagMap = 0;
+		addAllTag();
+		addAllUrl();
+		addAllMap();
+		getUntaggedUrl();
 	}
 	
-	/* Fonction qui retourne le tag recherché en fonctiond de son ID */
+	/* Fonction qui retourne le tag recherché en fonction de son ID */
 	public Tag getTagById(int id) {
 		for (int i=0; i<= uTags.size(); i++) {
 			if(uTags.get(i).getTid()==id)
@@ -101,6 +107,14 @@ public class User extends Dao {
 		return null;
 	}
 	
+	public List<TagMap> getuTagMap() {
+		return uTagMap;
+	}
+
+	public void setuTagMap(List<TagMap> uTagMap) {
+		this.uTagMap = uTagMap;
+	}
+
 	/* Fonction pour ajouter un tag dans la liste des tags de l'utilisateur */
 	private void addOneTag(Tag tag) {
 		uTags.add(tag);
@@ -121,41 +135,56 @@ public class User extends Dao {
 	// TODO : Enlever les variables temporaires
 	// TODO : Ajouter les commentaires expliquant les fonctions
 
-	private void addAllTag() throws SQLException{
+	private void addAllTag() {
 		ResultSet resultat;
 		Map<String, String> attr = new HashMap<String, String>();
 		attr.put("tagUserId", Integer.toString(this.uId));
 		resultat = Dao.search("jpTag", attr);
-		while(resultat.next()){
-			int tagId = resultat.getInt("tagId");
-			String tagName = resultat.getString("tagName");
-			Tag tag = new Tag(tagName, tagId, this.uId);
-			addOneTag(tag);
+		try {
+			while(resultat.next()){
+				int tagId = resultat.getInt("tagId");
+				String tagName = resultat.getString("tagName");
+				Tag tag = new Tag(tagName, tagId, this.uId);
+				addOneTag(tag);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 	
-	private void addAllUrl() throws SQLException {
+	private void addAllUrl() {
 		ResultSet resultat;
 		Map<String, String> attr = new HashMap<String, String>();
 		attr.put("urlUserId", Integer.toString(this.uId));
 		resultat = Dao.search("jpUrl", attr);
-		while(resultat.next()){
-			int urlId = resultat.getInt("urlId");
-			String urlTitle = resultat.getString("urlTitle");
-			String urlUri = resultat.getString("urlUri");
-			Url url = new Url(urlId, this.uId, urlUri, urlTitle);
-			addOneUrl(url);
+		try {
+			while(resultat.next()){
+				int urlId = resultat.getInt("urlId");
+				String urlTitle = resultat.getString("urlTitle");
+				String urlUri = resultat.getString("urlUri");
+				Url url = new Url(urlId, this.uId, urlUri, urlTitle);
+				addOneUrl(url);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 
-	private void addAllMap() throws SQLException {
+	private void addAllMap() {
 		ResultSet resultat;
 		Map<String, String> attr = new HashMap<String, String>();
 		attr.put("tagMapUserId", Integer.toString(this.uId));
 		resultat = Dao.search("jpTagMap", attr);
-		while(resultat.next()){
-			TagMap tagMap = new TagMap(resultat.getInt("tagMapId"), getTagById(resultat.getInt("tagMapTagId")), getUrlById(resultat.getInt("tagMapUrlId")));
-			addOneMap(tagMap);
+		try {
+			while(resultat.next()){
+				TagMap tagMap = new TagMap(resultat.getInt("tagMapId"), getTagById(resultat.getInt("tagMapTagId")), getUrlById(resultat.getInt("tagMapUrlId")));
+				addOneMap(tagMap);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 
@@ -176,6 +205,25 @@ public class User extends Dao {
 	/* Fonction qui retourne toutes les URLs de l'utilisateur  */
 	public List<Url> getAllUrl(){
 		return uUrls;
+	}
+	
+	public List<Url> getUntaggedUrl() {
+		ResultSet result;
+		List<Url> untaggedUrl = new ArrayList<Url>();
+		Map<String, String> attr = new HashMap<String, String>();
+		attr = null;
+		result = Dao.freeRequest("Select * from jpurl where urlId NOT IN (Select tagmapurlid from jptagmap where tagmapUserid = (select userid from jpuser where userMail='pcrouillere@gmail.com'))", attr);
+		try {
+			while(result.next()){
+				Url url = getUrlById(result.getInt("urlId"));
+				untaggedUrl.add(url);				
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.println(untaggedUrl.size());
+		return untaggedUrl;
 	}
 	
 	/* Getter & Setter */
