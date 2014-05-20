@@ -211,8 +211,8 @@ public class User extends Dao {
 		ResultSet result;
 		List<Url> untaggedUrl = new ArrayList<Url>();
 		Map<String, String> attr = new HashMap<String, String>();
-		attr.put("userMail", this.uEmail);
-		result = Dao.freeRequest("Select * from jpurl where urlId NOT IN (Select tagmapurlid from jptagmap where tagmapUserid = (select userid from jpuser where userMail=?))", attr);
+		attr = null;
+		result = Dao.freeRequest("Select * from jpurl where urlId NOT IN (Select tagmapurlid from jptagmap where tagmapUserid = (select userid from jpuser where userMail='pcrouillere@gmail.com'))", attr);
 		try {
 			while(result.next()){
 				Url url = getUrlById(result.getInt("urlId"));
@@ -223,7 +223,7 @@ public class User extends Dao {
 			e.printStackTrace();
 		}
 		System.out.println(untaggedUrl.size());
-		return null;
+		return untaggedUrl;
 	}
 	
 	/* Getter & Setter */

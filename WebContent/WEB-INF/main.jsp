@@ -12,7 +12,13 @@
 			</style>
 			<title>Welcome to #Jumper</title>
 		</head>
-	<body>
+	        <body>
+			<header>
+				<h2>#Jumper</h2>
+					<div id="user_name">
+						<p>Pauline</p>
+					</div>
+			</header>
 		<div id="page">
 			<div>
 				<%

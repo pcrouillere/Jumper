@@ -40,6 +40,8 @@ public class Action
 	}
 	
 	public HttpServletRequest accueil(HttpServletRequest req){
+		
+		System.out.println("je rentre dans accueil :)");
 		User user = User.getInstance();
 		List<Tag> tags = user.getAllTag();
 		int nbTags = tags.size();
@@ -64,6 +66,7 @@ public class Action
 		req.setAttribute("nbTags", nbTags);
 		req.setAttribute("nbUrls", nbUrls);
 		req.setAttribute("nbUntaggedUrls", nbUntaggedUrls);
+		
 		return req;
 	}
 	
@@ -77,18 +80,19 @@ public class Action
 		String mdp = req.getParameter("password");
 		boolean access = false;
 		User user;
+		if(email!=null) {
 		try {
 			user = User.getInstance(email, mdp);
 			System.out.println(email);
 			System.out.println(mdp);
 			if (user!=null) {
 				this.parent.session().open(user);
-				this.parent.redirect("accueil");
-				this.accueil(req);
+				this.parent.redirect("accueil", true);
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}
 		}
 		
 	return req;

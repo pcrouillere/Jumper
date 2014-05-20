@@ -245,7 +245,7 @@ public class FrontController extends HttpServlet {
 		String root = getServletContext().getRealPath("/");
 		root = root.substring(0,root.indexOf(".metadata")-1).concat(this.getServletContext().getContextPath()).concat("/");
 		root = ToolBox.parse_filename(root);
-		return "C:\\Users\\Pauline\\Documents\\Jumper\\";
+		return root;
 	}
 
 }
