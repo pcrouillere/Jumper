@@ -15,45 +15,14 @@
 		</ul>
 					<table> 
 						<tr>
-							<td>
-									<img src="<c:url value="/img/apercu_site/ent.png"/>"/>
-									<p>Ent</p>
-							</td>
-						    <td>
-									<img src="<c:url value="/img/apercu_site/deezer.jpg"/>"/>
-									<p>Deezer</p>
-							</td>	
-						    <td>
-									<img src="<c:url value="/img/apercu_site/allocine.png"/>"/>
-									<p>Allocine</p>
-						    </td>
-							<td>
-									<img src="<c:url value="/img/apercu_site/allocine.png"/>"/>
-									<p>Allocine</p>
-							</td>
-					    </tr>
-					    <tr>
-							<td>
-									<img src="<c:url value="/img/apercu_site/allocine.png"/>"/>
-									<p>Allocine</p>
-							</td>
-							<td>
-									<img src="<c:url value="/img/apercu_site/allocine.png"/>"/>
-									<p>Allocine</p>
-							</td>
-							<td>
-									<img src="<c:url value="/img/apercu_site/allocine.png"/>"/>
-									<p>Allocine</p>
-							</td>
-							<td>
-									<img src="<c:url value="/img/apercu_site/allocine.png"/>"/>
-									<p>Allocine</p>
-							</td>
-					    </tr>
+						<%
+						if (urls!=null){
+							for(int i=0; i<=1; i++) {
+								Url u = urls.get(i);
+								String uri = u.getuUri();
+								%><td><p><%= uri %></td></p><%} }%>
 					</table>
 					
 				</div>
-				<!-- implement� votre code ici -->
 			
 			</section>
-			<!--Si votre page contient une tab (ex: liste des tags), penser a utiliser la balise <aside>, elle fait pour ce genre de fonctionnalit�-->

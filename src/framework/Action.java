@@ -59,6 +59,10 @@ public class Action
 			}
 		}
 		
+		if (urls!= null){
+			System.out.println("Urls not null bitch");
+		}
+		
 		req.setAttribute("tags", tags);
 		req.setAttribute("urls", urls);
 		req.setAttribute("untaggedurls", untaggedUrls);
