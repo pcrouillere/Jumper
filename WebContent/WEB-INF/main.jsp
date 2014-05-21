@@ -32,7 +32,7 @@
 			</div>
 			
 			<footer>
-				<p>Copyright</p>
+				<p>Copyright Crouillère Pauline, Cuche Pauline, Chen Yiyan, Saadi Mourad</p>
 			</footer>
 		</div>
 	</body>
