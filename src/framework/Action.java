@@ -40,8 +40,6 @@ public class Action
 	}
 	
 	public HttpServletRequest accueil(HttpServletRequest req){
-		
-		System.out.println("je rentre dans accueil :)");
 		User user = User.getInstance();
 		List<Tag> tags = user.getAllTag();
 		int nbTags = tags.size();
@@ -66,6 +64,7 @@ public class Action
 		req.setAttribute("nbTags", nbTags);
 		req.setAttribute("nbUrls", nbUrls);
 		req.setAttribute("nbUntaggedUrls", nbUntaggedUrls);
+		req.setAttribute("user", null);
 		
 		return req;
 	}

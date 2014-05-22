@@ -6,18 +6,21 @@
 <% User user = (User) session.getAttribute("user"); %>
 <html>
         <head>
-			<meta http-equiv="Content-Type" content"text/html;charset=UTF-8">
+			<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
 			<style type="text/css">
 				<%= css %>
 			</style>
 			<title>Welcome to #Jumper</title>
 		</head>
 	        <body>
-			<header>
+	        <header>
 				<h2>#Jumper</h2>
-					<div id="user_name">
-						<p>Pauline</p>
-					</div>
+					<% if (user!=null){ %>
+						<div id="user_name">
+						<p><%= user.getuName() %></p>
+					</div>	
+					<%} %>
+
 			</header>
 		<div id="page">
 			<div>

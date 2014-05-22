@@ -24,6 +24,7 @@ public class User extends Dao {
 	private int nbUrl;
 	private List<TagMap> uTagMap;
 	private int nbTagMap;
+	private String uName;
 	
 	public static User getInstance(){
 		if (instance == null)
@@ -31,15 +32,24 @@ public class User extends Dao {
 		return instance;
 	}
 	
-	public static User getInstance(int id, String email, String pass){
+	public String getuName() {
+		return uName;
+	}
+
+	public void setuName(String uName) {
+		this.uName = uName;
+	}
+
+	public static User getInstance(int id, String email, String pass, String name){
 		if (instance == null)
-			instance = new User(id, email, pass);
+			instance = new User(id, email, pass, name);
 		return instance;
 	}
 	
 	public static User getInstance(String email, String pass) throws SQLException{
 		boolean realUser = false;
 		int id = 0;
+		String name = "";
 		if (instance == null){
 			Map<String, String> attr = new HashMap<String, String>();
 			ResultSet result;
@@ -50,10 +60,11 @@ public class User extends Dao {
 				if(result.getString("userPassword").equals(pass)){
 					realUser=true;
 					id = result.getInt("userId");
+					name = result.getString("userName");
 				}
 			}
 			if (realUser){
-			instance = new User(id, email, pass);
+			instance = new User(id, email, pass, name);
 			return instance;
 			}
 		}
@@ -72,8 +83,9 @@ public class User extends Dao {
 	}
 
 	/* Créer un nouveau user */	
-	private User(int id, String email, String pass){
+	private User(int id, String email, String pass, String name){
 		super();
+		uName = name;
 		uCon = new Base();
 		uTags = new ArrayList<Tag>();
 		uUrls = new ArrayList<Url>();

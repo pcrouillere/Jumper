@@ -4,10 +4,10 @@
 	/* ******************************************************************* */
 	
 	
-insert into jpUser (userMail, userPassword) values ('pcrouillere@gmail.com','123456789');
-insert into jpUser (userMail, userPassword) values ('pauline.cuche@gmail.com','azertyuiop');
-insert into jpUser (userMail, userPassword) values ('metachenyiyan@gmail.com', 'qsdfghjklm');
-insert into jpUser (userMail, userPassword) values ('blackstronedrummer@gmail.com', 'wxcvbn');
+insert into jpUser (userMail, userPassword, userName) values ('pcrouillere@gmail.com','123456789', 'Pauline');
+insert into jpUser (userMail, userPassword, userName) values ('pauline.cuche@gmail.com','azertyuiop', 'Pauline');
+insert into jpUser (userMail, userPassword, userName) values ('metachenyiyan@gmail.com', 'qsdfghjklm', 'Yiyan');
+insert into jpUser (userMail, userPassword, userName) values ('blackstronedrummer@gmail.com', 'wxcvbn', 'Mourad');
 	
 Insert into jpTag(tagUserId, tagName) values(1, 'Musique');
 Insert into jpTag(tagUserId, tagName) values(1, 'Sport');
