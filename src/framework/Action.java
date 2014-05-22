@@ -22,6 +22,15 @@ public class Action
 		this.parent = parent;
 	}
 	
+	public HttpServletRequest addvisit(HttpServletRequest req){
+		String id = req.getParameter("id");
+		User u = User.getInstance();
+		Url url = u.getUrlById(Integer.valueOf(id));
+		url.addVisit();
+		
+		return req;
+	}
+	
 	public HttpServletRequest index(HttpServletRequest req) {
 		return req;
 	}

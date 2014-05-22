@@ -58,11 +58,7 @@ public class Base {
 			if(sql_data != null ){
 				for (Map.Entry<String, String> entry : sql_data.entrySet())
 				{
-					if( entry.getValue() == "true" || entry.getValue() == "false")
-						preparedStatement.setBoolean( ++i, Boolean.parseBoolean(entry.getValue()) );
-					else{
-						preparedStatement.setString( ++i, entry.getValue() );
-					}
+					preparedStatement.setString( ++i, entry.getValue() );
 				}
 			}
 			result = preparedStatement.executeQuery();
@@ -83,11 +79,10 @@ public class Base {
 			//if query
 			PreparedStatement preparedStatement = connexion.prepareStatement(sql);
 			/*Remplissage de la requet */
-			for(int i = 0; i<sql_data.length; i++){
-				if( sql_data[i]  == "true" || sql_data[i]  == "false")
-					preparedStatement.setBoolean( i+1, Boolean.parseBoolean(sql_data[i]));
-				else
-					preparedStatement.setString( i+1, sql_data[i]);
+			if (sql_data != null){
+				for(int i = 0; i<sql_data.length; i++){
+						preparedStatement.setString( i+1, sql_data[i]);
+				}
 			}
 			status = preparedStatement.executeUpdate();
 		} catch (Exception e) {
