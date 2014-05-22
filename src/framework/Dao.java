@@ -44,6 +44,10 @@ public abstract class Dao implements Serializable {
 		return Base.getInstance().executeQuery(sql,  attr);
 	}
 	
+	static protected boolean freeRequestUpdate(String sql, String [] attr){
+		return Base.getInstance().executeUpdate(sql,  attr);
+	}
+	
 	static protected ResultSet search(String tableName, Map<String, String> attr, String orderBy){
 		int i = 0;
 		String chaine = "";
