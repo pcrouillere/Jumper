@@ -2,10 +2,57 @@
 @import url(http://weloveiconfonts.com/api/?family=fontawesome);
 @import url(http://meyerweb.com/eric/tools/css/reset/reset.css);
 
+.accueil {
+	margin: 50px auto;
+	width: 40px auto;
+}
+
+.accueil table {
+margin: 0px;
+padding: 50px;
+border-collapse: collapse;
+border-spacing: 50px;
+width: 100%;
+height: 100%;
+}
+
+.accueil td {
+vertical-align:middle;
+text-align: center;
+padding: 50px;
+font-size: 20px;
+font-family: "Varela Round", Arial, Helvetica, sans-serif;
+color: grey;
+font-color: grey;
+}
+
+.accueil a {
+	text-decoration:none;
+	color: grey;
+}
+
+.accueil a:hover {color:#C5252B;} 
+
+.accueil2 {
+	margin-top:40px;
+	margin-left: 20px;
+	margin-right: 20px;
+}
+section
+{
+	background-color: white;
+	border-radius: 20px 20px 0 0;
+	color:white;
+	font-family: "Varela Round", Arial, Helvetica, sans-serif;
+	font-size:15px;
+	padding:10px;
+	margin-top:25px;
+}
 
 [class*="fontawesome-"]:before {
   font-family: 'FontAwesome', sans-serif;
 }
+
 
 body {
 	background-color: #C0C0C0;
@@ -23,8 +70,6 @@ input {
 	line-height: inherit;
 	-webkit-appearance: none;
 }
-
-/* ---------- LOGIN ---------- */
 
 #login {
 	margin: 50px auto;
@@ -92,7 +137,6 @@ input {
 
 header h2
 {
-	/*#Jumper setting */
 	font-family: Impact;
 	font-size:30px;
 	color:#FFFFFF;
@@ -231,12 +275,6 @@ ul#menu_horizontal {
 	height: 130px;
 }
 
-body
-{
-	/*body background setting*/
-	background:FFFFCC;
-}
-
 header img
 {
 	/*user profil picture setting */
@@ -250,35 +288,23 @@ header img
 {
 	/*user name bordure setting setting */
 	font-family: Impact;
-	color : black;
 	border-radius: 15px;
 	border:2px groove;
-	border-color:rgba(124,188,174,0.8);
 	position:absolute;
 	top:14px;
 	right: 20px;
 	height:30px;
 	width:100px;
-	background-color: rgba(124,188,174,0.16);
+	background-color: #C5252B;
 }
 #user_name p
 {
 	/*user name text setting */
-	color:gray;
+	color:white;
 	text-align:center;
 	margin-top:4px;
 }
-section
-{
-	/*section setting setting */
-	background-color: rgba(124,188,174,0.16);
-	color:#C5252B;
-	font-family: Impact;
-	font-size:15px;
-	border:3px groove;
-	border-color:rgba(124,188,174,0.8); 
-	margin-top:1px;
-}
+
 #content_page
 {
 	/*content eg text setting*/
