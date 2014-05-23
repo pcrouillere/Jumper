@@ -1,15 +1,18 @@
 package framework;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 
-import sun.security.jca.GetInstance;
-import dao.*;
+import dao.Tag;
+import dao.Url;
+import dao.User;
 
 /**
  * Classe qui definie les actions specifiques pour chaque page.
@@ -105,4 +108,34 @@ public class Action
 		
 	return req;
 	}
+	
+	/** Fonction tableauBord
+	 * Gere la page tableau de bord de l'application
+	 * @param req	: HttpServletRequest **/
+	
+	public HttpServletRequest tableauBord(HttpServletRequest req){
+		System.out.println("Tableau de bord");
+		User user = User.getInstance();
+		List<Tag> tags = user.getAllTag();
+	    Map<Tag, List<Url>> mapTagUrls = new HashMap<Tag,List<Url>>();
+	    
+	    List<Url> urls;
+	    Tag tag;
+	    Set<Tag> cles = mapTagUrls.keySet();
+		Iterator<Tag> it = cles.iterator();
+	    for(int i=0 ; i<tags.size() ; i++){
+	    	
+	    	urls = new ArrayList<Url>();
+	    	tag = tags.get(i);
+	    	System.out.println("tag "+tag);
+	    	urls = tag.getUrls();
+	    	System.out.println("urls "+urls.toString());
+	    	mapTagUrls.put(tag, urls);
+	    }
+	    
+	    req.setAttribute("map", mapTagUrls);
+	    
+		return req;
 	}
+	
+}
