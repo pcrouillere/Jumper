@@ -77,8 +77,6 @@ public class Action
 		req.setAttribute("nbTags", nbTags);
 		req.setAttribute("nbUrls", nbUrls);
 		req.setAttribute("nbUntaggedUrls", nbUntaggedUrls);
-		req.setAttribute("user", null);
-		
 		return req;
 	}
 	
@@ -130,16 +128,14 @@ public class Action
 				mapTagUrls.put(tag, tag.getUrls());
 			}
 		}
-		
+		System.out.println(mapTagUrls.size());
 		req.setAttribute("tags", tags);
 		req.setAttribute("urls", urls);
 		req.setAttribute("untaggedurls", untaggedUrls);
 		req.setAttribute("mapTagUrls", mapTagUrls);
 		req.setAttribute("nbTags", nbTags);
 		req.setAttribute("nbUrls", nbUrls);
-		req.setAttribute("nbUntaggedUrls", nbUntaggedUrls);
-		req.setAttribute("user", null);
-		
+		req.setAttribute("nbUntaggedUrls", nbUntaggedUrls);		
 		return req;
 	}
 	
