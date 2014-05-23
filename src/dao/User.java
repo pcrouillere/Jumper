@@ -7,7 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import sun.security.util.Length;
+//import sun.security.util.Length;
 import framework.Base;
 import framework.Dao;
 
@@ -73,7 +73,7 @@ public class User extends Dao {
 	
 
 	
-	/* Créer un nouveau user */
+	/* Crï¿½er un nouveau user */
 	private User() {
 		uTags = new ArrayList<Tag>();
 		uUrls = new ArrayList<Url>();
@@ -82,7 +82,7 @@ public class User extends Dao {
 		nbUrl = 0;
 	}
 
-	/* Créer un nouveau user */	
+	/* Crï¿½er un nouveau user */	
 	private User(int id, String email, String pass, String name){
 		super();
 		uName = name;
@@ -102,7 +102,7 @@ public class User extends Dao {
 		getUntaggedUrl();
 	}
 	
-	/* Fonction qui retourne le tag recherché en fonction de son ID */
+	/* Fonction qui retourne le tag recherchï¿½ en fonction de son ID */
 	public Tag getTagById(int id) {
 		for (int i=0; i<= uTags.size(); i++) {
 			if(uTags.get(i).getTid()==id)

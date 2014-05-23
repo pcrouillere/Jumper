@@ -8,7 +8,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
-import sun.security.jca.GetInstance;
+//import sun.security.jca.GetInstance;
 import dao.*;
 
 /**
@@ -73,7 +73,8 @@ public class Action
 	 * Gere la connexion de l'utilisateur lors de son arrivee dans l'application
 	 * @param req	: HttpServletRequest **/
 	
-	public HttpServletRequest login(HttpServletRequest req) {
+	public HttpServletRequest login(HttpServletRequest req) 
+	{
 		System.out.println("Login");
 		String email = req.getParameter("email");
 		String mdp = req.getParameter("password");
@@ -96,4 +97,27 @@ public class Action
 		
 	return req;
 	}
+	
+	public HttpServletRequest graphview(HttpServletRequest req)
+	{
+		User user=User.getInstance();
+		List<Tag> listTags=user.getAllTag();
+		Iterator it = listTags.iterator();
+		node instTag=null;
+		Tag currentTag=null;
+		graph graphInstance=new graph();
+		int xVal=0;
+		int yVal=0;
+		while(it.hasNext())
+		{
+			currentTag=(Tag) it.next();
+			instTag=new node(String.valueOf(currentTag.getTid()), currentTag.gettName(),xVal , yVal, 3);
+			xVal++;yVal++;
+			graphInstance.putNodes(instTag);
+			instTag=null;
+		}
+		testJson fileInstance=new testJson(graphInstance);
+		//fileInstance.update_output();
+		return req;
 	}
+}
