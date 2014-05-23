@@ -51,6 +51,7 @@ public class Action
 		return req;
 	}
 	
+
 	public HttpServletRequest accueil(HttpServletRequest req){
 		User user = User.getInstance();
 		List<Tag> tags = user.getAllTag();
@@ -86,7 +87,6 @@ public class Action
 	 * @param req	: HttpServletRequest **/
 	
 	public HttpServletRequest login(HttpServletRequest req) {
-		System.out.println("Login");
 		String email = req.getParameter("email");
 		String mdp = req.getParameter("password");
 		boolean access = false;
@@ -113,28 +113,33 @@ public class Action
 	 * Gere la page tableau de bord de l'application
 	 * @param req	: HttpServletRequest **/
 	
-	public HttpServletRequest tableauBord(HttpServletRequest req){
-		System.out.println("Tableau de bord");
+	public HttpServletRequest tableaubord(HttpServletRequest req){
 		User user = User.getInstance();
 		List<Tag> tags = user.getAllTag();
-	    Map<Tag, List<Url>> mapTagUrls = new HashMap<Tag,List<Url>>();
-	    
-	    List<Url> urls;
-	    Tag tag;
-	    Set<Tag> cles = mapTagUrls.keySet();
-		Iterator<Tag> it = cles.iterator();
-	    for(int i=0 ; i<tags.size() ; i++){
-	    	
-	    	urls = new ArrayList<Url>();
-	    	tag = tags.get(i);
-	    	System.out.println("tag "+tag);
-	    	urls = tag.getUrls();
-	    	System.out.println("urls "+urls.toString());
-	    	mapTagUrls.put(tag, urls);
-	    }
-	    
-	    req.setAttribute("map", mapTagUrls);
-	    
+		int nbTags = tags.size();
+		List<Url> urls = user.getAllUrl();
+		int nbUrls = urls.size();
+		List<Url> untaggedUrls = user.getUntaggedUrl();
+		int nbUntaggedUrls = untaggedUrls.size();
+		Map<Tag, List<Url>> mapTagUrls = new HashMap<Tag, List<Url>>();
+		
+		if (tags != null){
+			Iterator<Tag> it = tags.iterator();
+			while(it.hasNext()){
+				Tag tag = it.next();
+				mapTagUrls.put(tag, tag.getUrls());
+			}
+		}
+		
+		req.setAttribute("tags", tags);
+		req.setAttribute("urls", urls);
+		req.setAttribute("untaggedurls", untaggedUrls);
+		req.setAttribute("mapTagUrls", mapTagUrls);
+		req.setAttribute("nbTags", nbTags);
+		req.setAttribute("nbUrls", nbUrls);
+		req.setAttribute("nbUntaggedUrls", nbUntaggedUrls);
+		req.setAttribute("user", null);
+		
 		return req;
 	}
 	

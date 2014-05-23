@@ -12,31 +12,12 @@
 		<ul id="menu_horizontal">
 				<li><%= nbTags.intValue() %> tags</li>
 				<li><%= nbUrls.intValue() %> favoris</li>
-				<li>2 favoris à trier</li>
+				<li><%= nbUntaggedUrls.intValue()%> favoris a trier</li>
 		</ul>
 		<div id="content_page">
-		
-		
 			<div class="row">
 
-			<%
-				Set<Tag> cles = mapTagUrl.keySet();
-				Iterator<Tag> it = cles.iterator();
-				while (it.hasNext()){
-					{out.println("<div class=\"col-xs-6 col-md-3\">");}
-					{out.println("<div class=\"jumbotron\">");}
-					Tag t = it.next(); // tu peux typer plus finement ici
-					{out.println(t.toString());}
-			   		List<Url> valeur = mapTagUrl.get(t); // tu peux typer plus finement ici
-			   		for(int i=0; i<valeur.size();i++){
-			   			Url u = valeur.get(i);
-			   			{out.println(u.toString());}
-			   		}
-			   		{out.println("<\\div>");}
-			   		{out.println("<\\div>");}
-				}
-			%>
 			</div>
 		</div>
-	
+
 	</section>
