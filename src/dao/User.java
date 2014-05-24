@@ -175,7 +175,8 @@ public class User extends Dao {
 				int urlId = resultat.getInt("urlId");
 				String urlTitle = resultat.getString("urlTitle");
 				String urlUri = resultat.getString("urlUri");
-				Url url = new Url(urlId, this.uId, urlUri, urlTitle);
+				int urlVisit = resultat.getInt("urlNbVisited");
+				Url url = new Url(urlId, this.uId, urlUri, urlTitle, urlVisit);
 				addOneUrl(url);
 			}
 		} catch (SQLException e) {

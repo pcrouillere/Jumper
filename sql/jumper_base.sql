@@ -33,6 +33,7 @@
 	urlUserId INT,
 	urlUri VARCHAR(255) UNIQUE NOT NULL,
 	urlTitle VARCHAR(255),
+	urlNbVisited INTEGER NOT NULL,
 	PRIMARY KEY (urlId)
 	);
 	

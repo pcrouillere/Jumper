@@ -18,6 +18,27 @@
 	Integer nbUntaggedUrls = (Integer) request
 			.getAttribute("nbUntaggedUrls");
 %>
+<script>
+
+function addVisitToUrl(id){ 
+	if (window.XMLHttpRequest) { 
+	httpRequest = new XMLHttpRequest(); 
+
+	} 
+	else if (window.ActiveXObject) { 
+	httpRequest = new ActiveXObject("Microsoft.XMLHTTP"); 
+	}	
+	if (!httpRequest) { 
+	alert('Abandon :Impossible de créer une instance XMLHTTP'); 
+	return false; 
+	} 
+
+	httpRequest.onreadystatechange = function() { 
+	}	
+	httpRequest.open("GET", "?page=addvisit&id="+id, false); 
+	httpRequest.send(null);  
+	} 
+</script>
 
 <div class="accueil2">
 <section>
@@ -39,7 +60,7 @@
 								Url u = urls.get(i + j);
 			%>
 			<td>
-				<a href="<%=u.getuUri() %>" target="_blank"><p><%=u.getuTitle()%></p></a>
+				<a href="<%=u.getuUri() %>" target="_blank" onclick="addVisitToUrl(<%=u.getuId()%>)"><p><%=u.getuTitle()%></p></a>
 			</td>
 
 			<%

@@ -14,14 +14,30 @@ public class Url extends Dao {
 	private int uUserId;
 	private String uUri;
 	private String uTitle;
+	private int uVisited;
 	
-	public Url(int id, int userid, String uri, String title){
+	public Url(int id, int userid, String uri, String title, int visit){
 		uId = id;
 		uUserId = userid;
 		uUri = uri;
 		uTitle = title;
+		uVisited = visit;
 	}
 	
+	public void addVisit(){
+		Map<String, String> attr = new HashMap<String, String>();
+		uVisited++;
+		Dao.freeRequestUpdate("UPDATE jpUrl set UrlNbVisited="+Integer.toString(uVisited)+" WHERE urlId="+Integer.toString(this.uId)+";", null);
+	}
+	
+	public int getuVisited() {
+		return uVisited;
+	}
+
+	public void setuVisited(int uVisited) {
+		this.uVisited = uVisited;
+	}
+
 	public List<Tag> getTags() throws SQLException{
 		List<Tag> allTags = new ArrayList<Tag>();
 		User u = User.getInstance();
