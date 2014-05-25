@@ -6,14 +6,12 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 
 import dao.*;
-import dao.Tag;
-import dao.Url;
-import dao.User;
 
 /**
  * Classe qui definie les actions specifiques pour chaque page.
@@ -108,28 +106,61 @@ public class Action
 	return req;
 	}
 	
-	public HttpServletRequest graphview(HttpServletRequest req)
+	public HttpServletRequest graphview(HttpServletRequest req) throws SQLException
 	{
+		System.out.println("Loading Graph");
 		User user=User.getInstance();
 		List<Tag> listTags=user.getAllTag();
 		Iterator it = listTags.iterator();
 		node instTag=null;
 		Tag currentTag=null;
 		graph graphInstance=new graph();
-		int xVal=0;
-		int yVal=0;
+		int xVal;
+		int yVal;
+		Random r=new Random();
 		while(it.hasNext())
 		{
 			currentTag=(Tag) it.next();
-			instTag=new node(String.valueOf(currentTag.getTid()), currentTag.gettName(),xVal , yVal, 3);
-			xVal++;yVal++;
+			do
+			{
+				xVal=r.nextInt(user.getAllTag().size()/2);
+				yVal=r.nextInt(user.getAllTag().size()/2);
+			}while(graphInstance.locationAlreadyExist(xVal, yVal));
+			
+			instTag=new node(String.valueOf(currentTag.getTid()), currentTag.gettName(),xVal , yVal, currentTag.getUrls().size());
 			graphInstance.putNodes(instTag);
 			instTag=null;
 		}
-		testJson fileInstance=new testJson(graphInstance);
-		//fileInstance.update_output();
+		List<Url> listUrls=user.getAllUrl();
+		Iterator itUri=listUrls.iterator();
+		Url currentUrl;
+		for(int k=0;k<listUrls.size();k++)
+		{
+			currentUrl=(Url) listUrls.get(k);
+			if(currentUrl.getTags().size()>1)
+			{
+				edge instance = null;
+				String idEdge;
+				for(int i=0;i<currentUrl.getTags().size();i++)
+				{
+					for(int j=i+1;j<currentUrl.getTags().size();j++)
+					{
+						idEdge=String.valueOf(currentUrl.getuId())+String.valueOf(i)+String.valueOf(j);
+						if(currentUrl.getTags().get(i).getTid()!=currentUrl.getTags().get(j).getTid())
+						{
+							instance=new edge(idEdge,String.valueOf(currentUrl.getTags().get(i).getTid()),String.valueOf(currentUrl.getTags().get(j).getTid()));
+							graphInstance.putEdges(instance);
+						}
+						instance=null;
+					}
+				}
+			}
+		}		
+		JsonOutput fileInstance=new JsonOutput(graphInstance);
+		fileInstance.update_output();
 		return req;
 	}
+	
 	/** Fonction tableauBord
 	 * Gere la page tableau de bord de l'application
 	 * @param req	: HttpServletRequest **/

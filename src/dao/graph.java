@@ -1,6 +1,7 @@
 package dao;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
@@ -42,5 +43,35 @@ public class graph {
 	public void putEdges(edge instance)
 	{
 		this.edges.add(instance);
+	}
+	
+	public boolean edgeAlreadyExist(edge instance)
+	{
+		edge curedg;
+		int i=0;
+		while(i<edges.size())
+		{
+			curedg=edges.get(i);
+			if(curedg.getId().equals(instance.getId()))
+				return true;
+			i++;
+		}
+		return false;
+	}
+	
+	public boolean locationAlreadyExist(int xVar,int yVar)
+	{
+		node temp=null;
+		int i=0;
+		while(i<nodes.size())
+		{
+			temp=nodes.get(i);
+			if(temp.getX()==xVar && temp.getY()==yVar)
+			{
+				return true;
+			}
+			i++;
+		}
+		return false;
 	}
 }

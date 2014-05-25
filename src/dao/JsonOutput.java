@@ -10,11 +10,11 @@ import java.io.Writer;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-public class testJson 
+public class JsonOutput 
 {
 	public graph instance;
 	
-	public testJson(graph i)
+	public JsonOutput(graph i)
 	{
 		this.instance=i;
 	}
@@ -40,7 +40,7 @@ public class testJson
 	{
 		try
 		{
-			File file=new File("C:/Users/MOURAD/Documents/Jump/WebContent/WEB-INF/data.json");
+			File file=new File("./data.json");
 		    FileOutputStream is = new FileOutputStream(file);
 	        OutputStreamWriter osw = new OutputStreamWriter(is);    
 	        Writer w = new BufferedWriter(osw);
