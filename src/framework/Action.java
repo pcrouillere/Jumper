@@ -30,7 +30,26 @@ public class Action
 		User u = User.getInstance();
 		Url url = u.getUrlById(Integer.valueOf(id));
 		url.addVisit();
+		return req;
+	}
+	
+	public HttpServletRequest tagbyid(HttpServletRequest req){
+		String id = req.getParameter("id");
+		User user = User.getInstance();
+		List<Tag> tags = user.getAllTag();
+		int nbTags = tags.size();
+		List<Url> urls = user.getAllUrl();
+		int nbUrls = urls.size();
+		List<Url> untaggedUrls = user.getUntaggedUrl();
+		int nbUntaggedUrls = untaggedUrls.size();
+		Tag tag = user.getTagById(Integer.valueOf(id));
+		List<Url> listUrls = tag.getUrls();
 		
+		req.setAttribute("tag", tag);
+		req.setAttribute("nbTags", nbTags);
+		req.setAttribute("nbUrls", nbUrls);
+		req.setAttribute("nbUntaggedUrls", nbUntaggedUrls);
+		req.setAttribute("listUrls", listUrls);
 		return req;
 	}
 	
