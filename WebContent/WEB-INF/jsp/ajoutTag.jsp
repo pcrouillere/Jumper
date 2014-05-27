@@ -59,7 +59,7 @@
 							while(i<tags.size())
 							{
 						%>
-						<p draggable="true" ondragstart="drag(event)"><%= "#"+tags.get(i).gettName() %></p>		
+						<p draggable="true" ondragstart="drag(event,'<%=tags.get(i).gettName()%>')" id=<%=tags.get(i).gettName()%>><%= "#"+tags.get(i).gettName() %></p>		
 						<%
 								i++;
 							}
