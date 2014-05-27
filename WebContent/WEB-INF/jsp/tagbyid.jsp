@@ -15,7 +15,6 @@
 <%	List<Url> listUrls = (List<Url>) request.getAttribute("listUrls"); %>
 <% Tag tag = (Tag) request.getAttribute("tag"); %>
 
-
 <section>
 	<ul id="menu_horizontal">
 		<li><%=nbTags.intValue()%> tags</li>
@@ -23,12 +22,15 @@
 		<li><%=nbUntaggedUrls.intValue()%> favoris a trier</li>
 	</ul>
 	<div id="content_page">
-	<h2><%=tag.gettName() %></h2>
+	<table class="tagbyid">
+	<caption><%=tag.gettName() %></caption>
 	<% Iterator urlIt = listUrls.iterator();
 		while(urlIt.hasNext()){
 			Url url = (Url) urlIt.next();
-			%> <td><%=url.getuTitle() %></td> <%
+			String imgSrc = "http://www.google.com/s2/favicons?domain=" + url.getuUri();
+			%> <tr><td><img width="20" height="20" src="<%=imgSrc %>"><a href="<%=url.getuUri()%>"><%=url.getuTitle() %></a></tr></td> <%
 		}
 		%>
+	</table>
 	</div>
 	</section>

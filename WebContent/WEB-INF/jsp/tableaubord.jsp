@@ -42,7 +42,6 @@
 			if(count_tag%4==0){
 				%><tr><%
 			}
-	
 			
 			%><td><table class="onetag"><caption><a href="?page=tagbyid&id=<%= tag.getTid()%>"><%=tag.gettName() %></a></caption><%
 			count_tag++;
