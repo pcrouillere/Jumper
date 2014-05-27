@@ -35,7 +35,7 @@
 							<li><a href="#">Avancee</a></li>
 						</ul></li>
 					<li><a href="#">Tableau De Bord</a></li>
-					<li><a href="#">Trier Nouveaux Favoris</a></li>
+					<li><a href="?page=ajouttag">Trier Nouveaux Favoris</a></li>
 					<li><a href="?page=deconnexion">Deconnexion</a></li>
 				</ul></li>
 		</ul>
