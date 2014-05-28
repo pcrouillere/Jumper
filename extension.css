@@ -1,0 +1,15 @@
+body{
+	min-height : 500px;
+	min-width : 500px;
+	margin : 10 px;
+	text-align: center;
+}
+
+h1{
+	color: #C5252B;
+}
+
+.bouton{
+	align: center;
+	width: 45%;
+}
