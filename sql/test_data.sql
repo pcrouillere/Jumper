@@ -34,8 +34,8 @@ insert into jpTagMap(tagMapUserId, tagMapUrlId, tagMapTagId) values(1, 2, 4);
 insert into jpTagMap(tagMapUserId, tagMapUrlId, tagMapTagId) values(1, 3, 5);
 insert into jpTagMap(tagMapUserId, tagMapUrlId, tagMapTagId) values(1, 4, 6);
 insert into jpTagMap(tagMapUserId, tagMapUrlId, tagMapTagId) values(1, 4, 7);
-insert into jpTagMap(tagMapUserId, tagMapUrlId, tagMapTagId) values(1, 3, 5);
-insert into jpTagMap(tagMapUserId, tagMapUrlId, tagMapTagId) values(1, 4, 6);
-insert into jpTagMap(tagMapUserId, tagMapUrlId, tagMapTagId) values(1, 4, 7);
+insert into jpTagMap(tagMapUserId, tagMapUrlId, tagMapTagId) values(1, 5, 5);
+insert into jpTagMap(tagMapUserId, tagMapUrlId, tagMapTagId) values(1, 5, 6);
+insert into jpTagMap(tagMapUserId, tagMapUrlId, tagMapTagId) values(1, 5, 7);
 
 

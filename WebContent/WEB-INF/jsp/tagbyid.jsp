@@ -28,7 +28,30 @@
 		while(urlIt.hasNext()){
 			Url url = (Url) urlIt.next();
 			String imgSrc = "http://www.google.com/s2/favicons?domain=" + url.getuUri();
-			%> <tr><td><img width="20" height="20" src="<%=imgSrc %>"><a href="<%=url.getuUri()%>"><%=url.getuTitle() %></a></tr></td> <%
+			%>
+			<tr>
+				<td>
+					<a href="<%=url.getuUri()%>"><img width="20" height="20" src="<%=imgSrc %>"></a>
+				</td>
+				<td>
+					<a href="<%=url.getuUri()%>"><%=url.getuTitle() %></a>
+					<% List<Tag> listTags = url.getTags();
+					Iterator tagIt = listTags.iterator();
+					String listTagsString = "";%>
+				</td> <%
+					while(tagIt.hasNext()){
+						Tag urlTag = (Tag) tagIt.next();
+						if (listTagsString =="") {
+							listTagsString += "<a href=\"?page=tagbyid&id=" + urlTag.getTid() + "\">" + urlTag.gettName() + "</a>";
+						}
+						else {
+							listTagsString = listTagsString + ", " + "<a href=\"?page=tagbyid&id=" + urlTag.getTid() + "\">" + urlTag.gettName() + "</a>";
+						}
+					}%>
+				<td><%=listTagsString %>
+				</td>
+				</td>
+			</tr> <%
 		}
 		%>
 	</table>
