@@ -50,7 +50,7 @@ public class Url extends Dao {
 		while(resultId.next()){
 			allTags.add(u.getTagById(resultId.getInt("tagMapTagId")));
 		}
-		return null;
+		return allTags;
 	}
 	
 	public int getuId() {

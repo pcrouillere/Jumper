@@ -19,7 +19,6 @@
 			.getAttribute("nbUntaggedUrls");
 %>
 <script>
-
 function addVisitToUrl(id){ 
 	if (window.XMLHttpRequest) { 
 	httpRequest = new XMLHttpRequest(); 
