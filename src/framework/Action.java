@@ -8,7 +8,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import dao.Tag;
 import dao.Url;
@@ -25,34 +27,55 @@ public class Action
 		this.parent = parent;
 	}
 	
-	public HttpServletRequest addvisit(HttpServletRequest req){
+	public HttpServletRequest addvisit(HttpServletRequest req, HttpServletResponse response){
 		String id = req.getParameter("id");
 		User u = User.getInstance();
 		Url url = u.getUrlById(Integer.valueOf(id));
 		url.addVisit();
+		return req;
+	}
+	
+	public HttpServletRequest tagbyid(HttpServletRequest req, HttpServletResponse response){
+		String id = req.getParameter("id");
+		User user = User.getInstance();
+		List<Tag> tags = user.getAllTag();
+		int nbTags = tags.size();
+		List<Url> urls = user.getAllUrl();
+		int nbUrls = urls.size();
+		List<Url> untaggedUrls = user.getUntaggedUrl();
+		int nbUntaggedUrls = untaggedUrls.size();
+		Tag tag = user.getTagById(Integer.valueOf(id));
+		List<Url> listUrls = tag.getUrls();
 		
+		req.setAttribute("tag", tag);
+		req.setAttribute("nbTags", nbTags);
+		req.setAttribute("nbUrls", nbUrls);
+		req.setAttribute("nbUntaggedUrls", nbUntaggedUrls);
+		req.setAttribute("listUrls", listUrls);
 		return req;
 	}
 	
-	public HttpServletRequest index(HttpServletRequest req) {
+	public HttpServletRequest index(HttpServletRequest req, HttpServletResponse response) {
 		return req;
 	}
 	
-	public HttpServletRequest error(HttpServletRequest req) {
+	public HttpServletRequest error(HttpServletRequest req, HttpServletResponse response) {
 		return req;
 	}
 	
 	/** Fonction deconnexion
 	 * @param req	: HttpServletRequest
 	 * @return HttpServletRequest **/
-	public HttpServletRequest deconnexion(HttpServletRequest req) {
+	public HttpServletRequest deconnexion(HttpServletRequest req, HttpServletResponse response) {
+		User user = User.getInstance();
+		user.deleteUser();
 		this.parent.redirect("login");
 		this.parent.session().close();
 		return req;
 	}
 	
 
-	public HttpServletRequest accueil(HttpServletRequest req){
+	public HttpServletRequest accueil(HttpServletRequest req, HttpServletResponse response){
 		User user = User.getInstance();
 		List<Tag> tags = user.getAllTag();
 		int nbTags = tags.size();
@@ -84,7 +107,7 @@ public class Action
 	 * Gere la connexion de l'utilisateur lors de son arrivee dans l'application
 	 * @param req	: HttpServletRequest **/
 	
-	public HttpServletRequest login(HttpServletRequest req) {
+	public HttpServletRequest login(HttpServletRequest req, HttpServletResponse response) {
 		String email = req.getParameter("email");
 		String mdp = req.getParameter("password");
 		boolean access = false;
@@ -95,6 +118,8 @@ public class Action
 			System.out.println(email);
 			System.out.println(mdp);
 			if (user!=null) {
+				Cookie userCookie = new Cookie("userId", Integer.toString(user.getuId()));
+				response.addCookie(userCookie);
 				this.parent.session().open(user);
 				this.parent.redirect("accueil", true);
 			}
@@ -111,7 +136,7 @@ public class Action
 	 * Gere la page tableau de bord de l'application
 	 * @param req	: HttpServletRequest **/
 	
-	public HttpServletRequest tableaubord(HttpServletRequest req){
+	public HttpServletRequest tableaubord(HttpServletRequest req, HttpServletResponse response){
 		User user = User.getInstance();
 		List<Tag> tags = user.getAllTag();
 		int nbTags = tags.size();

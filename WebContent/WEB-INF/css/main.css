@@ -4,6 +4,43 @@
 
 @import url(http://meyerweb.com/eric/tools/css/reset/reset.css);
 
+
+table.alltag{
+	padding: 5px 5px;
+	width: 100%;
+}
+.alltag td {
+	padding: 55px 55px;
+
+}
+
+table.onetag{
+	border: thin solid black;
+	border-collapse: collapse;
+	width: 100%;
+}
+
+.onetag caption{
+	background-color: #C5252B;
+	-webkit-border-radius: 20px 20px 0 0;
+	-moz-border-radius: 20px 20px 0 0;
+	border-radius: 20px 20px 0 0;
+	color: #fff;
+	font-size: 15px;
+	padding: 15px 15px;
+	}
+
+tr.onetag  {
+	padding: 5px 5px;
+}
+
+.onetag td {
+	padding: 10px 10px;
+
+}
+
+
+
 #nav li {
 	margin: 0 20px;
 	padding: 0 0 8px;
@@ -24,11 +61,11 @@
 }
 
 #nav li:hover {
-	background: #C5252B;
+	background: #7CBCAE;
 	color: white;
 	border-top: solid 1px #f8f8f8;
-	-webkit-border-radius: 1.6em;
-	-moz-border-radius: 1.6em;
+	-webkit-border-radius: 1em;
+	-moz-border-radius: 1em;
 }
 
 #nav ul li:hover a,#nav li:hover li a {
@@ -124,7 +161,7 @@ body {
 section {
 	background-color: white;
 	border-radius: 20px 20px 0 0;
-	color: white;
+	color: black;
 	font-family: "Varela Round", Arial, Helvetica, sans-serif;
 	font-size: 15px;
 	padding: 10px;
@@ -239,11 +276,6 @@ ul#menu_horizontal {
 	padding-right: 25px;
 }
 
-#content_page img {
-	width: 200px;
-	height: 130px;
-}
-
 /* Ajout Tag */
 #tag_list {
 	width: 250px;
@@ -330,11 +362,6 @@ ul#menu_horizontal {
 #content_page td {
 	padding-left: 25px;
 	padding-right: 25px;
-}
-
-#content_page img {
-	width: 200px;
-	height: 130px;
 }
 
 #user_name {

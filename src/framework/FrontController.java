@@ -181,12 +181,12 @@ public class FrontController extends HttpServlet {
 		Action action = new Action(this);
 		if (method != null) {
 			try {
-				request = (HttpServletRequest) method.invoke(action,(Object)request);
+				request = (HttpServletRequest) method.invoke(action,(Object)request,(Object) response);
 			} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {}
 		} else {
 			this.message = "Impossible de charger la page : " + this.page ;
 			this.page = "error";
-			request = action.error(request);
+			request = action.error(request, response);
 		}
 		if (this.exit) { // Si un veut changer l'adresse dans le navigateur.
 			int pos = root.substring(0,root.length()-1).lastIndexOf('/');
