@@ -26,6 +26,9 @@ public class User extends Dao {
 	private int nbTagMap;
 	private String uName;
 	
+	public void deleteUser() {
+		instance = null;
+	}
 	public static User getInstance(){
 		if (instance == null)
 			instance = new User();
