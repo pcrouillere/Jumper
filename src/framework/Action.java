@@ -1,12 +1,10 @@
 package framework;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -163,5 +161,23 @@ public class Action
 		req.setAttribute("nbUntaggedUrls", nbUntaggedUrls);		
 		return req;
 	}
+	
+	public HttpServletRequest addurl(HttpServletRequest req, HttpServletResponse response){
+		int idUser = Integer.parseInt(req.getParameter("id"));
+		String siteUrl = req.getParameter("url");
+		String nomUrl = req.getParameter("nomUrl");
+		System.out.println("id user : "+idUser+" url : "+siteUrl+" nom : "+nomUrl);
+		Url url = new Url(idUser,siteUrl, nomUrl, 0);
+		int urlId = url.getIdFromBDD();
+		System.out.println("ID DE L'URL Ajouté : "+urlId);
+		User user = User.getInstance();
+		
+		//TODO :: ajouter l'url au user !!!!!
+		
+		req.setAttribute("success", 1);
+		
+		return req;
+	}
+	
 	
 }

@@ -24,6 +24,34 @@ public class Url extends Dao {
 		uVisited = visit;
 	}
 	
+	public Url( int userid, String uri, String title, int visit){
+		uUserId = userid;
+		uUri = uri;
+		uTitle = title;
+		uVisited = visit;
+		
+		addUrlToDBB();
+	}
+	
+	public void addUrlToDBB(){		
+		
+        Dao.freeRequestUpdate("Insert into jpUrl(urlUserId, urlUri, urlTitle, urlNbVisited) values("+this.uUserId+",'"+this.uUri +"','"+this.uTitle +"',"+ this.uVisited +")", null);
+	}
+	
+	public int getIdFromBDD(){
+		ResultSet result;
+		result = Dao.freeRequest("Select urlId from jpurl WHERE urlUserId="+Integer.toString(uUserId)+" AND urlUri='"+this.uUri+"';", null);
+		try {
+			if(result.next()){
+				int id = result.getInt("urlId");
+				return id;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return -1;
+	}
+	
 	public void addVisit(){
 		Map<String, String> attr = new HashMap<String, String>();
 		uVisited++;
