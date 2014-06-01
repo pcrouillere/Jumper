@@ -33,10 +33,42 @@ function addVisitToUrl(id){
 	} 
 
 	httpRequest.onreadystatechange = function() { 
-	}	
+	};
+	
 	httpRequest.open("GET", "?page=addvisit&id="+id, false); 
 	httpRequest.send(null);  
-	} 
+	}
+
+function searchSite(){
+	var part = document.getElementById("rech_rapide").value;
+	xhr_obj = new XMLHttpRequest();
+	xhr_obj.onreadystatechange = function() {
+		if (xhr_obj.readyState == 4 && xhr_obj.responseText) {
+				var result = xhr_obj.responseText;
+				var listSites = result.split('\n');
+				var textResult = "<table>";
+				var i = 0;
+				for (var j = 0; j <= (listSites.length/3); j++) {
+					textResult +="<tr>" ;
+					for(var k =0; k<=2; k++){
+						if(i<listSites.length-1){
+							listSites[i] = listSites[i].split(' $$$ ');
+							textResult +="<td>" ;
+							textResult +="<a href='"+listSites[i][0]+"' target='_blank' onclick='addVisitToUrl("+listSites[i][2]+")'>" ;
+							textResult +="<p>"+listSites[i][1]+"</p></a>";
+							textResult +="</td>" ;
+						}
+						i++;
+					}
+					textResult +="</tr>" ;
+				}
+				textResult += "</table>";
+				document.getElementById('list_sites').innerHTML = textResult;
+		}
+	};
+	xhr_obj.open('GET', 'http://localhost:8080/Jump/search?part='+part, true);
+	xhr_obj.send(null);
+}
 </script>
 
 <div class="accueil2">
@@ -46,7 +78,11 @@ function addVisitToUrl(id){
 		<li><%=nbUrls.intValue()%> favoris</li>
 		<li><%=nbUntaggedUrls.intValue()%> favoris a trier</li>
 	</ul>
-	<div class="accueil">
+	<div>
+		<input type ="text" id="rech_rapide" value="rechercher" onkeyup = "searchSite()"/>	
+	</div>
+	
+	<div class="accueil" id ="list_sites">
 	<table>
 		<%
 			if (urls != null) {
