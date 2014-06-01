@@ -29,11 +29,9 @@ public class Url extends Dao {
 		uUri = uri;
 		uTitle = title;
 		uVisited = visit;
-		
-		addUrlToDBB();
 	}
 	
-	public void addUrlToDBB(){		
+	public void addUrlToDBB() throws SQLException{		
 		
         Dao.freeRequestUpdate("Insert into jpUrl(urlUserId, urlUri, urlTitle, urlNbVisited) values("+this.uUserId+",'"+this.uUri +"','"+this.uTitle +"',"+ this.uVisited +")", null);
 	}
@@ -55,7 +53,11 @@ public class Url extends Dao {
 	public void addVisit(){
 		Map<String, String> attr = new HashMap<String, String>();
 		uVisited++;
-		Dao.freeRequestUpdate("UPDATE jpUrl set UrlNbVisited="+Integer.toString(uVisited)+" WHERE urlId="+Integer.toString(this.uId)+";", null);
+		try {
+			Dao.freeRequestUpdate("UPDATE jpUrl set UrlNbVisited="+Integer.toString(uVisited)+" WHERE urlId="+Integer.toString(this.uId)+";", null);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public int getuVisited() {

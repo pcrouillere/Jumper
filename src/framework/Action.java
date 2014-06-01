@@ -10,6 +10,8 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
+
 import dao.Tag;
 import dao.Url;
 import dao.User;
@@ -168,14 +170,24 @@ public class Action
 		String nomUrl = req.getParameter("nomUrl");
 		System.out.println("id user : "+idUser+" url : "+siteUrl+" nom : "+nomUrl);
 		Url url = new Url(idUser,siteUrl, nomUrl, 0);
-		int urlId = url.getIdFromBDD();
-		System.out.println("ID DE L'URL Ajouté : "+urlId);
-		User user = User.getInstance();
-		
-		//TODO :: ajouter l'url au user !!!!!
-		
-		req.setAttribute("success", 1);
-		
+		try{
+			url.addUrlToDBB();
+			User user = (User) this.parent.user();
+			user.addOneUrl(url);
+			
+			response.setStatus(200);
+		}
+		catch(MySQLIntegrityConstraintViolationException e){
+			// URL existe déjà dans la BDD
+			System.out.println("URL duppliqué");
+			response.setStatus(201);
+
+		} catch (SQLException e) {
+			// erreur dans l'insertion a la BDD
+			e.printStackTrace();
+			response.setStatus(400);
+		}
+	
 		return req;
 	}
 	

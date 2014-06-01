@@ -3,17 +3,17 @@ function currentTab() {
 		chrome.cookies.get({ url: 'http://localhost:8080/Jump/', name: 'userId' },
 		  function (cookie) {
 			if (cookie) {
-			  alert(tab.url);
+			  //alert(tab.url);
 			  var url = tab.url;
 			  var title = tab.title;
 			  var userid = cookie.value;
-			  success = file('http://localhost:8080/Jump/?page=addurl&id='+userid+'&url='+url+'&nomUrl='+title);
-			  console.log("success",sucess);
-			  if(success == 1) alert("url ajouté");
-			  else alert("error ajout");
+			  var success = file('http://localhost:8080/Jump/?page=addurl&id='+userid+'&url='+url+'&nomUrl='+title);
+			  if(success == 200) alert("Ce site a bien été enregistré");
+			  if(success == 201) alert("Cette URL fait déjà parti de vos favoris");
+			  if(success == 400) alert("Une erreur est survenue lors de l'ajout de l'URL");
 			}
 			else {
-			  alert('Can\'t get cookie! Check the name!');
+			  alert('Attention tu n\'es pas loggé !');
 			}
 		});
 	});	
@@ -22,21 +22,19 @@ function currentTab() {
  
 function file(fichier)
 {
-	if(window.XMLHttpRequest){
-		xhr_object = new XMLHttpRequest();
-		}
-	else { 
-		return(false);
-	}
-	alert(2);
+	xhr_object = new XMLHttpRequest();
+	xhr_object.onreadystatechange  = function() 
+    { 
+       if(xhr_object.readyState  == 4)
+       {
+        if(xhr_object.status == 200) alert("Ce site a bien été enregistré");
+		else if(xhr_object.status == 201) alert("Cette URL fait déjà parti de vos favoris");
+        else
+            alert("Une erreur est survenue lors de l'ajout de l'URL");
+        }
+    }; 
 	xhr_object.open("GET", fichier, true);
 	xhr_object.send();
-	if(xhr_object.readyState == 4){
-		return (xhr_object.responseText);
-	}
-	else {
-		return(false);
-	}
 }
 	 
 document.getElementById('ajout').addEventListener("click", currentTab);
