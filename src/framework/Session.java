@@ -2,6 +2,7 @@ package framework;
 
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.HttpServletRequest;
+
 /**
  * Class pour Session simplifee
  */

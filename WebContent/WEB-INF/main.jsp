@@ -15,8 +15,9 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
 <style type="text/css">
-<%=css%>
+	<%=css%>
 </style>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <title>Welcome to #Jumper</title>
 </head>
 <body>
@@ -34,10 +35,10 @@
 							<li><a href="#">Simple</a></li>
 							<li><a href="#">Avancee</a></li>
 						</ul></li>
-					<li><a href="?page=tableaubord">Tableau De Bord</a></li>
+					<li><a href="tableaubord">Tableau De Bord</a></li>
 					<li><a href="#">GraphView</a></li>
-					<li><a href="#">Trier Nouveaux Favoris</a></li>
-					<li><a href="?page=deconnexion">Deconnexion</a></li>
+					<li><a href="ajoutertag">Trier Nouveaux Favoris</a></li>
+					<li><a href="deconnexion">Deconnexion</a></li>
 				</ul></li>
 		</ul>
 	</div>
