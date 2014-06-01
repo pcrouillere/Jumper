@@ -14,16 +14,11 @@ import framework.Session;
 
 public class FastSearch extends HttpServlet{
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		System.out.println("je suis dans test");
 		String part = request.getParameter("part");
 		Session session = new Session(request);
 		User user = (User) session.get_user();
-		
-		System.out.println("user : "+user.getuName());
 		ArrayList<Url> liste = user.getAutoCompletion(part);
-		
 		PrintWriter out = response.getWriter();
-		
 		for(Url url : liste){
 		    out.println(url.getuUri()+" $$$ "+url.getuTitle()+" $$$ "+url.getuUserId());
 		}
