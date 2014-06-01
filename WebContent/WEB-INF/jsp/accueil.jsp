@@ -79,7 +79,7 @@ function searchSite(){
 		<li><%=nbUntaggedUrls.intValue()%> favoris a trier</li>
 	</ul>
 	<div>
-		<input type ="text" id="rech_rapide" value="rechercher" onkeyup = "searchSite()"/>	
+		<input type ="text" id="rech_rapide" placeholder="Rechercher" onkeyup = "searchSite()"/>	
 	</div>
 	
 	<div class="accueil" id ="list_sites">

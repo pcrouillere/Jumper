@@ -91,7 +91,6 @@ tr.onetag  {
 }
 
 
-
 #nav li {
 	margin: 0 20px;
 	padding: 0 0 8px;
@@ -444,4 +443,16 @@ footer {
 	font-family: Impact;
 	text-align: center;
 	color: black;
+}
+
+#rech_rapide{
+	color : #C5252B;
+	float : right;
+	text-decoration: none;
+	border:2px solid #777;
+	border-radius:5px;
+	box-shadow:2px 2px 3px #eee inset;
+	padding-left : 30px;
+	margin-right : 50px;
+	
 }
