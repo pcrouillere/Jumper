@@ -2,6 +2,7 @@ package framework;
 
 import java.io.Serializable;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Map;
 
 
@@ -10,10 +11,10 @@ public abstract class Dao implements Serializable {
 /* Fonction pour inserer une valeur dans une table 
  * @param
  * String tableName		: Nom de la table
- * String[] sql_data			: Ensemble des donnees à inserer
+ * String[] sql_data			: Ensemble des donnees ï¿½ inserer
  *  */
 	
-	static protected boolean insert(String tableName, String[] sql_data){
+	static protected boolean insert(String tableName, String[] sql_data) throws SQLException{
 		String chaine = "";
 		for(int i = 0; i < sql_data.length; i++){
 			chaine += ",?";
@@ -24,10 +25,10 @@ public abstract class Dao implements Serializable {
 /* Fonction pour supprimer une valeur dans une table 
  * @param
  * String tableName		: Nom de la table
- * int keyId			: Id de la valeur à supprimer 
+ * int keyId			: Id de la valeur ï¿½ supprimer 
  * */
 	
-	static protected boolean delete(String tableName, int keyId){
+	static protected boolean delete(String tableName, int keyId) throws SQLException{
 		String[] chaine = new String[1];
 		chaine[0] = "";
 		chaine[0] += keyId;
@@ -36,7 +37,7 @@ public abstract class Dao implements Serializable {
 	
 /* Fonction pour effectuer une requete qqconque
  * @param
- * String sql					: Requête
+ * String sql					: Requï¿½te
  * Map<String, String> attr 	: Ensemble des attributs
  *  */
 	
@@ -44,7 +45,7 @@ public abstract class Dao implements Serializable {
 		return Base.getInstance().executeQuery(sql,  attr);
 	}
 	
-	static protected boolean freeRequestUpdate(String sql, String [] attr){
+	static protected boolean freeRequestUpdate(String sql, String [] attr) throws SQLException{
 		return Base.getInstance().executeUpdate(sql,  attr);
 	}
 	

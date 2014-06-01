@@ -1,16 +1,16 @@
 package framework;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
 
 import dao.Tag;
 import dao.Url;
@@ -163,5 +163,33 @@ public class Action
 		req.setAttribute("nbUntaggedUrls", nbUntaggedUrls);		
 		return req;
 	}
+	
+	public HttpServletRequest addurl(HttpServletRequest req, HttpServletResponse response){
+		int idUser = Integer.parseInt(req.getParameter("id"));
+		String siteUrl = req.getParameter("url");
+		String nomUrl = req.getParameter("nomUrl");
+		System.out.println("id user : "+idUser+" url : "+siteUrl+" nom : "+nomUrl);
+		Url url = new Url(idUser,siteUrl, nomUrl, 0);
+		try{
+			url.addUrlToDBB();
+			User user = (User) this.parent.user();
+			user.addOneUrl(url);
+			
+			response.setStatus(200);
+		}
+		catch(MySQLIntegrityConstraintViolationException e){
+			// URL existe déjà dans la BDD
+			System.out.println("URL duppliqué");
+			response.setStatus(201);
+
+		} catch (SQLException e) {
+			// erreur dans l'insertion a la BDD
+			e.printStackTrace();
+			response.setStatus(400);
+		}
+	
+		return req;
+	}
+	
 	
 }

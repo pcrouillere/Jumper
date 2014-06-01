@@ -13,9 +13,9 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
 public class Base {
-	/* Classe qui va s'occuper de se connecter à la BDD
-	 *  d'effectuer des requêtes et d'afficher les résultats */
-	/* La liste qui contiendra tous les résultats de nos essais */
+	/* Classe qui va s'occuper de se connecter ï¿½ la BDD
+	 *  d'effectuer des requï¿½tes et d'afficher les rï¿½sultats */
+	/* La liste qui contiendra tous les rï¿½sultats de nos essais */
 	
 	private static Base instance = null;
 	private Connection connexion;
@@ -72,10 +72,10 @@ public class Base {
 	 * Recupere une requete, l'execute et renvoie un boolean
 	 * @param sql
 	 * @param sql_data
+	 * @throws SQLException 
 	 */
-	public boolean executeUpdate(String sql, String [] sql_data) {
+	public boolean executeUpdate(String sql, String [] sql_data) throws SQLException {
 		int status = 0;
-		try{
 			//if query
 			PreparedStatement preparedStatement = connexion.prepareStatement(sql);
 			/*Remplissage de la requet */
@@ -85,9 +85,6 @@ public class Base {
 				}
 			}
 			status = preparedStatement.executeUpdate();
-		} catch (Exception e) {
-	        e.printStackTrace();
-	    }
 		if (status == 1)
 			return true;
 		return false;
