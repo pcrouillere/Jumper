@@ -1,0 +1,17 @@
+body{
+	min-width : 500px;
+	margin : 10 px;
+	text-align: center;
+	background-color :#C5252B;
+}
+
+
+.bouton{
+	align: center;
+	width: 45%;
+}
+
+#monContainer{
+	margin-top : 30px;
+	padding : 10px;
+}

@@ -6,19 +6,69 @@
 
 
 
+.drag caption{
+		position			: relative;
+		cursor				: move;
+		z-index				: 1;
+}
+
+
+
+
+table.tagbyid{
+	padding: 5px 5px;
+	width:100%;
+	
+}
+
+.tagbyid caption {
+	background-color: #4A8B87;
+	-webkit-border-radius: 20px 20px 0 0;
+	-moz-border-radius: 20px 20px 0 0;
+	border-radius: 20px 20px 0 0;
+	color: #fff;
+	font-size: 15px;
+	padding: 15px 15px;
+}
+
+.tagbyid td {
+	color: black;
+	padding: 5px 5px;
+}
+
+.tagbyid tr {
+	border : thin solid #F0D4AF;
+
+}
+
+.tagbyid img {
+	padding: 10px 20px 5px 0px;
+}
+
+
 table.alltag{
 	padding: 5px 5px;
 	width: 100%;
+	
 }
 .alltag td {
 	padding: 55px 55px;
+}
 
+.onetag a{
+	text-decoration: none;
+	color:white;
+}
+
+.onetag a:hover {
+	color:#4A8B87;
 }
 
 table.onetag{
-	border: thin solid black;
+	border : thin solid #F0D4AF;
 	border-collapse: collapse;
-	width: 100%;
+	position: absolute;
+	
 }
 
 .onetag caption{
@@ -36,10 +86,9 @@ tr.onetag  {
 }
 
 .onetag td {
-	padding: 10px 10px;
+	padding: 5px 5px;
 
 }
-
 
 
 #nav li {
@@ -273,8 +322,8 @@ ul#menu_horizontal {
 }
 
 #content_page td {
-	padding-left: 25px;
-	padding-right: 25px;
+	padding-left: 5px;
+	padding-right: 5px;
 }
 
 /* Ajout Tag */
@@ -361,8 +410,8 @@ ul#menu_horizontal {
 }
 
 #content_page td {
-	padding-left: 25px;
-	padding-right: 25px;
+	padding-left: 5px;
+	padding-right: 5px;
 }
 
 #user_name {
@@ -394,4 +443,16 @@ footer {
 	font-family: Impact;
 	text-align: center;
 	color: black;
+}
+
+#rech_rapide{
+	color : #C5252B;
+	float : right;
+	text-decoration: none;
+	border:2px solid #777;
+	border-radius:5px;
+	box-shadow:2px 2px 3px #eee inset;
+	padding-left : 30px;
+	margin-right : 50px;
+	
 }

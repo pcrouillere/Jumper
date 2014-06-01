@@ -26,6 +26,9 @@ public class User extends Dao {
 	private int nbTagMap;
 	private String uName;
 	
+	public void deleteUser() {
+		instance = null;
+	}
 	public static User getInstance(){
 		if (instance == null)
 			instance = new User();
@@ -134,7 +137,7 @@ public class User extends Dao {
 	}
 	
 	/* Fonction pour ajouter une URL dans la liste d'URL de l'utilisateur */
-	private void addOneUrl(Url url) {
+	public void addOneUrl(Url url) {
 		uUrls.add(url);
 		nbUrl++;
 	}
@@ -203,9 +206,10 @@ public class User extends Dao {
 
 	/** Fonction pour ajouter un user
 	 * @param
-	 * sql_data		: Contient les informations sur le User **/
+	 * sql_data		: Contient les informations sur le User 
+	 * @throws SQLException **/
 	
-	static public boolean insert(String [] sql_data){
+	static public boolean insert(String [] sql_data) throws SQLException{
 		return Dao.insert("jpuser", sql_data);
 	}
 	
@@ -237,6 +241,25 @@ public class User extends Dao {
 		}
 		System.out.println(untaggedUrl.size());
 		return untaggedUrl;
+	}
+	
+	public ArrayList<Url> getAutoCompletion(String part){
+		ArrayList<Url> listResult = new ArrayList<Url>();
+		String requeteSql = "Select DISTINCT * from jpurl WHERE urlUserId = "+this.uId+" AND urlTitle LIKE '%"+part+"%' ORDER BY urlNbVisited DESC;";
+		System.out.println(requeteSql);
+		ResultSet result = Dao.freeRequest(requeteSql, null);
+		
+		try {
+			while(result.next()){
+				Url url = new Url(result.getInt("urlId"),result.getInt("urlUserId"), result.getString("urlUri"), result.getString("urlTitle"), result.getInt("urlNbVisited") );
+				listResult.add(url);
+			}
+		}
+		catch(SQLException e){
+			e.printStackTrace();
+		}
+		
+		return listResult;
 	}
 	
 	/* Getter & Setter */

@@ -167,6 +167,7 @@ public class FrontController extends HttpServlet {
 		String main = "/WEB-INF/main.jsp";
 		this.page = request.getParameter("page");
 		String dir_css = ToolBox.parse_filename(root.concat("WebContent/WEB-INF/css/"));
+		String dir_js = ToolBox.parse_filename(root.concat("WebContent/WEB-INF/js/"));
 		
 		//***** GESTION DE LA SESSION *****//
 		this.init_session(request);
@@ -181,12 +182,12 @@ public class FrontController extends HttpServlet {
 		Action action = new Action(this);
 		if (method != null) {
 			try {
-				request = (HttpServletRequest) method.invoke(action,(Object)request);
+				request = (HttpServletRequest) method.invoke(action,(Object)request,(Object) response);
 			} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {}
 		} else {
 			this.message = "Impossible de charger la page : " + this.page ;
 			this.page = "error";
-			request = action.error(request);
+			request = action.error(request, response);
 		}
 		if (this.exit) { // Si un veut changer l'adresse dans le navigateur.
 			int pos = root.substring(0,root.length()-1).lastIndexOf('/');
@@ -224,6 +225,7 @@ public class FrontController extends HttpServlet {
 			RequestDispatcher rd = request.getRequestDispatcher(main);
 			request.setAttribute("page","/WEB-INF/jsp/" + this.page + ".jsp");
 			request.setAttribute("css",css);
+			request.setAttribute("dir_js", dir_js);
 			if (this.message != null) {
 				request.setAttribute("main_message",this.message);
 				this.message = null;
