@@ -72,10 +72,10 @@ public class Base {
 	 * Recupere une requete, l'execute et renvoie un boolean
 	 * @param sql
 	 * @param sql_data
+	 * @throws SQLException 
 	 */
-	public boolean executeUpdate(String sql, String [] sql_data) {
+	public boolean executeUpdate(String sql, String [] sql_data) throws SQLException {
 		int status = 0;
-		try{
 			//if query
 			PreparedStatement preparedStatement = connexion.prepareStatement(sql);
 			/*Remplissage de la requet */
@@ -85,9 +85,6 @@ public class Base {
 				}
 			}
 			status = preparedStatement.executeUpdate();
-		} catch (Exception e) {
-	        e.printStackTrace();
-	    }
 		if (status == 1)
 			return true;
 		return false;
