@@ -132,7 +132,7 @@ public class Action
 	return req;
 	}
 	
-	public HttpServletRequest graphview(HttpServletRequest req) throws SQLException
+	public HttpServletRequest graphview(HttpServletRequest req, HttpServletResponse response) throws SQLException
 	{
 		System.out.println("Loading Graph");
 		User user=User.getInstance();
@@ -182,7 +182,8 @@ public class Action
 				}
 			}
 		}		
-		JsonOutput fileInstance=new JsonOutput(graphInstance);
+		System.out.println("getting ready to output files");
+		JsonOutput fileInstance=new JsonOutput(graphInstance,this.parent);
 		fileInstance.update_output();
 		return req;
 	}

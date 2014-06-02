@@ -10,13 +10,17 @@ import java.io.Writer;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import framework.FrontController;
+
 public class JsonOutput 
 {
 	public graph instance;
+	public FrontController instanceFront;
 	
-	public JsonOutput(graph i)
+	public JsonOutput(graph i,FrontController ins)
 	{
 		this.instance=i;
+		this.instanceFront=ins;
 	}
 	
 	private String toJson()
@@ -40,7 +44,7 @@ public class JsonOutput
 	{
 		try
 		{
-			File file=new File("./data.json");
+			File file=new File(this.instanceFront.get_root()+"WebContent/js/data.json");
 		    FileOutputStream is = new FileOutputStream(file);
 	        OutputStreamWriter osw = new OutputStreamWriter(is);    
 	        Writer w = new BufferedWriter(osw);
