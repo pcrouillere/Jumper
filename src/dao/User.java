@@ -246,7 +246,6 @@ public class User extends Dao {
 	public ArrayList<Url> getAutoCompletion(String part){
 		ArrayList<Url> listResult = new ArrayList<Url>();
 		String requeteSql = "Select DISTINCT * from jpurl WHERE urlUserId = "+this.uId+" AND urlTitle LIKE '%"+part+"%' ORDER BY urlNbVisited DESC;";
-		System.out.println(requeteSql);
 		ResultSet result = Dao.freeRequest(requeteSql, null);
 		
 		try {
@@ -260,6 +259,15 @@ public class User extends Dao {
 		}
 		
 		return listResult;
+	}
+	
+	public void removeUrlFromTag(int urlId, int tagId){
+		String requeteSql ="DELETE FROM jptagmap WHERE tagMapTagId="+tagId+" AND tagMapUrlId="+urlId+" AND tagMapUserId="+this.getuId();
+		try {
+			Dao.freeRequestUpdate(requeteSql, null);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	/* Getter & Setter */

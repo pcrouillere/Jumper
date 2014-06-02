@@ -14,7 +14,32 @@
 %>
 <%	List<Url> listUrls = (List<Url>) request.getAttribute("listUrls"); %>
 <% Tag tag = (Tag) request.getAttribute("tag"); %>
+<script>
+function removeUrlFromTag(urlId, tagId){
+	alert("url : "+urlId+" tag : "+tagId);
+	if (window.XMLHttpRequest) { 
+		xhr_obj = new XMLHttpRequest(); 
+	} 
+	else if (window.ActiveXObject) { 
+		xhr_obj = new ActiveXObject("Microsoft.XMLHTTP"); 
+	}	
+	if (!xhr_obj) { 
+		alert('Abandon :Impossible de créer une instance XMLHTTP'); 
+		return false; 
+	} 
+	xhr_obj.onreadystatechange = function() {
+		if (xhr_obj.readyState == 4 && xhr_obj.status==200) {
+			location.reload();
+		}
+		if (xhr_obj.readyState == 4 && xhr_obj.status!=200) {
+			alert("une erreur est survenue lors de la suppression");			
+		}
+	};
+	xhr_obj.open('GET', 'http://localhost:8080/Jump/?page=removeurlfromtag&urlid='+urlId+'&tagid='+tagId, true);
+	xhr_obj.send(null);
+}
 
+</script>
 <section>
 	<ul id="menu_horizontal">
 		<li><%=nbTags.intValue()%> tags</li>
@@ -50,7 +75,9 @@
 					}%>
 				<td><%=listTagsString %>
 				</td>
-				</td>
+				<td>
+					<input type="image" src="img/DeleteButton.png" class="bouton_del" onclick="removeUrlFromTag(<%=url.getuId()%>,<%=tag.getTid()%>)"/>
+				</td> 
 			</tr> <%
 		}
 		%>

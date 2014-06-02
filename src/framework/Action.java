@@ -55,6 +55,14 @@ public class Action
 		return req;
 	}
 	
+	public HttpServletRequest removeurlfromtag(HttpServletRequest req, HttpServletResponse response){
+		int urlId = Integer.parseInt(req.getParameter("urlid"));
+		int tagId = Integer.parseInt(req.getParameter("tagid"));
+		User user = (User) this.parent.user();
+		user.removeUrlFromTag(urlId, tagId);
+		return req;	
+	}
+	
 	public HttpServletRequest index(HttpServletRequest req, HttpServletResponse response) {
 		return req;
 	}
@@ -168,7 +176,6 @@ public class Action
 		int idUser = Integer.parseInt(req.getParameter("id"));
 		String siteUrl = req.getParameter("url");
 		String nomUrl = req.getParameter("nomUrl");
-		System.out.println("id user : "+idUser+" url : "+siteUrl+" nom : "+nomUrl);
 		Url url = new Url(idUser,siteUrl, nomUrl, 0);
 		try{
 			url.addUrlToDBB();
