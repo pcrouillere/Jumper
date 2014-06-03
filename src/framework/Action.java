@@ -1,5 +1,11 @@
 package framework;
 
+import graphview.edge;
+import graphview.graph;
+import graphview.node;
+
+import java.io.IOException;
+import java.io.StringWriter;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -12,6 +18,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
 
 import dao.*;
@@ -183,8 +190,22 @@ public class Action
 			}
 		}		
 		System.out.println("getting ready to output files");
+		
+		ObjectMapper mapper = new ObjectMapper();
+		StringWriter sw = new StringWriter();
+		try 
+		{
+			mapper.writeValue(sw, graphInstance);
+		} 
+		catch (IOException e) 
+		{
+			e.printStackTrace();
+		}
+		req.setAttribute("json_data", sw.toString());
+		/*
 		JsonOutput fileInstance=new JsonOutput(graphInstance,this.parent);
 		fileInstance.update_output();
+		*/
 		return req;
 	}
 	
@@ -234,8 +255,8 @@ public class Action
 			response.setStatus(200);
 		}
 		catch(MySQLIntegrityConstraintViolationException e){
-			// URL existe d√©j√† dans la BDD
-			System.out.println("URL duppliqu√©");
+			// URL existe dÈj‡ dans la BDD
+			System.out.println("URL duppliquÈ");
 			response.setStatus(201);
 
 		} catch (SQLException e) {
