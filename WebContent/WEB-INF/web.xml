@@ -9,6 +9,16 @@
     <servlet-name>FastSearch</servlet-name>
     <url-pattern>/search</url-pattern>
   </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>GetImg</servlet-name>
+    <servlet-class>servlets.GetImg</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GetImg</servlet-name>
+    <url-pattern>/image</url-pattern>
+  </servlet-mapping>
+  
   <servlet>
     <servlet-name>FrontController</servlet-name>
     <servlet-class>framework.FrontController</servlet-class>

@@ -76,8 +76,8 @@ function removeUrlFromTag(urlId, tagId){
 				<td><%=listTagsString %>
 				</td>
 				<td>
-					<input type="image" src="img/DeleteButton.png" class="bouton_del" onclick="removeUrlFromTag(<%=url.getuId()%>,<%=tag.getTid()%>)"/>
-				</td> 
+					<input type="image" src="/Jump/image?src=DeleteButton.png" class="bouton_del" onclick="removeUrlFromTag(<%=url.getuId()%>,<%=tag.getTid()%>)"/>
+				</td>
 			</tr> <%
 		}
 		%>
