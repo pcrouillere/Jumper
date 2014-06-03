@@ -59,4 +59,6 @@ function done_callback(ev)
 	var tagList = $(ev.srcElement).parent().parent().parent().children().first()[0].tagList;
 	console.log(tagList);
 	var sender = new Sender();
+	data = {'userid' : '1' ,'url':'lequipe.fr','theme': 'sport','tag' : tagList,'op':'1'};
+	sender.send("POST",data,"localhost","8182","hello");
 }

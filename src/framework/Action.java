@@ -167,13 +167,10 @@ public class Action
 	public HttpServletRequest ajoutertag(HttpServletRequest req, HttpServletResponse response) throws SQLException
 	{
 		User user = User.getInstance(); 
-		String pathName="C://Users//MOURAD//Documents//Jump//WebContent//WEB-INF//js//atscript.js";
-		String jsCprits=ToolBox.load_file(pathName);
 		List<Tag> allTags = user.getAllTag();
 		List<Url> allUrls = user.getUntaggedUrl();
 		req.setAttribute("tags", allTags);
 		req.setAttribute("untaggedurls", allUrls);
-		req.setAttribute("jsCript", jsCprits);
 		return req;
 	}
 	

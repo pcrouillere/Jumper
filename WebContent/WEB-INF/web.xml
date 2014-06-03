@@ -17,16 +17,8 @@
     <servlet-name>FrontController</servlet-name>
     <url-pattern>/login</url-pattern>
   </servlet-mapping>
-    <servlet-mapping>
-    <servlet-name>FrontController</servlet-name>
-    <url-pattern>/accueil</url-pattern>
-  </servlet-mapping>
   <servlet-mapping>
     <servlet-name>FrontController</servlet-name>
     <url-pattern>/ajoutertag</url-pattern>
-  </servlet-mapping>
-  <servlet-mapping>
-    <servlet-name>FrontController</servlet-name>
-    <url-pattern>/tableaubord</url-pattern>
   </servlet-mapping>
 </web-app>

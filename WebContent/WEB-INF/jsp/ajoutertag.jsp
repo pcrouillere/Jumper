@@ -11,6 +11,7 @@
 <!--Les section, c'est la partie coeur, c'est la ou on doit developper les differentes fonctionnalitées -->
 
 <section>
+<script src="./js/insertAllJsInDom.js"></script>
 	<div id="content_page">
 		<div class="head_content_page">
 			<h1>Ajouter des tags</h1>
@@ -18,14 +19,21 @@
 					<div class="alert alert-info"><p>Drop all tags you want over the link</p></div>
 			</div>
 		</div>				
-		<div id="all_links">
 		<!-- This part should be loaded from Database, this is just an exemple -->
+		<script>
+		
+		var container = new ThumbnailContainer(document.getElementById('content_page'),null);
+		</script>
 		<% 
 			int i=0;
 			while ( i<urls.size())
 			{
 		%>
-			<div class="row" id="<%="link_"+String.valueOf(i+1)%>">
+		<script>
+			var param = '{<%=i%>:<%=urls.get(i).getuUri()%>}';
+			container.addThumbnail(param);
+		</script>
+			<!--<div class="row" id="<%="link_"+String.valueOf(i+1)%>">
 				<div class="col-sm-6 col-md-4">
 					<div class="thumbnail">
 						<img src="<c:url value="<%= urls.get(i).getuUri() %>"/>" ondrop="drop(event)" ondragover="allowDrop(event)" id="<%=String.valueOf(i+1)%>" class="img-thumbnail"/>
@@ -35,12 +43,11 @@
 						</div>
 					</div>
 				</div>
-			</div>
+			</div>-->
 		<% 
 				i++;
 			}
 		%>
-	</div>
 </div>
 <aside>
 	<div id="tag_list">
@@ -73,5 +80,4 @@
 	</div>
 	</aside>			
 </section>
-<script src="./js/atscript.js"> </script>
-<script src="./js/Sender.js"> </script>
+<script src="./js/atscript.js"></script>
