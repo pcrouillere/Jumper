@@ -39,26 +39,32 @@ function drag(ev,id)
 
 function drop(ev)
 {
-	//get the target id
 	var tagValue = ev.dataTransfer.getData("tag_names");
 	var srcImg = ev.srcElement;
+	var tagContainer = $($(srcImg).children()[1]).children()[1];
+	console.log($($(srcImg).children()[1]).children()[1]);
+	//tagContainer.innerHTML += '<button type="button" class="btn">#'+tagValue+'</button>';
+	
 	if(srcImg.tagList == null) {
 		var array = new Array();
 		var att = document.createAttribute("tagList");
 		srcImg.setAttributeNode(att);
 		srcImg.tagList = array;
 	}
-	srcImg.tagList.push(tagValue);
+	if(srcImg.tagList.indexOf("#"+tagValue)==-1) {
+		srcImg.tagList.push("#"+tagValue);
+		var tag = new ThumbnailTag(null,tagValue);
+		$(tagContainer).append(tag.getHtmlObject());
+	}
 }
 
 function done_callback(ev)
 {
-	var ele="link_"+ev.target.id;
-	var targetToRemove=document.getElementById(ele);
-	targetToRemove.parentNode.removeChild(targetToRemove);
-	var tagList = $(ev.srcElement).parent().parent().parent().children().first()[0].tagList;
-	console.log(tagList);
+	var thumbnail = $(ev.target).parent()[0];
+	var tagList = thumbnail.tagList;
+	var url = thumbnail.url;
 	var sender = new Sender();
-	data = {'userid' : '1' ,'url':'lequipe.fr','theme': 'sport','tag' : tagList,'op':'1'};
+	data = {'userid' : '1' ,'url':url,'theme': 'sport','tag' : tagList,'op':'1'};
 	sender.send("POST",data,"localhost","8182","hello");
+	$(ev.target).parent().remove();
 }

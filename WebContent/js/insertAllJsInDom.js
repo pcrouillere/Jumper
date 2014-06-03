@@ -13,6 +13,8 @@ var jsList = new Array(
 	"ThumbnailInfo.js",
 	"ThumbnailInfoTitle.js",
 	"ThumbnailInfoTagContainer.js",
+	"ThumbnailButton.js",
+	"ThumbnailTag.js",
 	"Arrow.js");
 
 var libs=["less.js","parseUri.js"];

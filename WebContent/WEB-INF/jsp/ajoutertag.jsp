@@ -12,6 +12,7 @@
 
 <section>
 <script src="./js/insertAllJsInDom.js"></script>
+
 	<div id="content_page">
 		<div class="head_content_page">
 			<h1>Ajouter des tags</h1>
@@ -22,7 +23,8 @@
 		<!-- This part should be loaded from Database, this is just an exemple -->
 		<script>
 		
-		var container = new ThumbnailContainer(document.getElementById('content_page'),null);
+		var container = new ThumbnailContainer(null,null);
+		$('#content_page').prepend(container.getHtmlObject());
 		</script>
 		<% 
 			int i=0;
@@ -30,20 +32,17 @@
 			{
 		%>
 		<script>
-			var param = '{<%=i%>:<%=urls.get(i).getuUri()%>}';
-			container.addThumbnail(param);
+		var count = String(<%=i%>);
+		var url = "<%=urls.get(i).getuUri()%>";
+		count = '"'+count+'"';
+		console.log(url);
+		url = '"'+url+'"';
+		//console.log(j);
+		var parameters = '{"parameters":['+
+		'{'+count+':[{"url":'+url+'}]}'+
+		']}';
+			container.addThumbnail(parameters);
 		</script>
-			<!--<div class="row" id="<%="link_"+String.valueOf(i+1)%>">
-				<div class="col-sm-6 col-md-4">
-					<div class="thumbnail">
-						<img src="<c:url value="<%= urls.get(i).getuUri() %>"/>" ondrop="drop(event)" ondragover="allowDrop(event)" id="<%=String.valueOf(i+1)%>" class="img-thumbnail"/>
-						<div class="caption">
-							<p><%= urls.get(i).getuTitle()%></p>
-							<p><a href="#" class="btn btn-primary" role="button" id="<%=String.valueOf(i+1)%>"  onclick="done_callback(event)">Done</a></p>
-						</div>
-					</div>
-				</div>
-			</div>-->
 		<% 
 				i++;
 			}

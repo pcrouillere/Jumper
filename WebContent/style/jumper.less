@@ -5,52 +5,23 @@
 html,body {
   margin:0px;
   padding:0px;
-  #barWrapper{
-    height:@default-thumbnail-height;
-    width:90%;
-    background:black;
-    border-radius:5px;
-  	.RecommandationBar{
-  	  background:black;
-  	  width:100%;
-  	  height:@default-thumbnail-height;
-  	  border-radius:5px;
-  	  overflow: hidden;
-      text-align: center;
-      
-      .Arrow {
-        background:grey;
-        width:5%;
-        height:@default-thumbnail-height;
-        float:left;
-        cursor:pointer;
-        span{
-          font-size:200%;
-          font-weight:bold;
-          margin:0 auto;
-          position:relative;
-          display:block;
-          top:40%;
-        }
-      }
-      #arrowRight {
-        float:right;
-      }
       .ThumbnailContainer{
         float:left;
         width:90%;
+        
     	  .Thumbnail{
     	    border:1px solid black;
           background:white;
           height:@default-thumbnail-height;
-          margin:0 auto;
+          margin:20px 20px 0px 20px;
           overflow: hidden;
           float:left;
           position:relative;
+          
           .ThumbnailImage{
             background-color: #dff0d8;
             width:100%;
-            height:70%;
+            height:60%;
             margin:0 auto;
             position:relative;
             .frame{
@@ -63,10 +34,11 @@ html,body {
               .scale(0.25);
             }
           }
+          
           .ThumbnailInfo{
             background-color: #dff0d8;
             width:100%;
-            height:30%;
+            height:25%;
             border-top:1px solid black;
             .ThumbnailInfoTitle{
               background-color: #dff0d8;
@@ -83,17 +55,18 @@ html,body {
               background-color: #dff0d8;
               height:60%;
               margin:0 auto;
-              button{
+              .ThumbnailTag{
                 background-color: #5cb85c;
                 border-color: #4cae4c;
                 font-weight:bold;
               }
             }
           }
+		  .ThumbnailButton {
+		  
+		  }
         }
       }
-    }
-	}
 	
 /*----------------Overide Bootstrap------------*/
 .container-fluid {

@@ -14,10 +14,12 @@ function ThumbnailImage (pParent,pSource){
 	console.log(pSource);
 	this.getHtmlObject().appendChild(this.cIframe);
 	
-	$(this.getHtmlObject()).on("click",function(e){
-		alert('ok');
-	});
-	
+	this.cIframe.ondrop = function(e) {
+		alert('drop');
+	};
+	this.cIframe.ondragover = function(e) {
+		allowDrop(e);
+	};
 	
 	this.addClass("ThumbnailImage");
 	
