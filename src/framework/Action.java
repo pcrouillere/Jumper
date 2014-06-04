@@ -62,6 +62,25 @@ public class Action
 		return req;
 	}
 	
+	public HttpServletRequest removeurlfromtag(HttpServletRequest req, HttpServletResponse response){
+		int urlId = Integer.parseInt(req.getParameter("urlid"));
+		int tagId = Integer.parseInt(req.getParameter("tagid"));
+		User user = (User) this.parent.user();
+		user.removeUrlFromTag(urlId, tagId);
+		user.setuTagMap(null);
+		user.addAllMap();
+		return req;	
+	}
+	
+	public HttpServletRequest removeurlfrombdd(HttpServletRequest req, HttpServletResponse response){
+		int urlId = Integer.parseInt(req.getParameter("urlid"));
+		User user = (User) this.parent.user();
+		user.removeUrlFromBdd(urlId);
+		user.setuTagMap(null);
+		user.addAllMap();
+		return req;	
+	}
+	
 	public HttpServletRequest index(HttpServletRequest req, HttpServletResponse response) {
 		return req;
 	}
@@ -255,8 +274,8 @@ public class Action
 			response.setStatus(200);
 		}
 		catch(MySQLIntegrityConstraintViolationException e){
-			// URL existe déjà dans la BDD
-			System.out.println("URL duppliqué");
+			// URL existe dï¿½jï¿½ dans la BDD
+			System.out.println("URL duppliquï¿½");
 			response.setStatus(201);
 
 		} catch (SQLException e) {

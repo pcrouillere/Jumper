@@ -188,7 +188,7 @@ public class User extends Dao {
 		}
 	}
 
-	private void addAllMap() {
+	public void addAllMap() {
 		ResultSet resultat;
 		Map<String, String> attr = new HashMap<String, String>();
 		attr.put("tagMapUserId", Integer.toString(this.uId));
@@ -243,6 +243,36 @@ public class User extends Dao {
 		return untaggedUrl;
 	}
 	
+	public HashMap<Tag,ArrayList<Url>> getTagAutoCompletion(String part){
+		HashMap<Tag,ArrayList<Url>> mapResult = new HashMap<Tag,ArrayList<Url>>();
+		String requeteSql = "Select DISTINCT * from jptag WHERE tagUserId = "+this.uId+" AND tagName LIKE '%"+part+"%';";
+		System.out.println(requeteSql);
+		ResultSet result = Dao.freeRequest(requeteSql, null);
+		
+		try {
+			
+			while(result.next()){
+				Tag tag = new Tag(result.getString("tagName"), result.getInt("tagId"), result.getInt("tagUserId"));
+				String requeteSql2 = "Select tagMapUrlId from jptagmap WHERE tagMapUserId = "+this.uId+" AND tagMapTagId = "+tag.getTid();
+				System.out.println(requeteSql2);
+				ResultSet result2 = Dao.freeRequest(requeteSql2, null);
+				ArrayList<Url> listResult = new ArrayList<Url>();
+				while(result2.next()){
+					Url url = getUrlById(result2.getInt("tagMapUrlId"));
+					listResult.add(url);
+				}
+				mapResult.put(tag, listResult);
+				
+			}
+		}
+		catch(SQLException e){
+			e.printStackTrace();
+		}
+		
+		return mapResult;
+	}
+	
+	
 	public ArrayList<Url> getAutoCompletion(String part){
 		ArrayList<Url> listResult = new ArrayList<Url>();
 		String requeteSql = "Select DISTINCT * from jpurl WHERE urlUserId = "+this.uId+" AND urlTitle LIKE '%"+part+"%' ORDER BY urlNbVisited DESC;";
@@ -260,6 +290,25 @@ public class User extends Dao {
 		}
 		
 		return listResult;
+	}
+	
+	public void removeUrlFromTag(int urlId, int tagId){
+		String requeteSql ="DELETE FROM jptagmap WHERE tagMapTagId="+tagId+" AND tagMapUrlId="+urlId+" AND tagMapUserId="+this.getuId();
+		try {
+			Dao.freeRequestUpdate(requeteSql, null);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	
+	public void removeUrlFromBdd(int urlId){
+		String requeteSql ="DELETE FROM jptagmap WHERE tagMapUrlId="+urlId+" AND tagMapUserId="+this.getuId();
+		try {
+			Dao.freeRequestUpdate(requeteSql, null);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	/* Getter & Setter */
