@@ -27,7 +27,6 @@
     <servlet-name>GetImg</servlet-name>
     <url-pattern>/image</url-pattern>
   </servlet-mapping>
-  
   <servlet>
     <servlet-name>FrontController</servlet-name>
     <servlet-class>framework.FrontController</servlet-class>
