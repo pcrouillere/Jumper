@@ -217,16 +217,18 @@ window.onload = function ()
 	
 	for (i = 0; i < data_tmp.length; i++){
 		if (document.getElementById(data_tmp[i]) != null){
-			data[j] = data_tmp[i];
-		}
+		data[j] = data_tmp[i];
+
 		j++;
-	}
-	for (i = 0; i < document.getElementsByClassName("drag").length ; i++){
-		if (data.indexOf(document.getElementsByClassName("drag")[i].parentNode.id) == -1){
-			data[i] = document.getElementsByClassName("drag")[i].parentNode.id;
-			j++;
 		}
-	}
+		}
+		for (i = 0; i < document.getElementsByClassName("drag").length ; i++){
+		if (data.indexOf(document.getElementsByClassName("drag")[i].parentNode.id) == -1){
+		data[j] = document.getElementsByClassName("drag")[i].parentNode.id;
+		j++;
+		}
+		}
+
 	for(i = 0; i < document.getElementsByClassName("drag").length ; i++){
 		document.getElementById(data[i]).style.clientWidth = width / nbColomn + "px";
 		document.getElementById(data[i]).style.top =  (Math.floor(i/nbColomn)*(width/nbColomn)) + headerSize + "px";
