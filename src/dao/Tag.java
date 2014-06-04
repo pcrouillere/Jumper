@@ -14,11 +14,17 @@ public class Tag extends Dao {
 	private int tid;
 	private int tUserId;
 	
-	Tag(String n, int id, int uid) {
+	public Tag(String n, int id, int uid) {
 		tName = n;
 		tid = id;
-		tUserId = id;
+		tUserId = uid;
 	}
+	
+	public Tag(String n, int uid) {
+		tName = n;
+		tUserId = uid;
+	}
+	
 
 	/** getUrls() : fonction qui retourne l'ensemble des urls taggees avec le tag 
 	 * @return List<Url>
@@ -41,6 +47,31 @@ public class Tag extends Dao {
 			e.printStackTrace();
 		}
 		return allUrls;
+	}
+	
+	public int getTagIdFromBDD()
+	{
+		ResultSet result;
+		result = Dao.freeRequest("Select tagId from jpTag WHERE urlUserId="+Integer.toString(tUserId)+" AND tagName='"+this.tName+"';", null);
+		try {
+			if(result.next()){
+				int id = result.getInt("tagId");
+				return id;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return -1;
+	}
+	
+	public void addTagtoBDD()
+	{
+        try {
+			Dao.freeRequestUpdate("Insert into jpTag(tagUserId, tagName) values("+this.tUserId+",'"+this.tName+"')", null);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	public String gettName() {

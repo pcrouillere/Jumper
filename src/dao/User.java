@@ -114,6 +114,14 @@ public class User extends Dao {
 		return null;
 	}
 	
+	public Tag getTagByName(String name) {
+		for (int i=0; i<= uTags.size(); i++) {
+			if(uTags.get(i).gettName().equals(name))
+				return uTags.get(i);
+		}
+		return null;
+	}
+	
 	public Url getUrlById(int id){
 		for(int i=0; i<= uUrls.size(); i++){
 			if(uUrls.get(i).getuId()==id)
@@ -131,7 +139,7 @@ public class User extends Dao {
 	}
 
 	/* Fonction pour ajouter un tag dans la liste des tags de l'utilisateur */
-	private void addOneTag(Tag tag) {
+	public void addOneTag(Tag tag) {
 		uTags.add(tag);
 		nbTag++;
 	}
@@ -142,7 +150,7 @@ public class User extends Dao {
 		nbUrl++;
 	}
 	
-	private void addOneMap(TagMap tagMap){
+	public void addOneMap(TagMap tagMap){
 		uTagMap.add(tagMap);
 		nbTagMap++;
 	}

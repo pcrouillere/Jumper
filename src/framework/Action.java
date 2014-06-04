@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
 
 import dao.Tag;
+import dao.TagMap;
 import dao.Url;
 import dao.User;
 
@@ -206,9 +207,26 @@ public class Action
 	
 	public HttpServletRequest addtagurl(HttpServletRequest req, HttpServletResponse response)
 	{
+		User user = User.getInstance(); 
 		String uri =(String) req.getParameter("url");
 		String listTag=(String)req.getParameter("list");
-		System.out.print("L'URL : "+uri+"\nles tags: "+listTag);
+		Url url=user.getUrlById(Integer.valueOf(uri));
+		String str[] = listTag.split("\\$\\$\\$");
+		for(int i=0; i<str.length; i++)
+		{
+			Tag tag = user.getTagByName(str[i]);
+			if(tag == null) {
+				//add tag
+				tag=new Tag(str[i],user.getuId());
+				tag.addTagtoBDD();
+				tag.setTid(tag.getTagIdFromBDD());
+				user.addOneTag(tag);
+			} 
+			TagMap tm=new TagMap(tag,url);
+			tm.addTagMaptoBDD(user.getuId());
+			tm.setTmId(tm.getIdFromBdd());
+			user.addOneMap(tm);
+		}
 		return req;
 	}
 }
