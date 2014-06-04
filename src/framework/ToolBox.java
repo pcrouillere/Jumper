@@ -44,9 +44,9 @@ public class ToolBox {
 	}
 	
 	/**
-	 * Permet le bon formatage d'un chemin selon le système.
-	 * @param filename String chemin à formater
-	 * @return String chemin formaté
+	 * Permet le bon formatage d'un chemin selon le systï¿½me.
+	 * @param filename String chemin ï¿½ formater
+	 * @return String chemin formatï¿½
 	 */
 	public static String parse_filename(String filename)
 	{
@@ -57,10 +57,10 @@ public class ToolBox {
 	}
 	
 	/**
-	 * Fonction qui vérifie l'existance d'une méthode pour une classe par réflexion.
+	 * Fonction qui vï¿½rifie l'existance d'une mï¿½thode pour une classe par rï¿½flexion.
 	 * @param class_name String nom complet de la classe, avec package
 	 * @param method_name String Methode de la classe
-	 * @return Method renvoie la méthode si elle existe ou null. 
+	 * @return Method renvoie la mï¿½thode si elle existe ou null. 
 	 */
 	public static Method get_method(String class_name, String method_name)
 	{

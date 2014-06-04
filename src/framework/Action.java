@@ -1,22 +1,29 @@
 package framework;
 
+import graphview.edge;
+import graphview.graph;
+import graphview.node;
+
+import java.io.IOException;
+import java.io.StringWriter;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
+import java.util.Set;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
 
-import dao.Tag;
-import dao.TagMap;
-import dao.Url;
-import dao.User;
+
+import dao.*;
 
 /**
  * Classe qui definie les actions specifiques pour chaque page.
@@ -55,6 +62,25 @@ public class Action
 		req.setAttribute("nbUntaggedUrls", nbUntaggedUrls);
 		req.setAttribute("listUrls", listUrls);
 		return req;
+	}
+	
+	public HttpServletRequest removeurlfromtag(HttpServletRequest req, HttpServletResponse response){
+		int urlId = Integer.parseInt(req.getParameter("urlid"));
+		int tagId = Integer.parseInt(req.getParameter("tagid"));
+		User user = (User) this.parent.user();
+		user.removeUrlFromTag(urlId, tagId);
+		user.setuTagMap(null);
+		user.addAllMap();
+		return req;	
+	}
+	
+	public HttpServletRequest removeurlfrombdd(HttpServletRequest req, HttpServletResponse response){
+		int urlId = Integer.parseInt(req.getParameter("urlid"));
+		User user = (User) this.parent.user();
+		user.removeUrlFromBdd(urlId);
+		user.setuTagMap(null);
+		user.addAllMap();
+		return req;	
 	}
 	
 	public HttpServletRequest index(HttpServletRequest req, HttpServletResponse response) {
@@ -134,6 +160,76 @@ public class Action
 	return req;
 	}
 	
+	public HttpServletRequest graphview(HttpServletRequest req, HttpServletResponse response) throws SQLException
+	{
+		System.out.println("Loading Graph");
+		User user=User.getInstance();
+		List<Tag> listTags=user.getAllTag();
+		Iterator it = listTags.iterator();
+		node instTag=null;
+		Tag currentTag=null;
+		graph graphInstance=new graph();
+		int xVal;
+		int yVal;
+		Random r=new Random();
+		while(it.hasNext())
+		{
+			currentTag=(Tag) it.next();
+			do
+			{
+				xVal=r.nextInt(user.getAllTag().size()/2);
+				yVal=r.nextInt(user.getAllTag().size()/2);
+			}while(graphInstance.locationAlreadyExist(xVal, yVal));
+			
+			instTag=new node(String.valueOf(currentTag.getTid()), currentTag.gettName(),xVal , yVal, currentTag.getUrls().size());
+			graphInstance.putNodes(instTag);
+			instTag=null;
+		}
+		List<Url> listUrls=user.getAllUrl();
+		Iterator itUri=listUrls.iterator();
+		Url currentUrl;
+		for(int k=0;k<listUrls.size();k++)
+		{
+			currentUrl=(Url) listUrls.get(k);
+			if(currentUrl.getTags().size()>1)
+			{
+				edge instance = null;
+				String idEdge;
+				for(int i=0;i<currentUrl.getTags().size();i++)
+				{
+					for(int j=i+1;j<currentUrl.getTags().size();j++)
+					{
+						idEdge=String.valueOf(currentUrl.getuId())+String.valueOf(i)+String.valueOf(j);
+						if(currentUrl.getTags().get(i).getTid()!=currentUrl.getTags().get(j).getTid())
+						{
+							instance=new edge(idEdge,String.valueOf(currentUrl.getTags().get(i).getTid()),String.valueOf(currentUrl.getTags().get(j).getTid()));
+							graphInstance.putEdges(instance);
+						}
+						instance=null;
+					}
+				}
+			}
+		}		
+		System.out.println("getting ready to output files");
+		
+		ObjectMapper mapper = new ObjectMapper();
+		StringWriter sw = new StringWriter();
+		try 
+		{
+			mapper.writeValue(sw, graphInstance);
+		} 
+		catch (IOException e) 
+		{
+			e.printStackTrace();
+		}
+		req.setAttribute("json_data", sw.toString());
+		/*
+		JsonOutput fileInstance=new JsonOutput(graphInstance,this.parent);
+		fileInstance.update_output();
+		*/
+		return req;
+	}
+	
 	/** Fonction tableauBord
 	 * Gere la page tableau de bord de l'application
 	 * @param req	: HttpServletRequest **/
@@ -192,8 +288,8 @@ public class Action
 			response.setStatus(200);
 		}
 		catch(MySQLIntegrityConstraintViolationException e){
-			// URL existe déjà dans la BDD
-			System.out.println("URL duppliqué");
+			// URL existe d�j� dans la BDD
+			System.out.println("URL duppliqu�");
 			response.setStatus(201);
 
 		} catch (SQLException e) {
@@ -229,4 +325,5 @@ public class Action
 		}
 		return req;
 	}
+
 }
