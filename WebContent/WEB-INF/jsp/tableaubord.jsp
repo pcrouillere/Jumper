@@ -38,8 +38,6 @@ var selection = true;
 
 var i;
 
-
-
 /*************************/
 /*                       */
 /*     Drag and Drop     */
@@ -206,6 +204,12 @@ var Move = function (e)
 
 window.onload = function ()
 {
+	loadPage();
+}
+
+
+function loadPage()
+{
 	var j = 0;
 	document.onmousedown = Down;
 	document.onmouseup   = Up;
@@ -242,6 +246,60 @@ window.onload = function ()
      document.getElementById("content_page").style.height = (Math.floor(document.getElementsByClassName("drag").length / nbColomn) +1) * width/nbColomn + "px";
 
 }
+
+
+function searchTag(){
+	var part = document.getElementById("rech_rapide").value;
+	if (window.XMLHttpRequest) { 
+		xhr_obj = new XMLHttpRequest(); 
+	}
+	else if (window.ActiveXObject) { 
+		xhr_obj = new ActiveXObject("Microsoft.XMLHTTP"); 
+	}	
+	if (!xhr_obj) { 
+		alert('Abandon :Impossible de créer une instance XMLHTTP'); 
+		return false; 
+	} 
+	xhr_obj.onreadystatechange = function() {
+		if (xhr_obj.readyState == 4 && xhr_obj.responseText) {
+				var result = xhr_obj.responseText;
+				var listTags = result.split('\n');
+				var textResult = '';
+				var i = 0;
+				for (var j = 0; j <= (listTags.length/nbColomn); j++) {
+					
+					for(var k =0; k<nbColomn; k++){
+						if(i<listTags.length-1){
+							listTags[i] = listTags[i].split(' $$$ ');
+							if(listTags[i].length>2){
+								textResult +='<table class="onetag" id ="'+listTags[i][0]+'" >' ;
+								textResult += '<caption class="drag"><a href="?page=tagbyid&id='+listTags[i][0]+'">'+listTags[i][1]+'</a></caption>';
+								textResult+="<br>";
+								var counturl=0;
+								for(var l =2; l<10; l++){
+									if(counturl%4 ==0) textResult +="<tr>" ;
+									counturl++;
+									textResult +="<td width='40' height='40'>" ;
+									if(l<listTags[i].length){
+										textResult+='<a href="'+ listTags[i][l] +'"><img src="http://www.google.com/s2/favicons?domain='+ listTags[i][l]+'" width="40" height="40" ></a>';
+									}
+									textResult +="</td>" ;
+									if(counturl%4 ==0) textResult +="</tr>" ;
+								}
+							}
+						}
+						i++;
+					}
+					textResult +="</tr>" ;
+				}
+				textResult += "</table>";
+				document.getElementById('content_page').innerHTML = textResult;
+				loadPage();
+		}
+	};
+	xhr_obj.open('GET', 'http://localhost:8080/Jump/searchtag?part='+part, true);
+	xhr_obj.send(null);
+}
 </script>
 <section>
 	<ul id="menu_horizontal">
@@ -249,6 +307,10 @@ window.onload = function ()
 		<li><%=nbUrls.intValue()%> favoris</li>
 		<li><%=nbUntaggedUrls.intValue()%> favoris a trier</li>
 	</ul>
+	<div>
+		<input type ="text" id="rech_rapide" placeholder="Rechercher" onkeyup = "searchTag()"/>	
+	</div>
+	
 	<div id="content_page">
 		<%int i = mapTagUrls.size();
 		int count_tag =0;
