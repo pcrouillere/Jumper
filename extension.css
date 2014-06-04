@@ -1,17 +1,47 @@
 body{
-	min-width : 500px;
+	min-width : 200px;
 	margin : 10 px;
 	text-align: center;
 	background-color :#C5252B;
 }
 
-
 .bouton{
-	align: center;
-	width: 45%;
+}
+.but {
+	width: 150px !important;
+	background-color:#C5252B;
+	-moz-border-radius:6px;
+	-webkit-border-radius:6px;
+	border:1px solid #C5252B;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Verdana;
+	font-size:17px;
+	font-weight:bold;
+	padding:11px ;
+}
+.but:hover {
+	background-color:#4A8B87;
 }
 
-#monContainer{
-	margin-top : 30px;
-	padding : 10px;
+.jumbotron {
+    color: inherit;
+    background-color: #eee;
 }
+.jumbotron h1, .jumbotron .h1 {
+    color: inherit;
+}
+.jumbotron p {
+    font-size: 21px;
+    font-weight: 200;
+}
+.container .jumbotron {
+    border-radius: 6px;
+}
+
+.jumbotron h1, .jumbotron .h1 {
+    font-size: 30px;
+}
+
+
+
