@@ -11,378 +11,92 @@
 <!--Les section, c'est la partie coeur, c'est la ou on doit developper les differentes fonctionnalitées -->
 
 <section>
-<style type="text/css">
-/* Default width of the player */
-@default-player-width: 750px;
-
-/* Default size of canvas */
-@default-canvas-width: 640px;
-@default-canvas-height: 360px;
-
-@default-thumbnail-height: 200px;
-
-/* Extra Extra small screen / phone - vertical */
-@xxs-screen-width: 320px;
-@screen-phoneV-width: 320px;
-@screen-phoneV-height: floor((@screen-phoneV-width*@default-canvas-height)/@default-canvas-width);
-
-/* Extra small screen / phone - horizontal */
-@xs-screen-width: 480px;
-@screen-phoneH-width: 480px;
-@screen-phoneH-height: floor((@screen-phoneH-width*@default-canvas-height)/@default-canvas-width);
-
-/* Small screen / tablet - vertical */
-@s-screen-width: 768px;
-/*@s-screen-width: 800px;*/
-@screen-tablet-width: @default-player-width;
-@screen-tablet-height: floor((@screen-tablet-width*@default-canvas-height)/@default-canvas-width);
-
-/* Medium screen / desktop */
-@m-screen-width: 992px;
-@screen-desktop-width: @default-player-width;
-@screen-desktop-height: floor((@screen-desktop-width*@default-canvas-height)/@default-canvas-width);
-
-/* Large screen / wide desktop*/
-@l-screen-width: 1200px;
-@screen-l-desktop-width: @default-player-width;
-@screen-l-desktop-height: floor((@screen-l-desktop-width*@default-canvas-height)/@default-canvas-width); 
-
-
-/* Thumbnail default height */ 
-@tn-default-height: 50px;
-
-/* Thumbnail width for extra small sceen / phone - vertical */ 
-@tn-phoneV-width: floor((@tn-default-height*320)/240);
-
-/* Thumbnail width for extra small sceen / phone - horizontal */ 
-@tn-phoneH-width: floor((@tn-default-height*480)/360);
-
-/* Thumbnail width for small sceen / tablet */
-@tn-tablet-width: floor((@tn-default-height*640)/360);
-
-/* Thumbnail width for medium sceen / desktop */
-@tn-desktop-width: floor((@tn-default-height*854)/480);
-
-/* Thumbnail width for large sceen / wide desktop */ 
-@tn-l-desktop-width: floor((@tn-default-height*1280)/720);
-
-/*Vignette text variable*/
-@vignette-font-familly: "Arial";
-@vignette-font-size: 8px;
-
-/* Control bar height */
-@controlBar-height: 30px;
-
-/* background for sprite */
-.background-icon(@x-position, @y-position, @x-size:820px, @y-size:428px) {
-	background: url("../assets/sprite.png") no-repeat transparent;
-	background-position: @x-position @y-position;
-	background-size: @x-size @y-size;
+<style>
+.ThumbnailContainer
+{
+      width:90%;
+	  margin: 0 auto;
 }
 
-
-#less {
-  .default_player_width { width: @default-player-width; }
-  .default_canvas_width { width: @default-canvas-width; }
-  .default_canvas_height{ height: @default-canvas-height; }
-  .xxs_screen_width { width: @xxs-screen-width; }
-  .screen_phoneV_width { width: @screen-phoneV-width; }
-  .screen_phoneV_height { height: @screen-phoneV-height; }
-  .xs_screen_width { width: @xs-screen-width; }
-  .screen_phoneH_width { width: @screen-phoneH-width ; }
-  .screen_phoneH_height { height: @screen-phoneH-height; }
-  .s_screen_width { width: @s-screen-width; }
-  .screen_tablet_width { width: @screen-tablet-width; }
-  .screen_tablet_height { height: @screen-tablet-height; }
-  .m_screen_width { width: @m-screen-width; }
-  .screen_desktop_width { width: @screen-desktop-width; }
-  .screen_desktop_height { height: @screen-desktop-height; }
-  .l_screen_width { width: @l-screen-width; }
-  .screen_l_desktop_width { width: @screen-l-desktop-width; }
-  .screen_l_desktop_height { height: @screen-l-desktop-height; }
-  .tn_default_height { height: @tn-default-height; }
-  .tn_phoneV_width { width: @tn-phoneV-width; }
-  .tn_phoneH_width { width: @tn-phoneH-width; }
-  .tn_tablet_width { width: @tn-tablet-width; }
-  .tn_desktop_width { width: @tn-desktop-width; }
-  .tn_l_desktop_width { width: @tn-l-desktop-width; }
-  .controlBar_height { width: @controlBar-height; }
-}
-// Style for small mobile vertical
-@media only screen and (max-width: @xxs-screen-width) {
-html,body {
-  #barWrapper{
-    .RecommandationBar{
-      .Arrow {
-        span{
-        }
-      }
-      .ThumbnailContainer{
-        .Thumbnail{
-          .ThumbnailImage{
-          }
-          .ThumbnailInfo{
-            .ThumbnailInfoTitle{
-              h4{
-                font-size:40%;
-              }
-            }
-            .ThumbnailTagContainer{
-              button{
-                margin-top:0px;
-                font-size:30%;
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-}
+.Thumbnail
+{
+	border:1px solid red;
+	 height:250px;
+	 margin:20px 20px 0px 20px;
+	 overflow: hidden;
+	 float:center;
+	 position:relative;
+     display : inline-block;
+     
 }
 
-// Style for mobile vertical
-@media only screen and (min-width: @xxs-screen-width) and (max-width: @xs-screen-width) { 
-     html,body {
-  #barWrapper{
-    .RecommandationBar{
-      .Arrow {
-        span{
-        }
-      }
-      .ThumbnailContainer{
-        .Thumbnail{
-          .ThumbnailImage{
-          }
-          .ThumbnailInfo{
-            .ThumbnailInfoTitle{
-              h4{
-                font-size:50%;
-              }
-            }
-            .ThumbnailTagContainer{
-              button{
-                margin-top:0px;
-                font-size:40%;
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-}
+.ThumbnailImage
+{
+	width:100%;
+	height:60%;
+	margin:0 auto;
+	position:relative;
 }
 
-
-// Style for mobile horizontal
-@media only screen and (min-width: @xs-screen-width) and (max-width: @s-screen-width) {
-html,body {
-  #barWrapper{
-    .RecommandationBar{
-      .Arrow {
-        span{
-        }
-      }
-      .ThumbnailContainer{
-        .Thumbnail{
-          .ThumbnailImage{
-          }
-          .ThumbnailInfo{
-            .ThumbnailInfoTitle{
-              h4{
-                font-size:60%;
-              }
-            }
-            .ThumbnailTagContainer{
-              button{
-                margin-top:0px;
-                font-size:40%;
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-}
+.frame
+{
+	overflow:hidden;
+	width:100%;
+	height:100%;
+	position:relative;
+	-webkit-transform-origin: 0 0;
+	overflow: hidden;
+	scale:0.001;
 }
 
-// Style for tablet
-@media only screen and (min-width: @s-screen-width) and (max-width: @m-screen-width) {	
-html,body {
-  #barWrapper{
-    .RecommandationBar{
-      .Arrow {
-        span{
-        }
-      }
-      .ThumbnailContainer{
-        .Thumbnail{
-          .ThumbnailImage{
-          }
-          .ThumbnailInfo{
-            .ThumbnailInfoTitle{
-              h4{
-                font-size:70%;
-              }
-            }
-            .ThumbnailTagContainer{
-              button{
-                margin-top:2px;
-                font-size:50%;
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-}
+.ThumbnailInfo
+{
+	width:100%;
+	height:25%;
+	border-top:1px solid red;
 }
 
-// Style for desktop
-@media only screen and (min-width: @m-screen-width) and (max-width: @l-screen-width) {
-html,body {
-  #barWrapper{
-    .RecommandationBar{
-      .Arrow {
-        span{
-        }
-      }
-      .ThumbnailContainer{
-        .Thumbnail{
-          .ThumbnailImage{
-          }
-          .ThumbnailInfo{
-            .ThumbnailInfoTitle{
-              h4{
-                font-size:80%;
-              }
-            }
-            .ThumbnailTagContainer{
-              button{
-                margin-top:2px;
-                font-size:60%;
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-}
+.ThumbnailInfoTitle
+{
+	height:40%;
+	margin:0 auto;
+	cursor:pointer;
 }
 
-// Style for wide desktop
-@media only screen and (min-width: @l-screen-width) {
-html,body {
-  #barWrapper{
-    .RecommandationBar{
-      .Arrow {
-        span{
-        }
-      }
-      .ThumbnailContainer{
-        .Thumbnail{
-          .ThumbnailImage{
-          }
-          .ThumbnailInfo{
-            .ThumbnailInfoTitle{
-              h4{
-                font-size:100%;
-              }
-            }
-            .ThumbnailTagContainer{
-              button{
-                margin-top:2px;
-                font-size:80%;
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-}
-html,body {
-  margin:0px;
-  padding:0px;
-      .ThumbnailContainer{
-        float:left;
-        width:90%;
-        
-    	  .Thumbnail{
-    	    border:1px solid black;
-          background:white;
-          height:@default-thumbnail-height;
-          margin:20px 20px 0px 20px;
-          overflow: hidden;
-          float:left;
-          position:relative;
-          
-          .ThumbnailImage{
-            background-color: #dff0d8;
-            width:100%;
-            height:60%;
-            margin:0 auto;
-            position:relative;
-            .frame{
-              overflow:hidden;
-              width:400%;
-              height:400%;
-              position:relative;
-              -webkit-transform-origin: 0 0;
-              overflow: hidden;
-              .scale(0.25);
-            }
-          }
-          
-          .ThumbnailInfo{
-            background-color: #dff0d8;
-            width:100%;
-            height:25%;
-            border-top:1px solid black;
-            .ThumbnailInfoTitle{
-              background-color: #dff0d8;
-              height:40%;
-              margin:0 auto;
-              cursor:pointer;
-              h4{
-                font-weight:bold;
-                text-align:center;
-                margin-top:0px;
-              }
-            }
-            .ThumbnailTagContainer{
-              background-color: #dff0d8;
-              height:60%;
-              margin:0 auto;
-              .ThumbnailTag{
-                background-color: #5cb85c;
-                border-color: #4cae4c;
-                font-weight:bold;
-              }
-            }
-          }
-		  .ThumbnailButton {
-		  
-		  }
-        }
-      }
-	
-/*----------------Overide Bootstrap------------*/
-.container-fluid {
+.container-fluid
+{
   padding-left: 0px;
   padding-right: 0px;
 }
-.btn {
-  padding: 0px;
+
+.btn 
+{
+	  padding: 0px;
 }
-	
+
+.ThumbnailTagContainer
+{
+    height:60%;
+    margin:0 auto;
+}
+button
+{
+	color:red;
+	font-weight:bold;
+}
+
+#all_links
+{
+	width:100%;
+	height:380px;
+	position:relative;
+	margin:1% auto;
+	overflow-x:auto;
+}
+
 }
 </style>
-<script type="text/javascript">
+<script>
 function parseUri (str) {
     var     o   = parseUri.options,
             m   = o.parser[o.strictMode ? "strict" : "loose"].exec(str),
@@ -978,72 +692,68 @@ Arrow.prototype.addGlyph = function() {
 
 </script>
 	<div id="content_page">
-		<div class="head_content_page">
-			<h1>Ajouter des tags</h1>
-			<div id="how_to_do">
-					<div class="alert alert-info"><p>Drop all tags you want over the link</p></div>
-			</div>
-		</div>				
-		<!-- This part should be loaded from Database, this is just an exemple -->
-		<script>
-		
-		var container = new ThumbnailContainer(null,null);
-		$('#content_page').prepend(container.getHtmlObject());
-		</script>
-		<% 
-			int i=0;
-			while ( i<urls.size())
-			{
-		%>
-		<script>
-		var count = String(<%=i%>);
-		var url = "<%=urls.get(i).getuUri()%>";
-		var iduri="<%=urls.get(i).getuId()%>";
-		count = '"'+count+'"';
-		console.log(url);
-		url = '"'+url+'"';
-		iduri= '"'+iduri+'"';
-		//console.log(j);
-		var parameters = '{"parameters":['+
-		'{'+count+':[{"url":'+url+'},{"idurl":'+iduri+'}]}'+
-		']}';
-			container.addThumbnail(parameters);
-		</script>
-		<% 
-				i++;
-			}
-		%>
-</div>
-<aside>
-	<div id="tag_list">
-		<div class="panel panel-default">
-			  <div class="panel-heading">
-			    <h3 class="panel-title">Liste des tags</h3>
-			  </div>
-			    <div class="panel-body" style="height:283px;">
-					<div id="tag_names"/>									
-						<!-- Load all tag names from the database here -->		
-						<%
-							i=0;
-							while(i<tags.size())
-							{
-						%>
-						<p draggable="true" ondragstart="drag(event,'<%=tags.get(i).gettName()%>')" id=<%=tags.get(i).gettName()%>><%= "#"+tags.get(i).gettName() %></p>		
-						<%
-								i++;
-							}
-						%>			
-					</div>
-				</div>
-			</div>
-		<div id="input_tag">
-			<div class="input-group">
-			  <span class="input-group-addon">Add tags</span>
-			  <input type="text" class="form-control" placeholder="Tag name" id="tag_name">
-			</div>
+		<div id="all_links">	
+			<!-- This part should be loaded from Database, this is just an exemple -->
+			<script>
+			
+			var container = new ThumbnailContainer(null,null);
+			$('#all_links').prepend(container.getHtmlObject());
+			</script>
+			<% 
+				int i=0;
+				while ( i<urls.size())
+				{
+			%>
+			<script>
+			var count = String(<%=i%>);
+			var url = "<%=urls.get(i).getuUri()%>";
+			var iduri="<%=urls.get(i).getuId()%>";
+			count = '"'+count+'"';
+			console.log(url);
+			url = '"'+url+'"';
+			iduri= '"'+iduri+'"';
+			//console.log(j);
+			var parameters = '{"parameters":['+
+			'{'+count+':[{"url":'+url+'},{"idurl":'+iduri+'}]}'+
+			']}';
+				container.addThumbnail(parameters);
+			</script>
+			<% 
+					i++;
+				}
+			%>
 		</div>
 	</div>
-	</aside>			
+	<aside>
+		<div id="tag_list">
+			<div class="panel panel-default">
+				  <div class="panel-heading">
+				    <h3 class="panel-title">Liste des tags</h3>
+				  </div>
+				    <div class="panel-body" style="height:283px;">
+						<div id="tag_names"/>									
+							<!-- Load all tag names from the database here -->		
+							<%
+								i=0;
+								while(i<tags.size())
+								{
+							%>
+							<p draggable="true" ondragstart="drag(event,'<%=tags.get(i).gettName()%>')" id=<%=tags.get(i).gettName()%>><%= "#"+tags.get(i).gettName() %></p>		
+							<%
+									i++;
+								}
+							%>			
+						</div>
+					</div>
+				</div>
+			<div id="input_tag">
+				<div class="input-group">
+				  <span class="input-group-addon">Add tags</span>
+				  <input type="text" class="form-control" placeholder="Tag name" id="tag_name">
+				</div>
+			</div>
+		</div>
+		</aside>			
 </section>
 <script type="text/javascript">
 var tag_input = document.getElementById("tag_name");

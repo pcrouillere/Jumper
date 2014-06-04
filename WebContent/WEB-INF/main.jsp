@@ -17,7 +17,6 @@
 <style type="text/css">
 	<%=css%>
 </style>
-<link rel="stylesheet/less" href="./style/jumper.less">
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <title>Welcome to #Jumper</title>
 </head>
