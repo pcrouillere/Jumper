@@ -188,7 +188,7 @@ public class User extends Dao {
 		}
 	}
 
-	private void addAllMap() {
+	public void addAllMap() {
 		ResultSet resultat;
 		Map<String, String> attr = new HashMap<String, String>();
 		attr.put("tagMapUserId", Integer.toString(this.uId));
@@ -260,6 +260,25 @@ public class User extends Dao {
 		}
 		
 		return listResult;
+	}
+	
+	public void removeUrlFromTag(int urlId, int tagId){
+		String requeteSql ="DELETE FROM jptagmap WHERE tagMapTagId="+tagId+" AND tagMapUrlId="+urlId+" AND tagMapUserId="+this.getuId();
+		try {
+			Dao.freeRequestUpdate(requeteSql, null);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	
+	public void removeUrlFromBdd(int urlId){
+		String requeteSql ="DELETE FROM jptagmap WHERE tagMapUrlId="+urlId+" AND tagMapUserId="+this.getuId();
+		try {
+			Dao.freeRequestUpdate(requeteSql, null);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	/* Getter & Setter */
