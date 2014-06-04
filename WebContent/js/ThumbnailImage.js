@@ -1,8 +1,4 @@
-﻿// --------------------------------------------------------------
-// --------------- ThumbnailImage CLASS ----------------
-// --------------------------------------------------------------
-
-function ThumbnailImage (pParent,pSource){
+﻿function ThumbnailImage (pParent,pSource){
 	JsHtmlObject.call(this, pParent, "div",null);
 	
 	this.cSource = pSource;

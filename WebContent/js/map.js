@@ -1,6 +1,3 @@
-// linking the key-value-pairs is optional
-// if no argument is provided, linkItems === undefined, i.e. !== false
-// --> linking will be enabled
 function Map(linkItems) {
     this.current = undefined;
     this.size = 0;

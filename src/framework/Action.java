@@ -1,6 +1,7 @@
 package framework;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -171,6 +172,7 @@ public class Action
 		List<Url> allUrls = user.getUntaggedUrl();
 		req.setAttribute("tags", allTags);
 		req.setAttribute("untaggedurls", allUrls);
+		//req.setAttribute("script", script);
 		return req;
 	}
 	
@@ -202,4 +204,11 @@ public class Action
 		return req;
 	}
 	
+	public HttpServletRequest addtagurl(HttpServletRequest req, HttpServletResponse response)
+	{
+		String uri =(String) req.getParameter("url");
+		String listTag=(String)req.getParameter("list");
+		System.out.print("L'URL : "+uri+"\nles tags: "+listTag);
+		return req;
+	}
 }

@@ -1,8 +1,4 @@
-﻿// --------------------------------------------------------------
-// --------------- ThumbnailInfo CLASS ----------------
-// --------------------------------------------------------------
-
-function ThumbnailInfo (pParent,pUrl,pListeTags){
+﻿function ThumbnailInfo (pParent,pUrl,pListeTags){
 	JsHtmlObject.call(this, pParent, "div",null);
 	this.cListeTags = pListeTags;
 	this.cUrl = pUrl;

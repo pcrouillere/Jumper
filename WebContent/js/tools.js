@@ -1,10 +1,3 @@
-/**
- * return true if the value given is null or undefined
- * @function
- * @global
- * @param {Object} pValue a value
- * @return {Boolean} true if value is null or undefined
- */
 function IS_NULL(pValue) {
 	return (pValue == null || (( typeof pValue) == 'undefined'));
 }

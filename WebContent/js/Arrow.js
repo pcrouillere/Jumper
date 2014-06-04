@@ -1,8 +1,4 @@
-﻿// --------------------------------------------------------------
-// --------------- Arrow CLASS ----------------
-// --------------------------------------------------------------
-
-function Arrow (pParent,pSens){
+﻿function Arrow (pParent,pSens){
 	JsHtmlObject.call(this, pParent, "div", "arrow"+pSens);
 	var t = this;
 	

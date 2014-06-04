@@ -1,4 +1,3 @@
-//Create new tag in the list
 var tag_input = document.getElementById("tag_name");
 var count=1;
 
@@ -63,8 +62,36 @@ function done_callback(ev)
 	var thumbnail = $(ev.target).parent()[0];
 	var tagList = thumbnail.tagList;
 	var url = thumbnail.url;
-	var sender = new Sender();
-	data = {'userid' : '1' ,'url':url,'theme': 'sport','tag' : tagList,'op':'1'};
-	sender.send("POST",data,"localhost","8182","hello");
+	var sender = new String();
+	var uri=new String("$$$"+url+"$$$");
+	for(i=0,len=tagList.length;i<len;i++)
+	{
+		sender+="$$$"+tagList[i]+"$$$";
+	}
+	console.log(url);
 	$(ev.target).parent().remove();
+}
+
+function sendRequest(url,sender)
+{ 
+	if (window.XMLHttpRequest) 
+	{ 
+		httpRequest = new XMLHttpRequest(); 
+	} 
+	else if (window.ActiveXObject) 
+	{ 
+		httpRequest = new ActiveXObject("Microsoft.XMLHTTP"); 
+	}	
+	if (!httpRequest)
+	{ 
+		alert('Abandon :Impossible de crÃ©er une instance XMLHTTP'); 
+		return false; 
+	} 
+
+	httpRequest.onreadystatechange = function() 
+	{ 
+	};
+	console.log(sender);
+	httpRequest.open("GET", "addtag?url="+url+"&?list="+sender, false); 
+	httpRequest.send(null);  
 }

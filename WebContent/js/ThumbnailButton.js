@@ -1,8 +1,4 @@
-﻿// --------------------------------------------------------------
-// --------------- ThumbnailButton CLASS ----------------
-// --------------------------------------------------------------
-
-function ThumbnailButton (pParent){
+﻿function ThumbnailButton (pParent){
 	JsHtmlObject.call(this, pParent, "button",null);
 	this.getHtmlObject().innerHTML = "Done";
 	this.addClass("ThumbnailButton");

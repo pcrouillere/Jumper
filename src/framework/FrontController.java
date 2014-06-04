@@ -165,8 +165,7 @@ public class FrontController extends HttpServlet {
 		//***** DECLARATION DES VARIABLES *****//
 		String root = this.get_root();
 		String main = "/WEB-INF/main.jsp";
-		this.page=request.getServletPath();
-		this.page=this.page.replace("/", "");
+		this.page=request.getParameter("page");
 		String dir_css = ToolBox.parse_filename(root.concat("WebContent/WEB-INF/css/"));
 		String dir_js = ToolBox.parse_filename(root.concat("WebContent/WEB-INF/js/"));
 		

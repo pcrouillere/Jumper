@@ -9,7 +9,7 @@ Sender.prototype.send = function(RequestType,RequestData,ServerAdress,ServerPort
     type: RequestType,
     dataType: "json",
     contentType: "application/json",
-    data : { foo : 'bar', bar : 'foo' },
+    data:{ foo : 'bar', bar : 'foo' },
     url: "http://"+ServerAdress+":"+ServerPort+"/"+ServerRessource,
 	}).always(function(data) {
 		console.log("Réponse de requete "+RequestType+" : "+data.responseText);

@@ -1,8 +1,4 @@
-﻿// --------------------------------------------------------------
-// --------------- ThumbnailContainer CLASS ----------------
-// --------------------------------------------------------------
-
-function ThumbnailContainer (pParent){
+﻿function ThumbnailContainer (pParent){
 	JsHtmlObject.call(this, null, "div", null);
 	
 	this.cThumbnails = new Array();

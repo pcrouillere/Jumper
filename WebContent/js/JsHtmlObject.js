@@ -1,13 +1,3 @@
-// ------------------------------------------------------------
-// ---------------------- CLASS JsHtmlObject  ----------------------
-// ---------------------------------------------------------------
-/**
- * Constructor : Init a Html element and lock at this class instance
- * @class The JsHtmlObject class. Manage the Html object
- * @param {JsHtmlObject or HtlmObject} pJsParent the object where this object will be attached or the Html Object if pHtmlType is null
- * @param {String} pHtmlType the type of Html object to create
- * @param {String} pHtmlId the id of Html object to create
- */
 function JsHtmlObject(pJsParent, pHtmlType, pHtmlId, pWidth, pHeight) {
 	
 	this.cParent = pJsParent;

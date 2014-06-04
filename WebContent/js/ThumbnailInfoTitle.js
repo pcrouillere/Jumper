@@ -1,8 +1,4 @@
-﻿// --------------------------------------------------------------
-// --------------- ThumbnailInfoTitle CLASS ----------------
-// --------------------------------------------------------------
-
-function ThumbnailInfoTitle (pParent,pText){
+﻿function ThumbnailInfoTitle (pParent,pText){
 	JsHtmlObject.call(this, pParent, "div",null);
 	this.cOriginalUrl = pText;
 	this.cText = this.parseTitle(pText);

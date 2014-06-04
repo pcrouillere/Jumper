@@ -1,8 +1,4 @@
-﻿// --------------------------------------------------------------
-// --------------- ThumbnailInfoTagContainer CLASS ----------------
-// --------------------------------------------------------------
-
-function ThumbnailInfoTagContainer (pParent,pListeTags){
+﻿function ThumbnailInfoTagContainer (pParent,pListeTags){
 	JsHtmlObject.call(this, pParent, "div",null);
 	
 	this.cListeTags = pListeTags;

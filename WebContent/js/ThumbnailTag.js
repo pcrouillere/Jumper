@@ -1,8 +1,4 @@
-﻿// --------------------------------------------------------------
-// --------------- ThumbnailTag CLASS ----------------
-// --------------------------------------------------------------
-
-function ThumbnailTag (pParent,pText){
+﻿function ThumbnailTag (pParent,pText){
 	JsHtmlObject.call(this, pParent, "button",null);
 	
 	this.addClass("ThumbnailTag");

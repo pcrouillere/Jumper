@@ -1,8 +1,4 @@
-﻿// --------------------------------------------------------------
-// --------------- Thumbnail CLASS ----------------
-// --------------------------------------------------------------
-
-function Thumbnail (pParent,pThumbNb,pParameters){
+﻿function Thumbnail (pParent,pThumbNb,pParameters){
 	JsHtmlObject.call(this, pParent, "div", "thumb"+pThumbNb);
 	
 	this.getHtmlObject().style.width = (100/MAX_DISPLAYED_THUMBNAILS)+"%";

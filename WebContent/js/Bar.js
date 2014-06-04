@@ -1,8 +1,4 @@
-﻿// --------------------------------------------------------------
-// --------------- Bar CLASS ----------------
-// --------------------------------------------------------------
-
-function Bar (pParameters) {
+﻿function Bar (pParameters) {
 	JsHtmlObject.call(this, null, "div", null);
 	this.addClass("RecommandationBar");
 	this.addClass("container-fluid");
