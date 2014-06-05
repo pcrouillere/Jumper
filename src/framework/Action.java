@@ -190,6 +190,40 @@ public class Action
 	
 		return req;
 	}
+
+	/** Fonction advancedsearch
+	 * Gere la page advancedsearch de l'application
+	 * @param req	: HttpServletRequest **/
+	
+	public HttpServletRequest advancedsearch(HttpServletRequest req, HttpServletResponse response){
+		User user = User.getInstance();
+		List<Tag> tags = user.getAllTag();
+		int nbTags = tags.size();
+		List<Url> urls = user.getAllUrl();
+		int nbUrls = urls.size();
+		List<Url> untaggedUrls = user.getUntaggedUrl();
+		int nbUntaggedUrls = untaggedUrls.size();
+		Map<Tag, List<Url>> mapTagUrls = new HashMap<Tag, List<Url>>();
+		
+		if (tags != null){
+			Iterator<Tag> it = tags.iterator();
+			while(it.hasNext()){
+				Tag tag = it.next();
+				mapTagUrls.put(tag, tag.getUrls());
+			}
+		}
+		System.out.println(mapTagUrls.size());
+		req.setAttribute("tags", tags);
+		req.setAttribute("urls", urls);
+		req.setAttribute("untaggedurls", untaggedUrls);
+		req.setAttribute("mapTagUrls", mapTagUrls);
+		req.setAttribute("nbTags", nbTags);
+		req.setAttribute("nbUrls", nbUrls);
+		req.setAttribute("nbUntaggedUrls", nbUntaggedUrls);		
+		return req;
+	}
+	
+	
 	
 	
 }

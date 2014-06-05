@@ -32,7 +32,7 @@
 					<li><a href="#">Recherches</a>
 						<ul>
 							<li><a href="#">Simple</a></li>
-							<li><a href="#">Avancee</a></li>
+							<li><a href="?page=advancedsearch">Avancee</a></li>
 						</ul></li>
 					<li><a href="?page=tableaubord">Tableau De Bord</a></li>
 					<li><a href="#">GraphView</a></li>
