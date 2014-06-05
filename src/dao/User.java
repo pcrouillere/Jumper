@@ -7,7 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import sun.security.util.Length;
+//import sun.security.util.Length;
 import framework.Base;
 import framework.Dao;
 
@@ -114,6 +114,14 @@ public class User extends Dao {
 		return null;
 	}
 	
+	public Tag getTagByName(String name) {
+		for (int i=0; i<= uTags.size(); i++) {
+			if(uTags.get(i).gettName().equals(name))
+				return uTags.get(i);
+		}
+		return null;
+	}
+	
 	public Url getUrlById(int id){
 		for(int i=0; i<= uUrls.size(); i++){
 			if(uUrls.get(i).getuId()==id)
@@ -131,7 +139,7 @@ public class User extends Dao {
 	}
 
 	/* Fonction pour ajouter un tag dans la liste des tags de l'utilisateur */
-	private void addOneTag(Tag tag) {
+	public void addOneTag(Tag tag) {
 		uTags.add(tag);
 		nbTag++;
 	}
@@ -142,7 +150,7 @@ public class User extends Dao {
 		nbUrl++;
 	}
 	
-	private void addOneMap(TagMap tagMap){
+	public void addOneMap(TagMap tagMap){
 		uTagMap.add(tagMap);
 		nbTagMap++;
 	}
@@ -188,7 +196,7 @@ public class User extends Dao {
 		}
 	}
 
-	private void addAllMap() {
+	public void addAllMap() {
 		ResultSet resultat;
 		Map<String, String> attr = new HashMap<String, String>();
 		attr.put("tagMapUserId", Integer.toString(this.uId));
@@ -243,6 +251,36 @@ public class User extends Dao {
 		return untaggedUrl;
 	}
 	
+	public HashMap<Tag,ArrayList<Url>> getTagAutoCompletion(String part){
+		HashMap<Tag,ArrayList<Url>> mapResult = new HashMap<Tag,ArrayList<Url>>();
+		String requeteSql = "Select DISTINCT * from jptag WHERE tagUserId = "+this.uId+" AND tagName LIKE '%"+part+"%';";
+		System.out.println(requeteSql);
+		ResultSet result = Dao.freeRequest(requeteSql, null);
+		
+		try {
+			
+			while(result.next()){
+				Tag tag = new Tag(result.getString("tagName"), result.getInt("tagId"), result.getInt("tagUserId"));
+				String requeteSql2 = "Select tagMapUrlId from jptagmap WHERE tagMapUserId = "+this.uId+" AND tagMapTagId = "+tag.getTid();
+				System.out.println(requeteSql2);
+				ResultSet result2 = Dao.freeRequest(requeteSql2, null);
+				ArrayList<Url> listResult = new ArrayList<Url>();
+				while(result2.next()){
+					Url url = getUrlById(result2.getInt("tagMapUrlId"));
+					listResult.add(url);
+				}
+				mapResult.put(tag, listResult);
+				
+			}
+		}
+		catch(SQLException e){
+			e.printStackTrace();
+		}
+		
+		return mapResult;
+	}
+	
+	
 	public ArrayList<Url> getAutoCompletion(String part){
 		ArrayList<Url> listResult = new ArrayList<Url>();
 		String requeteSql = "Select DISTINCT * from jpurl WHERE urlUserId = "+this.uId+" AND urlTitle LIKE '%"+part+"%' ORDER BY urlNbVisited DESC;";
@@ -260,6 +298,25 @@ public class User extends Dao {
 		}
 		
 		return listResult;
+	}
+	
+	public void removeUrlFromTag(int urlId, int tagId){
+		String requeteSql ="DELETE FROM jptagmap WHERE tagMapTagId="+tagId+" AND tagMapUrlId="+urlId+" AND tagMapUserId="+this.getuId();
+		try {
+			Dao.freeRequestUpdate(requeteSql, null);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	
+	public void removeUrlFromBdd(int urlId){
+		String requeteSql ="DELETE FROM jptagmap WHERE tagMapUrlId="+urlId+" AND tagMapUserId="+this.getuId();
+		try {
+			Dao.freeRequestUpdate(requeteSql, null);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	/* Getter & Setter */

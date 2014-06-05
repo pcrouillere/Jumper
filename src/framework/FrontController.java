@@ -13,13 +13,13 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
- * Servlet qui gère la distribution des tâches et l'exécution de l'action et des jsp spécifiques.
+ * Servlet qui gï¿½re la distribution des tï¿½ches et l'exï¿½cution de l'action et des jsp spï¿½cifiques.
  */
 public class FrontController extends HttpServlet {
 	private static final long	serialVersionUID	= 1L;
 	
 	/**
-	 * Message générale du site.
+	 * Message gï¿½nï¿½rale du site.
 	 */
 	private String message = null;
 	
@@ -29,7 +29,7 @@ public class FrontController extends HttpServlet {
 	private String page = null;
 	
 	/**
-	 * Paramètre d'url.
+	 * Paramï¿½tre d'url.
 	 */
 	private String params_url = null;
 	
@@ -44,7 +44,7 @@ public class FrontController extends HttpServlet {
 	private Object user = null;
 	
 	/**
-	 * Arrête la requête courante.
+	 * Arrï¿½te la requï¿½te courante.
 	 */
 	private boolean exit = false;
 	
@@ -56,22 +56,22 @@ public class FrontController extends HttpServlet {
 	}
 
 	/**
-	 * Methode de reception des paramètres GET.
+	 * Methode de reception des paramï¿½tres GET.
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) {
 		this.init(request,response);
 	}
 
 	/**
-	 * Methode de reception des paramètres POST.
+	 * Methode de reception des paramï¿½tres POST.
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) {
 		this.init(request,response);
 	}
 	
 	/**
-	 * Affichage un message général sur le site. Un seul message peut etre envoyé, les précédents seront écrasé. 
-	 * @param mes String message à envoyer.
+	 * Affichage un message gï¿½nï¿½ral sur le site. Un seul message peut etre envoyï¿½, les prï¿½cï¿½dents seront ï¿½crasï¿½. 
+	 * @param mes String message ï¿½ envoyer.
 	 */
 	public void message(String mes) {
 		this.message = mes;
@@ -86,9 +86,9 @@ public class FrontController extends HttpServlet {
 	}
 	
 	/**
-	 * Change la page courante en ajoutant des paramètres supplémentaires.
+	 * Change la page courante en ajoutant des paramï¿½tres supplï¿½mentaires.
 	 * @param page String nouvelle page pour la redirection
-	 * @param params String paramètre supplémentaire sans le premier "&".
+	 * @param params String paramï¿½tre supplï¿½mentaire sans le premier "&".
 	 */
 	public void redirect(String page, String params) {
 		this.page = page;
@@ -98,7 +98,7 @@ public class FrontController extends HttpServlet {
 	/**
 	 * Change la page courante.
 	 * @param page String nouvelle page pour la redirection
-	 * @param exti boolean Si true, réécriture de l'url
+	 * @param exti boolean Si true, rï¿½ï¿½criture de l'url
 	 */
 	public void redirect(String page, boolean exit) {
 		if (exit) {
@@ -110,10 +110,10 @@ public class FrontController extends HttpServlet {
 	}
 	
 	/**
-	 * Change la page courante en ajoutant des paramètres supplémentaires.
+	 * Change la page courante en ajoutant des paramï¿½tres supplï¿½mentaires.
 	 * @param page String nouvelle page pour la redirection
-	 * @param params String paramètre supplémentaire sans le premier "&"
-	 * @param exti boolean Si true, réécriture de l'url
+	 * @param params String paramï¿½tre supplï¿½mentaire sans le premier "&"
+	 * @param exti boolean Si true, rï¿½ï¿½criture de l'url
 	 */
 	public void redirect(String page, String params, boolean exit) {
 		if (exit) {
@@ -128,7 +128,7 @@ public class FrontController extends HttpServlet {
 	
 	/**
 	 * Initialise la session.
-	 * @param req HttpServletRequest la requête
+	 * @param req HttpServletRequest la requï¿½te
 	 */
 	private void init_session(HttpServletRequest req) {
 		this.session = new Session(req);
@@ -152,7 +152,7 @@ public class FrontController extends HttpServlet {
 	}
 	
 	/**
-	 * Gère les appels aux fonctions et à la jsp. 
+	 * Gï¿½re les appels aux fonctions et ï¿½ la jsp. 
 	 * Elle fait aussi la gestion des erreurs sur l'appel de la page.
 	 * @param request
 	 * @param response
@@ -165,7 +165,7 @@ public class FrontController extends HttpServlet {
 		//***** DECLARATION DES VARIABLES *****//
 		String root = this.get_root();
 		String main = "/WEB-INF/main.jsp";
-		this.page = request.getParameter("page");
+		this.page=request.getParameter("page");
 		String dir_css = ToolBox.parse_filename(root.concat("WebContent/WEB-INF/css/"));
 		String dir_js = ToolBox.parse_filename(root.concat("WebContent/WEB-INF/js/"));
 		
@@ -173,7 +173,7 @@ public class FrontController extends HttpServlet {
 		this.init_session(request);
 		
 		//***** GESTION DE LA PAGE ET DE L ACTION SPECIFIQUE *****//
-		if (this.page == null || this.page.length() == 0) { // Si aucune page renseignée, on met l'index du site.
+		if (this.page == null || this.page.length() == 0) { // Si aucune page renseignï¿½e, on met l'index du site.
 			this.page = "index";
 		} else { // Sinon on la formate.
 			this.page = this.page.toLowerCase();
@@ -204,7 +204,7 @@ public class FrontController extends HttpServlet {
 				}
 			} catch (IOException e) {}
 		} else {
-			// On vérifie que la page (le fichier.jsp) existe.
+			// On vï¿½rifie que la page (le fichier.jsp) existe.
 			String filename_page = root.concat("WebContent/WEB-INF/jsp/").concat(this.page).concat(".jsp");
 			filename_page = ToolBox.parse_filename(filename_page);
 			File file_page =  new File(filename_page);
@@ -216,9 +216,9 @@ public class FrontController extends HttpServlet {
 					this.message = "La page, '"+this.page+"', que vous demandez n'existe pas";
 				}
 			}
-			// Récupération du contenu du fichier css général (main.css).
+			// Rï¿½cupï¿½ration du contenu du fichier css gï¿½nï¿½ral (main.css).
 			String css = ToolBox.load_file(dir_css + "main.css");
-			// Récupération du contenu du fichier css spécifique (this.page.css).
+			// Rï¿½cupï¿½ration du contenu du fichier css spï¿½cifique (this.page.css).
 			css = css + ToolBox.load_file(dir_css + this.page + ".css");
 			
 			//***** APPEL DE LA PAGE PRINCIPALE (main.jsp) ET ENVOIE DES INFOS *****//
