@@ -10,6 +10,8 @@ public class node {
 	private String color;
 	private String name;
 	private int index;
+	private Tag tag;
+
 
 	public node(int i,String n, int s, Tag t )
 	{
@@ -40,7 +42,6 @@ public class node {
 		return color;
 	}
 
-	private Tag tag;
 	public Tag getTag() {
 		return tag;
 	}

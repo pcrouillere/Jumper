@@ -25,4 +25,10 @@ public class edge {
 	public void setTarget(int target) {
 		this.target = target;
 	}
+	
+	@Override
+	public String toString() {
+		String retour = "{\"source\":"+this.source+",\"target\":"+this.target+"}";
+		return retour;
+	}
 }
