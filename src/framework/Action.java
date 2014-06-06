@@ -173,6 +173,7 @@ public class Action {
 		}
 	}
 
+
 	/**
 	 * Fonction login Gere la connexion de l'utilisateur lors de son arrivee
 	 * dans l'application
@@ -183,6 +184,7 @@ public class Action {
 
 	public HttpServletRequest login(HttpServletRequest req,
 			HttpServletResponse response) {
+
 		String email = req.getParameter("email");
 		String mdp = req.getParameter("password");
 		boolean access = false;
@@ -466,23 +468,43 @@ public class Action {
 		int nbUntaggedUrls = untaggedUrls.size();
 		Map<Tag, List<Url>> mapTagUrls = new HashMap<Tag, List<Url>>();
 		
-		if (tags != null){
-			Iterator<Tag> it = tags.iterator();
-			while(it.hasNext()){
-				Tag tag = it.next();
-				mapTagUrls.put(tag, tag.getUrls());
-			}
+		String tagoper = req.getParameter("tagoper");
+		System.out.println(tagoper);
+	   //this.parent.redirect("accueil", true);
+		return req;
+	
+	}
+<<<<<<< HEAD
+=======
+	
+
+	
+	
+	public HttpServletRequest addtagurl(HttpServletRequest req, HttpServletResponse response)
+	{
+		User user = User.getInstance(); 
+		String uri =(String) req.getParameter("url");
+		String listTag=(String)req.getParameter("list");
+		Url url=user.getUrlById(Integer.valueOf(uri));
+		String str[] = listTag.split("\\$\\$\\$");
+		for(int i=0; i<str.length; i++)
+		{
+			Tag tag = user.getTagByName(str[i]);
+			if(tag == null) {
+				//add tag
+				tag=new Tag(str[i],user.getuId());
+				tag.addTagtoBDD();
+				tag.setTid(tag.getTagIdFromBDD());
+				user.addOneTag(tag);
+			} 
+			TagMap tm=new TagMap(tag,url);
+			tm.addTagMaptoBDD(user.getuId());
+			tm.setTmId(tm.getIdFromBdd());
+			user.addOneMap(tm);
 		}
-		System.out.println(mapTagUrls.size());
-		req.setAttribute("tags", tags);
-		req.setAttribute("urls", urls);
-		req.setAttribute("untaggedurls", untaggedUrls);
-		req.setAttribute("mapTagUrls", mapTagUrls);
-		req.setAttribute("nbTags", nbTags);
-		req.setAttribute("nbUrls", nbUrls);
-		req.setAttribute("nbUntaggedUrls", nbUntaggedUrls);		
 		return req;
 	}
+>>>>>>> advanced search
 
 }
 
