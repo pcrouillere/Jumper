@@ -1,45 +1,28 @@
 package graphview;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
-import com.fasterxml.jackson.annotation.JsonTypeInfo.As;
-
-@JsonTypeInfo(use = JsonTypeInfo.Id.MINIMAL_CLASS, include = As.PROPERTY, property = "@class")
-
-
 public class edge {
-	private String id;
-	private String source;
-	private String target;
+	private int source;
+	private int target;
 	
-	public edge(@JsonProperty("id") String i,@JsonProperty("source") String s,@JsonProperty("target") String t)
+	public edge(int s, int t)
 	{
-		this.id=i;
 		this.source=s;
 		this.target=t;
 	}
-	
-	public String getId() {
-		return id;
-	}
 
-	public void setId(String id) {
-		this.id = id;
-	}
-
-	public String getSource() {
+	public int getSource() {
 		return source;
 	}
 
-	public void setSource(String source) {
+	public void setSource(int source) {
 		this.source = source;
 	}
 
-	public String getTarget() {
+	public int getTarget() {
 		return target;
 	}
 
-	public void setTarget(String target) {
+	public void setTarget(int target) {
 		this.target = target;
 	}
 }
