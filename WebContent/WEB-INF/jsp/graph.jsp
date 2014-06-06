@@ -21,6 +21,11 @@ System.out.println(json_links);
   			stroke-width: 1.5px;
 		  }
 
+		.node text{
+		 	font : 15px;
+		 	pointer-events:none;
+ 		    color : black;
+		  }
 		  .link {
   			stroke: #999;
   			stroke-opacity: .6;
@@ -35,55 +40,70 @@ return c>=_s?n?"M0,"+i+"A"+i+","+i+" 0 1,1 0,"+-i+"A"+i+","+i+" 0 1,1 0,"+i+"M0,
 
 </script>
 <script>
+		var nodedata = <%=json_nodes%>;
+		var linkdata = <%=json_links%>;
+		
+		var width = 960,
+	    height = 500;
 
-		var nodedata = new String();
-		nodedata='<%=json_nodes%>';
-		var linkdata = new String();
-		linkdata='<%=json_links%>';
-		
-		var width = 960, height = 500;
-		
-//		var color = d3.scale.category20();
-		
-		var force = d3.layout.force()
-			.charge(-300)
-			.linkDistance(30)
-			.size([width, height]);		
-		
-        var svg = d3.select("#container").append("svg")
-			.attr("width", width)
-			.attr("height", height);
-        
-        force
-	        .nodes(nodedata)
-	        //.links(linkdata)
-	        .start();
+	var force = d3.layout.force()
+	    .nodes(nodedata)
+	    .links(linkdata)
+	    .size([width, height])
+	    .linkDistance(60)
+	    .charge(-300)
+	    .on("tick", tick)
+	    .start();
 
-/*	    var link = svg.selectAll(".link")
-	        .data(linkdata)
-	        .enter().append("line")
-	        .attr("class", "link")*/
-	
-	    var node = svg.selectAll(".node")
-	        .data(nodedata)
-	        .enter().append("circle")
-	        .attr("class", "node")
-	        .attr("r", 5)
-	        .style("fill", "#C6DBEF")
-	        .call(force.drag);
-	
-	    node.append("title")
-	        .text(function(d) { return d.name; });
-	
-	    force.on("tick", function() {
-	     /* link.attr("x1", function(d) { return d.source.x; })
-	          .attr("y1", function(d) { return d.source.y; })
-	          .attr("x2", function(d) { return d.target.x; .})
-	          .attr("y2", function(d) { return d.target.y; });*/
-	
-	      node.attr("cx", function(d) { return d.x; })
-	          .attr("cy", function(d) { return d.y; });
-	    });
+	var svg = d3.select("#container").append("svg")
+	    .attr("width", width)
+	    .attr("height", height);
+
+	var link = svg.selectAll(".link")
+	    .data(linkdata)
+	  .enter().append("line")
+	    .attr("class", "link");
+
+	var node = svg.selectAll(".node")
+	    .data(nodedata)
+	  .enter().append("g")
+	    .attr("class", "node")
+	    .on("mouseover", mouseover)
+	    .on("mouseout", mouseout)
+	    .call(force.drag);
+
+	node.append("circle")
+	    .attr("r", 8);
+
+	node.append("text")
+		.at
+	    .attr("x", 12)
+	    .attr("dy", ".35em")
+	    .text(function(d) { return d.name; });
+
+	function tick() {
+	  link
+	      .attr("x1", function(d) { return d.source.x; })
+	      .attr("y1", function(d) { return d.source.y; })
+	      .attr("x2", function(d) { return d.target.x; })
+	      .attr("y2", function(d) { return d.target.y; });
+
+	  node
+	      .attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
+	}
+
+	function mouseover() {
+	  d3.select(this).select("circle").transition()
+	      .duration(750)
+	      .attr("r", 16);
+	}
+
+	function mouseout() {
+	  d3.select(this).select("circle").transition()
+	      .duration(750)
+	      .attr("r", 8);
+	}
+
              
 </script>
 
