@@ -136,6 +136,9 @@ public class Action
 	 * @param req	: HttpServletRequest **/
 	
 	public HttpServletRequest login(HttpServletRequest req, HttpServletResponse response) {
+		
+		
+		System.out.println("login login login login ");
 		String email = req.getParameter("email");
 		String mdp = req.getParameter("password");
 		boolean access = false;
@@ -146,6 +149,7 @@ public class Action
 			System.out.println(email);
 			System.out.println(mdp);
 			if (user!=null) {
+				System.out.println("user not null");
 				Cookie userCookie = new Cookie("userId", Integer.toString(user.getuId()));
 				response.addCookie(userCookie);
 				this.parent.session().open(user);
@@ -315,24 +319,14 @@ public class Action
 		int nbUntaggedUrls = untaggedUrls.size();
 		Map<Tag, List<Url>> mapTagUrls = new HashMap<Tag, List<Url>>();
 		
-		if (tags != null){
-			Iterator<Tag> it = tags.iterator();
-			while(it.hasNext()){
-				Tag tag = it.next();
-				mapTagUrls.put(tag, tag.getUrls());
-			}
-		}
-		System.out.println(mapTagUrls.size());
-		req.setAttribute("tags", tags);
-		req.setAttribute("urls", urls);
-		req.setAttribute("untaggedurls", untaggedUrls);
-		req.setAttribute("mapTagUrls", mapTagUrls);
-		req.setAttribute("nbTags", nbTags);
-		req.setAttribute("nbUrls", nbUrls);
-		req.setAttribute("nbUntaggedUrls", nbUntaggedUrls);		
+		String tagoper = req.getParameter("tagoper");
+		System.out.println(tagoper);
+	   //this.parent.redirect("accueil", true);
 		return req;
+	
 	}
 	
+
 	
 	
 	public HttpServletRequest addtagurl(HttpServletRequest req, HttpServletResponse response)

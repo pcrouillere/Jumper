@@ -251,6 +251,27 @@ public class User extends Dao {
 		return untaggedUrl;
 	}
 	
+	public List<Url> advancedsearch(String tagoper){
+		ResultSet result;
+		List<Url> urls = new ArrayList<Url>();
+		Map<String, String> attr = null;
+		
+		result = Dao.freeRequest(tagoper, attr);
+		try {
+			while(result.next()){
+				Url url = getUrlById(result.getInt("urlId"));
+				urls.add(url);				
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.println(urls.size());
+			return urls;
+	}
+		
+	
+	
 	public HashMap<Tag,ArrayList<Url>> getTagAutoCompletion(String part){
 		HashMap<Tag,ArrayList<Url>> mapResult = new HashMap<Tag,ArrayList<Url>>();
 		String requeteSql = "Select DISTINCT * from jptag WHERE tagUserId = "+this.uId+" AND tagName LIKE '%"+part+"%';";

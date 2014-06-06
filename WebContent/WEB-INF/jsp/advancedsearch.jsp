@@ -80,10 +80,15 @@
    						for(i in selectedpiece){
    							request+="[";
    							for(j in selectedpiece[i]){
-   								if(selectedpiece[i][j])
+   								if(selectedpiece[i][j]){
+   									ovals[j].tag=ovals[j].tag.replace('#','');
    									request+=("("+ovals[j].tag+")");
-   								else 
+   								}	
+   								else {
+   									ovals[j].tag=ovals[j].tag.replace('#','');
    									request+=("(NOT "+ovals[j].tag+")");
+   								}
+   									
    							}
    							request+="]";
    						}
@@ -366,6 +371,7 @@
    						  		drawovals(ovals, document.getElementById('layer1'));
    								drawallpieces(selectedpiece,ovals,canvas3);
    								writeMessagedyn(allpiecestostring(ovals,selectedpiece));
+   							
    								layer.draw();
    						  	};
    					        
@@ -444,6 +450,7 @@
    								drawallpieces(selectedpiece,ovals,canvas3);
    								//context3.restore();
    								writeMessagedyn(allpiecestostring(ovals,selectedpiece));
+   								
    								});
    								
    						  stage.add(layer);
@@ -474,6 +481,42 @@
 
    					 </script>
 					
+					
+					<script>
+
+					function searchTag(){
+						var req = allpiecestostring(ovals,selectedpiece);
+					    
+						if (window.XMLHttpRequest) { 
+							xhr_obj = new XMLHttpRequest(); 
+						}
+						else if (window.ActiveXObject) { 
+							xhr_obj = new ActiveXObject("Microsoft.XMLHTTP"); 
+						}	
+						if (!xhr_obj) { 
+							alert('Abandon :Impossible de créer une instance XMLHTTP'); 
+							return false; 
+						} 
+						xhr_obj.onreadystatechange = function() {
+							if (xhr_obj.readyState == 4 && xhr_obj.responseText) {
+									var result = xhr_obj.responseText;
+
+									var listUrls = result.split(' $$$ ');
+									var textResult = '';
+									for(i in listUrls){
+										textResult+="<br>";
+										textResult+="<a href=\"" +listUrls[i]+"\">Visit W3Schools</a>";
+										textResult+="</br>";
+									}
+									document.getElementById('urls').innerHTML = textResult;
+							}
+						};
+						
+						xhr_obj.open('GET', 'http://localhost:8080/Jump/advancedsearch?req='+req, true);
+						xhr_obj.send(null);
+					}
+				
+					</script>
 				<aside>
 					<div id="tag_list">
 						<div class="panel panel-default">
@@ -491,6 +534,21 @@
 							  <span class="input-group-addon">Add tags</span>
 							  <input type="text" class="form-control" placeholder="Tag name" id="tag_name">
 							</div>
+		<form name="search" onsubmit="searchTag()">
+			<fieldset>
+				<p><input type="button" name ="Jump" value="Jump" onclick="searchTag()"></p>
+			</fieldset>
+		</form>
+       <div id="urls">
+	
+	  </div>
+							
+							
+							
+							
+							
+							
+							
 							<div class="input-group">
 							  <p><a href="#" class="btn btn-primary" role="button" id="done"  onclick="done_callback(event)">Done</a></p>
 							</div>
@@ -521,37 +579,14 @@
 									drawovals(ovals, document.getElementById('layer1'));
 									drawallpieces(selectedpiece,ovals,canvas3);
 									writeMessagedyn(allpiecestostring(ovals,selectedpiece));
+									
 									layer.draw();
 									element.value="";
 								}
 							}
 						},false);
 						
-						//Drag n drop option over tags names
-						function allowDrop(ev)
-						{
-							ev.preventDefault();
-						}
 
-						function drag(ev)
-						{
-							ev.dataTransfer.setData("tag_names",ev.target.id);
-						}
-
-						function drop(ev)
-						{
-							//get the target id
-							alert(ev.target.id);
-							var targetToRemove=document.getElementsById('row')[ev.target.id-1];
-							ev.preventDefault();
-							//remove the target
-							targetToRemove.parentNode.removeChild(targetToRemove);
-						}
-						
-						function done_callback(ev)
-						{
-							allpiecestostring(ovals,selectedpiece); 
-						}
 					</script>
   </body>
 </html>
