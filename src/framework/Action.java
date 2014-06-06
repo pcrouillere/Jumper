@@ -18,7 +18,6 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
 
 
@@ -193,12 +192,12 @@ public class Action
 				{
 					for(int j=i+1;j<nodes.size();j++)
 					{
-						if(currentUrl.getTags().contains(nodes.get(i).getTag().getTid()) && currentUrl.getTags().contains(nodes.get(j).getTag().getTid()))
+						if(currentUrl.getTags().contains((Tag)nodes.get(i).getTag()) && currentUrl.getTags().contains((Tag)nodes.get(j).getTag()) )
 						{
-							instEdge=new edge(nodes.get(i).getIndex(),nodes.get(i).getIndex());
+							instEdge=new edge(nodes.get(i).getIndex(),nodes.get(j).getIndex());
 							links.add(instEdge);
+							instEdge=null;
 						}
-						//instance=null;
 					}
 				}
 			}
