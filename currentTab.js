@@ -8,12 +8,12 @@ function currentTab() {
 			  var title = tab.title;
 			  var userid = cookie.value;
 			  var success = file('http://localhost:8080/Jump/?page=addurl&id='+userid+'&url='+url+'&nomUrl='+title);
-			  if(success == 200) alert("Ce site a bien été enregistré");
-			  if(success == 201) alert("Cette URL fait déjà parti de vos favoris");
+			  if(success == 200) alert("Ce site a bien ete enregistre");
+			  if(success == 201) alert("Cette URL fait deja� parti de vos favoris");
 			  if(success == 400) alert("Une erreur est survenue lors de l'ajout de l'URL");
 			}
 			else {
-			  alert('Attention tu n\'es pas loggé !');
+			  alert('Attention tu n\'es pas loggee !');
 			}
 		});
 	});	
@@ -27,8 +27,8 @@ function file(fichier)
     { 
        if(xhr_object.readyState  == 4)
        {
-        if(xhr_object.status == 200) alert("Ce site a bien été enregistré");
-		else if(xhr_object.status == 201) alert("Cette URL fait déjà parti de vos favoris");
+        if(xhr_object.status == 200) alert("Ce site a bien ete enregistre");
+		else if(xhr_object.status == 201) alert("Cette URL fait deja� parti de vos favoris");
         else
             alert("Une erreur est survenue lors de l'ajout de l'URL");
         }

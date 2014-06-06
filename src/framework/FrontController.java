@@ -232,6 +232,7 @@ public class FrontController extends HttpServlet {
 			} else {
 				request.removeAttribute("main_message");
 			}
+			System.out.println(request);
 			try {
 				rd.forward(request, response);
 			}
