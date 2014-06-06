@@ -1,6 +1,12 @@
 <%
-String json_data = (String) request.getAttribute("json_data");
+String json_nodes = (String) request.getAttribute("json_nodes");
+String json_links = (String) request.getAttribute("json_links");
+
+System.out.println(json_nodes);
+System.out.println(json_links);
+
  %>
+ 
 <section>
 	<div id="container"></div>
 	<style type="text/css">
@@ -30,68 +36,54 @@ return c>=_s?n?"M0,"+i+"A"+i+","+i+" 0 1,1 0,"+-i+"A"+i+","+i+" 0 1,1 0,"+i+"M0,
 </script>
 <script>
 
-var nodedata = [
-            {"r":20,"color":"#FDAE6B","name":"cercle 1", "id":1},
-            {"r":39,"color":"#FDD0A2","name":"cercle 2", "id":2},
-            {"r":38,"color":"#A1D99B","name":"cercle 3", "id":3},
-            {"r":29,"color":"#31A354","name":"cercle 5", "id":5},
-            {"r":21,"color":"#3182BD","name":"cercle 8", "id":8},
-            {"r":25,"color":"#FD8D3C","name":"cercle 9", "id":9},
-            {"r":35,"color":"#A1D99B","name":"cercle 12", "id":12},
-            {"r":32,"color":"#9ECAE1","name":"cercle 14", "id":14},
-            {"r":24,"color":"#C6DBEF","name":"cercle 16", "id":16}
-        	];
-var linkdata = [
-            {"source":0,"target":2},
-            {"source":1,"target":5},
-            {"source":2,"target":5},
-            {"source":1,"target":3}
-            ];
-            
+		var nodedata = new String();
+		nodedata='<%=json_nodes%>';
+		var linkdata = new String();
+		linkdata='<%=json_links%>';
+		
 		var width = 960, height = 500;
 		
-		var color = d3.scale.category20();
+//		var color = d3.scale.category20();
 		
 		var force = d3.layout.force()
-		.charge(-120)
-		.linkDistance(30)
-		.size([width, height]);		
+			.charge(-300)
+			.linkDistance(30)
+			.size([width, height]);		
 		
         var svg = d3.select("#container").append("svg")
-		.attr("width", width)
-		.attr("height", height);
+			.attr("width", width)
+			.attr("height", height);
         
         force
-        .nodes(graph.nodes)
-        .links(graph.links)
-        .start();
+	        .nodes(nodedata)
+	        //.links(linkdata)
+	        .start();
 
-    var link = svg.selectAll(".link")
-        .data(linkdata)
-        .enter().append("line")
-        .attr("class", "link")
-        //.style("stroke-width", 10);
-
-    var node = svg.selectAll(".node")
-        .data(nodedata)
-      .enter().append("circle")
-        .attr("class", "node")
-        .attr("r", 5)
-        .style("fill", function(d) { return color(d.group); })
-        .call(force.drag);
-
-    node.append("title")
-        .text(function(d) { return d.name; });
-
-    force.on("tick", function() {
-      link.attr("x1", function(d) { return d.source.x; })
-          .attr("y1", function(d) { return d.source.y; })
-          .attr("x2", function(d) { return d.target.x; })
-          .attr("y2", function(d) { return d.target.y; });
-
-      node.attr("cx", function(d) { return d.x; })
-          .attr("cy", function(d) { return d.y; });
-    });
+/*	    var link = svg.selectAll(".link")
+	        .data(linkdata)
+	        .enter().append("line")
+	        .attr("class", "link")*/
+	
+	    var node = svg.selectAll(".node")
+	        .data(nodedata)
+	        .enter().append("circle")
+	        .attr("class", "node")
+	        .attr("r", 5)
+	        .style("fill", "#C6DBEF")
+	        .call(force.drag);
+	
+	    node.append("title")
+	        .text(function(d) { return d.name; });
+	
+	    force.on("tick", function() {
+	     /* link.attr("x1", function(d) { return d.source.x; })
+	          .attr("y1", function(d) { return d.source.y; })
+	          .attr("x2", function(d) { return d.target.x; .})
+	          .attr("y2", function(d) { return d.target.y; });*/
+	
+	      node.attr("cx", function(d) { return d.x; })
+	          .attr("cy", function(d) { return d.y; });
+	    });
              
 </script>
 
