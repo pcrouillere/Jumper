@@ -282,14 +282,14 @@ public class Action
 		Url url = new Url(idUser,siteUrl, nomUrl, 0);
 		try{
 			url.addUrlToDBB();
+			url.setuId(url.getIdFromBDD());
 			User user = (User) this.parent.user();
 			user.addOneUrl(url);
-			
 			response.setStatus(200);
 		}
 		catch(MySQLIntegrityConstraintViolationException e){
 			// URL existe d�j� dans la BDD
-			System.out.println("URL duppliqu�");
+			System.out.println("URL duppliquee");
 			response.setStatus(201);
 
 		} catch (SQLException e) {
