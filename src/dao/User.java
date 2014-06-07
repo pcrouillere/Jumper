@@ -107,7 +107,7 @@ public class User extends Dao {
 	
 	/* Fonction qui retourne le tag recherch� en fonction de son ID */
 	public Tag getTagById(int id) {
-		for (int i=0; i<= uTags.size(); i++) {
+		for (int i=0; i< uTags.size(); i++) {
 			if(uTags.get(i).getTid()==id)
 				return uTags.get(i);
 		}
@@ -115,7 +115,7 @@ public class User extends Dao {
 	}
 	
 	public Tag getTagByName(String name) {
-		for (int i=0; i<= uTags.size(); i++) {
+		for (int i=0; i< uTags.size(); i++) {
 			if(uTags.get(i).gettName().equals(name))
 				return uTags.get(i);
 		}
@@ -123,7 +123,7 @@ public class User extends Dao {
 	}
 	
 	public Url getUrlById(int id){
-		for(int i=0; i<= uUrls.size(); i++){
+		for(int i=0; i< uUrls.size(); i++){
 			if(uUrls.get(i).getuId()==id)
 				return uUrls.get(i);
 		}
