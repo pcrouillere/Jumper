@@ -52,7 +52,7 @@ public class Tag extends Dao {
 	public int getTagIdFromBDD()
 	{
 		ResultSet result;
-		result = Dao.freeRequest("Select tagId from jpTag WHERE urlUserId="+Integer.toString(tUserId)+" AND tagName='"+this.tName+"';", null);
+		result = Dao.freeRequest("Select tagId from jpTag WHERE tagUserId="+Integer.toString(tUserId)+" AND tagName='"+this.tName+"';", null);
 		try {
 			if(result.next()){
 				int id = result.getInt("tagId");
