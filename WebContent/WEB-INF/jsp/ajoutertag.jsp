@@ -15,30 +15,34 @@
 <style>
 .ThumbnailContainer
 {
-      width:90%;
-	  margin: 0 auto;
+	width:100%;
+    margin : 0 auto;
 }
 
 .Thumbnail
 {
-	border:1px solid red;
-	 height:250px;
-	 margin:20px 20px 0px 20px;
-	 overflow: hidden;
-	 float:center;
-	 position:relative;
-     display : inline-block;
-     
+	display: inline-block;
+    padding: 4px;
+    margin-bottom: 20px;
+    line-height: 1.42857143;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    -webkit-transition: all .2s ease-in-out;
+    transition: all .2s ease-in-out; 
+    width:170 px;
 }
 
 .ThumbnailImage
 {
-	width:100%;
-	height:60%;
-	margin:0 auto;
-	position:relative;
+	margin-left: auto;
+    margin-right: auto;
 }
 
+.ThumbnailInfo:hover, .ThumbnailInfo:focus, .ThumbnailInfo.active
+{
+    border-color: #428bca;
+}
 .frame
 {
 	overflow:hidden;
@@ -59,9 +63,8 @@
 
 .ThumbnailInfoTitle
 {
-	height:40%;
-	margin:0 auto;
-	cursor:pointer;
+	padding: 9px;
+    color: #4A8B87;
 }
 
 .container-fluid
@@ -80,10 +83,28 @@
     height:60%;
     margin:0 auto;
 }
-button
-{
-	color:red;
-	font-weight:bold;
+
+
+button {
+    color: #fff;
+    background-color: #4A8B87;
+    border-color: #4A8B87;
+}
+button:hover, button:focus, button:active, button.active, .open .dropdown-toggle.button {
+    color: #fff;
+    background-color: #3276b1;
+    border-color: #285e8e;
+}
+button:active, button.active, .open .dropdown-toggle.button{
+    background-image: none;
+}
+button.disabled, .button[disabled], fieldset[disabled] .button, .button.disabled:hover, .button[disabled]:hover, fieldset[disabled] .btn-primary:hover, .btn-primary.disabled:focus, .btn-primary[disabled]:focus, fieldset[disabled] .btn-primary:focus, .btn-primary.disabled:active, .btn-primary[disabled]:active, fieldset[disabled] .btn-primary:active, .btn-primary.disabled.active, .btn-primary[disabled].active, fieldset[disabled] .btn-primary.active {
+    background-color: #428bca;
+    border-color: #357ebd;
+}
+button.badge {
+    color: #428bca;
+    background-color: #fff;
 }
 
 #all_links
@@ -91,8 +112,7 @@ button
 	width:100%;
 	height:380px;
 	position:relative;
-	margin:1% auto;
-	overflow-x:auto;
+	margin:0 auto;
 }
 
 .panel {
