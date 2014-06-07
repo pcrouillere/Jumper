@@ -62,9 +62,11 @@
    								selectedpiece.splice(j, 1);
    						}
    					}
+   					
    					function deleteovalbytag(ovals,selectedpiece,tag){
    						var j=-1;
    						for(i in ovals){
+   						
    							if(ovals[i].gettag()==tag){
    								j=i;
    							}
@@ -81,12 +83,12 @@
    							request+="[";
    							for(j in selectedpiece[i]){
    								if(selectedpiece[i][j]){
-   									ovals[j].tag=ovals[j].tag.replace('#','');
-   									request+=("("+ovals[j].tag+")");
+   									var taginrequest=ovals[j].tag.replace('#','');
+   									request+=("("+taginrequest+")");
    								}	
    								else {
-   									ovals[j].tag=ovals[j].tag.replace('#','');
-   									request+=("(NOT "+ovals[j].tag+")");
+   									var taginrequest=ovals[j].tag.replace('#','');
+   									request+=("(!"+taginrequest+")");
    								}
    									
    							}
@@ -371,13 +373,11 @@
    						  		drawovals(ovals, document.getElementById('layer1'));
    								drawallpieces(selectedpiece,ovals,canvas3);
    								writeMessagedyn(allpiecestostring(ovals,selectedpiece));
-   							
    								layer.draw();
    						  	};
-   					        
    					      });
-   					      
-   							var ovalshape = new Kinetic.Shape({
+   						  
+   						  var ovalshape = new Kinetic.Shape({
    						      sceneFunc: function (context) {
    						          context.beginPath();
    						          context.save();
@@ -392,27 +392,19 @@
    						      x: 0,
    						      y: 0,
    						      stroke: 'blue',
-   						      strokeWidth: 4,
-
-
+   						      strokeWidth: 4
    						  });
-   						  
-   						    
-   						  
    						  //ovalshape.draggable(true);
+   						  
    						  group.on('mouseover', function () {
    						      document.body.style.cursor = 'pointer';
    						  });
    						  group.on('mouseout', function () {
    						      document.body.style.cursor = 'default';
    						  });
-
    					      group.on('dragend', function() {
-   						    this.model.update(this.x()/width,this.y()/height);
-   						
-   							
+   						      this.model.update(this.x()/width,this.y()/height);
    					      });
-   						  
    						  group.add(text);
    						  group.add(ovalshape);
    						  layer.add(group);
@@ -476,17 +468,13 @@
    					var img = new Image();
    					img.onload = function() { context4.drawImage(img,450, 450,50,50);};
    					img.src = 'icones/trush.png';
-
    					layer.draw();
-
    					 </script>
 					
 					
 					<script>
-
 					function searchTag(){
 						var req = allpiecestostring(ovals,selectedpiece);
-					    
 						if (window.XMLHttpRequest) { 
 							xhr_obj = new XMLHttpRequest(); 
 						}
@@ -500,22 +488,20 @@
 						xhr_obj.onreadystatechange = function() {
 							if (xhr_obj.readyState == 4 && xhr_obj.responseText) {
 									var result = xhr_obj.responseText;
-
 									var listUrls = result.split(' $$$ ');
 									var textResult = '';
 									for(i in listUrls){
 										textResult+="<br>";
-										textResult+="<a href=\"" +listUrls[i]+"\">Visit W3Schools</a>";
+										textResult+="<a href=\""+listUrls[i]+"\">Visit W3Schools</a>";
 										textResult+="</br>";
 									}
+									console.log( textResult); 
 									document.getElementById('urls').innerHTML = textResult;
 							}
 						};
-						
 						xhr_obj.open('GET', 'http://localhost:8080/Jump/advancedsearch?req='+req, true);
 						xhr_obj.send(null);
 					}
-				
 					</script>
 				<aside>
 					<div id="tag_list">
