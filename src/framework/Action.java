@@ -172,12 +172,14 @@ public class Action
 		int ind = 0;
 		while(it.hasNext())
 		{
-			currentTag=(Tag) it.next();		
-			instTag=new node(currentTag.getTid(), currentTag.gettName(), currentTag.getUrls().size(), currentTag);
-			instTag.setIndex(ind);
-			nodes.add(instTag);
-			instTag=null;
-			ind++;
+			currentTag=(Tag) it.next();	
+			if(currentTag.getUrls().size()!=0 ){
+				instTag=new node(currentTag.getTid(), currentTag.gettName(), currentTag.getUrls().size(), currentTag);
+				instTag.setIndex(ind);
+				nodes.add(instTag);
+				instTag=null;
+				ind++;
+			}
 		}
 		List<Url> listUrls=user.getAllUrl();
 	//	Iterator<Url> itUri=listUrls.iterator();
@@ -202,7 +204,6 @@ public class Action
 				}
 			}
 		}		
-		System.out.println("getting ready to output files");
 		
 		System.out.println("nodes");
 		System.out.println(nodes.toString());
