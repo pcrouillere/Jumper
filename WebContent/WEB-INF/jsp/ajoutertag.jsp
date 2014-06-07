@@ -11,6 +11,7 @@
 <!--Les section, c'est la partie coeur, c'est la ou on doit developper les differentes fonctionnalitées -->
 
 <section>
+
 <style>
 .ThumbnailContainer
 {
@@ -94,7 +95,185 @@ button
 	overflow-x:auto;
 }
 
+.panel {
+    margin-bottom: 20px;
+    background-color: #fff;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
+    box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
 }
+
+.panel-default {
+    border-color: #ddd;
+}
+.panel-default>.panel-heading {
+    color: #333;
+    background-color: #4A8B87;
+    border-color: #ddd;
+}
+.panel-default>.panel-heading+.panel-collapse .panel-body {
+    border-top-color: #ddd;
+}
+.panel-default>.panel-footer+.panel-collapse .panel-body {
+    border-bottom-color: #ddd;
+}
+.panel-body {
+  padding: 15px;
+}
+.panel-heading {
+  padding: 10px 15px;
+  border-bottom: 1px solid transparent;
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+}
+
+.panel-title {
+  margin-top: 0;
+  margin-bottom: 0;
+  font-size: 16px;
+  color: white;
+}
+.panel-title > a {
+  color: inherit;
+}
+
+.input-group {
+    position: relative;
+    display: table;
+    border-collapse: separate;
+}
+.input-group[class*=col-] {
+    float: none;
+    padding-left: 0;
+    padding-right: 0;
+}
+.input-group .form-control {
+    position: relative;
+    z-index: 2;
+    float: left;
+    width: 86%;
+    margin-bottom: 0;
+}
+
+.input-group-addon, .input-group-btn, .input-group .form-control {
+    display: table-cell;
+}
+
+.input-group-addon:not(:first-child):not(:last-child), .input-group-btn:not(:first-child):not(:last-child), .input-group .form-control:not(:first-child):not(:last-child) {
+    border-radius: 0;
+}
+
+.input-group-addon, .input-group-btn {
+    width: 1%;
+    white-space: nowrap;
+    vertical-align: middle;
+}
+.input-group-addon {
+    padding: 6px 12px;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1;
+    color: white;
+    text-align: center;
+    background-color: #4A8B87;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+.input-group-addon input[type=radio], .input-group-addon input[type=checkbox] {
+    margin-top: 0;
+}
+
+.input-group .form-control:first-child, .input-group-addon:first-child, .input-group-btn:first-child>.btn, .input-group-btn:first-child>.btn-group>.btn, .input-group-btn:first-child>.dropdown-toggle, .input-group-btn:last-child>.btn:not(:last-child):not(.dropdown-toggle), .input-group-btn:last-child>.btn-group:not(:last-child)>.btn {
+    border-bottom-right-radius: 0;
+    border-top-right-radius: 0;
+}
+
+.input-group-addon:first-child {
+    border-right: 0;
+}
+
+.input-group .form-control:last-child, .input-group-addon:last-child, .input-group-btn:last-child>.btn, .input-group-btn:last-child>.btn-group>.btn, .input-group-btn:last-child>.dropdown-toggle, .input-group-btn:first-child>.btn:not(:first-child), .input-group-btn:first-child>.btn-group:not(:first-child)>.btn {
+    border-bottom-left-radius: 0;
+    border-top-left-radius: 0;
+}
+
+.input-group-addon:last-child {
+    border-left: 0;
+}
+
+.input-group-btn {
+    position: relative;
+    font-size: 0;
+    white-space: nowrap;
+}
+
+.input-group-btn>.btn {
+    position: relative;
+}
+.input-group-btn>.btn+.btn {
+    margin-left: -1px;
+}
+.input-group-btn>.btn:hover, .input-group-btn>.btn:focus, .input-group-btn>.btn:active {
+    z-index: 2;
+}
+.input-group-btn:first-child>.btn, .input-group-btn:first-child>.btn-group {
+    margin-right: -1px;
+}
+.input-group-btn:last-child>.btn, .input-group-btn:last-child>.btn-group {
+    margin-left: -1px;
+}
+
+.form-control {
+    display: block;
+    height: 34px;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #555;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+    -webkit-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+    transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+}
+
+#tag_names
+{
+	display : block;
+	width: 218px;
+	right: 0px;
+    padding: 10px 15px;
+    margin-bottom: -1px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+}
+#tag_names:first-child {
+    border-top-right-radius: 4px;
+    border-top-left-radius: 4px;
+}
+#tag_names:last-child {
+    margin-bottom: 0;
+    border-bottom-right-radius: 4px;
+    border-bottom-left-radius: 4px;
+}
+#tag_names p {
+    color: #555;
+}
+
+#tag_names p:hover, #tag_names p:focus {
+    text-decoration: white;
+    text-color:white;
+    background-color: #4A8B87;
+    border-bottom-right-radius: 4px;
+    border-bottom-left-radius: 4px;
+    border-top-right-radius: 4px;
+    border-top-left-radius: 4px;
+}
+
 </style>
 <script>
 function parseUri (str) {
@@ -748,8 +927,8 @@ Arrow.prototype.addGlyph = function() {
 				</div>
 			<div id="input_tag">
 				<div class="input-group">
-				  <span class="input-group-addon">Add tags</span>
-				  <input type="text" class="form-control" placeholder="Tag name" id="tag_name">
+				  <span class="input-group-addon">Ajouter</span>
+				  <input type="text" class="form-control" placeholder="nom du tag" id="tag_name">
 				</div>
 			</div>
 		</div>
