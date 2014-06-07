@@ -14,6 +14,7 @@ System.out.println(json_links);
 			max-width:100%;
 			height: 500px;
 			margin: auto;
+			background-color:yellow;
 		  }
 		  
 		  .node {
@@ -42,7 +43,8 @@ return c>=_s?n?"M0,"+i+"A"+i+","+i+" 0 1,1 0,"+-i+"A"+i+","+i+" 0 1,1 0,"+i+"M0,
 <script>
 		var nodedata = <%=json_nodes%>;
 		var linkdata = <%=json_links%>;
-		
+		var color = d3.scale.category20();
+
 		var width = 960,
 	    height = 500;
 
@@ -70,15 +72,16 @@ return c>=_s?n?"M0,"+i+"A"+i+","+i+" 0 1,1 0,"+-i+"A"+i+","+i+" 0 1,1 0,"+i+"M0,
 	    .attr("class", "node")
 	    .on("mouseover", mouseover)
 	    .on("mouseout", mouseout)
+	    .style("fill",function(d){return color(d.group);})
 	    .call(force.drag);
 
 	node.append("circle")
 	    .attr("r", 8);
 
 	node.append("text")
-		.at
 	    .attr("x", 12)
 	    .attr("dy", ".35em")
+	   	.style("fill",function(d){return "#e0ffff";})
 	    .text(function(d) { return d.name; });
 
 	function tick() {
