@@ -43,15 +43,20 @@
 {
     border-color: #428bca;
 }
-.frame
+.img
 {
 	overflow:hidden;
-	width:100%;
-	height:100%;
+	width:100px;
+	height:100px;
 	position:relative;
 	-webkit-transform-origin: 0 0;
 	overflow: hidden;
 	scale:0.001;
+}
+img.resize
+{
+    width:200px; /* you can use % */
+    height: 200px;
 }
 
 .ThumbnailInfo
@@ -565,12 +570,12 @@ function Thumbnail (pParent,pThumbNb,pParameters){
 	this.addImage();
 	this.addInfo();
 	this.addButton();
-	this.getHtmlObject().ondrop = function(e) {
+ 	this.getHtmlObject().ondrop = function(e) {
 		drop(e);
 	};
 	this.getHtmlObject().ondragover = function(e) {
 		allowDrop(e);
-	};
+	}; 
 
 	var att = document.createAttribute("url");
 	this.getHtmlObject().setAttributeNode(att);
@@ -670,20 +675,20 @@ function ThumbnailImage (pParent,pSource){
 	JsHtmlObject.call(this, pParent, "div",null);
 	
 	this.cSource = pSource;
-	this.cIframe = document.createElement("iframe");
-	this.cIframe.src = this.cSource;
+	this.cIframe = document.createElement("img");
+	this.cIframe.src = 'http://img.bitpixels.com/getthumbnail?code=43419&url='+this.cSource;
 	this.cIframe.scrolling = "no";
 	this.cIframe.sandbox = "allow-same-origin allow-scripts allow-popups allow-forms";
 	this.cIframe.classList.add("frame");
 	console.log(pSource);
 	this.getHtmlObject().appendChild(this.cIframe);
-	
-	this.cIframe.ondrop = function(e) {
-		alert('drop');
+
+/*	this.cIframe.ondrop = function(e) {
+		drop(e);
 	};
 	this.cIframe.ondragover = function(e) {
 		allowDrop(e);
-	};
+	}; */
 	
 	this.addClass("ThumbnailImage");
 	
@@ -998,7 +1003,8 @@ function drop(ev)
 	var tagValue = ev.dataTransfer.getData("tag_names");
 	var srcImg = ev.srcElement;
 	var tagContainer = $($(srcImg).children()[1]).children()[1];
-	console.log($($(srcImg).children()[1]).children()[1]);
+	//var tagContainer = $(srcImg).children()[1];
+	//var contTag = document.getElementsByClassName('ThumbnailTagContainer');
 	//tagContainer.innerHTML += '<button type="button" class="btn">#'+tagValue+'</button>';
 	
 	if(srcImg.tagList == null) {
