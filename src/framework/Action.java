@@ -330,18 +330,15 @@ public class Action
 		String listTag=(String)req.getParameter("list");
 		Url url=user.getUrlById(Integer.valueOf(uri));
 		String str[] = listTag.split("\\$\\$\\$");
-		System.out.println("Tag d size"+str.length);
 		for(int i=0; i<str.length; i++)
 		{
 			Tag tag = user.getTagByName(str[i]);
-			System.out.println("Tag non enregistré non passe encore "+str[i]);
 			if(tag == null) {
 				//add tag
 				tag=new Tag(str[i],user.getuId());
 				tag.addTagtoBDD();
 				tag.setTid(tag.getTagIdFromBDD());
 				user.addOneTag(tag);
-				System.out.println("Tag non enregistré "+str[i]);
 			} 
 			TagMap tm=new TagMap(tag,url);
 			tm.addTagMaptoBDD(user.getuId());
