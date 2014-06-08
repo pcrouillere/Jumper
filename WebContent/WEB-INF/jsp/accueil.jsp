@@ -54,6 +54,7 @@ function searchSite(){
 						if(i<listSites.length-1){
 							listSites[i] = listSites[i].split(' $$$ ');
 							textResult +="<td>" ;
+							textResult += "<img src = 'http://img.bitpixels.com/getthumbnail?code=43419&url="+listSites[i][0]+"'>";
 							textResult +="<a href='"+listSites[i][0]+"' target='_blank' onclick='addVisitToUrl("+listSites[i][2]+")'>" ;
 							textResult +="<p>"+listSites[i][1]+"</p></a>";
 							textResult +="</td>" ;
@@ -95,6 +96,7 @@ function searchSite(){
 								Url u = urls.get(i + j);
 			%>
 			<td>
+				<img src = "http://img.bitpixels.com/getthumbnail?code=43419&url=<%=u.getuUri() %>">
 				<a href="<%=u.getuUri() %>" target="_blank" onclick="addVisitToUrl(<%=u.getuId()%>)"><p><%=u.getuTitle()%></p></a>
 			</td>
 
