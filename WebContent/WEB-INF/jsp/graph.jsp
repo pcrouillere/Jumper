@@ -55,7 +55,7 @@ return c>=_s?n?"M0,"+i+"A"+i+","+i+" 0 1,1 0,"+-i+"A"+i+","+i+" 0 1,1 0,"+i+"M0,
 	    .nodes(nodedata)
 	    .links(linkdata)
 	    .size([width, height])
-	    .linkDistance(80)
+	    .linkDistance(100)
 	    .charge(-400)
 	    .on("tick", tick)
 	    .start();
@@ -79,7 +79,7 @@ return c>=_s?n?"M0,"+i+"A"+i+","+i+" 0 1,1 0,"+-i+"A"+i+","+i+" 0 1,1 0,"+i+"M0,
 	    .call(force.drag);
 
 	node.append("circle")
-	    .attr("r",function(d){return (d.r*20+5);} );
+	    .attr("r",function(d){return (d.r*35);} );
 
 	node.append("text")
 	    //.attr("x", 12)
@@ -102,13 +102,13 @@ return c>=_s?n?"M0,"+i+"A"+i+","+i+" 0 1,1 0,"+-i+"A"+i+","+i+" 0 1,1 0,"+i+"M0,
 	function mouseover() {
 	  d3.select(this).select("circle").transition()
 	      .duration(750)
-	      .attr("r", function(d){return(d.r*20+5)*1.2;});
+	      .attr("r", function(d){return(d.r*35)*1.2;});
 	}
 
 	function mouseout() {
 	  d3.select(this).select("circle").transition()
 	      .duration(750)
-	      .attr("r", function(d){return(d.r*20+5);});
+	      .attr("r", function(d){return(d.r*35);});
 	}
 
              
