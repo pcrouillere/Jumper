@@ -169,11 +169,13 @@ public class Action
 		List<node> nodes = new ArrayList<node>();
 		List<edge> links = new ArrayList<edge>();
 		int ind = 0;
+		double maxUrl = 0;
 		while(it.hasNext())
 		{
 			currentTag=(Tag) it.next();	
 			if(currentTag.getUrls().size()!=0 ){
 				instTag=new node(currentTag.getTid(), currentTag.gettName(), currentTag.getUrls().size(), currentTag);
+				if(maxUrl < currentTag.getUrls().size() ) maxUrl = currentTag.getUrls().size();
 				instTag.setIndex(ind);
 				instTag.setColorId(ind);
 				nodes.add(instTag);
@@ -181,6 +183,12 @@ public class Action
 				ind++;
 			}
 		}
+		
+		// ratio taille des noeuds
+		for(int i = 0; i<nodes.size(); i++){
+			nodes.get(i).setSize(nodes.get(i).getSize()/maxUrl );
+		}
+		
 		List<Url> listUrls=user.getAllUrl();
 	//	Iterator<Url> itUri=listUrls.iterator();
 		Url currentUrl;

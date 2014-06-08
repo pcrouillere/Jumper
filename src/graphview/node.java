@@ -6,7 +6,7 @@ public class node {
 	
 
 	private int id;
-	private int size;
+	private double size;
 	private int colorId;
 	public int getColorId() {
 		return colorId;
@@ -22,7 +22,7 @@ public class node {
 	private Tag tag;
 
 
-	public node(int i,String n, int s, Tag t )
+	public node(int i,String n, double s, Tag t )
 	{
 		this.id=i;
 		this.name=n;
@@ -39,11 +39,11 @@ public class node {
 		this.id = id;
 	}
 
-	public int getSize() {
+	public double getSize() {
 		return size;
 	}
 
-	public void setSize(int size) {
+	public void setSize(double size) {
 		this.size = size;
 	}
 
