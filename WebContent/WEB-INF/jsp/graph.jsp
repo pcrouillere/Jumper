@@ -14,18 +14,21 @@ System.out.println(json_links);
 			max-width:100%;
 			height: 500px;
 			margin: auto;
-			background-color:yellow;
+		  }
+		  
+		  #container svg{
+		  	display : block;
+		  	margin : auto;
 		  }
 		  
 		  .node {
- 		    stroke: #fff;
-  			stroke-width: 1.5px;
+ 		    stroke : none;
 		  }
 
 		.node text{
-		 	font : 15px;
+			font-weight: bold;
+		 	font-size: 10px;
 		 	pointer-events:none;
- 		    color : black;
 		  }
 		  .link {
   			stroke: #999;
@@ -52,8 +55,8 @@ return c>=_s?n?"M0,"+i+"A"+i+","+i+" 0 1,1 0,"+-i+"A"+i+","+i+" 0 1,1 0,"+i+"M0,
 	    .nodes(nodedata)
 	    .links(linkdata)
 	    .size([width, height])
-	    .linkDistance(60)
-	    .charge(-300)
+	    .linkDistance(80)
+	    .charge(-400)
 	    .on("tick", tick)
 	    .start();
 
@@ -72,16 +75,17 @@ return c>=_s?n?"M0,"+i+"A"+i+","+i+" 0 1,1 0,"+-i+"A"+i+","+i+" 0 1,1 0,"+i+"M0,
 	    .attr("class", "node")
 	    .on("mouseover", mouseover)
 	    .on("mouseout", mouseout)
-	    .style("fill",function(d){return color(d.group);})
+	    .style("fill",function(d){return d.color;})
 	    .call(force.drag);
 
 	node.append("circle")
-	    .attr("r", 8);
+	    .attr("r",function(d){return (d.r*20+5);} );
 
 	node.append("text")
-	    .attr("x", 12)
+	    //.attr("x", 12)
 	    .attr("dy", ".35em")
-	   	.style("fill",function(d){return "#e0ffff";})
+	   	.style("fill","black")
+	    .style("text-anchor", "middle")
 	    .text(function(d) { return d.name; });
 
 	function tick() {
@@ -98,13 +102,13 @@ return c>=_s?n?"M0,"+i+"A"+i+","+i+" 0 1,1 0,"+-i+"A"+i+","+i+" 0 1,1 0,"+i+"M0,
 	function mouseover() {
 	  d3.select(this).select("circle").transition()
 	      .duration(750)
-	      .attr("r", 16);
+	      .attr("r", function(d){return(d.r*20+5)*1.2;});
 	}
 
 	function mouseout() {
 	  d3.select(this).select("circle").transition()
 	      .duration(750)
-	      .attr("r", 8);
+	      .attr("r", function(d){return(d.r*20+5);});
 	}
 
              

@@ -7,6 +7,15 @@ public class node {
 
 	private int id;
 	private int size;
+	private int colorId;
+	public int getColorId() {
+		return colorId;
+	}
+
+	public void setColorId(int colorId) {
+		this.colorId = colorId;
+	}
+
 	private String color;
 	private String name;
 	private int index;
