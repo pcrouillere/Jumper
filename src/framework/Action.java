@@ -137,8 +137,7 @@ public class Action
 	
 	public HttpServletRequest login(HttpServletRequest req, HttpServletResponse response) {
 		
-		
-		System.out.println("login login login login ");
+	
 		String email = req.getParameter("email");
 		String mdp = req.getParameter("password");
 		boolean access = false;
@@ -146,10 +145,7 @@ public class Action
 		if(email!=null) {
 		try {
 			user = User.getInstance(email, mdp);
-			System.out.println(email);
-			System.out.println(mdp);
 			if (user!=null) {
-				System.out.println("user not null");
 				Cookie userCookie = new Cookie("userId", Integer.toString(user.getuId()));
 				response.addCookie(userCookie);
 				this.parent.session().open(user);
@@ -320,8 +316,6 @@ public class Action
 		Map<Tag, List<Url>> mapTagUrls = new HashMap<Tag, List<Url>>();
 		
 		String tagoper = req.getParameter("tagoper");
-		System.out.println(tagoper);
-	   //this.parent.redirect("accueil", true);
 		return req;
 	
 	}

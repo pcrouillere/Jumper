@@ -470,8 +470,6 @@
    					img.src = 'icones/trush.png';
    					layer.draw();
    					 </script>
-					
-					
 					<script>
 					function searchTag(){
 						var req = allpiecestostring(ovals,selectedpiece);
@@ -528,16 +526,7 @@
        <div id="urls">
 	
 	  </div>
-							
-							
-							
-							
-							
-							
-							
-							<div class="input-group">
-							  <p><a href="#" class="btn btn-primary" role="button" id="done"  onclick="done_callback(event)">Done</a></p>
-							</div>
+
 						</div>
 					</div>
 					<script language="javascript" type="text/javascript">
@@ -571,8 +560,6 @@
 								}
 							}
 						},false);
-						
-
 					</script>
   </body>
 </html>

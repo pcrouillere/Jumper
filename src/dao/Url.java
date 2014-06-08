@@ -83,6 +83,15 @@ public class Url extends Dao {
 		return allTags;
 	}
 	
+	public List<String> getAllTagString(List<TagMap> TagMap){
+		List<String> tags= new ArrayList<String>(); 
+		for(int i= 0; i<TagMap.size();++i){
+			if(TagMap.get(i).getTmUrl().getuId()==this.getuId()){
+				tags.add(TagMap.get(i).getTmTag().gettName()); 
+			}
+		}
+		return tags; 
+	}
 	public int getuId() {
 		return uId;
 	}
