@@ -28,6 +28,7 @@ import dao.*;
 public class Action
 {
 	FrontController parent = null;
+	String colorTab[] = {"#FDAE6B", "#A1D99B", "#9ECAE1", "#31A354", "#3182BD","#FD8D3C", "#A1D99B", "#C6DBEF","#FDD0A2" };
 	
 	public Action(FrontController parent) {
 		this.parent = parent;
@@ -174,6 +175,7 @@ public class Action
 			if(currentTag.getUrls().size()!=0 ){
 				instTag=new node(currentTag.getTid(), currentTag.gettName(), currentTag.getUrls().size(), currentTag);
 				instTag.setIndex(ind);
+				instTag.setColorId(ind);
 				nodes.add(instTag);
 				instTag=null;
 				ind++;
@@ -201,7 +203,8 @@ public class Action
 					}
 				}
 			}
-		}		
+		}
+		coloration(nodes, links);
 		
 		System.out.println("nodes");
 		System.out.println(nodes.toString());
@@ -215,6 +218,26 @@ public class Action
 		return req;
 	}
 	
+	private void coloration(List<node> nodes, List<edge> edges){
+		
+		for (int i = 0; i<edges.size();i++){
+			node source = nodes.get(edges.get(i).getSource());
+			node target = nodes.get(edges.get(i).getTarget());
+			if(source.getColorId() != target.getColorId()){
+				for(int j = 0; j<nodes.size();j++){
+					if(nodes.get(j).getColorId()==target.getColorId()){
+						nodes.get(j).setColorId(source.getColorId());
+					}
+				}
+			}
+		}
+		
+		for (int i=0; i<nodes.size();i++){
+			node n = nodes.get(i);
+			n.setColor(colorTab[n.getColorId()%9]);
+		}
+		
+	}
 	
 	public HttpServletRequest graphview(HttpServletRequest req, HttpServletResponse response) throws SQLException
 	{
