@@ -307,7 +307,7 @@ public class Action
 		String uri =(String) req.getParameter("url");
 		String listTag=(String)req.getParameter("list");
 		Url url=user.getUrlById(Integer.valueOf(uri));
-		String str[] = listTag.split("\\$\\$\\$");
+		String str[] = listTag.split("@");
 		for(int i=0; i<str.length; i++)
 		{
 			Tag tag = user.getTagByName(str[i]);

@@ -8,6 +8,9 @@
 <%
 	List<Url> urls = (List<Url>) request.getAttribute("untaggedurls");
 %>
+<%
+	User user = (User) session.getAttribute("user");
+%>
 <!--Les section, c'est la partie coeur, c'est la ou on doit developper les differentes fonctionnalitées -->
 
 <section>
@@ -576,13 +579,16 @@ function Thumbnail (pParent,pThumbNb,pParameters){
 	this.cImage;
 	this.cInfo;
 	this.cButton;
+	this.cList;
 	this.cParameters = this.parseParameters(pParameters);
 	this.addClass("Thumbnail");
 	this.addClass("container-fluid");
 	
 	this.addImage();
 	this.addInfo();
+	this.addDropdown();
 	this.addButton();
+	
  	this.getHtmlObject().ondrop = function(e) {
 		drop(e);
 	};
@@ -617,6 +623,11 @@ Thumbnail.prototype.addInfo = function() {
 Thumbnail.prototype.addButton = function() {
 	this.cButton = new ThumbnailButton(this);
 	this.getHtmlObject().appendChild(this.cButton.getHtmlObject());
+};
+
+Thumbnail.prototype.addDropdown = function() {
+	this.cList = new ThumbnailDropdownList(this);
+	this.getHtmlObject().appendChild(this.cList.getHtmlObject());
 };
 
 Thumbnail.prototype.parseParameters = function(pParam) {
@@ -842,8 +853,31 @@ ThumbnailButton.prototype.constructor = ThumbnailButton;
 ThumbnailButton.prototype.addClass = function(pClassName) {
 	this.getHtmlObject().classList.add(pClassName);
 };
+</script>
+<script type="text/javascript">
+function ThumbnailDropdownList (pParent){
+	JsHtmlObject.call(this, pParent, "select",null);
+	this.addClass("ThumbnailDropdownList");
+	this.cThemes = ["Société","Politique","Economie","Science","Sport","Culture","Voyages"];
+	this.addOptions();
+};
+ThumbnailDropdownList.prototype = new JsHtmlObject();
+ThumbnailDropdownList.prototype.constructor = ThumbnailDropdownList;
 
-
+ThumbnailDropdownList.prototype.addClass = function(pClassName) {
+	this.getHtmlObject().classList.add(pClassName);
+};
+ThumbnailDropdownList.prototype.addOptions = function() {
+	for(var i=0,len=this.cThemes.length;i<len;i++){
+		this.addOption(this.cThemes[i]);
+	}
+};
+ThumbnailDropdownList.prototype.addOption = function(pName) {
+	var option = document.createElement('option');
+	option.value = pName;
+	option.innerHTML = pName;
+	$(this.getHtmlObject()).append(option);
+};
 </script>
 <script type="text/javascript">
 function ThumbnailTag (pParent,pText){
@@ -1065,17 +1099,22 @@ function dropInfoTitle(ev)
 function done_callback(ev)
 {
 	var thumbnail = $(ev.target).parent()[0];
+	var theme = $(thumbnail).children()[2].value;
 	var tagList = thumbnail.tagList;
 	var url = thumbnail.url;
 	var urlid = thumbnail.urlid;
 	var sender = new String("");
+	var userid = <%= user.getuId()%>;
 	var uri=new String("$$$"+url+"$$$");
-	for(i=0,len=tagList.length;i<len;i++)
-	{
-		sender+=tagList[i].replace("#","")+"$$$";
+	if(tagList!=null){
+		for(i=0,len=tagList.length;i<len;i++)
+		{
+			sender+=tagList[i].replace("#","")+"@";
+		}
+		sendRequest(urlid,sender);
+		sendRequestToRestServer(userid,url,sender,theme);
+		$(ev.target).parent().remove();
 	}
-	sendRequest(urlid,sender);
-	$(ev.target).parent().remove();
 }
 
 function sendRequest(url,sender)
@@ -1101,6 +1140,29 @@ function sendRequest(url,sender)
 	console.log("uuuu" + url);
 	httpRequest.open("GET", "?page=addtagurl&url="+url+"&list="+sender, false); 
 	httpRequest.send(null);  
+}
+
+function sendRequestToRestServer(userid,url,sender,theme)
+{ 
+	if (window.XMLHttpRequest) 
+	{ 
+		httpRequest = new XMLHttpRequest(); 
+	} 
+	else if (window.ActiveXObject) 
+	{ 
+		httpRequest = new ActiveXObject("Microsoft.XMLHTTP"); 
+	}	
+	if (!httpRequest)
+	{ 
+		alert('Abandon :Impossible de crÃ©er une instance XMLHTTP'); 
+		return false; 
+	} 
+
+	httpRequest.onreadystatechange = function() 
+	{ 
+	};
+	httpRequest.open("GET", "http://192.168.1.19:8182/ServerRest?userid="+userid+"&url="+url+"&list="+sender+"&theme="+theme+"&op="+1, true); 
+	httpRequest.send();  
 }
 
 </script>
