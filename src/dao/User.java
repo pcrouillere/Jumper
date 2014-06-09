@@ -114,6 +114,15 @@ public class User extends Dao {
 		return null;
 	}
 	
+	public Tag getTagByName(String name) {
+		for (int i=0; i< uTags.size(); i++) {
+			if(uTags.get(i).gettName().equals(name))
+				return uTags.get(i);
+		}
+		return null;
+	}
+
+	
 	public Url getUrlById(int id){
 		for(int i=0; i<= uUrls.size(); i++){
 			if(uUrls.get(i).getuId()==id)
