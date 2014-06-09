@@ -61,7 +61,7 @@ table.alltag{
 }
 
 .onetag a:hover {
-	color:#4A8B87;
+	color:#C5252B;
 }
 
 table.onetag{
@@ -72,7 +72,7 @@ table.onetag{
 }
 
 .onetag caption{
-	background-color: #C5252B;
+	background-color: #4A8B87;
 	-webkit-border-radius: 20px 20px 0 0;
 	-moz-border-radius: 20px 20px 0 0;
 	border-radius: 20px 20px 0 0;
