@@ -83,6 +83,7 @@ public class Url extends Dao {
 		return allTags;
 	}
 	
+
 	public List<String> getAllTagString(List<TagMap> TagMap){
 		List<String> tags= new ArrayList<String>(); 
 		for(int i= 0; i<TagMap.size();++i){
@@ -92,6 +93,25 @@ public class Url extends Dao {
 		}
 		return tags; 
 	}
+
+	public boolean hasTag(Tag tag) throws SQLException{
+		List<Tag> allTags = new ArrayList<Tag>();
+		User u = User.getInstance();
+		ResultSet resultId;
+		Map<String, String> attr = new HashMap<String, String>();
+		attr.put("tagMapUrlId", Integer.toString(this.uId));
+		attr.put("tagMapUserId", Integer.toString(u.getuId()));
+		resultId = Dao.search("jpTagMap", attr);
+		
+		while(resultId.next()){
+			if(resultId.getInt("tagMapTagId")==tag.getTid()){
+				return true;
+			}
+		}
+		return false;
+	}
+	
+
 	public int getuId() {
 		return uId;
 	}

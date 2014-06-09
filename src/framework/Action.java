@@ -23,6 +23,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
 
 
+
 import dao.*;
 
 /**
@@ -273,6 +274,20 @@ public class Action
 		return req;
 	}
 	
+	
+	public HttpServletRequest ajoutertagurl(HttpServletRequest req, HttpServletResponse response) throws SQLException
+	{
+		User user = User.getInstance(); 
+		String id = req.getParameter("id");
+		List<Tag> allTags = user.getAllTag();
+		Url url = user.getUrlById(Integer.parseInt(id));
+		List<Url> allUrls = new ArrayList<Url>();
+		allUrls.add(url);
+		req.setAttribute("tags", allTags);
+		req.setAttribute("urls", allUrls);
+		return req;
+	}
+	
 
 	public HttpServletRequest addurl(HttpServletRequest req, HttpServletResponse response){
 		int idUser = Integer.parseInt(req.getParameter("id"));
@@ -323,7 +338,7 @@ public class Action
 
 	
 	
-	public HttpServletRequest addtagurl(HttpServletRequest req, HttpServletResponse response)
+	public HttpServletRequest addtagurl(HttpServletRequest req, HttpServletResponse response) throws SQLException
 	{
 		User user = User.getInstance(); 
 		String uri =(String) req.getParameter("url");
@@ -339,11 +354,13 @@ public class Action
 				tag.addTagtoBDD();
 				tag.setTid(tag.getTagIdFromBDD());
 				user.addOneTag(tag);
-			} 
-			TagMap tm=new TagMap(tag,url);
-			tm.addTagMaptoBDD(user.getuId());
-			tm.setTmId(tm.getIdFromBdd());
-			user.addOneMap(tm);
+			}
+			if(!url.hasTag(tag)) {
+				TagMap tm=new TagMap(tag,url);
+				tm.addTagMaptoBDD(user.getuId());
+				tm.setTmId(tm.getIdFromBdd());
+				user.addOneMap(tm);
+			}
 		}
 		return req;
 	}

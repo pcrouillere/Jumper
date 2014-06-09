@@ -29,18 +29,47 @@
     </style>
   </head>
   <body>
-<div style="position: relative;">
+				
+				<div>
+				<center>
+				<div>
   <canvas id="tempCanvas" width="500" height="500" style="display:none;"></canvas>
   <canvas id="layer2" width="500" height="500" 
-   style="position: absolute; left: 1000px; top: 0px; z-index: 0;"></canvas>
+   style="position:  relative; left: 0px; top: 0px; z-index: 0;"></canvas>
   <canvas id="layer3" width="500" height="500" 
-   style="position: absolute; left: 1000px; top: 0px; z-index: 1;"></canvas>
+   style="position:  relative; left: 0px; top: 0px; z-index: 1;"></canvas>
   <canvas id="layer1" width="500" height="500" 
-   style="position: absolute; left: 1000px; top: 0px; z-index: 2;"></canvas>
-  <div id="container"  style="position: absolute; left: 1000px; top: 0px; z-index: 4;"></div>
+   style="position:  relative; left: 0px; top: 0px; z-index: 2;"></canvas>
+  <div id="container"  style="position:  relative; left: 0px; top: 0px; z-index: 4;"></div>
   <canvas id="trush"  width="500" height="500" 
-   style="position: absolute; left:1000px ; top:0px; z-index: 3;"></canvas>
+   style="position:  relative; left:1000px ; top:0px; z-index: 3;"></canvas>
   </div>
+					</center>
+				
+						
+							<div class="input-group">
+							    <center>
+							  <span class="input-group-addon">Add tags</span>
+							  <input type="text" class="form-control" placeholder="Tag name" id="tag_name">
+							  	   </center>
+							  <center>
+							  <form name="search" onsubmit="searchTag()">
+								<fieldset>
+									<p><input type="button" name ="Jump" value="Jump" onclick="searchTag()"></p>
+								</fieldset>
+							   </form>
+							   </center>
+							</div>
+					
+					
+			
+	
+		</div>
+       		
+      
+       <div id="urls">
+	
+	  </div>
      <script  type="text/javascript" src="http://d3lp1msu2r81bx.cloudfront.net/kjs/js/lib/kinetic-v5.0.2.min.js"></script>
    	 <script  type="text/javascript" defer="defer">
 
@@ -368,7 +397,6 @@
    						  text.on('dragend', function() {
    						  	if(text.x()+group.x()>450 && text.y()+group.y()>450){
    						  		group.remove(); 
-   						  		alert(text.getAttr("text"));
    						  		deleteovalbytag(ovals,selectedpiece,text.getAttr("text"));
    						  		drawovals(ovals, document.getElementById('layer1'));
    								drawallpieces(selectedpiece,ovals,canvas3);
@@ -469,6 +497,9 @@
    					img.onload = function() { context4.drawImage(img,450, 450,50,50);};
    					img.src = 'icones/trush.png';
    					layer.draw();
+   					
+   					
+   					
    					 </script>
 					<script>
 					function searchTag(){
@@ -486,14 +517,20 @@
 						xhr_obj.onreadystatechange = function() {
 							if (xhr_obj.readyState == 4 && xhr_obj.responseText) {
 									var result = xhr_obj.responseText;
-									var listUrls = result.split(' $$$ ');
+									console.log('result: '+result); 
 									var textResult = '';
-									for(i in listUrls){
-										textResult+="<br>";
-										textResult+="<a href=\""+listUrls[i]+"\">Visit W3Schools</a>";
-										textResult+="</br>";
+									if(result.length>3){
+										var listUrls = result.split(' $$$ ');
+										for(i in listUrls){
+											if(listUrls[i].length>1){
+												textResult+="<br>";
+												textResult+="<a href=\""+listUrls[i]+"\">Visit W3Schools</a>";
+												textResult+="</br>";
+											}
+											
+										}
 									}
-									console.log( textResult); 
+									console.log('text result: '+textResult); 
 									document.getElementById('urls').innerHTML = textResult;
 							}
 						};
@@ -501,34 +538,8 @@
 						xhr_obj.send(null);
 					}
 					</script>
-				<aside>
-					<div id="tag_list">
-						<div class="panel panel-default">
-							  <div class="panel-heading">
-							    <h3 class="panel-title">Liste des tags</h3>
-							  </div>
-							    <div class="panel-body" style="height:283px;">
-									<div id="tag_names"/>									
-										<!-- Load all tag names from the database here -->							
-									</div>
-								</div>
-							</div>
-						<div id="input_tag">
-							<div class="input-group">
-							  <span class="input-group-addon">Add tags</span>
-							  <input type="text" class="form-control" placeholder="Tag name" id="tag_name">
-							</div>
-		<form name="search" onsubmit="searchTag()">
-			<fieldset>
-				<p><input type="button" name ="Jump" value="Jump" onclick="searchTag()"></p>
-			</fieldset>
-		</form>
-       <div id="urls">
-	
-	  </div>
 
-						</div>
-					</div>
+
 					<script language="javascript" type="text/javascript">
 						//Create new tag in the list
 						var element= document.getElementById("tag_name");
@@ -541,20 +552,12 @@
 								var key = e.which || e.keycode;
 								if(key==13)
 								{
-									var span=document.createElement('p');
-									span.draggable="true";
-									span.ondragstart="drag(event)";
-									var newlinktext=document.createTextNode("#"+element.value);
-									span.appendChild(newlinktext);
-									var tag_names= document.getElementById("tag_names");
-									tag_names.appendChild(span);
 									var ovalnew=new Tagoval("#"+element.value,0.5,0.5,Math.PI/3,0.2,0.5);
 									addoval(ovals,selectedpiece,ovalnew);
 									drawdynoval(ovalnew,layer,stage,stage.width(),stage.height());
 									drawovals(ovals, document.getElementById('layer1'));
 									drawallpieces(selectedpiece,ovals,canvas3);
 									writeMessagedyn(allpiecestostring(ovals,selectedpiece));
-									
 									layer.draw();
 									element.value="";
 								}

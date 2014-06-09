@@ -26,9 +26,16 @@ public class advancedsearch extends HttpServlet {
 		User user = (User) session.get_user();
 		List<Url> urls=user.advancedsearch(req); 
 		Iterator<Url> it = urls.iterator();
-		while (it.hasNext()){
-		   Url url = it.next(); // tu peux typer plus finement ici
-		   out.print(" $$$ "+url.getuUri());
+		if( urls.size()>0){
+			while (it.hasNext()){
+				   Url url = it.next(); // tu peux typer plus finement ici
+				   out.print(" $$$ "+url.getuUri());
+				   System.out.print(" $$$ "+url.getuUri());
+				}
+		}
+		else{
+			out.print(" $$$ ");
+			System.out.print("");
 		}
 	}
 }
