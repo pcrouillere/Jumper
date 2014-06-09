@@ -44,79 +44,364 @@ System.out.println(json_links);
 			top:0px;  
 			left:0px;
 		}
-	#toPopup {
-		font-family: "lucida grande",tahoma,verdana,arial,sans-serif;
-	    background: none repeat scroll 0 0 #FFFFFF;
-	    border: 10px solid #ccc;
-	    border-radius: 3px 3px 3px 3px;
-	    color: #333333;
-	    display: none;
-		font-size: 14px;
-	    left: 50%;
-	    margin-left: -402px;
-	    position: fixed;
-	    top: 20%;
-	    width: 800px;
-	    z-index: 2;
-	}
-	div.loader {
-	    background: url("/Jump/image?src=loading.gif") no-repeat scroll 0 0 transparent;
-	    height: 32px;
-	    width: 32px;
-		display: none;
-		z-index: 9999;
-		top: 40%;
-		left: 50%;
-		position: absolute;
-		margin-left: -10px;
-	}
-	div.close {
-	    background: url("/Jump/image?src=closebox.png") no-repeat scroll 0 0 transparent;
-	    bottom: 24px;
-	    cursor: pointer;
-	    float: right;
-	    height: 30px;
-	    left: 27px;
-	    position: relative;
-	    width: 30px;
-	}
-	span.ecs_tooltip {
-	    background: none repeat scroll 0 0 #000000;
-	    border-radius: 2px 2px 2px 2px;
-	    color: #FFFFFF;
-	    display: none;
-	    font-size: 11px;
-	    height: 16px;
-	    opacity: 0.7;
-	    padding: 4px 3px 2px 5px;
-	    position: absolute;
-	    right: -62px;
-	    text-align: center;
-	    top: -51px;
-	    width: 93px;
-	}
-	span.arrow {
-	    border-left: 5px solid transparent;
-	    border-right: 5px solid transparent;
-	    border-top: 7px solid #000000;
-	    display: block;
-	    height: 1px;
-	    left: 40px;
-	    position: relative;
-	    top: 3px;
-	    width: 1px;
-	}
-	div#popup_content {
-	    margin: 4px 7px;
-	}
+			#toPopup {
+				font-family: "lucida grande",tahoma,verdana,arial,sans-serif;
+			    background: none repeat scroll 0 0 #FFFFFF;
+			    border: 10px solid #ccc;
+			    border-radius: 3px 3px 3px 3px;
+			    color: #333333;
+			    display: none;
+				font-size: 14px;
+			    left: 50%;
+			    margin-left: -402px;
+			    position: fixed;
+			    top: 20%;
+			    width: 800px;
+			    z-index: 2;
+			    
+			}
+			div.loader {
+			    background: url("/Jump/image?src=loading.gif") no-repeat scroll 0 0 transparent;
+			    height: 32px;
+			    width: 32px;
+				display: none;
+				z-index: 9999;
+				top: 40%;
+				left: 50%;
+				position: absolute;
+				margin-left: -10px;
+			}
+			div.close {
+			    background: url("/Jump/image?src=closebox.png") no-repeat scroll 0 0 transparent;
+			    bottom: 24px;
+			    cursor: pointer;
+			    float: right;
+			    height: 30px;
+			    left: 27px;
+			    position: relative;
+			    width: 30px;
+			}
+			span.ecs_tooltip {
+			    background: none repeat scroll 0 0 #000000;
+			    border-radius: 2px 2px 2px 2px;
+			    color: #FFFFFF;
+			    display: none;
+			    font-size: 11px;
+			    height: 16px;
+			    opacity: 0.7;
+			    padding: 4px 3px 2px 5px;
+			    position: absolute;
+			    right: -62px;
+			    text-align: center;
+			    top: -51px;
+			    width: 93px;
+			}
+			span.arrow {
+			    border-left: 5px solid transparent;
+			    border-right: 5px solid transparent;
+			    border-top: 7px solid #000000;
+			    display: block;
+			    height: 1px;
+			    left: 40px;
+			    position: relative;
+			    top: 3px;
+			    width: 1px;
+			}
+			div#popup_content {
+			    margin: 4px 7px;
+			}
+			
+			.ThumbnailContainer
+			{
+				width:100%;
+			    margin : 0 auto;
+			}
+			
+			.Thumbnail
+			{
+			    padding: 4px;
+			    margin-bottom: 20px;
+			    line-height: 1.42857143;
+			    background-color: #fff;
+			    border: 1px solid #ddd;
+			    border-radius: 4px;
+			    -webkit-transition: all .2s ease-in-out;
+			    transition: all .2s ease-in-out; 
+			    width:170 px;
+			}
+			
+			.ThumbnailImage
+			{
+				margin-left: auto;
+			    margin-right: auto;
+			}
+			
+			.ThumbnailInfo:hover, .ThumbnailInfo:focus, .ThumbnailInfo.active
+			{
+			    border-color: #428bca;
+			}
+			.img
+			{
+				overflow:hidden;
+				width:100px;
+				height:100px;
+				position:relative;
+				-webkit-transform-origin: 0 0;
+				overflow: hidden;
+				scale:0.001;
+			}
+			img.resize
+			{
+			    width:200px; /* you can use % */
+			    height: 200px;
+			}
+			
+			.ThumbnailInfo
+			{
+				width:100%;
+				height:25%;
+				border-top:1px solid red;
+			}
+			
+			.ThumbnailInfoTitle
+			{
+				padding: 9px;
+			    color: #4A8B87;
+			}
+			
+			.container-fluid
+			{
+			  padding-left: 0px;
+			  padding-right: 0px;
+			}
+			
+			.btn 
+			{
+				  padding: 0px;
+			}
+			
+			.ThumbnailTagContainer
+			{
+			    height:60%;
+			    margin:0 auto;
+			}
+			
+			
+			button {
+			    color: #fff;
+			    background-color: #4A8B87;
+			    border-color: #4A8B87;
+			}
+			button:hover, button:focus, button:active, button.active, .open .dropdown-toggle.button {
+			    color: #fff;
+			    background-color: #3276b1;
+			    border-color: #285e8e;
+			}
+			button:active, button.active, .open .dropdown-toggle.button{
+			    background-image: none;
+			}
+			button.disabled, .button[disabled], fieldset[disabled] .button, .button.disabled:hover, .button[disabled]:hover, fieldset[disabled] .btn-primary:hover, .btn-primary.disabled:focus, .btn-primary[disabled]:focus, fieldset[disabled] .btn-primary:focus, .btn-primary.disabled:active, .btn-primary[disabled]:active, fieldset[disabled] .btn-primary:active, .btn-primary.disabled.active, .btn-primary[disabled].active, fieldset[disabled] .btn-primary.active {
+			    background-color: #428bca;
+			    border-color: #357ebd;
+			}
+			button.badge {
+			    color: #428bca;
+			    background-color: #fff;
+			}
+			
+			#all_links
+			{
+				width:100%;
+				height:380px;
+				position:relative;
+				margin:0 auto;
+			}
+			
+			.panel {
+			    margin-bottom: 20px;
+			    background-color: #fff;
+			    border: 1px solid transparent;
+			    border-radius: 4px;
+			    -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
+			    box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
+			}
+			
+			.panel-default {
+			    border-color: #ddd;
+			}
+			.panel-default>.panel-heading {
+			    color: #333;
+			    background-color: #4A8B87;
+			    border-color: #ddd;
+			}
+			.panel-default>.panel-heading+.panel-collapse .panel-body {
+			    border-top-color: #ddd;
+			}
+			.panel-default>.panel-footer+.panel-collapse .panel-body {
+			    border-bottom-color: #ddd;
+			}
+			.panel-body {
+			  padding: 15px;
+			}
+			.panel-heading {
+			  padding: 10px 15px;
+			  border-bottom: 1px solid transparent;
+			  border-top-left-radius: 3px;
+			  border-top-right-radius: 3px;
+			}
+			
+			.panel-title {
+			  margin-top: 0;
+			  margin-bottom: 0;
+			  font-size: 16px;
+			  color: white;
+			}
+			.panel-title > a {
+			  color: inherit;
+			}
+			
+			.input-group {
+			    position: relative;
+			    display: table;
+			    border-collapse: separate;
+			}
+			.input-group[class*=col-] {
+			    float: none;
+			    padding-left: 0;
+			    padding-right: 0;
+			}
+			.input-group .form-control {
+			    position: relative;
+			    z-index: 2;
+			    float: left;
+			    width: 86%;
+			    margin-bottom: 0;
+			}
+			
+			.input-group-addon, .input-group-btn, .input-group .form-control {
+			    display: table-cell;
+			}
+			
+			.input-group-addon:not(:first-child):not(:last-child), .input-group-btn:not(:first-child):not(:last-child), .input-group .form-control:not(:first-child):not(:last-child) {
+			    border-radius: 0;
+			}
+			
+			.input-group-addon, .input-group-btn {
+			    width: 1%;
+			    white-space: nowrap;
+			    vertical-align: middle;
+			}
+			.input-group-addon {
+			    padding: 6px 12px;
+			    font-size: 14px;
+			    font-weight: 400;
+			    line-height: 1;
+			    color: white;
+			    text-align: center;
+			    background-color: #4A8B87;
+			    border: 1px solid #ccc;
+			    border-radius: 4px;
+			}
+			.input-group-addon input[type=radio], .input-group-addon input[type=checkbox] {
+			    margin-top: 0;
+			}
+			
+			.input-group .form-control:first-child, .input-group-addon:first-child, .input-group-btn:first-child>.btn, .input-group-btn:first-child>.btn-group>.btn, .input-group-btn:first-child>.dropdown-toggle, .input-group-btn:last-child>.btn:not(:last-child):not(.dropdown-toggle), .input-group-btn:last-child>.btn-group:not(:last-child)>.btn {
+			    border-bottom-right-radius: 0;
+			    border-top-right-radius: 0;
+			}
+			
+			.input-group-addon:first-child {
+			    border-right: 0;
+			}
+			
+			.input-group .form-control:last-child, .input-group-addon:last-child, .input-group-btn:last-child>.btn, .input-group-btn:last-child>.btn-group>.btn, .input-group-btn:last-child>.dropdown-toggle, .input-group-btn:first-child>.btn:not(:first-child), .input-group-btn:first-child>.btn-group:not(:first-child)>.btn {
+			    border-bottom-left-radius: 0;
+			    border-top-left-radius: 0;
+			}
+			
+			.input-group-addon:last-child {
+			    border-left: 0;
+			}
+			
+			.input-group-btn {
+			    position: relative;
+			    font-size: 0;
+			    white-space: nowrap;
+			}
+			
+			.input-group-btn>.btn {
+			    position: relative;
+			}
+			.input-group-btn>.btn+.btn {
+			    margin-left: -1px;
+			}
+			.input-group-btn>.btn:hover, .input-group-btn>.btn:focus, .input-group-btn>.btn:active {
+			    z-index: 2;
+			}
+			.input-group-btn:first-child>.btn, .input-group-btn:first-child>.btn-group {
+			    margin-right: -1px;
+			}
+			.input-group-btn:last-child>.btn, .input-group-btn:last-child>.btn-group {
+			    margin-left: -1px;
+			}
+			
+			.form-control {
+			    display: block;
+			    height: 34px;
+			    padding: 6px 12px;
+			    font-size: 14px;
+			    line-height: 1.42857143;
+			    color: #555;
+			    background-color: #fff;
+			    background-image: none;
+			    border: 1px solid #ccc;
+			    border-radius: 4px;
+			    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+			    box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+			    -webkit-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+			    transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+			}
+			
+			#tag_names
+			{
+				display : block;
+				width: 218px;
+				right: 0px;
+			    padding: 10px 15px;
+			    margin-bottom: -1px;
+			    background-color: #fff;
+			    border: 1px solid #ddd;
+			}
+			#tag_names:first-child {
+			    border-top-right-radius: 4px;
+			    border-top-left-radius: 4px;
+			}
+			#tag_names:last-child {
+			    margin-bottom: 0;
+			    border-bottom-right-radius: 4px;
+			    border-bottom-left-radius: 4px;
+			}
+			#tag_names p {
+			    color: #555;
+			}
+			
+			#tag_names p:hover, #tag_names p:focus {
+			    text-decoration: white;
+			    text-color:white;
+			    background-color: #4A8B87;
+			    border-bottom-right-radius: 4px;
+			    border-bottom-left-radius: 4px;
+			    border-top-right-radius: 4px;
+			    border-top-left-radius: 4px;
+			}
 	</style>
 	<div id="toPopup"> 
         <div class="close"></div>
-       	<span class="ecs_tooltip">Press Esc to close <span class="arrow"></span></span>
-		<div id="popup_content"> <!--your content start-->
-        </div> <!--your content end-->
-    
-    </div> <!--toPopup end-->
+       	<span class="ecs_tooltip">Fermer <span class="arrow"></span></span>
+		<div id="popup_content">
+        </div> 
+    </div> 
     
 	<div class="loader"></div>
    	<div id="backgroundPopup"></div>
@@ -175,7 +460,7 @@ return c>=_s?n?"M0,"+i+"A"+i+","+i+" 0 1,1 0,"+-i+"A"+i+","+i+" 0 1,1 0,"+i+"M0,
 	    .style("text-anchor", "middle")
 	    .text(function(d) { return d.name; });
 
-	function tick() {
+ 	function tick() {
 	  link
 	      .attr("x1", function(d) { return d.source.x; })
 	      .attr("y1", function(d) { return d.source.y; })
@@ -200,10 +485,20 @@ return c>=_s?n?"M0,"+i+"A"+i+","+i+" 0 1,1 0,"+-i+"A"+i+","+i+" 0 1,1 0,"+i+"M0,
 	
 	function onclick()
 	{
-		loading(); // loading
-		setTimeout(function(){ // then show popup, deley in .5 second
-			loadPopup(); // function show popup 
-		}, 500); // .5 second
+		var container = new ThumbnailContainer(null,null);
+		$('#popup_content').prepend(container.getHtmlObject());
+		var url='https://www.google.fr';
+		var iduri="0";
+		var count="0";
+		count = '"'+count+'"';
+		url = '"'+url+'"';
+		iduri= '"'+iduri+'"';
+		var parameters = '{"parameters":['+
+		'{'+count+':[{"url":'+url+'},{"idurl":'+iduri+'}]}'+
+		']}';
+		container.addThumbnail(parameters);
+		loading(); 
+		setTimeout(function(){loadPopup();}, 500); 
 	}
 
 </script>
@@ -218,17 +513,17 @@ $("div.close").hover(
 		);
 
 $("div.close").click(function() {
-disablePopup();  // function close pop up
+disablePopup(); 
 });
 
 $(this).keyup(function(event) {
-if (event.which == 27) { // 27 is 'Ecs' in the keyboard
-	disablePopup();  // function close pop up
+if (event.which == 27) { 
+	disablePopup(); 
 }  	
 });
 
 $("div#backgroundPopup").click(function() {
-disablePopup();  // function close pop up
+disablePopup();  
 });
 
 $('a.livebox').click(function() {
@@ -244,25 +539,550 @@ function closeloading() {
 $("div.loader").fadeOut('normal');  
 }
 
-var popupStatus = 0; // set value
+var popupStatus = 0; 
 
 function loadPopup() { 
-if(popupStatus == 0) { // if value is 0, show popup
-	closeloading(); // fadeout loading
-	$("#toPopup").fadeIn(0500); // fadein popup div
-	$("#backgroundPopup").css("opacity", "0.7"); // css opacity, supports IE7, IE8
+if(popupStatus == 0) { 
+	closeloading(); 
+	$("#toPopup").fadeIn(0500); 
+	$("#backgroundPopup").css("opacity", "0.7");
 	$("#backgroundPopup").fadeIn(0001); 
-	popupStatus = 1; // and set value to 1
+	popupStatus = 1; 
 }	
 }
 
 function disablePopup() {
-if(popupStatus == 1) { // if value is 1, close popup
+if(popupStatus == 1) { 
 	$("#toPopup").fadeOut("normal");  
 	$("#backgroundPopup").fadeOut("normal");  
-	popupStatus = 0;  // and set value to 0
+	popupStatus = 0; 
 }
 }
 </script>		
+<script>
+function parseUri (str) {
+    var     o   = parseUri.options,
+            m   = o.parser[o.strictMode ? "strict" : "loose"].exec(str),
+            uri = {},
+            i   = 14;
 
+    while (i--) uri[o.key[i]] = m[i] || "";
+
+    uri[o.q.name] = {};
+    uri[o.key[12]].replace(o.q.parser, function ($0, $1, $2) {
+            if ($1) uri[o.q.name][$1] = $2;
+    });
+
+    return uri;
+};
+
+parseUri.options = {
+    strictMode: false,
+    key: ["source","protocol","authority","userInfo","user","password","host","port","relative","path","directory","file","query","anchor"],
+    q:   {
+            name:   "queryKey",
+            parser: /(?:^|&)([^&=]*)=?([^&]*)/g
+    },
+    parser: {
+            strict: /^(?:([^:\/?#]+):)?(?:\/\/((?:(([^:@]*)(?::([^:@]*))?)?@)?([^:\/?#]*)(?::(\d*))?))?((((?:[^?#\/]*\/)*)([^?#]*))(?:\?([^#]*))?(?:#(.*))?)/,
+            loose:  /^(?:(?![^:@]+:[^:@\/]*@)([^:\/?#.]+):)?(?:\/\/)?((?:(([^:@]*)(?::([^:@]*))?)?@)?([^:\/?#]*)(?::(\d*))?)(((\/(?:[^?#](?![^?#\/]*\.[^?#\/.]+(?:[?#]|$)))*\/?)?([^?#\/]*))(?:\?([^#]*))?(?:#(.*))?)/
+    }
+};
+</script>
+<script type="text/javascript">
+function JsHtmlObject(pJsParent, pHtmlType, pHtmlId, pWidth, pHeight) {
+	
+	this.cParent = pJsParent;
+	this.cHtmlObject = null;
+
+	if (IS_NULL(pJsParent) && IS_NULL(pHtmlType) && IS_NULL(pHtmlId)) {
+		//Heritage creation
+		return false;
+	}
+	if (IS_NULL(pHtmlType)) {
+		//If Html type not defined,
+
+		if (!IS_NULL(pJsParent)) {
+			this.cHtmlObject = pJsParent;
+		} else if (!IS_NULL(pHtmlId)) {
+			this.cHtmlObject = document.getElementById(pHtmlId);
+			if (IS_NULL(this.cHtmlObject)) {
+				return false;
+			}
+		} else {
+			return false;
+		}
+	} else {
+		this.cHtmlObject = document.createElement(pHtmlType);
+		if (!IS_NULL(pHtmlId)){
+		this.cHtmlObject.id = pHtmlId;
+		}
+		if (!IS_NULL(pWidth)){
+			this.cHtmlObject.width = pWidth;
+		}
+		if (!IS_NULL(pHeight)) {
+			this.cHtmlObject.height = pHeight;
+		}
+		if (!IS_NULL(pJsParent)){
+			pJsParent.getHtmlObject().appendChild(this.cHtmlObject);
+		} else {
+			document.body.appendChild(this.cHtmlObject);
+		}
+	}
+	/*$(this.cHtmlObject).dblclick(function(e){
+		e.preventDefault();
+	});*/
+	return true;
+};
+
+/**
+ * Get the instance of the HTML object, this element controls
+ * @function
+ * @return {HtmlObject} the instance of the HTML object, this element controls
+ */
+JsHtmlObject.prototype.getHtmlObject = function() {
+	return this.cHtmlObject;
+};
+
+JsHtmlObject.prototype.getParent = function() {
+	if(!IS_NULL(this.cParent)){
+		return this.cParent;
+	} else {
+		return document;
+	}
+	
+};
+
+</script>
+<script type="text/javascript">
+function IS_NULL(pValue) {
+	return (pValue == null || (( typeof pValue) == 'undefined'));
+}
+
+/**
+ * return false if the value given is null or undefined
+ * @function
+ * @global
+ * @param {Object} pValue a value
+ * @return {Boolean} false if value is null or undefined
+ */
+function IS_NOT_NULL(pValue) {
+	return (pValue != null && (( typeof pValue) != 'undefined') );
+}
+/**
+ * return the initial position of the slider
+ * @function
+ * @global
+ * @return {Number}
+ */
+function getCoordonateXY(element) {
+	var rect = element.getBoundingClientRect();
+	return { top: rect.top, right: rect.right , bottom: rect.bottom, left: rect.left };
+}
+/**
+ * return the initial position of the slider
+ * @function
+ * @global
+ * @return {Number}
+ */
+function getSliderStartPosition(pSlider,pAxis) {
+	var handleOffset = -$($(pSlider.getHtmlObject()).children()[0]).innerWidth()/2;
+	if(pAxis == "x"){
+		return getCoordonateXY(pSlider.getHtmlObject()).left + handleOffset;
+	} else {
+		return getCoordonateXY(pSlider.getHtmlObject()).bottom + handleOffset;
+	}
+}
+/**
+ *
+ * @function
+ * @global
+ */
+function setCurrentTimeOnVideo(BarRange, BarValue, VideoDuration) {
+	return Math.floor((BarValue / BarRange) * VideoDuration*100)/100;
+}
+/**
+ * getLessVars parses your LESS variables to Javascript (provided you make a dummy node in LESS)
+ * @param {String} id The CSS-id your variables are listed under.
+ * @param {Boolean} [parseNumbers=true] Try to parse units as numbers.
+ * @return {Object} A value object containing your LESS variables.
+ * @example
+ * LESS:
+ * 	&#64;myLessVariable: 123px;
+ * 	#dummyLessId { width: @myLessVariable; }
+ * Javascript:
+ * 	GET_LESS_VARIABLES('dummyLessId');
+ * returns:
+ * 	{myLessVariable:123}
+ */
+function GET_LESS_VARIABLES(id, parseNumbers) {
+	var bNumbers = parseNumbers === undefined ? true : parseNumbers, oLess = {}, rgId = /\#\w+/, rgKey = /\.(\w+)/, rgUnit = /[a-z]+$/, aUnits = 'em,ex,ch,rem,vw,vh,vmin,cm,mm,in,pt,pc,px,deg,grad,rad,turn,s,ms,Hz,kHz,dpi,dpcm,dppx'.split(','), rgValue = /:\s?(.*)\s?;\s?\}/, rgStr = /^'([^']+)'$/, sId = '#' + id, oStyles = document.styleSheets;
+	for (var i = 0, l = oStyles.length; i < l; i++) {
+		var oRules = oStyles[i].cssRules;
+		for (var j = 0, k = oRules.length; j < k; j++) {
+			var sRule = oRules[j].cssText, aMatchId = sRule.match(rgId);
+			if (aMatchId && aMatchId[0] == sId) {
+				var aKey = sRule.match(rgKey), aVal = sRule.match(rgValue);
+				if (aKey && aVal) {
+					var sKey = aKey[1], oVal = aVal[1], aUnit, aStr;
+					if (bNumbers && ( aUnit = oVal.match(rgUnit)) && aUnits.indexOf(aUnit[0]) !== -1) {
+						oVal = parseFloat(oVal);
+					} else if ( aStr = oVal.match(rgStr)) {
+						oVal = aStr[1];
+					}
+					oLess[sKey] = oVal;
+				}
+			}
+		}
+	}
+	return oLess;
+}
+
+
+</script>
+<script type="text/javascript">
+POST_REQUEST="POST";
+GET_REQUEST="GET";
+
+MAX_DISPLAYED_THUMBNAILS=5;
+
+LEFT = "Left";
+RIGHT = "Right";
+
+
+</script>
+<script type="text/javascript">
+POST_REQUEST="POST";
+GET_REQUEST="GET";
+
+MAX_DISPLAYED_THUMBNAILS=5;
+
+LEFT = "Left";
+RIGHT = "Right";
+
+
+</script>
+<script type="text/javascript">
+function Bar (pParameters) {
+	JsHtmlObject.call(this, null, "div", null);
+	this.addClass("RecommandationBar");
+	this.addClass("container-fluid");
+	
+	document.getElementById("barWrapper").appendChild(this.getHtmlObject());
+	
+	this.cParameters = pParameters;
+	this.cThumbnailContainer;
+	this.addContainer();
+	this.addArrow(LEFT);this.addArrow(RIGHT);
+	
+	var t = this;
+	Hammer(this.getHtmlObject(),{swipe_velocity: 0.3}).on("swiperight", function(e) {
+		t.move(LEFT);
+	});
+	Hammer(this.getHtmlObject(),{swipe_velocity: 0.3}).on("swipeleft", function(e) {
+		t.move(RIGHT);
+	});
+};
+Bar.prototype = new JsHtmlObject();
+Bar.prototype.constructor = Bar;
+
+Bar.prototype.addClass = function(pClassName) {
+	this.getHtmlObject().classList.add(pClassName);
+};
+
+Bar.prototype.addContainer = function(pClassName) {
+	this.cThumbnailContainer = new ThumbnailContainer(this,this.cParameters);
+};
+
+Bar.prototype.addArrow = function(pSens) {
+	var arrow = new Arrow(this,pSens);
+	if(pSens=="Right"){
+		$(this.getHtmlObject()).append(arrow.getHtmlObject());
+	} else {
+		$(this.getHtmlObject()).prepend(arrow.getHtmlObject());
+	}
+};
+
+Bar.prototype.move = function(pSens) {
+	this.cThumbnailContainer.move(pSens);
+};
+
+
+</script>
+<script type="text/javascript">
+function Thumbnail (pParent,pThumbNb,pParameters){
+	JsHtmlObject.call(this, pParent, "div", "thumb"+pThumbNb);
+	
+	this.getHtmlObject().style.width = (100/MAX_DISPLAYED_THUMBNAILS)+"%";
+	
+	this.cThumbId = pThumbNb;
+	this.cListeTags = new Array();	
+	this.cUrl;
+	this.cUrlid;
+	this.cImage;
+	this.cInfo;
+	this.cButton;
+	this.cParameters = this.parseParameters(pParameters);
+	this.addClass("Thumbnail");
+	this.addClass("container-fluid");
+	
+	this.addImage();
+	this.addInfo();
+ 	this.getHtmlObject().ondrop = function(e) {
+		drop(e);
+	};
+	this.getHtmlObject().ondragover = function(e) {
+		allowDrop(e);
+	}; 
+
+	var att = document.createAttribute("url");
+	this.getHtmlObject().setAttributeNode(att);
+	this.getHtmlObject().url = this.cUrl;
+	var attid = document.createAttribute("urlid");
+	this.getHtmlObject().setAttributeNode(attid);
+	this.getHtmlObject().urlid = this.cUrlid;
+};
+Thumbnail.prototype = new JsHtmlObject();
+Thumbnail.prototype.constructor = Thumbnail;
+
+Thumbnail.prototype.addClass = function(pClassName) {
+	this.getHtmlObject().classList.add(pClassName);
+};
+
+Thumbnail.prototype.addImage = function() {
+	this.cImage = new ThumbnailImage(this,this.cUrl);
+	this.getHtmlObject().appendChild(this.cImage.getHtmlObject());
+};
+
+Thumbnail.prototype.addInfo = function() {
+	this.cInfo = new ThumbnailInfo(this,this.cUrl,this.cListeTags);
+	this.getHtmlObject().appendChild(this.cInfo.getHtmlObject());
+};
+
+Thumbnail.prototype.addButton = function() {
+	this.cButton = new ThumbnailButton(this);
+	this.getHtmlObject().appendChild(this.cButton.getHtmlObject());
+};
+
+Thumbnail.prototype.parseParameters = function(pParam) {
+	var param = JSON.parse(pParam).parameters;
+	this.cUrl = param[0][this.cThumbId][0].url;
+	this.cUrlid= param[0][this.cThumbId][1].idurl;
+	/*var tags = param[0][this.cThumbId][1].tags;
+	for(i=0,len=tags.length;i<len;i++){
+		this.cListeTags.push(tags[i][i]);
+	}*/
+};
+</script>
+<script type="text/javascript">
+function ThumbnailContainer (pParent){
+	JsHtmlObject.call(this, null, "div", null);
+	
+	this.cThumbnails = new Array();
+	this.cNbThumbnails = 0;
+	this.cCurrentFirstThumbnails = 0;
+	
+	this.addClass("ThumbnailContainer");
+	this.addClass("container-fluid");
+	//this.addThumbnail();
+};
+ThumbnailContainer.prototype = new JsHtmlObject();
+ThumbnailContainer.prototype.constructor = ThumbnailContainer;
+
+ThumbnailContainer.prototype.addClass = function(pClassName) {
+	this.getHtmlObject().classList.add(pClassName);
+};
+
+ThumbnailContainer.prototype.move = function(pSens) {
+	if(pSens == RIGHT && this.cCurrentFirstThumbnails > 0) {
+		this.removeThumbnail(this.cCurrentFirstThumbnails+MAX_DISPLAYED_THUMBNAILS-1);
+		this.appendThumbnail(pSens,this.cCurrentFirstThumbnails-1);
+		this.cCurrentFirstThumbnails--;
+	} else if(pSens == LEFT && this.cCurrentFirstThumbnails+MAX_DISPLAYED_THUMBNAILS < this.cNbThumbnails){
+		this.removeThumbnail(this.cCurrentFirstThumbnails);
+		this.appendThumbnail(pSens,this.cCurrentFirstThumbnails+MAX_DISPLAYED_THUMBNAILS);
+		this.cCurrentFirstThumbnails++;
+	}
+};
+
+ThumbnailContainer.prototype.removeThumbnail = function(index) {
+	$(this.cThumbnails[index].getHtmlObject()).remove();
+};
+
+ThumbnailContainer.prototype.appendThumbnail = function(pSens,index) {
+	if(pSens == RIGHT) {
+		$(this.getHtmlObject()).prepend(this.cThumbnails[index].getHtmlObject());
+	} else {
+		$(this.getHtmlObject()).append(this.cThumbnails[index].getHtmlObject());
+	}
+};
+
+ThumbnailContainer.prototype.addThumbnail = function(param) {
+	var thumb = new Thumbnail(this,this.cNbThumbnails,param);
+	this.cThumbnails.push(thumb);
+	if(this.cNbThumbnails >= MAX_DISPLAYED_THUMBNAILS) {
+		this.getHtmlObject().removeChild(thumb.getHtmlObject());
+	}
+	this.cNbThumbnails++;
+};
+
+
+</script>
+<script type="text/javascript">
+function ThumbnailImage (pParent,pSource){
+	JsHtmlObject.call(this, pParent, "div",null);
+	
+	this.cSource = pSource;
+	this.cIframe = document.createElement("img");
+	this.cIframe.src = 'http://img.bitpixels.com/getthumbnail?code=43419&url='+this.cSource;
+	this.cIframe.scrolling = "no";
+	this.cIframe.sandbox = "allow-same-origin allow-scripts allow-popups allow-forms";
+	this.cIframe.classList.add("frame");
+	console.log(pSource);
+	this.getHtmlObject().appendChild(this.cIframe);
+
+/*	this.cIframe.ondrop = function(e) {
+		drop(e);
+	};
+	this.cIframe.ondragover = function(e) {
+		allowDrop(e);
+	}; */
+	
+	this.addClass("ThumbnailImage");
+	
+};
+ThumbnailImage.prototype = new JsHtmlObject();
+ThumbnailImage.prototype.constructor = ThumbnailImage;
+
+ThumbnailImage.prototype.addClass = function(pClassName) {
+	this.getHtmlObject().classList.add(pClassName);
+};
+
+
+
+</script>
+<script type="text/javascript">
+function ThumbnailInfo (pParent,pUrl,pListeTags){
+	JsHtmlObject.call(this, pParent, "div",null);
+	this.cListeTags = pListeTags;
+	this.cUrl = pUrl;
+	this.cInfoTitle;
+	this.cInfoTags;
+	
+	this.addClass("ThumbnailInfo");
+	this.addClass("container-fluid");
+	
+	this.addTitle(this.cUrl);
+};
+ThumbnailInfo.prototype = new JsHtmlObject();
+ThumbnailInfo.prototype.constructor = ThumbnailInfo;
+
+ThumbnailInfo.prototype.addClass = function(pClassName) {
+	this.getHtmlObject().classList.add(pClassName);
+};
+
+ThumbnailInfo.prototype.addTitle = function(pTitle) {
+	this.cInfoTitle = new ThumbnailInfoTitle(this,pTitle);
+	this.getHtmlObject().appendChild(this.cInfoTitle.getHtmlObject());
+};
+
+ThumbnailInfo.prototype.addTags = function() {
+	this.cInfoTags = new ThumbnailInfoTagContainer(this,this.cListeTags);
+	this.getHtmlObject().appendChild(this.cInfoTags.getHtmlObject());
+};
+
+ThumbnailInfo.prototype.getTitle = function() {
+	return this.cInfoTitle;
+};
+
+
+
+
+</script>
+<script type="text/javascript">
+
+function ThumbnailInfoTitle (pParent,pText){
+	JsHtmlObject.call(this, pParent, "div",null);
+	this.cOriginalUrl = pText;
+	this.cText = this.parseTitle(pText);
+	this.cTitle;
+	
+	this.addClass("ThumbnailInfoTitle");
+	this.addClass("container-fluid");
+	
+	this.addText(this.cText);
+};
+ThumbnailInfoTitle.prototype = new JsHtmlObject();
+ThumbnailInfoTitle.prototype.constructor = ThumbnailInfoTitle;
+
+ThumbnailInfoTitle.prototype.addClass = function(pClassName) {
+	this.getHtmlObject().classList.add(pClassName);
+};
+
+ThumbnailInfoTitle.prototype.addText = function(pText) {
+	title = document.createElement('h4');
+	link = document.createElement('a');
+	link.innerHTML = pText;
+	link.href = this.cOriginalUrl;
+	link.target = "_blank";
+	title.appendChild(link);
+	this.getHtmlObject().appendChild(title);
+};
+
+ThumbnailInfoTitle.prototype.parseTitle = function(url) {
+	return parseUri(url).host;
+};
+
+
+</script>
+<script type="text/javascript">
+function ThumbnailInfoTagContainer (pParent,pListeTags){
+	JsHtmlObject.call(this, pParent, "div",null);
+	
+	this.cListeTags = pListeTags;
+	
+	this.addClass("ThumbnailTagContainer");
+	this.addClass("container-fluid");
+	
+	this.addAllTags();
+	
+};
+ThumbnailInfoTagContainer.prototype = new JsHtmlObject();
+ThumbnailInfoTagContainer.prototype.constructor = ThumbnailInfoTagContainer;
+
+ThumbnailInfoTagContainer.prototype.addClass = function(pClassName) {
+	this.getHtmlObject().classList.add(pClassName);
+};
+
+ThumbnailInfoTagContainer.prototype.initTag = function(pTag) {	
+	return '<button type="button" class="btn">#'+pTag+'</button>';
+};
+
+ThumbnailInfoTagContainer.prototype.addAllTags = function() {
+	for(i=0,len = this.cListeTags.length;i<len;i++){
+		this.getHtmlObject().innerHTML += this.initTag(this.cListeTags[i])+"  ";
+	}
+};
+ThumbnailInfoTagContainer.prototype.addTag = function(pTexte) {
+	this.getHtmlObject().innerHTML += this.initTag(pTexte)+" ";
+};
+
+
+</script>
+<script type="text/javascript">
+function ThumbnailButton (pParent){
+	JsHtmlObject.call(this, pParent, "button",null);
+	this.getHtmlObject().innerHTML = "Done";
+	this.addClass("ThumbnailButton");
+	this.getHtmlObject().onclick = function(e){
+		done_callback(e);
+	};
+};
+ThumbnailButton.prototype = new JsHtmlObject();
+ThumbnailButton.prototype.constructor = ThumbnailButton;
+
+ThumbnailButton.prototype.addClass = function(pClassName) {
+	this.getHtmlObject().classList.add(pClassName);
+};
+</script>
 </section>
