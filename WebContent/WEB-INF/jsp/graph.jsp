@@ -119,6 +119,7 @@ System.out.println(json_links);
 			
 			.Thumbnail
 			{
+				display: inline-block;
 			    padding: 4px;
 			    margin-bottom: 20px;
 			    line-height: 1.42857143;
@@ -127,7 +128,7 @@ System.out.println(json_links);
 			    border-radius: 4px;
 			    -webkit-transition: all .2s ease-in-out;
 			    transition: all .2s ease-in-out; 
-			    width:170 px;
+			    width:170px;
 			}
 			
 			.ThumbnailImage
@@ -135,7 +136,9 @@ System.out.println(json_links);
 				margin-left: auto;
 			    margin-right: auto;
 			}
-			
+			.frame {
+				width:100% !important;
+			}
 			.ThumbnailInfo:hover, .ThumbnailInfo:focus, .ThumbnailInfo.active
 			{
 			    border-color: #428bca;
@@ -446,7 +449,6 @@ return c>=_s?n?"M0,"+i+"A"+i+","+i+" 0 1,1 0,"+-i+"A"+i+","+i+" 0 1,1 0,"+i+"M0,
 	    .attr("class", "node")
 	    .on("mouseover", mouseover)
 	    .on("mouseout", mouseout)
-	    //.on("click",onclick)
 	    .style("fill",function(d){return d.color;})
 	    .call(force.drag);
 
@@ -484,29 +486,57 @@ return c>=_s?n?"M0,"+i+"A"+i+","+i+" 0 1,1 0,"+-i+"A"+i+","+i+" 0 1,1 0,"+i+"M0,
 	}
 	
 	
-	$(".node").click(function(d) {
-		 var childNode = this.childNodes[1];
-		 var childNodeValue = childNode.nodeValue;
-		console.log("text node "+this.childNodes[1].textContent);
+	$(".node").dblclick(function(d) {
+		displayPopUp(this.childNodes[1].textContent);
 		}); 
 	
-	/* function onclick()
+	function displayPopUp(tagName)
+	{
+		xhr_obj = new XMLHttpRequest();
+		xhr_obj.onreadystatechange = function()
+		{
+			if (xhr_obj.readyState == 4 && xhr_obj.responseText) 
+			{
+				var result = xhr_obj.responseText;
+				console.log(result);
+				var listSites = new Array();
+				var resultsplit = result.split('@');
+				for (var i = 0; i < resultsplit.length -1; i++) 
+				{
+					listSites.push(encodeURI(resultsplit[i].substr(0,resultsplit[i].length)));
+				}
+				addUrlInPopUp(listSites);
+			}
+		}
+		xhr_obj.open('GET', 'http://localhost:8080/Jump/searchurl?name='+tagName, true);
+		xhr_obj.send(null);
+		
+	}
+	
+	function addUrlInPopUp(listSites)
 	{
 		var container = new ThumbnailContainer(null,null);
 		$('#popup_content').prepend(container.getHtmlObject());
-		var url='https://www.google.fr';
-		var iduri="0";
-		var count="0";
-		count = '"'+count+'"';
-		url = '"'+url+'"';
-		iduri= '"'+iduri+'"';
-		var parameters = '{"parameters":['+
-		'{'+count+':[{"url":'+url+'},{"idurl":'+iduri+'}]}'+
-		']}';
-		container.addThumbnail(parameters);
+		console.log(listSites);
+		for (var i = 0; i < listSites.length; i++) 
+		{
+			var url=listSites[i];
+			var iduri=String(i);
+			var count=String(i);
+			count = '"'+count+'"';
+			url = '"'+url+'"';
+			iduri= '"'+iduri+'"';
+		
+			var parameters = '{"parameters":['+
+			'{'+count+':[{"url":'+url+'},{"idurl":'+iduri+'}]}'+
+			']}';
+			
+			container.addThumbnail(parameters);
+		}
+	
 		loading(); 
-		setTimeout(function(){loadPopup();}, 500); 
-	}  */
+		setTimeout(function(){loadPopup();}, 500);
+	}
 
 </script>
 <script>
@@ -874,11 +904,6 @@ Thumbnail.prototype.addButton = function() {
 Thumbnail.prototype.parseParameters = function(pParam) {
 	var param = JSON.parse(pParam).parameters;
 	this.cUrl = param[0][this.cThumbId][0].url;
-	this.cUrlid= param[0][this.cThumbId][1].idurl;
-	/*var tags = param[0][this.cThumbId][1].tags;
-	for(i=0,len=tags.length;i<len;i++){
-		this.cListeTags.push(tags[i][i]);
-	}*/
 };
 </script>
 <script type="text/javascript">
