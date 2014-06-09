@@ -593,6 +593,8 @@ if(popupStatus == 1) {
 	$("#toPopup").fadeOut("normal");  
 	$("#backgroundPopup").fadeOut("normal");  
 	popupStatus = 0; 
+	$(".ThumbnailContainer").remove();
+
 }
 }
 </script>		
