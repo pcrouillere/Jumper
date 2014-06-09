@@ -1053,11 +1053,11 @@ ThumbnailInfoTitle.prototype.addClass = function(pClassName) {
 
 ThumbnailInfoTitle.prototype.addText = function(pText) {
 	title = document.createElement('h4');
-	link = document.createElement('a');
-	link.innerHTML = pText;
-	link.href = this.cOriginalUrl;
-	link.target = "_blank";
-	title.appendChild(link);
+	link2 = document.createElement('a');
+	link2.innerHTML = pText;
+	link2.href = this.cOriginalUrl;
+	link2.target = "_blank";
+	title.appendChild(link2);
 	this.getHtmlObject().appendChild(title);
 };
 
