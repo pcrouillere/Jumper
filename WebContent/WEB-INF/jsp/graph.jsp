@@ -446,7 +446,7 @@ return c>=_s?n?"M0,"+i+"A"+i+","+i+" 0 1,1 0,"+-i+"A"+i+","+i+" 0 1,1 0,"+i+"M0,
 	    .attr("class", "node")
 	    .on("mouseover", mouseover)
 	    .on("mouseout", mouseout)
-	    .on("click",onclick)
+	    //.on("click",onclick)
 	    .style("fill",function(d){return d.color;})
 	    .call(force.drag);
 
@@ -483,7 +483,14 @@ return c>=_s?n?"M0,"+i+"A"+i+","+i+" 0 1,1 0,"+-i+"A"+i+","+i+" 0 1,1 0,"+i+"M0,
 	      .attr("r", function(d){return(d.r*35);});
 	}
 	
-	function onclick()
+	
+	$(".node").click(function(d) {
+		 var childNode = this.childNodes[1];
+		 var childNodeValue = childNode.nodeValue;
+		console.log("text node "+this.childNodes[1].textContent);
+		}); 
+	
+	/* function onclick()
 	{
 		var container = new ThumbnailContainer(null,null);
 		$('#popup_content').prepend(container.getHtmlObject());
@@ -499,7 +506,7 @@ return c>=_s?n?"M0,"+i+"A"+i+","+i+" 0 1,1 0,"+-i+"A"+i+","+i+" 0 1,1 0,"+i+"M0,
 		container.addThumbnail(parameters);
 		loading(); 
 		setTimeout(function(){loadPopup();}, 500); 
-	}
+	}  */
 
 </script>
 <script>
