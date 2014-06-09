@@ -43,6 +43,11 @@
 {
     border-color: #428bca;
 }
+
+.frame
+{
+	width:100% !important;
+}
 .img
 {
 	overflow:hidden;
@@ -94,6 +99,14 @@ button {
     color: #fff;
     background-color: #4A8B87;
     border-color: #4A8B87;
+}
+.ThumbnailButton {
+	border-color: #C5252B;
+    background-color: #C5252B;
+    cursor:pointer;
+}
+.ThumbnailTag {
+    cursor:pointer;
 }
 button:hover, button:focus, button:active, button.active, .open .dropdown-toggle.button {
     color: #fff;
@@ -625,8 +638,7 @@ function ThumbnailContainer (pParent){
 	this.cCurrentFirstThumbnails = 0;
 	
 	this.addClass("ThumbnailContainer");
-	this.addClass("container-fluid");
-	//this.addThumbnail();
+	this.addClass("container-fluid"); 
 };
 ThumbnailContainer.prototype = new JsHtmlObject();
 ThumbnailContainer.prototype.constructor = ThumbnailContainer;
@@ -683,12 +695,12 @@ function ThumbnailImage (pParent,pSource){
 	console.log(pSource);
 	this.getHtmlObject().appendChild(this.cIframe);
 
-/*	this.cIframe.ondrop = function(e) {
-		drop(e);
+	this.getHtmlObject().ondrop = function(e) {
+		dropFrame(e);
 	};
-	this.cIframe.ondragover = function(e) {
+	this.getHtmlObject().ondragover = function(e) {
 		allowDrop(e);
-	}; */
+	}; 
 	
 	this.addClass("ThumbnailImage");
 	
@@ -716,6 +728,12 @@ function ThumbnailInfo (pParent,pUrl,pListeTags){
 	
 	this.addTitle(this.cUrl);
 	this.addTags();
+	this.getHtmlObject().ondrop = function(e) {
+		dropInfo(e);
+	};
+	this.getHtmlObject().ondragover = function(e) {
+		allowDrop(e);
+	}; 
 };
 ThumbnailInfo.prototype = new JsHtmlObject();
 ThumbnailInfo.prototype.constructor = ThumbnailInfo;
@@ -738,9 +756,6 @@ ThumbnailInfo.prototype.getTitle = function() {
 	return this.cInfoTitle;
 };
 
-
-
-
 </script>
 <script type="text/javascript">
 
@@ -753,7 +768,7 @@ function ThumbnailInfoTitle (pParent,pText){
 	this.addClass("ThumbnailInfoTitle");
 	this.addClass("container-fluid");
 	
-	this.addText(this.cText);
+	this.addText(this.cText); 
 };
 ThumbnailInfoTitle.prototype = new JsHtmlObject();
 ThumbnailInfoTitle.prototype.constructor = ThumbnailInfoTitle;
@@ -843,6 +858,7 @@ function ThumbnailTag (pParent,pText){
 		tagList.splice(index,1);
 		$(this).remove();
 	});
+	
 	
 };
 ThumbnailTag.prototype = new JsHtmlObject();
@@ -997,16 +1013,8 @@ function drag(ev,id)
 	console.log("drag function value: "+id);
 	ev.dataTransfer.setData("tag_names",id);
 }
-
-function drop(ev)
+function handleDrop(ev,tagContainer,tagValue,srcImg)
 {
-	var tagValue = ev.dataTransfer.getData("tag_names");
-	var srcImg = ev.srcElement;
-	var tagContainer = $($(srcImg).children()[1]).children()[1];
-	//var tagContainer = $(srcImg).children()[1];
-	//var contTag = document.getElementsByClassName('ThumbnailTagContainer');
-	//tagContainer.innerHTML += '<button type="button" class="btn">#'+tagValue+'</button>';
-	
 	if(srcImg.tagList == null) {
 		var array = new Array();
 		var att = document.createAttribute("tagList");
@@ -1016,8 +1024,42 @@ function drop(ev)
 	if(srcImg.tagList.indexOf("#"+tagValue)==-1) {
 		srcImg.tagList.push("#"+tagValue);
 		var tag = new ThumbnailTag(null,tagValue);
+		$(tag).remove();
 		$(tagContainer).append(tag.getHtmlObject());
 	}
+}
+function drop(ev)
+{
+	var tagValue = ev.dataTransfer.getData("tag_names");
+	var srcImg = ev.srcElement;
+	var tagContainer = $($(srcImg).children()[1]).children()[1];
+	handleDrop(ev,tagContainer,tagValue,srcImg);
+}
+
+function dropFrame(ev)
+{
+	var tagValue = ev.dataTransfer.getData("tag_names");
+	var Thumbnail = $(ev.srcElement).parent().parent()[0];
+	var tagContainer = $($(Thumbnail).children()[1]).children()[1];
+	handleDrop(ev,tagContainer,tagValue,Thumbnail);
+	ev.stopPropagation();
+	ev.cancelBubble = true;
+	ev.preventDefault();
+}
+
+function dropInfo(ev)
+{
+	ev.stopPropagation();
+	ev.cancelBubble = true;
+	ev.preventDefault();
+
+}
+function dropInfoTitle(ev)
+{
+	ev.stopPropagation();
+	ev.cancelBubble = true;
+	ev.preventDefault();
+
 }
 
 function done_callback(ev)
