@@ -75,7 +75,10 @@ public class User extends Dao {
 		return null;
 	}
 	
-
+	public static void addNewUser(String email, String password, String name) throws SQLException{
+		String req = "Insert into jpUser(userMail, userPassword, userName) values('"+email+"','"+password+"','"+name+"')";
+        Dao.freeRequestUpdate(req, null);
+	}
 	
 	/* Cr�er un nouveau user */
 	private User() {

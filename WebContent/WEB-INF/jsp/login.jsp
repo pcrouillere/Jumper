@@ -14,8 +14,9 @@
 <body>
 
 	<div id="login">
-
-		<h2><span class="fontawesome-lock"></span>Sign In</h2>
+		<table>
+		<td>
+		<h2><span class="fontawesome-lock"></span>Se Connecter</h2>
 
 		<form action="?page=login" method="POST">
 
@@ -27,11 +28,28 @@
 				<p><label for="password">Mot De Passe</label></p>
 				<p><input type="password" name="password" id="password" value="password" onBlur="if(this.value=='')this.value='password'" onFocus="if(this.value=='password')this.value=''"></p> <!-- JS because of IE support; better: placeholder="password" -->
 
-				<p><input type="submit" value="Sign In"></p>
+				<p><input type="submit" value="Connexion"></p>
 
 			</fieldset>
 
 		</form>
+		
+		</td>
+		<td></td>
+		<td>
+		<h2><span class="fontawesome-lock"></span>Inscription</h2>
+
+		<form action="?page=inscription" method="POST">
+
+			<fieldset>
+
+				<p><input type="submit" value="C'est parti ! "></p>
+
+			</fieldset>
+
+		</form>
+		</td>
+		</table>
 
 	</div> <!-- end login -->
 
