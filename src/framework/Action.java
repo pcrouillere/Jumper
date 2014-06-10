@@ -109,7 +109,7 @@ public class Action
 		User user = User.getInstance();
 		List<Tag> tags = user.getAllTag();
 		int nbTags = tags.size();
-		List<Url> urls = user.getAllUrl();
+		List<Url> urls = user.getAllUrlOrderBy();
 		int nbUrls = urls.size();
 		List<Url> untaggedUrls = user.getUntaggedUrl();
 		int nbUntaggedUrls = untaggedUrls.size();
