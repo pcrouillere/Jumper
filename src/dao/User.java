@@ -105,6 +105,9 @@ public class User extends Dao {
 		getUntaggedUrl();
 	}
 	
+	public void setuUrls(List<Url> uUrls) {
+		this.uUrls = uUrls;
+	}
 	/* Fonction qui retourne le tag recherch� en fonction de son ID */
 	public Tag getTagById(int id) {
 		for (int i=0; i< uTags.size(); i++) {
@@ -176,7 +179,7 @@ public class User extends Dao {
 		}
 	}
 	
-	private void addAllUrl() {
+	public void addAllUrl() {
 		ResultSet resultat;
 		Map<String, String> attr = new HashMap<String, String>();
 		attr.put("urlUserId", Integer.toString(this.uId));
@@ -317,6 +320,14 @@ public class User extends Dao {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		
+		String requeteSqlDelete="DELETE FROM jpUrl WHERE urlId="+urlId;
+		try {
+			Dao.freeRequestUpdate(requeteSqlDelete, null);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
 	}
 	
 	/* Getter & Setter */

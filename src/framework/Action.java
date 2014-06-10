@@ -80,6 +80,8 @@ public class Action
 		user.removeUrlFromBdd(urlId);
 		user.setuTagMap(null);
 		user.addAllMap();
+		user.setuUrls(null);
+		user.addAllUrl();
 		return req;	
 	}
 	
