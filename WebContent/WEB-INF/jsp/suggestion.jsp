@@ -5,9 +5,11 @@ html {
 	-ms-text-size-adjust: 100%;
 	-webkit-text-size-adjust: 100%
 }
+
 body {
 	margin: 0
 }
+
 article, aside, details, figcaption, figure, footer, header, hgroup, main, nav, section, summary {
 	display: block
 }
@@ -4971,7 +4973,7 @@ button.close {
 
 .RecommandationBar
 {
-  	  background:black;
+  	  background:#C5252B;
   	  width:100%;
   	  height:170px;
   	  border-radius:5px;
@@ -4981,9 +4983,9 @@ button.close {
 
 .Arrow 
 {
-        background:grey;
+        background:#4A8B87;
         width:5%;
-        height:@default-thumbnail-height;
+        height:150px;
         float:left;
         cursor:pointer;
 }
@@ -5045,14 +5047,10 @@ button.close {
 
 .frame
 {
-        overflow:hidden;
-        width:400%;
-        height:400%;
-        position:relative;
-        -webkit-transform-origin: 0 0;
-        overflow: hidden;
-        .scale(0.25);
+	width:100% !important;
 }
+
+
           
 .ThumbnailInfo
 {
@@ -5086,9 +5084,10 @@ button.close {
 
 button
 {
-		background-color: #5cb85c;
-		border-color: #4cae4c;
+		background-color: #4A8B87;
+		border-color: #4A8B87;
 		font-weight:bold;
+		color:white;
 }
 
 .container-fluid
@@ -5463,8 +5462,8 @@ function ThumbnailImage (pParent,pSource){
 	JsHtmlObject.call(this, pParent, "div",null);
 	
 	this.cSource = pSource;
-	this.cIframe = document.createElement("iframe");
-	this.cIframe.src = this.cSource;
+	this.cIframe = document.createElement("img");
+	this.cIframe.src = 'http://img.bitpixels.com/getthumbnail?code=43419&url='+this.cSource;
 	this.cIframe.scrolling = "no";
 	this.cIframe.sandbox = "allow-same-origin allow-scripts allow-popups allow-forms";
 	this.cIframe.classList.add("frame");
