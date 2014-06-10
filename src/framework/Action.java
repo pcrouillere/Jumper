@@ -218,10 +218,10 @@ public class Action
 		}
 		coloration(nodes, links);
 		
-		System.out.println("nodes");
-		System.out.println(nodes.toString());
-		System.out.println("links");
-		System.out.println(links.toString());
+		//System.out.println("nodes");
+		//System.out.println(nodes.toString());
+		//System.out.println("links");
+		//System.out.println(links.toString());
 		
 		
 		req.setAttribute("json_links", links.toString() );
@@ -236,8 +236,9 @@ public class Action
 			node source = nodes.get(edges.get(i).getSource());
 			node target = nodes.get(edges.get(i).getTarget());
 			if(source.getColorId() != target.getColorId()){
+				int oldColorId = target.getColorId();
 				for(int j = 0; j<nodes.size();j++){
-					if(nodes.get(j).getColorId()==target.getColorId()){
+					if(nodes.get(j).getColorId() == oldColorId){
 						nodes.get(j).setColorId(source.getColorId());
 					}
 				}
