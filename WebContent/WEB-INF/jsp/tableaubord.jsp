@@ -305,9 +305,9 @@ function searchTag(){
 </script>
 <section>
 	<ul id="menu_horizontal">
-		<li><%=nbTags.intValue()%> tags</li>
-		<li><%=nbUrls.intValue()%> favoris</li>
-		<li><%=nbUntaggedUrls.intValue()%> favoris a trier</li>
+		<li><a href="?page=tableaubord"><%=nbTags.intValue()%> tags</a></li>
+		<li><a href="?page=accueil"><%=nbUrls.intValue()%> favoris</a></li>
+		<li><a href="?page=ajoutertag"><%=nbUntaggedUrls.intValue()%> favoris a trier</a></li>
 	</ul>
 	<div>
 		<input type ="text" id="rech_rapide" placeholder="Rechercher" onkeyup = "searchTag()"/>	

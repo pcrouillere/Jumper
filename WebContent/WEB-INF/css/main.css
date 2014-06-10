@@ -308,6 +308,11 @@ header h2 {
 	padding: 20px 26px;
 }
 
+ul#menu_horizontal li a {
+	text-decoration: none;
+	color: #C5252B;
+}
+
 ul#menu_horizontal li {
 	display: inline;
 	padding: 0 0.5em; /* put some space between the text */
