@@ -33,15 +33,11 @@
 		<ul id="nav">
 			<li><a href="#"><%=user.getuName() %></a>
 				<ul>
-					<li><a href="#">Recherches</a>
-						<ul>
-							<li><a href="#">Simple</a></li>
-							<li><a href="#">Avancee</a></li>
-						</ul></li>
+					<li><a href="?advancedsearch">Recherches</a></li>
 					<li><a href="?page=tableaubord">Tableau De Bord</a></li>
 					<li><a href="?page=graph">Graph View</a></li>
 					<li><a href="?page=ajoutertag">Trier Nouveaux Favoris</a></li>
-					<li><a href="?page=suggestion">suggestion</a></li>
+					<li><a href="?page=suggestion">Suggestion</a></li>
 					<li><a href="?page=deconnexion">Deconnexion</a></li>
 				</ul></li>
 		</ul>
