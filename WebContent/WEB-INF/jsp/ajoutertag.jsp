@@ -501,24 +501,14 @@ function GET_LESS_VARIABLES(id, parseNumbers) {
 POST_REQUEST="POST";
 GET_REQUEST="GET";
 
-MAX_DISPLAYED_THUMBNAILS=5;
+MAX_DISPLAYED_THUMBNAILS=100000;
 
 LEFT = "Left";
 RIGHT = "Right";
 
 
 </script>
-<script type="text/javascript">
-POST_REQUEST="POST";
-GET_REQUEST="GET";
 
-MAX_DISPLAYED_THUMBNAILS=5;
-
-LEFT = "Left";
-RIGHT = "Right";
-
-
-</script>
 <script type="text/javascript">
 function Bar (pParameters) {
 	JsHtmlObject.call(this, null, "div", null);
@@ -570,7 +560,7 @@ Bar.prototype.move = function(pSens) {
 function Thumbnail (pParent,pThumbNb,pParameters){
 	JsHtmlObject.call(this, pParent, "div", "thumb"+pThumbNb);
 	
-	this.getHtmlObject().style.width = (100/MAX_DISPLAYED_THUMBNAILS)+"%";
+	this.getHtmlObject().style.width = (100/5)+"%";
 	
 	this.cThumbId = pThumbNb;
 	this.cListeTags = new Array();	
