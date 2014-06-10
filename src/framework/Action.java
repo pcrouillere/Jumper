@@ -207,6 +207,19 @@ public class Action {
 
 		return req;
 	}
+	
+	public HttpServletRequest inscription(HttpServletRequest req,
+			HttpServletResponse response) throws SQLException {
+		String name = req.getParameter("name");
+		String email = req.getParameter("email");
+		String mdp = req.getParameter("password");
+		if(name!=null && email!=null &&mdp!=null){
+			//ajouter l'utilisateur a la base de données
+			User.addNewUser(email, mdp, name);
+			parent.redirect("login", true);
+		}
+		return req;
+	} 
 
 	public HttpServletRequest graph(HttpServletRequest req,
 			HttpServletResponse response) throws SQLException {

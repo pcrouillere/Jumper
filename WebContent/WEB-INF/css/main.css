@@ -237,6 +237,10 @@ input {
 	width: 400px;
 }
 
+#login td{
+ padding-left:50px;
+ }
+
 #login h2 {
 	background-color: #C5252B;
 	-webkit-border-radius: 20px 20px 0 0;
@@ -274,7 +278,7 @@ input {
 	border-radius: 3px;
 }
 
-#login fieldset input[type="email"],#login fieldset input[type="password"]{
+#login fieldset input[type="email"],#login fieldset input[type="password"], #login fieldset input[type="name"]{
 	background-color: #eee;
 	color: #777;
 	padding: 4px 10px;

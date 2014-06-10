@@ -32,8 +32,8 @@ public class Url extends Dao {
 	}
 	
 	public void addUrlToDBB() throws SQLException{		
-		
-        Dao.freeRequestUpdate("Insert into jpUrl(urlUserId, urlUri, urlTitle, urlNbVisited) values("+this.uUserId+",'"+this.uUri +"','"+this.uTitle +"',"+ this.uVisited +")", null);
+		String req = "Insert into jpUrl(urlUserId, urlUri, urlTitle, urlNbVisited) values("+this.uUserId+",'"+this.uUri +"','"+this.uTitle +"',"+ this.uVisited +")";
+        Dao.freeRequestUpdate(req, null);
 	}
 	
 	public int getIdFromBDD(){
