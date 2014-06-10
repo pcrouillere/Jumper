@@ -453,16 +453,12 @@ public class Action {
 	 * @param req	: HttpServletRequest **/
 	
 	public HttpServletRequest advancedsearch(HttpServletRequest req, HttpServletResponse response){
-		User user = User.getInstance();
-		List<Tag> tags = user.getAllTag();
-		int nbTags = tags.size();
-		List<Url> urls = user.getAllUrl();
-		int nbUrls = urls.size();
-		List<Url> untaggedUrls = user.getUntaggedUrl();
-		int nbUntaggedUrls = untaggedUrls.size();
-		Map<Tag, List<Url>> mapTagUrls = new HashMap<Tag, List<Url>>();
-		
-		String tagoper = req.getParameter("tagoper");
+		User user = User.getInstance(); 
+		List<Tag> allTags = user.getAllTag();
+		List<Url> allUrls = user.getUntaggedUrl();
+		req.setAttribute("tags", allTags);
+		req.setAttribute("untaggedurls", allUrls);
+		//req.setAttribute("script", script);
 		return req;
 	
 	}
