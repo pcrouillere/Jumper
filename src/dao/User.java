@@ -30,8 +30,9 @@ public class User extends Dao {
 		instance = null;
 	}
 	public static User getInstance(){
-		if (instance == null)
-			instance = new User();
+		if (instance == null) {
+			return null;
+			}
 		return instance;
 	}
 	
