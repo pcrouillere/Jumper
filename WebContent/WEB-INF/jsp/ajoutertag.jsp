@@ -1161,7 +1161,7 @@ function sendRequestToRestServer(userid,url,sender,theme)
 	httpRequest.onreadystatechange = function() 
 	{ 
 	};
-	httpRequest.open("GET", "http://192.168.1.19:8182/ServerRest?userid="+userid+"&url="+url+"&list="+sender+"&theme="+theme+"&op="+1, true); 
+	httpRequest.open("POST", "http://192.168.43.8:8182/ServerRest?userid="+"jack"+"&url="+url+"&list="+sender+"&theme="+theme+"&op="+0, true); 
 	httpRequest.send();  
 }
 
