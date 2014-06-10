@@ -9,10 +9,7 @@
 <%
 	List<Tag> tags = (List<Tag>) request.getAttribute("tags");
 	List<Url> urls = (List<Url>) request.getAttribute("urls");
-	Integer nbTags = (Integer) request.getAttribute("nbTags");
-	Integer nbUrls = (Integer) request.getAttribute("nbUrls");
-	Integer nbUntaggedUrls = (Integer) request.getAttribute("nbUntaggedUrls");
-    Map<Tag, List<Url>> mapTagUrls = (Map<Tag, List<Url>>) request.getAttribute("mapTagUrls");
+
 %>
 
 
@@ -30,46 +27,402 @@
   </head>
   <body>
 				
-				<div>
-				<center>
-				<div>
+			
+	  
+	  <section>
+	  
+<section>
+
+<style>
+.ThumbnailContainer
+{
+	width:100%;
+    margin : 0 auto;
+}
+
+.Thumbnail
+{
+	display: inline-block;
+    padding: 4px;
+    margin-bottom: 20px;
+    line-height: 1.42857143;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    -webkit-transition: all .2s ease-in-out;
+    transition: all .2s ease-in-out; 
+    width:170 px;
+}
+
+.ThumbnailImage
+{
+	margin-left: auto;
+    margin-right: auto;
+}
+
+.ThumbnailInfo:hover, .ThumbnailInfo:focus, .ThumbnailInfo.active
+{
+    border-color: #428bca;
+}
+.frame
+{
+	overflow:hidden;
+	width:100%;
+	height:100%;
+	position:relative;
+	-webkit-transform-origin: 0 0;
+	overflow: hidden;
+	scale:0.001;
+}
+
+.ThumbnailInfo
+{
+	width:100%;
+	height:25%;
+	border-top:1px solid red;
+}
+
+.ThumbnailInfoTitle
+{
+	padding: 9px;
+    color: #4A8B87;
+}
+
+.container-fluid
+{
+  padding-left: 0px;
+  padding-right: 0px;
+}
+
+.btn 
+{
+	  padding: 0px;
+}
+
+.ThumbnailTagContainer
+{
+    height:60%;
+    margin:0 auto;
+}
+
+
+button {
+    color: #fff;
+    background-color: #4A8B87;
+    border-color: #4A8B87;
+}
+button:hover, button:focus, button:active, button.active, .open .dropdown-toggle.button {
+    color: #fff;
+    background-color: #3276b1;
+    border-color: #285e8e;
+}
+button:active, button.active, .open .dropdown-toggle.button{
+    background-image: none;
+}
+button.disabled, .button[disabled], fieldset[disabled] .button, .button.disabled:hover, .button[disabled]:hover, fieldset[disabled] .btn-primary:hover, .btn-primary.disabled:focus, .btn-primary[disabled]:focus, fieldset[disabled] .btn-primary:focus, .btn-primary.disabled:active, .btn-primary[disabled]:active, fieldset[disabled] .btn-primary:active, .btn-primary.disabled.active, .btn-primary[disabled].active, fieldset[disabled] .btn-primary.active {
+    background-color: #428bca;
+    border-color: #357ebd;
+}
+button.badge {
+    color: #428bca;
+    background-color: #fff;
+}
+
+#all_links
+{
+	width:100%;
+	height:380px;
+	position:relative;
+	margin:0 auto;
+}
+
+.panel {
+    margin-bottom: 20px;
+    background-color: #fff;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
+    box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
+}
+
+.panel-default {
+    border-color: #ddd;
+}
+.panel-default>.panel-heading {
+    color: #333;
+    background-color: #4A8B87;
+    border-color: #ddd;
+}
+.panel-default>.panel-heading+.panel-collapse .panel-body {
+    border-top-color: #ddd;
+}
+.panel-default>.panel-footer+.panel-collapse .panel-body {
+    border-bottom-color: #ddd;
+}
+.panel-body {
+  padding: 15px;
+}
+.panel-heading {
+  padding: 6px 15px;
+  border-bottom: 2px solid transparent;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+
+.panel-title {
+  margin-top: 20;
+  margin-bottom: 0;
+  font-size: 16px;
+  color: white;
+}
+.panel-title > a {
+  color: inherit;
+}
+
+.input-group {
+    position: relative;
+    display: table;
+    border-collapse: separate;
+}
+.input-group[class*=col-] {
+    float: none;
+    padding-left: 0;
+    padding-right: 0;
+}
+.input-group .form-control {
+    position: relative;
+    z-index: 2;
+    float: left;
+    width: 86%;
+    margin-bottom: 0;
+}
+
+.input-group-addon, .input-group-btn, .input-group .form-control {
+    display: table-cell;
+}
+
+.input-group-addon:not(:first-child):not(:last-child), .input-group-btn:not(:first-child):not(:last-child), .input-group .form-control:not(:first-child):not(:last-child) {
+    border-radius: 0;
+}
+
+.input-group-addon, .input-group-btn {
+    width: 1%;
+    white-space: nowrap;
+    vertical-align: middle;
+}
+.input-group-addon {
+    padding: 6px 12px;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1;
+    color: white;
+    text-align: center;
+    background-color: #4A8B87;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+.input-group-addon input[type=radio], .input-group-addon input[type=checkbox] {
+    margin-top: 0;
+}
+
+.input-group .form-control:first-child, .input-group-addon:first-child, .input-group-btn:first-child>.btn, .input-group-btn:first-child>.btn-group>.btn, .input-group-btn:first-child>.dropdown-toggle, .input-group-btn:last-child>.btn:not(:last-child):not(.dropdown-toggle), .input-group-btn:last-child>.btn-group:not(:last-child)>.btn {
+    border-bottom-right-radius: 0;
+    border-top-right-radius: 0;
+}
+
+.input-group-addon:first-child {
+    border-right: 0;
+}
+
+.input-group .form-control:last-child, .input-group-addon:last-child, .input-group-btn:last-child>.btn, .input-group-btn:last-child>.btn-group>.btn, .input-group-btn:last-child>.dropdown-toggle, .input-group-btn:first-child>.btn:not(:first-child), .input-group-btn:first-child>.btn-group:not(:first-child)>.btn {
+    border-bottom-left-radius: 0;
+    border-top-left-radius: 0;
+}
+
+.input-group-addon:last-child {
+    border-left: 0;
+}
+
+.input-group-btn {
+    position: relative;
+    font-size: 0;
+    white-space: nowrap;
+}
+
+.input-group-btn>.btn {
+    position: relative;
+}
+.input-group-btn>.btn+.btn {
+    margin-left: -1px;
+}
+.input-group-btn>.btn:hover, .input-group-btn>.btn:focus, .input-group-btn>.btn:active {
+    z-index: 2;
+}
+.input-group-btn:first-child>.btn, .input-group-btn:first-child>.btn-group {
+    margin-right: -1px;
+}
+.input-group-btn:last-child>.btn, .input-group-btn:last-child>.btn-group {
+    margin-left: -1px;
+}
+
+.form-control {
+    display: block;
+    height: 34px;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #555;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+    -webkit-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+    transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+}
+
+#tag_names
+{
+	display : block;
+	width: 500px;
+	height:450px;
+	right: 0px;
+    padding: 10px 15px;
+    margin-bottom: -1px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+}
+#tag_names:first-child {
+    border-top-right-radius: 4px;
+    border-top-left-radius: 4px;
+}
+#tag_names:last-child {
+    margin-bottom: 0;
+    border-bottom-right-radius: 4px;
+    border-bottom-left-radius: 4px;
+}
+#tag_names p {
+    color: #555;
+}
+
+#tag_names p:hover, #tag_names p:focus {
+    text-decoration: white;
+    text-color:white;
+    background-color: #4A8B87;
+    border-bottom-right-radius: 4px;
+    border-bottom-left-radius: 4px;
+    border-top-right-radius: 4px;
+    border-top-left-radius: 4px;
+}
+
+
+input[type=button] {
+    border-radius: 8px;
+  
+    width: 500px;
+    height:40px;
+    font-family: Tahoma;
+    background: #f4f4f4;
+    /* Old browsers */
+    background: -moz-linear-gradient(top, #f4f4f4 1%, #ededed 100%);
+    /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(1%, #f4f4f4), color-stop(100%, #ededed));
+    /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top, #f4f4f4 1%, #ededed 100%);
+    /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top, #f4f4f4 1%, #ededed 100%);
+    /* Opera 11.10+ */
+    background: -ms-linear-gradient(top, #f4f4f4 1%, #ededed 100%);
+    /* IE10+ */
+    background: linear-gradient(to bottom, #f4f4f4 1%, #ededed 100%);
+    /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#f4f4f4', endColorstr='#ededed', GradientType=0);
+    /* IE6-9 */
+    top: -10;
+   font-weight: bold;
+    font-face: 'Comic Sans MS';
+     font-size: 50; 
+     color: blue; 
+     background-color: #FFFFC0; 
+     border: 3pt ridge lightgrey" ;
+     
+    
+}
+
+</style>
+
+
+<script>
+function addVisitToUrl(id){ 
+	if (window.XMLHttpRequest) { 
+	httpRequest = new XMLHttpRequest(); 
+
+	} 
+	else if (window.ActiveXObject) { 
+	httpRequest = new ActiveXObject("Microsoft.XMLHTTP"); 
+	}	
+	if (!httpRequest) { 
+	alert('Abandon :Impossible de créer une instance XMLHTTP'); 
+	return false; 
+	} 
+
+	httpRequest.onreadystatechange = function() { 
+	};
+	
+	httpRequest.open("GET", "?page=addvisit&id="+id, false); 
+	httpRequest.send(null);  
+	}
+
+
+</script>
+
+
+
+	  
+	<div id="content_page">
+		<div class="accueil" id ="list_sites">	
+			
+		</div>
+	</div>
+	<aside>
+		<div id="tag_list">
+			<div class="panel panel-default" style="position:absolute; left: -300px; height:568px ">
+				  <div class="panel-heading">
+				    <h3 class="panel-title"><input  type="button" name ="Jump" value="Jump" onclick="searchTag()" ></h3>
+				  </div>
+				    <div class="panel-body" style="height:550px; width: 500px;">
+						<div id="tag_names" style="height:510px"/>	
+														
+						
+		<div style="position: relative;">
   <canvas id="tempCanvas" width="500" height="500" style="display:none;"></canvas>
   <canvas id="layer2" width="500" height="500" 
-   style="position:  relative; left: 0px; top: 0px; z-index: 0;"></canvas>
+   style="position: absolute; left: 0px; top: 0px; z-index: 0;"></canvas>
   <canvas id="layer3" width="500" height="500" 
-   style="position:  relative; left: 0px; top: 0px; z-index: 1;"></canvas>
+   style="position: absolute; left: 0px; top: 0px; z-index: 1;"></canvas>
   <canvas id="layer1" width="500" height="500" 
-   style="position:  relative; left: 0px; top: 0px; z-index: 2;"></canvas>
-  <div id="container"  style="position:  relative; left: 0px; top: 0px; z-index: 4;"></div>
+   style="position: absolute; left: 0px; top: 0px; z-index: 2;"></canvas>
+  <div id="container"  style="position: absolute; left: 0px; top: 0px; z-index: 4;"></div>
   <canvas id="trush"  width="500" height="500" 
-   style="position:  relative; left:1000px ; top:0px; z-index: 3;"></canvas>
-  </div>
-					</center>
-				
-						
-							<div class="input-group">
-							    <center>
-							  <span class="input-group-addon">Add tags</span>
-							  <input type="text" class="form-control" placeholder="Tag name" id="tag_name">
-							  	   </center>
-							  <center>
-							  <form name="search" onsubmit="searchTag()">
-								<fieldset>
-									<p><input type="button" name ="Jump" value="Jump" onclick="searchTag()"></p>
-								</fieldset>
-							   </form>
-							   </center>
-							</div>
-					
-					
-			
-	
+   style="position: absolute; left:0px ; top:0px; z-index: 3;"></canvas>
+  
+						</div>
+					</div>
+				</div>
+			<div id="input_tag">
+				<div class="input-group">
+				 <input type="text" class="form-control" placeholder="nom du tag" id="tag_name" style="position: absolute; top: 250px;left: -5px ;width:510px; ">
+				</div>
+			</div>
 		</div>
-       		
-      
-       <div id="urls">
+		</aside>			
+</section>
+	  
+
 	
-	  </div>
+
+
      <script  type="text/javascript" src="http://d3lp1msu2r81bx.cloudfront.net/kjs/js/lib/kinetic-v5.0.2.min.js"></script>
    	 <script  type="text/javascript" defer="defer">
 
@@ -517,21 +870,26 @@
 						xhr_obj.onreadystatechange = function() {
 							if (xhr_obj.readyState == 4 && xhr_obj.responseText) {
 									var result = xhr_obj.responseText;
-									console.log('result: '+result); 
-									var textResult = '';
-									if(result.length>3){
-										var listUrls = result.split(' $$$ ');
-										for(i in listUrls){
-											if(listUrls[i].length>1){
-												textResult+="<br>";
-												textResult+="<a href=\""+listUrls[i]+"\">Visit W3Schools</a>";
-												textResult+="</br>";
+									var listSites = result.split('\n');
+									var textResult = "<table>";
+									var i = 0;
+									for (var j = 0; j <= (listSites.length/3); j++) {
+										textResult +="<tr>" ;
+										for(var k =0; k<=2; k++){
+											if(i<listSites.length-1){
+												listSites[i] = listSites[i].split(' $$$ ');
+												textResult +="<td>" ;
+												textResult += "<img src = 'http://img.bitpixels.com/getthumbnail?code=43419&url="+listSites[i][0]+"'>";
+												textResult +="<a href='"+listSites[i][0]+"' target='_blank' onclick='addVisitToUrl("+listSites[i][2]+")'>" ;
+												textResult +="<p>"+listSites[i][1]+"</p></a>";
+												textResult +="</td>" ;
 											}
-											
+											i++;
 										}
+										textResult +="</tr>" ;
 									}
-									console.log('text result: '+textResult); 
-									document.getElementById('urls').innerHTML = textResult;
+									textResult += "</table>";
+									document.getElementById('list_sites').innerHTML = textResult;
 							}
 						};
 						xhr_obj.open('GET', 'http://localhost:8080/Jump/advancedsearch?req='+req, true);
