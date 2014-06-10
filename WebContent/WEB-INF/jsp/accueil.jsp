@@ -75,9 +75,11 @@ function searchSite(){
 <div class="accueil2">
 <section>
 	<ul id="menu_horizontal">
+	<%if(nbTags!=null && nbUrls!=null && nbUntaggedUrls!=null) {%>
 		<li><a href="?page=tableaubord"><%=nbTags.intValue()%> tags</a></li>
 		<li><a href="?page=accueil"><%=nbUrls.intValue()%> favoris</a></li>
 		<li><a href="?page=ajoutertag"><%=nbUntaggedUrls.intValue()%> favoris a trier</a></li>
+	<%} %>
 	</ul>
 	<div>
 		<input type ="text" id="rech_rapide" placeholder="Rechercher" onkeyup = "searchSite()"/>	
