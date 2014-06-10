@@ -56,9 +56,8 @@ System.out.println(json_links);
 			    margin-left: -402px;
 			    position: fixed;
 			    top: 20%;
-			    width: 800px;
+			    width: 820px;
 			    z-index: 2;
-			    
 			}
 			div.loader {
 			    background: url("/Jump/image?src=loading.gif") no-repeat scroll 0 0 transparent;
@@ -108,20 +107,27 @@ System.out.println(json_links);
 			    width: 1px;
 			}
 			div#popup_content {
-			    margin: 4px 7px;
+			    position: center;
 			}
 			
 			.ThumbnailContainer
 			{
-				width:100%;
-			    margin : 0 auto;
+				/*width:100%;*/
+			    margin :auto;
+			    overflow-x: scroll;
+			    overflow-y: hidden;
+			    width:100%;
+			    white-space:nowrap;
 			}
 			
 			.Thumbnail
 			{
 				display: inline-block;
 			    padding: 4px;
-			    margin-bottom: 20px;
+			    padding-left: 20px;
+			    padding-right: 20px; 
+			    margin-left: auto;
+			    margin-right:auto;
 			    line-height: 1.42857143;
 			    background-color: #fff;
 			    border: 1px solid #ddd;
@@ -142,6 +148,7 @@ System.out.println(json_links);
 			.ThumbnailInfo:hover, .ThumbnailInfo:focus, .ThumbnailInfo.active
 			{
 			    border-color: #428bca;
+			    text-align: center;
 			}
 			.img
 			{
@@ -163,19 +170,22 @@ System.out.println(json_links);
 			{
 				width:100%;
 				height:25%;
-				border-top:1px solid red;
+				border-top:1px solid #C5252B;
+				text-align: center;
+				font-family: sans-serif;
 			}
 			
 			.ThumbnailInfoTitle
 			{
 				padding: 9px;
 			    color: #4A8B87;
+			    text-align: center;
 			}
 			
 			.container-fluid
 			{
-			  padding-left: 0px;
-			  padding-right: 0px;
+			  /* padding-left: 0px;
+			  padding-right: 0px; */
 			}
 			
 			.btn 
