@@ -148,6 +148,7 @@ tr.onetag  {
 	background: white;
 	border: solid 1px #b4b4b4;
 	border-radius: 10px;
+	z-index:10000;
 }
 
 #nav ul li {

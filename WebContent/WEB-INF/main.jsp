@@ -17,7 +17,10 @@
 <style type="text/css">
 	<%=css%>
 </style>
+
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+
 <title>Welcome to #Jumper</title>
 </head>
 <body>

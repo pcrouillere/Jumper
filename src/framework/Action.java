@@ -1,7 +1,6 @@
 package framework;
 
 import graphview.edge;
-import graphview.graph;
 import graphview.node;
 
 import java.io.IOException;
@@ -19,7 +18,6 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
 
 
@@ -32,6 +30,7 @@ import dao.*;
 public class Action
 {
 	FrontController parent = null;
+	String colorTab[] = {"#FDAE6B", "#A1D99B", "#9ECAE1", "#31A354", "#3182BD","#FD8D3C", "#A1D99B", "#C6DBEF","#FDD0A2" };
 	
 	public Action(FrontController parent) {
 		this.parent = parent;
@@ -161,8 +160,98 @@ public class Action
 	return req;
 	}
 	
+	public HttpServletRequest graph(HttpServletRequest req, HttpServletResponse response) throws SQLException
+	{
+		System.out.println("Graph D3");
+		User user=User.getInstance();
+		List<Tag> listTags=user.getAllTag();
+		Iterator<Tag> it = listTags.iterator();
+		node instTag=null;
+		Tag currentTag=null;
+		List<node> nodes = new ArrayList<node>();
+		List<edge> links = new ArrayList<edge>();
+		int ind = 0;
+		double maxUrl = 0;
+		while(it.hasNext())
+		{
+			currentTag=(Tag) it.next();	
+			if(currentTag.getUrls().size()!=0 ){
+				instTag=new node(currentTag.getTid(), currentTag.gettName(), currentTag.getUrls().size(), currentTag);
+				if(maxUrl < currentTag.getUrls().size() ) maxUrl = currentTag.getUrls().size();
+				instTag.setIndex(ind);
+				instTag.setColorId(ind);
+				nodes.add(instTag);
+				instTag=null;
+				ind++;
+			}
+		}
+		
+		// ratio taille des noeuds
+		for(int i = 0; i<nodes.size(); i++){
+			nodes.get(i).setSize(nodes.get(i).getSize()/maxUrl );
+		}
+		
+		List<Url> listUrls=user.getAllUrl();
+	//	Iterator<Url> itUri=listUrls.iterator();
+		Url currentUrl;
+		for(int k=0;k<listUrls.size();k++)
+		{
+			currentUrl=(Url) listUrls.get(k);
+			if(currentUrl.getTags().size()>1)
+			{
+				edge instEdge = null;
+				for(int i=0;i<nodes.size();i++)
+				{
+					for(int j=i+1;j<nodes.size();j++)
+					{
+						if(currentUrl.getTags().contains((Tag)nodes.get(i).getTag()) && currentUrl.getTags().contains((Tag)nodes.get(j).getTag()) )
+						{
+							instEdge=new edge(nodes.get(i).getIndex(),nodes.get(j).getIndex());
+							links.add(instEdge);
+							instEdge=null;
+						}
+					}
+				}
+			}
+		}
+		coloration(nodes, links);
+		
+		System.out.println("nodes");
+		System.out.println(nodes.toString());
+		System.out.println("links");
+		System.out.println(links.toString());
+		
+		
+		req.setAttribute("json_links", links.toString() );
+		req.setAttribute("json_nodes", nodes.toString() );
+
+		return req;
+	}
+	
+	private void coloration(List<node> nodes, List<edge> edges){
+		
+		for (int i = 0; i<edges.size();i++){
+			node source = nodes.get(edges.get(i).getSource());
+			node target = nodes.get(edges.get(i).getTarget());
+			if(source.getColorId() != target.getColorId()){
+				for(int j = 0; j<nodes.size();j++){
+					if(nodes.get(j).getColorId()==target.getColorId()){
+						nodes.get(j).setColorId(source.getColorId());
+					}
+				}
+			}
+		}
+		
+		for (int i=0; i<nodes.size();i++){
+			node n = nodes.get(i);
+			n.setColor(colorTab[n.getColorId()%9]);
+		}
+		
+	}
+	
 	public HttpServletRequest graphview(HttpServletRequest req, HttpServletResponse response) throws SQLException
 	{
+		/*
 		System.out.println("Loading Graph");
 		User user=User.getInstance();
 		List<Tag> listTags=user.getAllTag();
@@ -230,6 +319,9 @@ public class Action
 		*/
 		return req;
 	}
+	
+	
+	
 	
 	/** Fonction tableauBord
 	 * Gere la page tableau de bord de l'application
@@ -340,7 +432,7 @@ public class Action
 		String uri =(String) req.getParameter("url");
 		String listTag=(String)req.getParameter("list");
 		Url url=user.getUrlById(Integer.valueOf(uri));
-		String str[] = listTag.split("\\$\\$\\$");
+		String str[] = listTag.split("@");
 		for(int i=0; i<str.length; i++)
 		{
 			Tag tag = user.getTagByName(str[i]);
