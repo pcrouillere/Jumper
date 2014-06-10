@@ -434,5 +434,11 @@ public class Action
 		}
 		return req;
 	}
+	
+	public HttpServletRequest suggestion(HttpServletRequest req, HttpServletResponse response) throws SQLException
+	{
+		User user = User.getInstance(); 
+		return req;
+	}
 
 }
