@@ -24,6 +24,11 @@
         padding: 0px;
       }
     </style>
+  <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
+  <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+  <script src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+    
+    
   </head>
   <body>	
 	  
@@ -313,7 +318,9 @@ button.badge {
     border-top-right-radius: 4px;
     border-top-left-radius: 4px;
 }
-
+.ui-autocomplete {
+    z-index: 100 !important;
+}
 
 input[type=button] {
     border-radius: 8px;
@@ -387,8 +394,30 @@ function addVisitToUrl(id){
 		<div id="tag_list">
 			<div class="panel panel-default" style="position:absolute; left: -300px; height:568px ">
 				  <div class="panel-heading">
-				    <h3 class="panel-title"><input  type="button" name ="Jump" value="Jump" onclick="searchTag()" ></h3>
-				  </div>
+				  <h3 class="panel-title">
+				  	 <input type="text" class="form-control" placeholder="nom du tag" id="tag_name" >
+				<script>
+					var alltags=[];
+				</script>
+				<% 
+				int i=0;
+				while ( i<tags.size())
+				{
+				%>
+				<script>
+				  alltags.push("<%= tags.get(i).gettName()%>");
+				</script>
+				 <% 
+				 ++i;
+				}
+				%>
+				<script>
+				$( "#tag_name" ).autocomplete({
+  				source: alltags
+  				,autoFocus: true});
+				</script>
+				</h3>
+				     </div>
 				    <div class="panel-body" style="height:550px; width: 500px;">
 						<div id="tag_names" style="height:510px"/>	
 														
@@ -409,16 +438,16 @@ function addVisitToUrl(id){
 					</div>
 				</div>
 			<div id="input_tag">
-				<div class="input-group">
-				 <input type="text" class="form-control" placeholder="nom du tag" id="tag_name" style="position: absolute; top: 250px;left: -5px ;width:510px; ">
+				<div class="input-group"> 
+			    <input  type="button" name ="Jump" value="Jump" onclick="searchTag()" style="position: absolute; top: 250px;left: 0px ;width:528px; ">
+				
 				</div>
 			</div>
 		</div>
 		</aside>			
-</section>
-	  
-
-	 <script  type="text/javascript" src="http://d3lp1msu2r81bx.cloudfront.net/kjs/js/lib/kinetic-v5.0.2.min.js"></script>
+</section>  
+	
+     <script  type="text/javascript" src="http://d3lp1msu2r81bx.cloudfront.net/kjs/js/lib/kinetic-v5.0.2.min.js"></script>
    	 <script  type="text/javascript" defer="defer">
 
    					var selectedpiece= [];
@@ -844,7 +873,7 @@ function addVisitToUrl(id){
    					      
    					var img = new Image();
    					img.onload = function() { context4.drawImage(img,450, 450,50,50);};
-   					img.src = 'icones/trush.png';
+   					img.src = 'http://wcdn1.dataknet.com/static/resources/icons/set20/f02a629829e9.png';
    					layer.draw();
    					 </script>
 					<script>
@@ -863,25 +892,30 @@ function addVisitToUrl(id){
 						xhr_obj.onreadystatechange = function() {
 							if (xhr_obj.readyState == 4 && xhr_obj.responseText) {
 									var result = xhr_obj.responseText;
-									var listSites = result.split('\n');
-									var textResult = "<table>";
-									var i = 0;
-									for (var j = 0; j <= (listSites.length/3); j++) {
-										textResult +="<tr>" ;
-										for(var k =0; k<=2; k++){
-											if(i<listSites.length-1){
-												listSites[i] = listSites[i].split(' $$$ ');
-												textResult +="<td>" ;
-												textResult += "<img src = 'http://img.bitpixels.com/getthumbnail?code=43419&url="+listSites[i][0]+"'>";
-												textResult +="<a href='"+listSites[i][0]+"' target='_blank' onclick='addVisitToUrl("+listSites[i][2]+")'>" ;
-												textResult +="<p>"+listSites[i][1]+"</p></a>";
-												textResult +="</td>" ;
+									var textResult = "";
+									if(result!="!!!"){
+										var listSites = result.split('\n');
+										textResult = "<aside>";
+										textResult += "<table>";
+										var i = 0;
+										for (var j = 0; j <= (listSites.length/3); j++) {
+											textResult +="<tr>" ;
+											for(var k =0; k<=2; k++){
+												if(i<listSites.length-1){
+													listSites[i] = listSites[i].split(' $$$ ');
+													textResult +="<td>" ;
+													textResult += "<img src = 'http://img.bitpixels.com/getthumbnail?code=43419&url="+listSites[i][0]+"'>";
+													textResult +="<a href='"+listSites[i][0]+"' target='_blank' onclick='addVisitToUrl("+listSites[i][2]+")'>" ;
+													textResult +="<p>"+listSites[i][1]+"</p></a>";
+													textResult +="</td>" ;
+												}
+												i++;
 											}
-											i++;
+											textResult +="</tr>" ;
 										}
-										textResult +="</tr>" ;
+										textResult += "</table>";
+										textResult += "</aside>";
 									}
-									textResult += "</table>";
 									document.getElementById('list_sites').innerHTML = textResult;
 							}
 						};
