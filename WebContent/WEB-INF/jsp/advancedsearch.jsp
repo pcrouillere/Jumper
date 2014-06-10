@@ -30,7 +30,64 @@
     
     
   </head>
-  <body>	
+  <body>
+				
+			<script>
+		
+			    Colors = {};
+			    Colors.names = {
+			        aqua: "#00ffff",
+			        azure: "#f0ffff",
+			        beige: "#f5f5dc",
+			        black: "#000000",
+			        blue: "#0000ff",
+			        brown: "#a52a2a",
+			        cyan: "#00ffff",
+			        darkblue: "#00008b",
+			        darkcyan: "#008b8b",
+			        darkgrey: "#a9a9a9",
+			        darkgreen: "#006400",
+			        darkkhaki: "#bdb76b",
+			        darkmagenta: "#8b008b",
+			        darkolivegreen: "#556b2f",
+			        darkorange: "#ff8c00",
+			        darkorchid: "#9932cc",
+			        darkred: "#8b0000",
+			        darksalmon: "#e9967a",
+			        darkviolet: "#9400d3",
+			        fuchsia: "#ff00ff",
+			        gold: "#ffd700",
+			        green: "#008000",
+			        indigo: "#4b0082",
+			        khaki: "#f0e68c",
+			        lightblue: "#add8e6",
+			        lightcyan: "#e0ffff",
+			        lightgreen: "#90ee90",
+			        lightgrey: "#d3d3d3",
+			        lightpink: "#ffb6c1",
+			        lightyellow: "#ffffe0",
+			        lime: "#00ff00",
+			        magenta: "#ff00ff",
+			        maroon: "#800000",
+			        navy: "#000080",
+			        olive: "#808000",
+			        orange: "#ffa500",
+			        pink: "#ffc0cb",
+			        purple: "#800080",
+			        violet: "#800080",
+			        silver: "#c0c0c0",
+			        yellow: "#ffff00"
+			    };
+			    Colors.random = function() {
+			        var result;
+			        var count = 0;
+			        for (var prop in this.names)
+			            if (Math.random() < 1/++count)
+			               result = prop;
+			        return { name: result, rgb: this.names[result]};
+			    };
+	
+			</script>
 	  
 	  <section>
 	  
@@ -546,10 +603,11 @@ function addVisitToUrl(id){
 
 
 
-   					function Tagoval(tag,x_por,y_por,rot,rw_por,hw_ratio) {
+   					function Tagoval(tag,x_por,y_por,rot,rw_por,hw_ratio,color) {
    					  this.selected=false;
    					  this.mouseon=false;
    					  this.tag=tag;
+   					  this.color=color;
    					  this.x_por=x_por;
    					  this.y_por=y_por;
    					  this.rot=rot;
@@ -689,7 +747,7 @@ function addVisitToUrl(id){
    						          context.arc(0, 0, ovals[i].rw_por * canvas.width, 0, 2 * Math.PI, false);
    						          context.closePath();
    						          context.restore();
-   						          context.lineWidth = 5;
+   						          context.lineWidth = 2;
    						          context.strokeStyle = 'black';
    						          context.stroke();
    								  context.restore();
@@ -765,7 +823,7 @@ function addVisitToUrl(id){
    					        fontFamily: 'Calibri',
    					        fontSize: 24,
    					        text: oval.tag,
-   					        fill: 'black'
+   					        fill: oval.color
    					      });
    						  
    						  text.draggable(true);
@@ -797,8 +855,8 @@ function addVisitToUrl(id){
    						      },
    						      x: 0,
    						      y: 0,
-   						      stroke: 'blue',
-   						      strokeWidth: 4
+   						      stroke: oval.color,
+   						      strokeWidth: 3
    						  });
    						  //ovalshape.draggable(true);
    						  
@@ -811,8 +869,9 @@ function addVisitToUrl(id){
    					      group.on('dragend', function() {
    						      this.model.update(this.x()/width,this.y()/height);
    					      });
-   						  group.add(text);
+   						  
    						  group.add(ovalshape);
+   						group.add(text);
    						  layer.add(group);
    						}
    						
@@ -963,14 +1022,16 @@ function addVisitToUrl(id){
 								var key = e.which || e.keycode;
 								if(key==13)
 								{
-									var span=document.createElement('p');
+									/*var span=document.createElement('p');
 									span.draggable="true";
 									span.ondragstart="drag(event)";
 									var newlinktext=document.createTextNode("#"+element.value);
 									span.appendChild(newlinktext);
 									var tag_names= document.getElementById("tag_names");
-									tag_names.appendChild(span);
-									var ovalnew=new Tagoval("#"+element.value,0.5,0.5,Math.PI/3,0.2,0.5);
+									tag_names.appendChild(span);*/	
+									
+									var ovalnew=new Tagoval("#"+element.value,0.5,0.5,2*Math.PI*Math.random(),0.2,0.5,Colors.random().rgb);
+
 									addoval(ovals,selectedpiece,ovalnew);
 									drawdynoval(ovalnew,layer,stage,stage.width(),stage.height());
 									drawovals(ovals, document.getElementById('layer1'));
