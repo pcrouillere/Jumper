@@ -234,13 +234,27 @@ public class User extends Dao {
 	public List<Url> getAllUrl(){
 		return uUrls;
 	}
-	
+	public List<Url> getAllUrlOrderBy(){
+		ResultSet result;
+		List<Url> urls = new ArrayList<Url>();
+		result = Dao.freeRequest("Select DISTINCT * from jpurl WHERE urlUserId = "+this.uId+" ORDER BY urlNbVisited DESC;", null);
+		try {
+			while(result.next()){
+				Url url = getUrlById(result.getInt("urlId"));
+				urls.add(url);				
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return urls;
+	}
 	public List<Url> getUntaggedUrl() {
 		ResultSet result;
 		List<Url> untaggedUrl = new ArrayList<Url>();
 		Map<String, String> attr = new HashMap<String, String>();
 		attr = null;
-		result = Dao.freeRequest("Select * from jpurl where urlId NOT IN (Select tagmapurlid from jptagmap where tagmapUserid = (select userid from jpuser where userMail='pcrouillere@gmail.com'))", attr);
+		result = Dao.freeRequest("Select * from jpurl where urlId NOT IN (Select tagmapurlid from jptagmap where tagmapUserid ="+this.uId+")", attr);
 		try {
 			while(result.next()){
 				Url url = getUrlById(result.getInt("urlId"));
