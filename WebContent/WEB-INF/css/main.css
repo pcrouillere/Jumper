@@ -224,18 +224,13 @@ body {
 	color: #C5252B;
 }
 
-.accueil2 {
-	margin-top: 10px;
-}
-
 section {
 	background-color: white;
-	border-radius: 20px 20px 0 0;
 	color: black;
 	font-family: "Varela Round", Arial, Helvetica, sans-serif;
 	font-size: 15px;
 	padding: 10px;
-	margin-top: 10px;
+	margin-top: 5px;
 }
 
 [class*="fontawesome-"]:before {
@@ -325,9 +320,6 @@ header h2 {
 	text-align: center;
 	margin-top: 5px;
 	background-color: #C5252B;
-	-webkit-border-radius: 20px 20px 0 0;
-	-moz-border-radius: 20px 20px 0 0;
-	border-radius: 20px 20px 0 0;
 	padding: 20px 26px;
 }
 
