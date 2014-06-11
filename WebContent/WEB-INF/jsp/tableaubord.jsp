@@ -29,7 +29,7 @@ var data = new Array();
 //!!!!!!!!!!!!!!!!!!!! CONFIGURATION !!!!!!!!!!!!!!!!!!!!!!!!
 var width = 1100;
 var nbColomn = 4; // PAS MOINS QUE 4 !
-var headerSize = 150;
+var headerSize = 170;
 var leftSize = 100;
 var margin = 10;
 var size = 180;
