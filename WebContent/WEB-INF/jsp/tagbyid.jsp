@@ -112,5 +112,6 @@ function removeUrlFromBdd(urlId){
 		}
 		%>
 	</table>
+	<a class="bouton_back" href="?page=tableaubord"><img src="/Jump/image?src=back.jpg" /></a>
 	</div>
 	</section>

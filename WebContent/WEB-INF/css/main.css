@@ -466,3 +466,8 @@ footer {
 	margin-right : 50px;
 	
 }
+.bouton_back{
+	position : absolute;
+	left : 5px;
+	margin : 20px;
+}
