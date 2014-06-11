@@ -70,47 +70,28 @@ function searchSite(){
 	xhr_obj.open('GET', 'http://localhost:8080/Jump/search?part='+part, true);
 	xhr_obj.send(null);
 }
+
+window.onload = function ()
+{
+	searchSite();
+}
 </script>
 
 <div class="accueil2">
 <section>
 	<ul id="menu_horizontal">
+	<%if(nbTags!=null && nbUrls!=null && nbUntaggedUrls!=null) {%>
 		<li><a href="?page=tableaubord"><%=nbTags.intValue()%> tags</a></li>
 		<li><a href="?page=accueil"><%=nbUrls.intValue()%> favoris</a></li>
 		<li><a href="?page=ajoutertag"><%=nbUntaggedUrls.intValue()%> favoris a trier</a></li>
+	<%} %>
 	</ul>
 	<div>
 		<input type ="text" id="rech_rapide" placeholder="Rechercher" onkeyup = "searchSite()"/>	
 	</div>
 	
 	<div class="accueil" id ="list_sites">
-	<table>
-		<%
-			if (urls != null) {
-				for (int i = 0; i <= 1; i++) {
-		%>
-		<tr>
-			<%
-				for (int j = 0; j <= 2; j++) {
-							if (urls.get(i + j) != null) {
-								Url u = urls.get(i + j);
-			%>
-			<td>
-				<img src = "http://img.bitpixels.com/getthumbnail?code=43419&url=<%=u.getuUri() %>">
-				<a href="<%=u.getuUri() %>" target="_blank" onclick="addVisitToUrl(<%=u.getuId()%>)"><p><%=u.getuTitle()%></p></a>
-			</td>
-
-			<%
-				}
-				}
-			%>
-		</tr>
-		<%
-			}
-			}
-		%>
-
-	</table>
+	
 	</div>
 </section>
 </div>

@@ -60,7 +60,6 @@ public class User extends Dao {
 			attr.put("userMail", email);
 			result = Dao.search("jpUser", attr);
 			while (result.next()){
-				System.out.println(result.getString("userPassword"));
 				if(result.getString("userPassword").equals(pass)){
 					realUser=true;
 					id = result.getInt("userId");
@@ -76,8 +75,44 @@ public class User extends Dao {
 	}
 	
 	public static void addNewUser(String email, String password, String name) throws SQLException{
-		String req = "Insert into jpUser(userMail, userPassword, userName) values('"+email+"','"+password+"','"+name+"')";
+		ResultSet result;
+		result = Dao.freeRequest("Select * from jpuser WHERE userMail = '"+email+"'", null);
+		try {
+			if(result.next()) {
+				
+			}
+			else {
+				String req = "Insert into jpUser(userMail, userPassword, userName) values('"+email+"','"+password+"','"+name+"')";
+		        Dao.freeRequestUpdate(req, null);
+		        User.createUser(email);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+	
+	public static void createUser(String mail) throws SQLException{
+		int id = 0;
+		Map<String, String> attr = new HashMap<String, String>();
+		ResultSet result;
+		attr.put("userMail", mail);
+		result = Dao.search("jpUser", attr);
+		while (result.next()){
+				id = result.getInt("userId");
+			}
+		String req = "Insert into jpTag(tagUserId, tagName) values("+id+", 'Jumper')";
         Dao.freeRequestUpdate(req, null);
+        Dao.freeRequestUpdate("Insert into jpUrl(urlUserId, urlUri, urlTitle, urlNbVisited) values("+id+", 'http://localhost:8080/Jump/?page=accueil', '#Jumper', 0)", null);
+        Dao.freeRequestUpdate("Insert into jpUrl(urlUserId, urlUri, urlTitle, urlNbVisited) values("+id+", 'http://localhost:8080/Jump/?page=tableauBord', '#Jumper', 0)", null);
+        Url url = new Url(id, "http://localhost:8080/Jump/?page=tableauBord", "#Jumper", 0);
+        Tag tag = new Tag("Jumper", id);
+        tag.setTid(tag.getTagIdFromBDD());
+        url.setuId(url.getIdFromBDD());
+        TagMap tagMap = new TagMap(tag, url);
+        tagMap.addTagMaptoBDD(id);
+        
 	}
 	
 	/* Cr�er un nouveau user */
@@ -258,7 +293,7 @@ public class User extends Dao {
 		List<Url> untaggedUrl = new ArrayList<Url>();
 		Map<String, String> attr = new HashMap<String, String>();
 		attr = null;
-		result = Dao.freeRequest("Select * from jpurl where urlId NOT IN (Select tagmapurlid from jptagmap where tagmapUserid ="+this.uId+")", attr);
+		result = Dao.freeRequest("Select * from jpurl where urlId NOT IN (Select tagmapurlid from jptagmap where tagmapUserid ="+this.uId+") AND urluserId="+this.uId, attr);
 		try {
 			while(result.next()){
 				Url url = getUrlById(result.getInt("urlId"));
