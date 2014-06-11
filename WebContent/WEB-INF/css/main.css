@@ -184,7 +184,7 @@ tr.onetag  {
 }
 
 body {
-	background-color: #C0C0C0;
+	background-color: #DCDEDF;
 	color: #000;
 	font-family: "Varela Round", Arial, Helvetica, sans-serif;
 	font-size: 16px;
@@ -225,9 +225,7 @@ body {
 }
 
 .accueil2 {
-	margin-top: 40px;
-	margin-left: 20px;
-	margin-right: 20px;
+	margin-top: 10px;
 }
 
 section {
@@ -237,7 +235,7 @@ section {
 	font-family: "Varela Round", Arial, Helvetica, sans-serif;
 	font-size: 15px;
 	padding: 10px;
-	margin-top: 25px;
+	margin-top: 10px;
 }
 
 [class*="fontawesome-"]:before {
