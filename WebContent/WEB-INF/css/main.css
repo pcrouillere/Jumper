@@ -4,6 +4,11 @@
 
 @import url(http://meyerweb.com/eric/tools/css/reset/reset.css);
 
+@import url(http://fonts.googleapis.com/css?family=Pacifico);
+
+@import url(http://fonts.googleapis.com/css?family=Special+Elite);
+
+@import url(http://fonts.googleapis.com/css?family=Ubuntu:400,500);
 
 
 .drag caption{
@@ -29,7 +34,22 @@ table.tagbyid{
 	color: #fff;
 	font-size: 15px;
 	padding: 15px 15px;
+	font-family: 'Ubuntu', sans-serif;
 }
+
+.tagbyid a {
+	text-decoration: none;
+	font-family: 'Ubuntu', sans-serif;
+	color: #4A8B87;
+}
+
+.tagbyid a:hover {
+	text-decoration: none;
+	font-family: 'Ubuntu', sans-serif;
+	color: #C5252B;
+}
+
+
 
 .tagbyid td {
 	color: black;
@@ -79,6 +99,7 @@ table.onetag{
 	color: #fff;
 	font-size: 15px;
 	padding: 15px 15px;
+	font-family: 'Ubuntu', sans-serif;
 	}
 
 tr.onetag  {
@@ -300,7 +321,7 @@ input {
 
 /* ACCUEIL */
 header h2 {
-	font-family: Impact;
+	font-family: Pacifico;
 	font-size: 30px;
 	color: #FFFFFF;
 	text-align: center;
@@ -315,6 +336,11 @@ header h2 {
 ul#menu_horizontal li a {
 	text-decoration: none;
 	color: #C5252B;
+}
+
+ul#menu_horizontal li a:hover {
+	text-decoration: none;
+	color: #4A8B87;
 }
 
 ul#menu_horizontal li {
@@ -425,7 +451,7 @@ ul#menu_horizontal {
 }
 
 #user_name {
-	font-family: Impact;
+	font-family: Pacifico;
 	border-radius: 15px;
 	position: absolute;
 	top: 14px;
@@ -450,7 +476,7 @@ ul#menu_horizontal {
 
 footer {
 	/*footer (eg:copyright) setting */
-	font-family: Impact;
+	font-family: Pacifico;
 	text-align: center;
 	color: black;
 }
