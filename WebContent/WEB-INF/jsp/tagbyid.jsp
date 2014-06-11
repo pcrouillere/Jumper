@@ -62,13 +62,32 @@ function removeUrlFromBdd(urlId){
 	xhr_obj.send(null);
 }
 
+function addVisitToUrl(id){ 
+	if (window.XMLHttpRequest) { 
+	httpRequest = new XMLHttpRequest(); 
+
+	} 
+	else if (window.ActiveXObject) { 
+	httpRequest = new ActiveXObject("Microsoft.XMLHTTP"); 
+	}	
+	if (!httpRequest) { 
+	alert('Abandon :Impossible de créer une instance XMLHTTP'); 
+	return false; 
+	} 
+
+	httpRequest.onreadystatechange = function() { 
+	};
+	
+	httpRequest.open("GET", "?page=addvisit&id="+id, false); 
+	httpRequest.send(null);  
+	}
 </script>
 
 <section>
 	<ul id="menu_horizontal">
-		<li><%=nbTags.intValue()%> tags</li>
-		<li><%=nbUrls.intValue()%> favoris</li>
-		<li><%=nbUntaggedUrls.intValue()%> favoris a trier</li>
+		<li><a href="?page=tableaubord"><%=nbTags.intValue()%> tags</a></li>
+		<li><a href="?page=accueil"><%=nbUrls.intValue()%> favoris</a></li>
+		<li><a href="?page=ajoutertag"><%=nbUntaggedUrls.intValue()%> favoris a trier</a></li>
 	</ul>
 	<div id="content_page">
 	<table class="tagbyid">
@@ -80,10 +99,10 @@ function removeUrlFromBdd(urlId){
 			%>
 			<tr>
 				<td>
-					<a href="<%=url.getuUri()%>"><img width="20" height="20" src="<%=imgSrc %>"></a>
+					<a href="<%=url.getuUri()%>" target='_blank' onclick='addVisitToUrl(<%=url.getuId()%>)'><img width="20" height="20" src="<%=imgSrc %>"></a>
 				</td>
 				<td>
-					<a href="<%=url.getuUri()%>"><%=url.getuTitle() %></a>
+					<a href="<%=url.getuUri()%>" target='_blank' onclick='addVisitToUrl(<%=url.getuId()%>)'><%=url.getuTitle() %></a>
 					<% List<Tag> listTags = url.getTags();
 					Iterator tagIt = listTags.iterator();
 					String listTagsString = "";%>
@@ -112,6 +131,6 @@ function removeUrlFromBdd(urlId){
 		}
 		%>
 	</table>
-	<a class="bouton_back" href="?page=tableaubord"><img src="/Jump/image?src=back.jpg" /></a>
+	<a class="bouton_back" href="?page=tableaubord"><img width="30" height="30" src="/Jump/image?src=back.png" /></a>
 	</div>
 	</section>

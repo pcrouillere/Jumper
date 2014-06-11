@@ -302,6 +302,26 @@ function searchTag(){
 	xhr_obj.open('GET', 'http://localhost:8080/Jump/searchtag?part='+part, true);
 	xhr_obj.send(null);
 }
+
+function addVisitToUrl(id){ 
+	if (window.XMLHttpRequest) { 
+	httpRequest = new XMLHttpRequest(); 
+
+	} 
+	else if (window.ActiveXObject) { 
+	httpRequest = new ActiveXObject("Microsoft.XMLHTTP"); 
+	}	
+	if (!httpRequest) { 
+	alert('Abandon :Impossible de créer une instance XMLHTTP'); 
+	return false; 
+	} 
+
+	httpRequest.onreadystatechange = function() { 
+	};
+	
+	httpRequest.open("GET", "?page=addvisit&id="+id, false); 
+	httpRequest.send(null);  
+	}
 </script>
 <section>
 	<ul id="menu_horizontal">
@@ -331,7 +351,7 @@ function searchTag(){
 				count_url++;
 				Url u = (Url) listIterator.next();
 				String imgSrc = "http://www.google.com/s2/favicons?domain=" + u.getuUri();
-				%><td><a href="<%=u.getuUri() %>"><img src=<%=imgSrc %> width="40" height="40" ></a></td><%
+				%><td><a href="<%=u.getuUri() %>" target='_blank' onclick='addVisitToUrl(<%=u.getuId()%>)'><img src=<%=imgSrc %> width="40" height="40" ></a></td><%
 				if(count_url%4==0)
 				{%></tr><%}
 			}
