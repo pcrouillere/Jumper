@@ -48,9 +48,9 @@ function searchSite(){
 				var listSites = result.split('\n');
 				var textResult = "<table>";
 				var i = 0;
-				for (var j = 0; j <= (listSites.length/3); j++) {
+				for (var j = 0; j <= (listSites.length/4); j++) {
 					textResult +="<tr>" ;
-					for(var k =0; k<=2; k++){
+					for(var k =0; k<=3; k++){
 						if(i<listSites.length-1){
 							listSites[i] = listSites[i].split(' $$$ ');
 							textResult +="<td>" ;
