@@ -9,7 +9,7 @@
 	List<Url> urls = (List<Url>) request.getAttribute("untaggedurls");
 %>
 <%
-	User user = (User) session.getAttribute("user");
+	User user = (User) request.getAttribute("user");
 %>
 <!--Les section, c'est la partie coeur, c'est la ou on doit developper les differentes fonctionnalitées -->
 
@@ -314,7 +314,6 @@ button.badge {
     border-top-right-radius: 4px;
     border-top-left-radius: 4px;
 }
-
 </style>
 <script>
 function parseUri (str) {
@@ -505,10 +504,7 @@ MAX_DISPLAYED_THUMBNAILS=100000;
 
 LEFT = "Left";
 RIGHT = "Right";
-
-
 </script>
-
 <script type="text/javascript">
 function Bar (pParameters) {
 	JsHtmlObject.call(this, null, "div", null);

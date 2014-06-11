@@ -365,6 +365,7 @@ public class Action {
 			List<Url> allUrls = user.getUntaggedUrl();
 			req.setAttribute("tags", allTags);
 			req.setAttribute("untaggedurls", allUrls);
+			req.setAttribute("user", user);
 			return req;
 		}
 	}

@@ -293,7 +293,7 @@ public class User extends Dao {
 		List<Url> untaggedUrl = new ArrayList<Url>();
 		Map<String, String> attr = new HashMap<String, String>();
 		attr = null;
-		result = Dao.freeRequest("Select * from jpurl where urlId NOT IN (Select tagmapurlid from jptagmap where tagmapUserid ="+this.uId+")", attr);
+		result = Dao.freeRequest("Select * from jpurl where urlId NOT IN (Select tagmapurlid from jptagmap where tagmapUserid ="+this.uId+") AND urluserId="+this.uId, attr);
 		try {
 			while(result.next()){
 				Url url = getUrlById(result.getInt("urlId"));
