@@ -203,9 +203,7 @@
 <section>
 
 <style>
-	.mCanvas{
-	
-	}
+
 	.ui-autocomplete {
 	    z-index: 100 !important;
 	}
@@ -217,12 +215,17 @@
 	}
 	#graphesearch{
 	    position:absolute;
-		height:550px;
-		width:550px;
-		background-color:#F4F4F4;
+		background-color:white;
 		border:1px solid #333;
 		display:block;
 	}
+	
+	#graphics{
+	position: relative;
+	width:600px;
+	height:600px; 
+	
+	} 
 	
 	#list_resultats{
 		background-color : red;
@@ -329,25 +332,81 @@ function addVisitToUrl(id){
 						</script>
 				
 				</div>
-				<div >
+				<div id="graphics" >
 				
-					  <canvas id="tempCanvas" class="mCanvas" width="500" height="500" style="display:none;"></canvas>
-					  <canvas id="layer2" class="mCanvas" width="500" height="500" 
-					   style="position: absolute; left: 0px; top: 30px; z-index: 0;"></canvas>
-					  <canvas id="layer3" class="mCanvas" width="500" height="500" 
-					   style="left: 0px; top: 30px; z-index: 1;"></canvas>
-					  <canvas id="layer1" class="mCanvas" width="500" height="500" 
-					   style="position: absolute; left: 0px; top: 30px; z-index: 2;"></canvas>
-					  <div id="container" class="mCanvas" style="position: absolute; left: 0px; top: 30px; z-index: 4;"></div>
-					  <canvas id="trush" class="mCanvas" width="500" height="500" 
-					   style="position: absolute; left:0px ; top:30px; z-index: 3;"></canvas>
+				
+				
+				   <style>
+				   	.mCanvas1{
+						width:100%; 
+						height:100% ;
+						display:none;
+			       }
+				   
+				   .mCanvas2{
+				       position: absolute;
+					   width:100%; 
+					   height:100% ;
+					   top:0px;
+					   left:0px;
+					   z-index: 0;
+					}
+					.mCanvas3{
+					    position: absolute;
+						width:100%; 
+						height:100% ;
+						top:0px;
+						left:0px;
+					    z-index: 1;
+					}
+						.mCanvas4{
+						position: absolute;
+						width:100%; 
+						height:100% ;
+						top:0px;
+						left:0px;
+					    z-index: 2;
+					}
+					
+						.mCanvas5{
+						 position: absolute; 
+						 width:100%; 
+						 height:100% ;
+				         top:0px;
+						 left:0px;
+					     z-index: 4;
+					}
+					
+					.mCanvas6{
+					    position: absolute;
+						width:100%; 
+						height:100%;
+						top:0px;
+						left:0px;
+					    z-index: 3;
+					}
+					
+				   </style>
+					  <canvas id="tempCanvas" class="mCanvas1" ></canvas>
+					  <canvas id="layer2" class="mCanvas2" ></canvas>
+					  <canvas id="layer3" class="mCanvas3" ></canvas>
+					  <canvas id="layer1" class="mCanvas4" ></canvas>
+					  <div id="container" class="mCanvas5"></div>
+					  <canvas id="trush" class="mCanvas6" ></canvas>
+					  
+					  
+				
+					  
 			   </div>
 				 <div> 
 				    <input  type="button" name ="Jump" value="Jump" onclick="searchTag()" id="butJump">
 				</div> 
-			</div>	
-	</div>
+
+			</div>
 	
+	</div> 
+   
+   
 
 
 
@@ -417,7 +476,7 @@ Drag.init(theHandle, theRoot);
    						request+="}";
    						return request;
    					}
-
+						  var graphics=document.getElementById('graphics'); 
    					      var canvas = document.getElementById('layer1');
    					      var context = canvas.getContext('2d');
    					      var canvas2 = document.getElementById('layer2');
@@ -426,13 +485,20 @@ Drag.init(theHandle, theRoot);
    					      var context3 = canvas3.getContext('2d');
    					      var canvas4 = document.getElementById('trush');
    					      var context4 = canvas4.getContext('2d');
-   					      
-   					      
-   					      
+   					      canvas.width=graphics.offsetWidth;
+				          canvas.height=graphics.offsetHeight; 
+				          canvas2.width=graphics.offsetWidth;
+					      canvas2.height=graphics.offsetHeight; 
+					      canvas3.width=graphics.offsetWidth;
+					      canvas3.height=graphics.offsetHeight; 
+					      canvas4.width=graphics.offsetWidth;
+					      canvas4.height=graphics.offsetHeight; 
+					      document.getElementById('tempCanvas').width=graphics.offsetWidth;
+					      document.getElementById('tempCanvas').height=graphics.offsetHeight;
    						  var stage = new Kinetic.Stage({
    						      container: 'container',
-   						      width: 500,
-   						      height: 500
+   						      width: document.getElementById('graphics').offsetWidth,
+   						      height: document.getElementById('graphics').offsetHeight
    						  });
    						  
    						  
@@ -771,11 +837,12 @@ Drag.init(theHandle, theRoot);
    							
    						  layer.on('mousemove', function(){
    							var mousePos = stage.getPointerPosition();
-   					        var message = 'Mouse position: ' + mousePos.x + ',' + mousePos.y;
+   					        var message = 'Mouse position: ' + mousePos.x + ',' + mousePos.y+','+canvas3.width+','+canvas3.height+','+canvas2.style.width+','+canvas2.style.heigth;
    							//writeMessagedyn(message);
    							context2.save();
    							context2.clearRect(0, 0, canvas2.width, canvas2.height); 
    							for(var i in ovals){
+   								
    								if(isInside({x:mousePos.x/canvas2.width,y:mousePos.y/canvas2.height},ovals[i])){
    									ovals[i].mouseon=true; 
    								}
@@ -788,7 +855,7 @@ Drag.init(theHandle, theRoot);
    					      }, false);
    					      
    					var img = new Image();
-   					img.onload = function() { context4.drawImage(img,450, 450,50,50);};
+   					img.onload = function() { context4.drawImage(img,canvas4.width*90/100, canvas4.height*90/100,canvas4.width*10/100,canvas4.height*10/100);};
    					img.src = 'http://wcdn1.dataknet.com/static/resources/icons/set20/f02a629829e9.png';
    					layer.draw();
    					 </script>
