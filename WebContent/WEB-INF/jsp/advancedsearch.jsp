@@ -209,32 +209,33 @@
 	}
 	#graphesearch{
 	    position:absolute;
-		background-color:white;
-		border:1px solid #333;
+	    border-radius: 20px;
+	    border:2px solid #C0C0C0;
+		padding : 10px;
 		display:block;
 		top:137px;
 		right:4px;
 	}
 	
 	#graphics{
- 	position: relative;
- 	width:100%;
-	height:450px; 
+	 	position: relative;
+	 	width:100%;
+		height:450px; 
 	} 
 	
 	#list_resultats{
 		position : relative;
-		width : 81%;
-		height:523px;
+		width : 78%;
+		height:540px;
 	}
 	#butJump {
 	    border-radius: 8px;
 	    width: 500px;
 	    height:40px;
 	    font-size : bold;
-	 /*   top: -10;*/
-	     color: white; 
-	     background-color: #4A8B87; 
+	   	top: -10;
+	    color: white; 
+	    background-color: #4A8B87; 
 	}
 
    
@@ -246,12 +247,15 @@
 		background-color: navy;
 		font-weight: bold;
 		 z-index:0;
-		}
+	}
 		
 	table{
 		width : 100%;
 	}
-	
+	table td{
+		padding : 10px;
+		width : 33%
+	}
 	caption{
 		background-color: #4A8B87;
 		-webkit-border-radius: 20px 20px 0 0;
@@ -263,54 +267,65 @@
 		width : 100%;
 	}
 	
-.mCanvas1{
-						width:100%; 
-						height:100% ;
-						display:none;
-			       }
-				   
-				   .mCanvas2{
-				       position: absolute;
-					   width:100%; 
-					   height:100% ;
-					   top:0px;
-					   left:0px;
-					   z-index: 0;
-					}
-					.mCanvas3{
-					    position: absolute;
-						width:100%; 
-						height:100% ;
-						top:0px;
-						left:0px;
-					    z-index: 1;
-					}
-						.mCanvas4{
-						position: absolute;
-						width:100%; 
-						height:100% ;
-						top:0px;
-						left:0px;
-					    z-index: 2;
-					}
+	#tag_name{
+		width : 100%;
+		color : #C0C0C0;
+		text-decoration: none;
+		border:2px solid #C0C0C0;
+		border-radius:5px;
+		box-shadow:2px 2px 3px #eee inset;
+	}
+	
+	.mCanvas1{
+		width:100%; 
+		height:100% ;
+		display:none;
+      }
+   
+   .mCanvas2{
+       position: absolute;
+	   width:100%; 
+	   height:100% ;
+	   top:0px;
+	   left:0px;
+	   z-index: 0;
+	}
+	.mCanvas3{
+	    position: absolute;
+		width:100%; 
+		height:100% ;
+		top:0px;
+		left:0px;
+	    z-index: 1;
+	}
+		.mCanvas4{
+		position: absolute;
+		width:100%; 
+		height:100% ;
+		top:0px;
+		left:0px;
+	    z-index: 2;
+	}
+	
+		.mCanvas5{
+		 position: absolute; 
+		 width:100%; 
+		 height:100% ;
+         top:0px;
+		 left:0px;
+	     z-index: 4;
+	}
+	
+	.mCanvas6{
+	    position: absolute;
+		width:100%; 
+		height:100%;
+		top:0px;
+		left:0px;
+	    z-index: 3;
+	}
+	
 					
-						.mCanvas5{
-						 position: absolute; 
-						 width:100%; 
-						 height:100% ;
-				         top:0px;
-						 left:0px;
-					     z-index: 4;
-					}
-					
-					.mCanvas6{
-					    position: absolute;
-						width:100%; 
-						height:100%;
-						top:0px;
-						left:0px;
-					    z-index: 3;
-					}
 
 
 </style>
