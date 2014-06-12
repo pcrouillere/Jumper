@@ -122,7 +122,7 @@ function addVisitToUrl(id){
 					<input type="image" src="/Jump/image?src=Remove2.png" class="bouton_del" onclick="removeUrlFromTag(<%=url.getuId()%>,<%=tag.getTid()%>)"/>
 				</td>
 				<td>
-					<a href="?page=ajoutertagurl&id=<%=url.getuId()%>"><img src="/Jump/image?src=add.png"/></a>
+					<a href="?page=ajoutertagurl&id=<%=url.getuId()%>&tagId=<%=tag.getTid()%>"><img src="/Jump/image?src=add.png"/></a>
 				</td>
 				<td>
 					<input type="image" src="/Jump/image?src=Bin.png" class="bouton_del" onclick="removeUrlFromBdd(<%=url.getuId()%>)"/>
