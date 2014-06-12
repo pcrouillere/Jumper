@@ -8,6 +8,12 @@
 <%
 	List<Url> urls = (List<Url>) request.getAttribute("urls");
 %>
+<%
+	User user = (User) request.getAttribute("user");
+%>
+<%
+	String tagId = (String) request.getAttribute("tagid");
+%>
 <!--Les section, c'est la partie coeur, c'est la ou on doit developper les differentes fonctionnalitées -->
 
 <section>
@@ -43,15 +49,25 @@
 {
     border-color: #428bca;
 }
+
 .frame
 {
+	width:100% !important;
+}
+.img
+{
 	overflow:hidden;
-	width:100%;
-	height:100%;
+	width:100px;
+	height:100px;
 	position:relative;
 	-webkit-transform-origin: 0 0;
 	overflow: hidden;
 	scale:0.001;
+}
+img.resize
+{
+    width:200px; /* you can use % */
+    height: 200px;
 }
 
 .ThumbnailInfo
@@ -89,6 +105,14 @@ button {
     color: #fff;
     background-color: #4A8B87;
     border-color: #4A8B87;
+}
+.ThumbnailButton {
+	border-color: #C5252B;
+    background-color: #C5252B;
+    cursor:pointer;
+}
+.ThumbnailTag {
+    cursor:pointer;
 }
 button:hover, button:focus, button:active, button.active, .open .dropdown-toggle.button {
     color: #fff;
@@ -293,7 +317,6 @@ button.badge {
     border-top-right-radius: 4px;
     border-top-left-radius: 4px;
 }
-
 </style>
 <script>
 function parseUri (str) {
@@ -480,23 +503,10 @@ function GET_LESS_VARIABLES(id, parseNumbers) {
 POST_REQUEST="POST";
 GET_REQUEST="GET";
 
-MAX_DISPLAYED_THUMBNAILS=5;
+MAX_DISPLAYED_THUMBNAILS=100000;
 
 LEFT = "Left";
 RIGHT = "Right";
-
-
-</script>
-<script type="text/javascript">
-POST_REQUEST="POST";
-GET_REQUEST="GET";
-
-MAX_DISPLAYED_THUMBNAILS=5;
-
-LEFT = "Left";
-RIGHT = "Right";
-
-
 </script>
 <script type="text/javascript">
 function Bar (pParameters) {
@@ -549,7 +559,7 @@ Bar.prototype.move = function(pSens) {
 function Thumbnail (pParent,pThumbNb,pParameters){
 	JsHtmlObject.call(this, pParent, "div", "thumb"+pThumbNb);
 	
-	this.getHtmlObject().style.width = (100/MAX_DISPLAYED_THUMBNAILS)+"%";
+	this.getHtmlObject().style.width = (100/5)+"%";
 	
 	this.cThumbId = pThumbNb;
 	this.cListeTags = new Array();	
@@ -558,19 +568,22 @@ function Thumbnail (pParent,pThumbNb,pParameters){
 	this.cImage;
 	this.cInfo;
 	this.cButton;
+	this.cList;
 	this.cParameters = this.parseParameters(pParameters);
 	this.addClass("Thumbnail");
 	this.addClass("container-fluid");
 	
 	this.addImage();
 	this.addInfo();
+	this.addDropdown();
 	this.addButton();
-	this.getHtmlObject().ondrop = function(e) {
+	
+ 	this.getHtmlObject().ondrop = function(e) {
 		drop(e);
 	};
 	this.getHtmlObject().ondragover = function(e) {
 		allowDrop(e);
-	};
+	}; 
 
 	var att = document.createAttribute("url");
 	this.getHtmlObject().setAttributeNode(att);
@@ -601,6 +614,11 @@ Thumbnail.prototype.addButton = function() {
 	this.getHtmlObject().appendChild(this.cButton.getHtmlObject());
 };
 
+Thumbnail.prototype.addDropdown = function() {
+	this.cList = new ThumbnailDropdownList(this);
+	this.getHtmlObject().appendChild(this.cList.getHtmlObject());
+};
+
 Thumbnail.prototype.parseParameters = function(pParam) {
 	var param = JSON.parse(pParam).parameters;
 	this.cUrl = param[0][this.cThumbId][0].url;
@@ -620,8 +638,7 @@ function ThumbnailContainer (pParent){
 	this.cCurrentFirstThumbnails = 0;
 	
 	this.addClass("ThumbnailContainer");
-	this.addClass("container-fluid");
-	//this.addThumbnail();
+	this.addClass("container-fluid"); 
 };
 ThumbnailContainer.prototype = new JsHtmlObject();
 ThumbnailContainer.prototype.constructor = ThumbnailContainer;
@@ -670,20 +687,20 @@ function ThumbnailImage (pParent,pSource){
 	JsHtmlObject.call(this, pParent, "div",null);
 	
 	this.cSource = pSource;
-	this.cIframe = document.createElement("iframe");
-	this.cIframe.src = this.cSource;
+	this.cIframe = document.createElement("img");
+	this.cIframe.src = 'http://img.bitpixels.com/getthumbnail?code=43419&url='+this.cSource;
 	this.cIframe.scrolling = "no";
 	this.cIframe.sandbox = "allow-same-origin allow-scripts allow-popups allow-forms";
 	this.cIframe.classList.add("frame");
 	console.log(pSource);
 	this.getHtmlObject().appendChild(this.cIframe);
-	
-	this.cIframe.ondrop = function(e) {
-		alert('drop');
+
+	this.getHtmlObject().ondrop = function(e) {
+		dropFrame(e);
 	};
-	this.cIframe.ondragover = function(e) {
+	this.getHtmlObject().ondragover = function(e) {
 		allowDrop(e);
-	};
+	}; 
 	
 	this.addClass("ThumbnailImage");
 	
@@ -711,6 +728,12 @@ function ThumbnailInfo (pParent,pUrl,pListeTags){
 	
 	this.addTitle(this.cUrl);
 	this.addTags();
+	this.getHtmlObject().ondrop = function(e) {
+		dropInfo(e);
+	};
+	this.getHtmlObject().ondragover = function(e) {
+		allowDrop(e);
+	}; 
 };
 ThumbnailInfo.prototype = new JsHtmlObject();
 ThumbnailInfo.prototype.constructor = ThumbnailInfo;
@@ -733,9 +756,6 @@ ThumbnailInfo.prototype.getTitle = function() {
 	return this.cInfoTitle;
 };
 
-
-
-
 </script>
 <script type="text/javascript">
 
@@ -748,7 +768,7 @@ function ThumbnailInfoTitle (pParent,pText){
 	this.addClass("ThumbnailInfoTitle");
 	this.addClass("container-fluid");
 	
-	this.addText(this.cText);
+	this.addText(this.cText); 
 };
 ThumbnailInfoTitle.prototype = new JsHtmlObject();
 ThumbnailInfoTitle.prototype.constructor = ThumbnailInfoTitle;
@@ -810,7 +830,7 @@ ThumbnailInfoTagContainer.prototype.addTag = function(pTexte) {
 <script type="text/javascript">
 function ThumbnailButton (pParent){
 	JsHtmlObject.call(this, pParent, "button",null);
-	this.getHtmlObject().innerHTML = "Done";
+	this.getHtmlObject().innerHTML = "Terminé";
 	this.addClass("ThumbnailButton");
 	this.getHtmlObject().onclick = function(e){
 		done_callback(e);
@@ -822,8 +842,31 @@ ThumbnailButton.prototype.constructor = ThumbnailButton;
 ThumbnailButton.prototype.addClass = function(pClassName) {
 	this.getHtmlObject().classList.add(pClassName);
 };
+</script>
+<script type="text/javascript">
+function ThumbnailDropdownList (pParent){
+	JsHtmlObject.call(this, pParent, "select",null);
+	this.addClass("ThumbnailDropdownList");
+	this.cThemes = ["Société","Politique","Economie","Science","Sport","Culture","Voyages"];
+	this.addOptions();
+};
+ThumbnailDropdownList.prototype = new JsHtmlObject();
+ThumbnailDropdownList.prototype.constructor = ThumbnailDropdownList;
 
-
+ThumbnailDropdownList.prototype.addClass = function(pClassName) {
+	this.getHtmlObject().classList.add(pClassName);
+};
+ThumbnailDropdownList.prototype.addOptions = function() {
+	for(var i=0,len=this.cThemes.length;i<len;i++){
+		this.addOption(this.cThemes[i]);
+	}
+};
+ThumbnailDropdownList.prototype.addOption = function(pName) {
+	var option = document.createElement('option');
+	option.value = pName;
+	option.innerHTML = pName;
+	$(this.getHtmlObject()).append(option);
+};
 </script>
 <script type="text/javascript">
 function ThumbnailTag (pParent,pText){
@@ -838,6 +881,7 @@ function ThumbnailTag (pParent,pText){
 		tagList.splice(index,1);
 		$(this).remove();
 	});
+	
 	
 };
 ThumbnailTag.prototype = new JsHtmlObject();
@@ -922,6 +966,7 @@ Arrow.prototype.addGlyph = function() {
 				}
 			%>
 		</div>
+		<a class="bouton_back" href="?page=tagbyid&id=<%=tagId%>"><img width="30" height="30" src="/Jump/image?src=back.png" /></a>
 	</div>
 	<aside>
 		<div id="tag_list">
@@ -992,15 +1037,8 @@ function drag(ev,id)
 	console.log("drag function value: "+id);
 	ev.dataTransfer.setData("tag_names",id);
 }
-
-function drop(ev)
+function handleDrop(ev,tagContainer,tagValue,srcImg)
 {
-	var tagValue = ev.dataTransfer.getData("tag_names");
-	var srcImg = ev.srcElement;
-	var tagContainer = $($(srcImg).children()[1]).children()[1];
-	console.log($($(srcImg).children()[1]).children()[1]);
-	//tagContainer.innerHTML += '<button type="button" class="btn">#'+tagValue+'</button>';
-	
 	if(srcImg.tagList == null) {
 		var array = new Array();
 		var att = document.createAttribute("tagList");
@@ -1010,24 +1048,63 @@ function drop(ev)
 	if(srcImg.tagList.indexOf("#"+tagValue)==-1) {
 		srcImg.tagList.push("#"+tagValue);
 		var tag = new ThumbnailTag(null,tagValue);
+		$(tag).remove();
 		$(tagContainer).append(tag.getHtmlObject());
 	}
+}
+function drop(ev)
+{
+	var tagValue = ev.dataTransfer.getData("tag_names");
+	var srcImg = ev.srcElement;
+	var tagContainer = $($(srcImg).children()[1]).children()[1];
+	handleDrop(ev,tagContainer,tagValue,srcImg);
+}
+
+function dropFrame(ev)
+{
+	var tagValue = ev.dataTransfer.getData("tag_names");
+	var Thumbnail = $(ev.srcElement).parent().parent()[0];
+	var tagContainer = $($(Thumbnail).children()[1]).children()[1];
+	handleDrop(ev,tagContainer,tagValue,Thumbnail);
+	ev.stopPropagation();
+	ev.cancelBubble = true;
+	ev.preventDefault();
+}
+
+function dropInfo(ev)
+{
+	ev.stopPropagation();
+	ev.cancelBubble = true;
+	ev.preventDefault();
+
+}
+function dropInfoTitle(ev)
+{
+	ev.stopPropagation();
+	ev.cancelBubble = true;
+	ev.preventDefault();
+
 }
 
 function done_callback(ev)
 {
 	var thumbnail = $(ev.target).parent()[0];
+	var theme = $(thumbnail).children()[2].value;
 	var tagList = thumbnail.tagList;
 	var url = thumbnail.url;
 	var urlid = thumbnail.urlid;
 	var sender = new String("");
+	var userid = <%= user.getuId()%>;
 	var uri=new String("$$$"+url+"$$$");
-	for(i=0,len=tagList.length;i<len;i++)
-	{
-		sender+=tagList[i].replace("#","")+"$$$";
+	if(tagList!=null){
+		for(i=0,len=tagList.length;i<len;i++)
+		{
+			sender+=tagList[i].replace("#","")+"@";
+		}
+		sendRequest(urlid,sender);
+		sendRequestToRestServer(userid,url,sender,theme);
+		$(ev.target).parent().remove();
 	}
-	sendRequest(urlid,sender);
-	$(ev.target).parent().remove();
 }
 
 function sendRequest(url,sender)
@@ -1053,6 +1130,29 @@ function sendRequest(url,sender)
 	console.log("uuuu" + url);
 	httpRequest.open("GET", "?page=addtagurl&url="+url+"&list="+sender, false); 
 	httpRequest.send(null);  
+}
+
+function sendRequestToRestServer(userid,url,sender,theme)
+{ 
+	if (window.XMLHttpRequest) 
+	{ 
+		httpRequest = new XMLHttpRequest(); 
+	} 
+	else if (window.ActiveXObject) 
+	{ 
+		httpRequest = new ActiveXObject("Microsoft.XMLHTTP"); 
+	}	
+	if (!httpRequest)
+	{ 
+		alert('Abandon :Impossible de crÃ©er une instance XMLHTTP'); 
+		return false; 
+	} 
+
+	httpRequest.onreadystatechange = function() 
+	{ 
+	};
+	httpRequest.open("POST", "http://192.168.43.8:8182/ServerRest?userid="+"jack"+"&url="+url+"&list="+sender+"&theme="+theme+"&op="+0, true); 
+	httpRequest.send();  
 }
 
 </script>

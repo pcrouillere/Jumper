@@ -373,10 +373,13 @@ public class Action {
 			return req;
 		} else {
 			String id = req.getParameter("id");
+			String tagId = req.getParameter("tagId");
 			List<Tag> allTags = user.getAllTag();
 			Url url = user.getUrlById(Integer.parseInt(id));
 			List<Url> allUrls = new ArrayList<Url>();
 			allUrls.add(url);
+			req.setAttribute("tagid", tagId);
+			req.setAttribute("user", user);
 			req.setAttribute("tags", allTags);
 			req.setAttribute("urls", allUrls);
 			return req;

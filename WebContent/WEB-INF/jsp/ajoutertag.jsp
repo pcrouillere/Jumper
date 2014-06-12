@@ -827,7 +827,7 @@ ThumbnailInfoTagContainer.prototype.addTag = function(pTexte) {
 <script type="text/javascript">
 function ThumbnailButton (pParent){
 	JsHtmlObject.call(this, pParent, "button",null);
-	this.getHtmlObject().innerHTML = "Done";
+	this.getHtmlObject().innerHTML = "Terminé";
 	this.addClass("ThumbnailButton");
 	this.getHtmlObject().onclick = function(e){
 		done_callback(e);
@@ -963,7 +963,10 @@ Arrow.prototype.addGlyph = function() {
 				}
 			%>
 		</div>
+			<a class="bouton_back" href="?page=tableaubord"><img width="30" height="30" src="/Jump/image?src=back.png" /></a>
+		
 	</div>
+	
 	<aside>
 		<div id="tag_list">
 			<div class="panel panel-default">
@@ -985,6 +988,7 @@ Arrow.prototype.addGlyph = function() {
 							%>			
 						</div>
 					</div>
+					
 				</div>
 			<div id="input_tag">
 				<div class="input-group">
@@ -992,6 +996,7 @@ Arrow.prototype.addGlyph = function() {
 				  <input type="text" class="form-control" placeholder="nom du tag" id="tag_name">
 				</div>
 			</div>
+			
 		</div>
 		</aside>			
 </section>
