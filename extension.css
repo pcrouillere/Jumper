@@ -1,21 +1,29 @@
+@import url(http://fonts.googleapis.com/css?family=Pacifico);
+
+@import url(http://fonts.googleapis.com/css?family=Special+Elite);
+
+@import url(http://fonts.googleapis.com/css?family=Ubuntu:400,500);
+
 body{
 	min-width : 200px;
-	margin : 10 px;
 	text-align: center;
-	background-color :#C5252B;
+	margin: 0px;
+	margin-top:0px;
+	padding: 0px;
 }
 
 .bouton{
 }
+
 .but {
 	width: 150px !important;
-	background-color:#C5252B;
 	-moz-border-radius:6px;
 	-webkit-border-radius:6px;
-	border:1px solid #C5252B;
+	border:0px solid #C5252B;
 	cursor:pointer;
 	color:#ffffff;
-	font-family:Verdana;
+	background-color:none;
+	font-family:Ubuntu;
 	font-size:17px;
 	font-weight:bold;
 	padding:11px ;
@@ -24,19 +32,26 @@ body{
 	background-color:#4A8B87;
 }
 
+.but img{
+	padding-right: 15px;
+}
+
 .jumbotron {
     color: inherit;
     background-color: #eee;
 }
 .jumbotron h1, .jumbotron .h1 {
-    color: inherit;
+	font-family : Pacifico;
+    color: white;
+    background-color:#C5252B;
+    padding:0px;
+    margin:0px;
 }
 .jumbotron p {
     font-size: 21px;
     font-weight: 200;
 }
 .container .jumbotron {
-    border-radius: 6px;
 }
 
 .jumbotron h1, .jumbotron .h1 {
