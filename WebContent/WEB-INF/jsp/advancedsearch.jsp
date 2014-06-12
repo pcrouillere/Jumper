@@ -415,7 +415,7 @@ Drag.init(theHandle, theRoot);
 
    					var selectedpiece= [];
    					var ovals = [];
-
+					var trush_ratio=90/100;
    					function addoval(ovals,selectedpiece,oval){
    						ovals.push(oval); 
    						for(i in selectedpiece){
@@ -743,7 +743,7 @@ Drag.init(theHandle, theRoot);
    						  
    						  
    						  text.on('dragend', function() {
-   						  	if(text.x()+group.x()>450 && text.y()+group.y()>450){
+   						  	if(text.x()+group.x()>width*trush_ratio && text.y()+group.y()>height*trush_ratio){
    						  		group.remove(); 
    						  		deleteovalbytag(ovals,selectedpiece,text.getAttr("text"));
    						  		drawovals(ovals, document.getElementById('layer1'));
@@ -826,7 +826,7 @@ Drag.init(theHandle, theRoot);
    							
    						  layer.on('mousemove', function(){
    							var mousePos = stage.getPointerPosition();
-   					        var message = 'Mouse position: ' + mousePos.x + ',' + mousePos.y+','+canvas3.width+','+canvas3.height+','+canvas2.style.width+','+canvas2.style.heigth;
+   					        var message = 'Mouse position: ' + mousePos.x + ',' + mousePos.y+','+canvas4.width+','+canvas4.height+','+canvas4.style.width+','+canvas4.style.heigth;
    							//writeMessagedyn(message);
    							context2.save();
    							context2.clearRect(0, 0, canvas2.width, canvas2.height); 
@@ -844,7 +844,7 @@ Drag.init(theHandle, theRoot);
    					      }, false);
    					      
    					var img = new Image();
-   					img.onload = function() { context4.drawImage(img,canvas4.width*90/100, canvas4.height*90/100,canvas4.width*10/100,canvas4.height*10/100);};
+   					img.onload = function() { context4.drawImage(img,canvas4.width*trush_ratio, canvas4.height*trush_ratio,canvas4.width*(1-trush_ratio),canvas4.height*(1-trush_ratio));};
    					img.src = 'http://wcdn1.dataknet.com/static/resources/icons/set20/f02a629829e9.png';
    					layer.draw();
 
