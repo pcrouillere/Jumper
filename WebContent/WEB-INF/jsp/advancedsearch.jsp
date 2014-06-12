@@ -128,43 +128,21 @@
 	
 	
 	    Colors = {};
-	    Colors.names = {
-	        aqua: "#00ffff",
+	    Colors.names = {		
+	    	orange: "#FDAE6B", 
+	    	greenlight: "#A1D99B", 
+	    	bluelight: "#9ECAE1", 
+	    	green: "#31A354", 
+	    	blue: "#3182BD", 
+	    	yellowlight:"#FFF38B",
+	        aqua: "#81EBEB",
 	        azure: "#f0ffff",
-	        beige: "#f5f5dc",
-	        black: "#000000",
 	        blue: "#0000ff",
-	        brown: "#a52a2a",
-	        cyan: "#00ffff",
-	        darkblue: "#00008b",
-	        darkcyan: "#008b8b",
-	        darkgrey: "#a9a9a9",
-	        darkgreen: "#006400",
-	        darkkhaki: "#bdb76b",
-	        darkmagenta: "#8b008b",
-	        darkolivegreen: "#556b2f",
-	        darkorange: "#ff8c00",
-	        darkorchid: "#9932cc",
-	        darkred: "#8b0000",
-	        red :"#FF0000",
-	        darksalmon: "#e9967a",
-	        darkviolet: "#9400d3",
-	        fuchsia: "#ff00ff",
-	        gold: "#ffd700",
-	        green: "#008000",
-	        indigo: "#4b0082",
-	        khaki: "#f0e68c",
-	        lime: "#00ff00",
-	        magenta: "#ff00ff",
-	        maroon: "#800000",
-	        navy: "#000080",
-	        olive: "#808000",
-	        orange: "#ffa500",
-	        pink: "#ffc0cb",
-	        purple: "#800080",
-	        violet: "#800080",
-	        silver: "#c0c0c0"
-	      
+	        darksalmon: "#FBAA90",
+	        violet: "#DA97F6",
+	        fuchsia: "#D0BDD0",
+	        khaki: "#D7CD79",
+	        olive: "#9D9D2F",
 	    };
 	    Colors.random = function() {
 	        var result;
@@ -195,19 +173,20 @@
 		display:inline-block;
 	}
 	#graphesearch{
+		margin-right : 10px;
 	    position:absolute;
 	    border-radius: 20px;
 	    border:2px solid #C0C0C0;
 		padding : 10px;
 		display:block;
-		top:137px;
+		top:85px;
 		right:4px;
 	}
 	
 	#graphics{
 	 	position: relative;
-	 	width:100%;
-		height:450px; 
+	 	width:450px;
+		height:430px; 
 	} 
 	
 	#list_resultats{
@@ -217,7 +196,7 @@
 	}
 	#butJump {
 	    border-radius: 8px;
-	    width: 500px;
+	    width: 100%;
 	    height:40px;
 	    font-size : bold;
 	   	top: -10;
@@ -311,6 +290,15 @@
 		left:0px;
 	    z-index: 3;
 	}
+	
+	a{
+		color: grey;
+ 		text-decoration: none;
+	}
+	a:hover {
+		color: #C5252B;
+		text-decoration: none;
+	}
 </style>
 
 <script>
@@ -384,9 +372,9 @@ function addVisitToUrl(id){
 	</div> 
 </section>
 <script type="text/javascript">
-	var theHandle = document.getElementById("handle");
-	var theRoot = document.getElementById("graphesearch");
-	Drag.init(theHandle, theRoot);
+	//var theHandle = document.getElementById("handle");
+	//var theRoot = document.getElementById("graphesearch");
+	//Drag.init(theHandle, theRoot);
 </script>
  
 <script  type="text/javascript" src="http://d3lp1msu2r81bx.cloudfront.net/kjs/js/lib/kinetic-v5.0.2.min.js"></script>
@@ -856,7 +844,9 @@ function writeMessage(canvas, message) {
 								if(i<listSites.length-1){
 									listSites[i] = listSites[i].split(' $$$ ');
 									textResult +="<td>" ;
-									textResult += "<img src = 'http://img.bitpixels.com/getthumbnail?code=43419&url="+listSites[i][0]+"'>";
+									textResult += "<a href='"+listSites[i][0]+"' target='_blank' onclick='addVisitToUrl("+listSites[i][2]+")'>";
+									textResult +="<img src = 'http://img.bitpixels.com/getthumbnail?code=43419&url="+listSites[i][0]+"'>";
+									textResult +="</a>";
 									textResult +="<a href='"+listSites[i][0]+"' target='_blank' onclick='addVisitToUrl("+listSites[i][2]+")'>" ;
 									textResult +="<p>"+listSites[i][1]+"</p></a>";
 									textResult +="</td>" ;
