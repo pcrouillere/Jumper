@@ -12,25 +12,12 @@
 
 %>
 
-
-
-
-
-<html>
-  <head>
-    <style>
-      body {
-        margin: 0px;
-        padding: 0px;
-      }
-    </style>
   <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
   <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
   <script src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
     
     
-  </head>
-  <body>
+  <section>
 				
 			<script>
 		
@@ -204,6 +191,12 @@
 
 <style>
 
+	body
+	{
+        margin: 0px;
+        padding: 0px;
+    }
+
 	.ui-autocomplete {
 	    z-index: 100 !important;
 	}
@@ -212,56 +205,36 @@
 	{
 		height:auto;
 		margin:auto;
+		display:inline-block;
 	}
 	#graphesearch{
 	    position:absolute;
 		background-color:white;
 		border:1px solid #333;
 		display:block;
+		top:137px;
+		right:4px;
 	}
 	
 	#graphics{
-	position: relative;
-	width:600px;
-	height:600px; 
-	
+ 	position: relative;
+ 	width:100%;
+	height:450px; 
 	} 
 	
 	#list_resultats{
-		background-color : red;
 		position : relative;
-		width : 82%;
-		height:500px;
+		width : 81%;
+		height:523px;
 	}
-	input[type=button] {
+	#butJump {
 	    border-radius: 8px;
-	  
 	    width: 500px;
 	    height:40px;
-	    font-family: Tahoma;
-	    background: #f4f4f4;
-	    /* Old browsers */
-	    background: -moz-linear-gradient(top, #f4f4f4 1%, #ededed 100%);
-	    /* FF3.6+ */
-	    background: -webkit-gradient(linear, left top, left bottom, color-stop(1%, #f4f4f4), color-stop(100%, #ededed));
-	    /* Chrome,Safari4+ */
-	    background: -webkit-linear-gradient(top, #f4f4f4 1%, #ededed 100%);
-	    /* Chrome10+,Safari5.1+ */
-	    background: -o-linear-gradient(top, #f4f4f4 1%, #ededed 100%);
-	    /* Opera 11.10+ */
-	    background: -ms-linear-gradient(top, #f4f4f4 1%, #ededed 100%);
-	    /* IE10+ */
-	    background: linear-gradient(to bottom, #f4f4f4 1%, #ededed 100%);
-	    /* W3C */
-	    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#f4f4f4', endColorstr='#ededed', GradientType=0);
-	    /* IE6-9 */
-	    top: -10;
-	   font-weight: bold;
-	    font-face: 'Comic Sans MS';
-	     font-size: 50; 
-	     color: blue; 
-	     background-color: #FFFFC0; 
-	     border: 3pt ridge lightgrey" ;    
+	    font-size : bold;
+	 /*   top: -10;*/
+	     color: white; 
+	     background-color: #4A8B87; 
 	}
 
    
@@ -274,70 +247,23 @@
 		font-weight: bold;
 		 z-index:0;
 		}
-
-
-</style>
-
-
-<script>
-function addVisitToUrl(id){ 
-	if (window.XMLHttpRequest) { 
-	httpRequest = new XMLHttpRequest(); 
-
-	} 
-	else if (window.ActiveXObject) { 
-	httpRequest = new ActiveXObject("Microsoft.XMLHTTP"); 
-	}	
-	if (!httpRequest) { 
-	alert('Abandon :Impossible de créer une instance XMLHTTP'); 
-	return false; 
-	} 
-
-	httpRequest.onreadystatechange = function() { 
-	};
-	
-	httpRequest.open("GET", "?page=addvisit&id="+id, false); 
-	httpRequest.send(null);  
+		
+	table{
+		width : 100%;
 	}
-
-
-</script>
-  
-	<div id="content_page">
-		<div id ="list_resultats">	
-		</div>
-			<div id="graphesearch">
-			<div id="handle">Handle</div>
-				<div>
-						<input type="text" placeholder="add tags" id="tag_name" style="z-index:0;">
-						<script>
-							var alltags=[];
-						</script>
-						<% 
-						int i=0;
-						while ( i<tags.size())
-						{
-						%>
-						<script>
-					  		alltags.push("<%= tags.get(i).gettName()%>");
-						</script>
-						 <% 
-						 ++i;
-						}
-						%>
-						<script>
-						$( "#tag_name" ).autocomplete({
-		  				source: alltags
-		  				,autoFocus: true});
-						</script>
-				
-				</div>
-				<div id="graphics" >
-				
-				
-				
-				   <style>
-				   	.mCanvas1{
+	
+	caption{
+		background-color: #4A8B87;
+		-webkit-border-radius: 20px 20px 0 0;
+		-moz-border-radius: 20px 20px 0 0;
+		border-radius: 20px 20px 0 0;
+		color: #fff;
+		font-size: 15px;
+		padding: 15px 15px;
+		width : 100%;
+	}
+	
+.mCanvas1{
 						width:100%; 
 						height:100% ;
 						display:none;
@@ -385,25 +311,80 @@ function addVisitToUrl(id){
 						left:0px;
 					    z-index: 3;
 					}
-					
-				   </style>
+
+
+</style>
+
+
+<script>
+function addVisitToUrl(id){ 
+	if (window.XMLHttpRequest) { 
+	httpRequest = new XMLHttpRequest(); 
+
+	} 
+	else if (window.ActiveXObject) { 
+	httpRequest = new ActiveXObject("Microsoft.XMLHTTP"); 
+	}	
+	if (!httpRequest) { 
+	alert('Abandon :Impossible de créer une instance XMLHTTP'); 
+	return false; 
+	} 
+
+	httpRequest.onreadystatechange = function() { 
+	};
+	
+	httpRequest.open("GET", "?page=addvisit&id="+id, false); 
+	httpRequest.send(null);  
+	}
+
+
+</script>
+  
+	<div id="content_page">
+		<div id ="list_resultats">	
+			<table>
+				<caption>Resultat</caption>
+			</table>
+		</div>
+			<div id="graphesearch">
+			<!--  <div id="handle">Handle</div>-->
+				<div>
+						<input type="text" placeholder="add tags" id="tag_name" style="z-index:0;">
+						<script>
+							var alltags=[];
+						</script>
+						<% 
+						int i=0;
+						while ( i<tags.size())
+						{
+						%>
+						<script>
+					  		alltags.push("<%= tags.get(i).gettName()%>");
+						</script>
+						 <% 
+						 ++i;
+						}
+						%>
+						<script>
+						$( "#tag_name" ).autocomplete({
+		  				source: alltags
+		  				,autoFocus: true});
+						</script>
+				
+				</div>
+				<div id="graphics" >
 					  <canvas id="tempCanvas" class="mCanvas1" ></canvas>
 					  <canvas id="layer2" class="mCanvas2" ></canvas>
 					  <canvas id="layer3" class="mCanvas3" ></canvas>
 					  <canvas id="layer1" class="mCanvas4" ></canvas>
 					  <div id="container" class="mCanvas5"></div>
 					  <canvas id="trush" class="mCanvas6" ></canvas>
-					  
-					  
-				
-					  
 			   </div>
 				 <div> 
 				    <input  type="button" name ="Jump" value="Jump" onclick="searchTag()" id="butJump">
 				</div> 
 
 			</div>
-	
 	</div> 
    
    
@@ -881,6 +862,7 @@ Drag.init(theHandle, theRoot);
 										textResult = "";
 										textResult += "<table>";
 										var i = 0;
+										textResult +="<caption>Resultat</caption>";
 										for (var j = 0; j <= (listSites.length/3); j++) {
 											textResult +="<tr>" ;
 											for(var k =0; k<=2; k++){
@@ -967,5 +949,3 @@ Drag.init(theHandle, theRoot);
 							}
 						},false);
 					</script>
-  </body>
-</html>
