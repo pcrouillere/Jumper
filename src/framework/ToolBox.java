@@ -43,6 +43,11 @@ public class ToolBox {
 	    return content;
 	}
 	
+	public static boolean contains(String s, char value){
+        return s != null && s.indexOf(value) > -1;
+     }
+	
+	
 	/**
 	 * Permet le bon formatage d'un chemin selon le syst�me.
 	 * @param filename String chemin � formater
@@ -55,6 +60,8 @@ public class ToolBox {
 		}
 		return filename;
 	}
+	
+	
 	
 	/**
 	 * Fonction qui v�rifie l'existance d'une m�thode pour une classe par r�flexion.

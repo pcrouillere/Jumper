@@ -34,7 +34,7 @@
 			<li><a href="#"><%=user.getuName() %></a>
 				<ul>
 					<li><a href="?page=accueil">Accueil</a></li>	
-					<li><a href="?advancedsearch">Recherches</a></li>
+					<li><a href="?page=advancedsearch">Recherches</a></li>
 					<li><a href="?page=tableaubord">Tableau De Bord</a></li>
 					<li><a href="?page=graph">Graph View</a></li>
 					<li><a href="?page=ajoutertag">Trier Nouveaux Favoris</a></li>

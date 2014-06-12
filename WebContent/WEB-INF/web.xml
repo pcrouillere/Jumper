@@ -19,6 +19,15 @@
   </servlet-mapping>
   
   <servlet>
+    <servlet-name>advancedsearch</servlet-name>
+    <servlet-class>servlets.advancedsearch</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>advancedsearch</servlet-name>
+    <url-pattern>/advancedsearch</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
     <servlet-name>FastSearch</servlet-name>
     <servlet-class>servlets.FastSearch</servlet-class>
   </servlet>

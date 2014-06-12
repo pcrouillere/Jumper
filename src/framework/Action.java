@@ -173,16 +173,12 @@ public class Action {
 		}
 	}
 
-	/**
-	 * Fonction login Gere la connexion de l'utilisateur lors de son arrivee
-	 * dans l'application
-	 * 
-	 * @param req
-	 *            : HttpServletRequest
-	 **/
 
-	public HttpServletRequest login(HttpServletRequest req,
-			HttpServletResponse response) {
+	/** Fonction login
+	 * Gere la connexion de l'utilisateur lors de son arrivee dans l'application
+	 * @param req	: HttpServletRequest **/	
+	
+	public HttpServletRequest login(HttpServletRequest req, HttpServletResponse response) {
 		String email = req.getParameter("email");
 		String mdp = req.getParameter("password");
 		boolean access = false;
@@ -193,8 +189,7 @@ public class Action {
 				System.out.println(email);
 				System.out.println(mdp);
 				if (user != null) {
-					Cookie userCookie = new Cookie("userId",
-							Integer.toString(user.getuId()));
+					Cookie userCookie = new Cookie("userId", Integer.toString(user.getuId()));
 					response.addCookie(userCookie);
 					this.parent.session().open(user);
 					this.parent.redirect("accueil", true);
@@ -414,8 +409,29 @@ public class Action {
 		return req;
 	}
 
-	public HttpServletRequest addtagurl(HttpServletRequest req,
-			HttpServletResponse response) throws SQLException {
+	
+
+	public HttpServletRequest suggestion(HttpServletRequest req, HttpServletResponse response) throws SQLException {
+		User user = User.getInstance();
+		return req;
+	}
+
+	/** Fonction advancedsearch
+	 * Gere la page advancedsearch de l'application
+	 * @param req	: HttpServletRequest **/
+	
+	public HttpServletRequest advancedsearch(HttpServletRequest req, HttpServletResponse response){
+		User user = User.getInstance(); 
+		List<Tag> allTags = user.getAllTag();
+		List<Url> allUrls = user.getUntaggedUrl();
+		req.setAttribute("tags", allTags);
+		req.setAttribute("untaggedurls", allUrls);
+		//req.setAttribute("script", script);
+		return req;
+	
+	}
+
+	public HttpServletRequest addtagurl(HttpServletRequest req,			HttpServletResponse response) throws SQLException {
 		User user = User.getInstance();
 		if (user == null) {
 			this.parent.redirect("login", true);
@@ -444,12 +460,6 @@ public class Action {
 			}
 			return req;
 		}
-	}
-
-	public HttpServletRequest suggestion(HttpServletRequest req,
-			HttpServletResponse response) throws SQLException {
-		User user = User.getInstance();
-		return req;
 	}
 
 }

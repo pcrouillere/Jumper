@@ -7,9 +7,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+
+
 //import sun.security.util.Length;
 import framework.Base;
 import framework.Dao;
+import framework.ToolBox;
 
 public class User extends Dao {
 	
@@ -306,6 +309,82 @@ public class User extends Dao {
 		System.out.println(untaggedUrl.size());
 		return untaggedUrl;
 	}
+	
+	
+	
+	private void createadvancedcondition(String tagoper,List<List<String>> requestlist){
+        ArrayList<String> pile = new ArrayList<>();
+        String temptag= "";
+        List<String> tempet= new ArrayList<>();
+        String specbegchar="[{(";
+        String specendchar="]})";
+        for (int i = 0; i < tagoper.length(); i++) { 
+            if(ToolBox.contains(specbegchar,tagoper.charAt(i))){
+                 pile.add(Character.toString(tagoper.charAt(i)));
+            }
+            else if(ToolBox.contains(specendchar,tagoper.charAt(i))){
+                if(pile.get(pile.size()-1).toCharArray()[0]=='['){
+                    requestlist.add(tempet); 
+                    tempet = new ArrayList<>();
+                    pile.remove(pile.size()-1); 
+                }
+                else if(pile.get(pile.size()-1).toCharArray()[0]=='('){
+                    tempet.add(temptag); 
+                    temptag=""; 
+                    pile.remove(pile.size()-1);
+                }
+            }else{
+                    temptag+=tagoper.charAt(i);
+                }
+        }
+   }
+	
+	
+
+	private boolean taginlist(String tag,  List<String> tags){
+		for(int i=0; i<tags.size(); ++i){
+			System.out.println("FROM UI: " + tag +" VSVSVS "+"FROM BDD: "+ tags.get(i) );
+			if(tags.get(i).equalsIgnoreCase(tag)){
+				return true; 
+			}
+		}
+		return false; 
+	}
+	private boolean andconditiontourl(List<String> andcondition,List<String> tags ){
+		boolean verified=true;
+		for(int i=0; i<andcondition.size() && verified;++i){
+			if(andcondition.get(i).charAt(0)=='!'){
+				verified=verified && (!taginlist(andcondition.get(i).substring(1),tags));
+			}
+			else{
+				verified=verified && taginlist(andcondition.get(i),tags); 
+			}
+		}
+		return verified; 
+	}
+	
+	private boolean orconditiontourl(List<List<String>> advancedcondition,List<String> tags ){
+		boolean verified=false;
+		for(int i=0; i<advancedcondition.size() && !verified;++i){
+			//System.out.println(advancedcondition.get(i).get(0)+" vs "+ tags.size() ) ; 
+			verified=verified || andconditiontourl(advancedcondition.get(i),tags );
+		}
+		return verified; 
+	}
+	
+	public List<Url> advancedsearch(String tagoper){
+		List<Url> returnurls = new ArrayList<Url>();
+		List<List<String>> advancedcondition =new ArrayList<List<String>>(); 
+		createadvancedcondition(tagoper,advancedcondition);
+		for(int i =0; i<uUrls.size();++i){
+			 if(orconditiontourl(advancedcondition,uUrls.get(i).getAllTagString(uTagMap)))
+				 returnurls.add(uUrls.get(i));
+		}
+		//System.out.println("length of result"+ returnurls.size());
+	    return returnurls;
+	}
+		
+	
 	
 	public HashMap<Tag,ArrayList<Url>> getTagAutoCompletion(String part){
 		HashMap<Tag,ArrayList<Url>> mapResult = new HashMap<Tag,ArrayList<Url>>();
