@@ -184,7 +184,6 @@
 			               result = prop;
 			        return { name: result, rgb: this.names[result]};
 			    };
-
 			</script>
 	  
 <section>
@@ -398,12 +397,8 @@ function addVisitToUrl(id){
 				 <div> 
 				    <input  type="button" name ="Jump" value="Jump" onclick="searchTag()" id="butJump">
 				</div> 
-
 			</div>
 	</div> 
-   
-   
-
 
 
 <script type="text/javascript">
@@ -415,7 +410,6 @@ Drag.init(theHandle, theRoot);
 	
 </section>
 	  
-	
      <script  type="text/javascript" src="http://d3lp1msu2r81bx.cloudfront.net/kjs/js/lib/kinetic-v5.0.2.min.js"></script>
    	 <script  type="text/javascript" defer="defer">
 
@@ -751,7 +745,6 @@ Drag.init(theHandle, theRoot);
    						  text.on('dragend', function() {
    						  	if(text.x()+group.x()>450 && text.y()+group.y()>450){
    						  		group.remove(); 
-   						  		alert(text.getAttr("text"));
    						  		deleteovalbytag(ovals,selectedpiece,text.getAttr("text"));
    						  		drawovals(ovals, document.getElementById('layer1'));
    								drawallpieces(selectedpiece,ovals,canvas3);
@@ -854,6 +847,7 @@ Drag.init(theHandle, theRoot);
    					img.onload = function() { context4.drawImage(img,canvas4.width*90/100, canvas4.height*90/100,canvas4.width*10/100,canvas4.height*10/100);};
    					img.src = 'http://wcdn1.dataknet.com/static/resources/icons/set20/f02a629829e9.png';
    					layer.draw();
+
    					 </script>
 					<script>
 					function searchTag(){
@@ -902,34 +896,7 @@ Drag.init(theHandle, theRoot);
 						xhr_obj.send(null);
 					}
 					</script>
-				<aside>
-					<div id="tag_list">
-						<div class="panel panel-default">
-							  <div class="panel-heading">
-							    <h3 class="panel-title">Liste des tags</h3>
-							  </div>
-							    <div class="panel-body" style="height:283px;">
-									<div id="tag_names"/>									
-										<!-- Load all tag names from the database here -->							
-									</div>
-								</div>
-							</div>
-						<div id="input_tag">
-							<div class="input-group">
-							  <span class="input-group-addon">Add tags</span>
-							  <input type="text" class="form-control" placeholder="Tag name" id="tag_name">
-							</div>
-		<form name="search" onsubmit="searchTag()">
-			<fieldset>
-				<p><input type="button" name ="Jump" value="Jump" onclick="searchTag()"></p>
-			</fieldset>
-		</form>
-       <div id="urls">
-	
-	  </div>
 
-						</div>
-					</div>
 					<script language="javascript" type="text/javascript">
 						//Create new tag in the list
 						var element= document.getElementById("tag_name");
@@ -949,18 +916,18 @@ Drag.init(theHandle, theRoot);
 									span.appendChild(newlinktext);
 									var tag_names= document.getElementById("tag_names");
 									tag_names.appendChild(span);*/	
-									
+											
 									var ovalnew=new Tagoval("#"+element.value,0.5,0.5,2*Math.PI*Math.random(),0.2,0.5,Colors.random().rgb);
-
 									addoval(ovals,selectedpiece,ovalnew);
 									drawdynoval(ovalnew,layer,stage,stage.width(),stage.height());
 									drawovals(ovals, document.getElementById('layer1'));
 									drawallpieces(selectedpiece,ovals,canvas3);
 									writeMessagedyn(allpiecestostring(ovals,selectedpiece));
-									
+
 									layer.draw();
 									element.value="";
 								}
 							}
 						},false);
+
 					</script>

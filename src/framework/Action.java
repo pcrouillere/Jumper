@@ -179,7 +179,6 @@ public class Action {
 	 * @param req	: HttpServletRequest **/	
 	
 	public HttpServletRequest login(HttpServletRequest req, HttpServletResponse response) {
-			
 		String email = req.getParameter("email");
 		String mdp = req.getParameter("password");
 		boolean access = false;
@@ -410,8 +409,29 @@ public class Action {
 		return req;
 	}
 
-	public HttpServletRequest addtagurl(HttpServletRequest req,
-			HttpServletResponse response) throws SQLException {
+	
+
+	public HttpServletRequest suggestion(HttpServletRequest req, HttpServletResponse response) throws SQLException {
+		User user = User.getInstance();
+		return req;
+	}
+
+	/** Fonction advancedsearch
+	 * Gere la page advancedsearch de l'application
+	 * @param req	: HttpServletRequest **/
+	
+	public HttpServletRequest advancedsearch(HttpServletRequest req, HttpServletResponse response){
+		User user = User.getInstance(); 
+		List<Tag> allTags = user.getAllTag();
+		List<Url> allUrls = user.getUntaggedUrl();
+		req.setAttribute("tags", allTags);
+		req.setAttribute("untaggedurls", allUrls);
+		//req.setAttribute("script", script);
+		return req;
+	
+	}
+
+	public HttpServletRequest addtagurl(HttpServletRequest req,			HttpServletResponse response) throws SQLException {
 		User user = User.getInstance();
 		if (user == null) {
 			this.parent.redirect("login", true);
@@ -441,58 +461,6 @@ public class Action {
 			return req;
 		}
 	}
-
-	public HttpServletRequest suggestion(HttpServletRequest req,
-			HttpServletResponse response) throws SQLException {
-		User user = User.getInstance();
-		return req;
-	}
-
-	/** Fonction advancedsearch
-	 * Gere la page advancedsearch de l'application
-	 * @param req	: HttpServletRequest **/
-	
-	public HttpServletRequest advancedsearch(HttpServletRequest req, HttpServletResponse response){
-		User user = User.getInstance(); 
-		List<Tag> allTags = user.getAllTag();
-		List<Url> allUrls = user.getUntaggedUrl();
-		req.setAttribute("tags", allTags);
-		req.setAttribute("untaggedurls", allUrls);
-		//req.setAttribute("script", script);
-		return req;
-	
-	}
-<<<<<<< HEAD
-=======
-	
-
-	
-	
-	public HttpServletRequest addtagurl(HttpServletRequest req, HttpServletResponse response)
-	{
-		User user = User.getInstance(); 
-		String uri =(String) req.getParameter("url");
-		String listTag=(String)req.getParameter("list");
-		Url url=user.getUrlById(Integer.valueOf(uri));
-		String str[] = listTag.split("\\$\\$\\$");
-		for(int i=0; i<str.length; i++)
-		{
-			Tag tag = user.getTagByName(str[i]);
-			if(tag == null) {
-				//add tag
-				tag=new Tag(str[i],user.getuId());
-				tag.addTagtoBDD();
-				tag.setTid(tag.getTagIdFromBDD());
-				user.addOneTag(tag);
-			} 
-			TagMap tm=new TagMap(tag,url);
-			tm.addTagMaptoBDD(user.getuId());
-			tm.setTmId(tm.getIdFromBdd());
-			user.addOneMap(tm);
-		}
-		return req;
-	}
->>>>>>> advanced search
 
 }
 
