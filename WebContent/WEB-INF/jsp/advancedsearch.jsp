@@ -889,7 +889,6 @@ function addVisitToUrl(id){
 
 									layer.draw();
 									element.value="";
-
 								}
 								i++;
 							}
