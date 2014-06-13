@@ -89,7 +89,7 @@ function addVisitToUrl(id){
 		<li><a href="?page=accueil"><%=nbUrls.intValue()%> favoris</a></li>
 		<li><a href="?page=ajoutertag"><%=nbUntaggedUrls.intValue()%> favoris a trier</a></li>
 	</ul>
-	<div id="content_page">
+	<div id="content_page" style="height:120%">
 	<table class="tagbyid">
 	<caption><%=tag.gettName() %></caption>
 	<% Iterator urlIt = listUrls.iterator();
