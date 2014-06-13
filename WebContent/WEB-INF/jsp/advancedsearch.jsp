@@ -139,7 +139,7 @@
 			
 			    Colors = {};
 			    Colors.names = {
-			        blacktag: "#4A8B87"
+			    		blacktag: "#4A8B87",
 			    };
 			    Colors.random = function() {
 			        var result;
@@ -171,14 +171,32 @@
 		margin:auto;
 		display:inline-block;
 	}
+	
+	a{
+		color : #COCOCO;
+		text-decoration : none;	
+	}
+	a p{
+		color : #COCOCO;
+		text-decoration : none;	
+	}
+	a:hover{
+		color : #C5252B;
+		text-decoration : none;
+	}
+	
+	a:visited{
+		color : #COCOCO;
+		text-decoration : none;
+	}
 	#graphesearch{
 	    position:absolute;
 	    border-radius: 20px;
 	    border:2px solid #C0C0C0;
 		padding : 10px;
 		display:block;
-		top:103px;
-		right:10px;
+		top:137px;
+		right:4px;
 	}
 	
 	#graphics{
@@ -187,11 +205,26 @@
 		height:450px; 
 	} 
 	
+	#caption{
+		background-color: #4A8B87;
+		-webkit-border-radius: 20px 20px 0 0;
+		-moz-border-radius: 20px 20px 0 0;
+		border-radius: 20px 20px 0 0;
+		color: #fff;
+		font-size: 15px;
+		padding: 15px 15px;
+		width : 75%;
+	}
+	
 	#list_resultats{
+		overflow-y :scroll;  
+		overflow-x :hidden; 
 		position : relative;
 		width : 78%;
 		height:540px;
 	}
+	
+	
 	#butJump {
 	    border-radius: 8px;
 	    width: 500px;
@@ -220,16 +253,7 @@
 		padding : 10px;
 		width : 33%
 	}
-	caption{
-		background-color: #4A8B87;
-		-webkit-border-radius: 20px 20px 0 0;
-		-moz-border-radius: 20px 20px 0 0;
-		border-radius: 20px 20px 0 0;
-		color: #fff;
-		font-size: 15px;
-		padding: 15px 15px;
-		width : 100%;
-	}
+	
 	
 	#tag_name{
 		width : 100%;
@@ -321,11 +345,10 @@ function addVisitToUrl(id){
 </script>
   
 	<div id="content_page">
-		<div id ="list_resultats">	
-			<table>
-				<caption>Resultat</caption>
-			</table>
-		</div>
+			<div id="caption">Resultats</div>
+			<div id ="list_resultats">	
+		
+			</div>	
 			<div id="graphesearch">
 			<!--  <div id="handle">Handle</div>-->
 				<div>
@@ -839,7 +862,7 @@ Drag.init(theHandle, theRoot);
 										textResult = "";
 										textResult += "<table>";
 										var i = 0;
-										textResult +="<caption>Resultat</caption>";
+										//textResult +="<caption>Resultat</caption>";
 										for (var j = 0; j <= (listSites.length/3); j++) {
 											textResult +="<tr>" ;
 											for(var k =0; k<=2; k++){
@@ -859,7 +882,7 @@ Drag.init(theHandle, theRoot);
 									}else{
 										textResult = "";
 										textResult += "<table>";
-										textResult +="<caption>Resultat</caption>";
+										//textResult +="<caption>Resultat</caption>";
 										textResult += "</table>";
 									}
 								
