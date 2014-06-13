@@ -380,7 +380,7 @@ function addVisitToUrl(id){
 					  <canvas id="trush" class="mCanvas6" ></canvas>
 			   </div>
 				 <div> 
-				    <input  type="button" name ="Jump" value="Rechercher" onclick="searchTag()" id="butJump">
+				    <input  type="button" name ="Jump" onclick="searchTag()" id="butJump">
 				</div> 
 			</div>
 	</div> 
@@ -608,7 +608,8 @@ Drag.init(theHandle, theRoot);
    								   for(var i in selectedpiece){
    									  drawpiece2(selectedpiece[i],ovals,tempCanvas);
    									  contexts.drawImage(tempCanvas,0,0);
-   								   }   
+   								   }
+   								   searchTag(); 
    							}
    							
    							function deletepiece(selectedpiece,piece){
