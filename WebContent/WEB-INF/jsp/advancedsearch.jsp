@@ -139,21 +139,7 @@
 			
 			    Colors = {};
 			    Colors.names = {
-			   
-			        black: "#000000",
-			      
-			        brown: "#a52a2a",
-			        darkblue: "#00008b",
-			        darkcyan: "#008b8b",
-			        darkgrey: "#a9a9a9",
-			        darkgreen: "#006400",
-			        darkkhaki: "#bdb76b",
-			        darkmagenta: "#8b008b",
-			        darkolivegreen: "#556b2f",
-			        darkorchid: "#9932cc",
-			        darkviolet: "#9400d3",
-			        purple: "#800080",
-			        violet: "#800080",
+			        blacktag: "#4A8B87"
 			    };
 			    Colors.random = function() {
 			        var result;
@@ -191,8 +177,8 @@
 	    border:2px solid #C0C0C0;
 		padding : 10px;
 		display:block;
-		top:137px;
-		right:4px;
+		top:103px;
+		right:10px;
 	}
 	
 	#graphics{

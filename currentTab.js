@@ -8,7 +8,6 @@ function currentTab() {
 			  var title = tab.title;
 			  var userid = cookie.value;
 			  var success = file('http://localhost:8080/Jump/?page=addurl&id='+userid+'&url='+url+'&nomUrl='+title);
-			  if(success == 200) alert("Ce site a bien ete enregistre");
 			  if(success == 201) alert("Cette URL fait deja  parti de vos favoris");
 			  if(success == 400) alert("Une erreur est survenue lors de l'ajout de l'URL");
 			}
