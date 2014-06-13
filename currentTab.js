@@ -26,8 +26,7 @@ function file(fichier)
     { 
        if(xhr_object.readyState  == 4)
        {
-        if(xhr_object.status == 200) alert("Ce site a bien ete enregistre");
-		else if(xhr_object.status == 201) alert("Cette URL fait deja  parti de vos favoris");
+        if(xhr_object.status == 200)
         else
             alert("Une erreur est survenue lors de l'ajout de l'URL");
         }
