@@ -139,7 +139,7 @@
 			
 			    Colors = {};
 			    Colors.names = {
-			        blacktag: "#4A8B87"
+			    		blacktag: "#4A8B87",
 			    };
 			    Colors.random = function() {
 			        var result;
@@ -171,14 +171,32 @@
 		margin:auto;
 		display:inline-block;
 	}
+	
+	a{
+		color : #COCOCO;
+		text-decoration : none;	
+	}
+	a p{
+		color : #COCOCO;
+		text-decoration : none;	
+	}
+	a:hover{
+		color : #C5252B;
+		text-decoration : none;
+	}
+	
+	a:visited{
+		color : #COCOCO;
+		text-decoration : none;
+	}
 	#graphesearch{
 	    position:absolute;
 	    border-radius: 20px;
 	    border:2px solid #C0C0C0;
 		padding : 10px;
 		display:block;
-		top:103px;
-		right:10px;
+		top:137px;
+		right:4px;
 	}
 	
 	#graphics{
@@ -186,7 +204,6 @@
 	 	width:100%;
 		height:450px; 
 	} 
-	
 	
 	#caption{
 		background-color: #4A8B87;
@@ -196,14 +213,14 @@
 		color: #fff;
 		font-size: 15px;
 		padding: 15px 15px;
-		width : 87%;
+		width : 75%;
 	}
 	
 	#list_resultats{
 		overflow-y :scroll;  
 		overflow-x :hidden; 
 		position : relative;
-		width : 90%;
+		width : 78%;
 		height:540px;
 	}
 	
@@ -328,10 +345,10 @@ function addVisitToUrl(id){
 </script>
   
 	<div id="content_page">
-		<div id="caption">Resultats</div>
-		<div id ="list_resultats">	
+			<div id="caption">Resultats</div>
+			<div id ="list_resultats">	
 		
-		</div>
+			</div>	
 			<div id="graphesearch">
 			<!--  <div id="handle">Handle</div>-->
 				<div>
