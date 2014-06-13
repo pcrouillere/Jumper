@@ -139,13 +139,10 @@
 			
 			    Colors = {};
 			    Colors.names = {
-			        aqua: "#00ffff",
-			        azure: "#f0ffff",
-			        beige: "#f5f5dc",
+			   
 			        black: "#000000",
-			        blue: "#0000ff",
+			      
 			        brown: "#a52a2a",
-			        cyan: "#00ffff",
 			        darkblue: "#00008b",
 			        darkcyan: "#008b8b",
 			        darkgrey: "#a9a9a9",
@@ -153,28 +150,10 @@
 			        darkkhaki: "#bdb76b",
 			        darkmagenta: "#8b008b",
 			        darkolivegreen: "#556b2f",
-			        darkorange: "#ff8c00",
 			        darkorchid: "#9932cc",
-			        darkred: "#8b0000",
-			        red :"#FF0000",
-			        darksalmon: "#e9967a",
 			        darkviolet: "#9400d3",
-			        fuchsia: "#ff00ff",
-			        gold: "#ffd700",
-			        green: "#008000",
-			        indigo: "#4b0082",
-			        khaki: "#f0e68c",
-			        lime: "#00ff00",
-			        magenta: "#ff00ff",
-			        maroon: "#800000",
-			        navy: "#000080",
-			        olive: "#808000",
-			        orange: "#ffa500",
-			        pink: "#ffc0cb",
 			        purple: "#800080",
 			        violet: "#800080",
-			        silver: "#c0c0c0"
-			      
 			    };
 			    Colors.random = function() {
 			        var result;
@@ -279,6 +258,7 @@
 		width:100%; 
 		height:100% ;
 		display:none;
+		 z-index: 1;
       }
    
    .mCanvas2{
@@ -598,11 +578,11 @@ Drag.init(theHandle, theRoot);
    					     }
    					   
    							function drawpiece2(piece,ovals,canvas){
-   								if(piece.length=ovals.length){
+   								if(piece.length==ovals.length){
    									for(var i in piece){
    										ovals[i].mouseon=piece[i];
    									}
-   									drawpiece(ovals,canvas,'#ffff00');
+   									drawpiece(ovals,canvas,'#C5252B');
    								}
    								
    							}
@@ -669,7 +649,7 @@ Drag.init(theHandle, theRoot);
 
    						  
    						  	function drawandfill(oval, canvas,color) {
-   							  color = typeof color !== 'undefined' ? color : '#ffff00';
+   							  color = typeof color !== 'undefined' ? color : '#C5252B';
    						      var context = canvas.getContext('2d');
    					              context.save();
    						          var centerX = canvas.width * oval.x_por;
@@ -685,7 +665,7 @@ Drag.init(theHandle, theRoot);
    						  }
    						  
    						   function drawpiece(ovals,canvas,color){
-   						   color = typeof color !== 'undefined' ? color : '#ffff00';
+   						   color = typeof color !== 'undefined' ? color : '#C5252B';
    						      
    						    context=canvas.getContext('2d');
    							context.save();
@@ -703,6 +683,7 @@ Drag.init(theHandle, theRoot);
    					        context.rect(0, 0,canvas.width, canvas.height);
    					        context.fillStyle = color;
    					        context.fill();
+   					        
    							
    							
    							for(var i in ovals){
@@ -748,7 +729,7 @@ Drag.init(theHandle, theRoot);
    						  		deleteovalbytag(ovals,selectedpiece,text.getAttr("text"));
    						  		drawovals(ovals, document.getElementById('layer1'));
    								drawallpieces(selectedpiece,ovals,canvas3);
-   								writeMessagedyn(allpiecestostring(ovals,selectedpiece));
+   								//writeMessagedyn(allpiecestostring(ovals,selectedpiece));
    								layer.draw();
    						  	};
    					      });
@@ -818,7 +799,7 @@ Drag.init(theHandle, theRoot);
    							
    								drawallpieces(selectedpiece,ovals,canvas3);
    								//context3.restore();
-   								writeMessagedyn(allpiecestostring(ovals,selectedpiece));
+   								//writeMessagedyn(allpiecestostring(ovals,selectedpiece));
    								
    								});
    								
@@ -866,7 +847,8 @@ Drag.init(theHandle, theRoot);
 							if (xhr_obj.readyState == 4 && xhr_obj.responseText) {
 									var result = xhr_obj.responseText;
 									var textResult = "";
-									if(result!="!!!"){
+									var test = result.replace(/(\r\n|\n|\r)/gm,"");
+									if(test!="!!!"){
 										var listSites = result.split('\n');
 										textResult = "";
 										textResult += "<table>";
@@ -888,7 +870,13 @@ Drag.init(theHandle, theRoot);
 											textResult +="</tr>" ;
 										}
 										textResult += "</table>";
+									}else{
+										textResult = "";
+										textResult += "<table>";
+										textResult +="<caption>Resultat</caption>";
+										textResult += "</table>";
 									}
+								
 									document.getElementById('list_resultats').innerHTML = textResult;
 							}
 						};
@@ -922,7 +910,7 @@ Drag.init(theHandle, theRoot);
 									drawdynoval(ovalnew,layer,stage,stage.width(),stage.height());
 									drawovals(ovals, document.getElementById('layer1'));
 									drawallpieces(selectedpiece,ovals,canvas3);
-									writeMessagedyn(allpiecestostring(ovals,selectedpiece));
+									//writeMessagedyn(allpiecestostring(ovals,selectedpiece));
 
 									layer.draw();
 									element.value="";
