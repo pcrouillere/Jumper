@@ -28,7 +28,7 @@ import dao.*;
 public class Action {
 	FrontController parent = null;
 	String colorTab[] = { "#FDAE6B", "#A1D99B", "#9ECAE1", "#31A354",
-			"#3182BD", "#FD8D3C", "#A1D99B", "#C6DBEF", "#FDD0A2" };
+			"#3182BD", "#FD8D3C", "#FFA5E2", "#C6DBEF", "#FDD0A2" };
 
 	public Action(FrontController parent) {
 		this.parent = parent;
@@ -209,7 +209,7 @@ public class Action {
 		String email = req.getParameter("email");
 		String mdp = req.getParameter("password");
 		if(name!=null && email!=null &&mdp!=null){
-			//ajouter l'utilisateur a la base de données
+			//ajouter l'utilisateur a la base de donnï¿½es
 			User.addNewUser(email, mdp, name);
 			parent.redirect("login", true);
 		}
