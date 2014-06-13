@@ -149,6 +149,10 @@ public class User extends Dao {
 	
 	public void setuUrls(List<Url> uUrls) {
 		this.uUrls = uUrls;
+		if(uUrls==null){
+			uUrls.clear();
+			nbUrl=0;
+		}
 	}
 	/* Fonction qui retourne le tag recherch� en fonction de son ID */
 	public Tag getTagById(int id) {
@@ -188,7 +192,14 @@ public class User extends Dao {
 	}
 
 	public void setuTagMap(List<TagMap> uTagMap) {
-		this.uTagMap = uTagMap;
+		if(uTagMap==null){
+			uTagMap.clear();
+			nbTagMap=0;
+		}
+		else {
+			this.uTagMap = uTagMap;
+		}
+
 	}
 
 	/* Fonction pour ajouter un tag dans la liste des tags de l'utilisateur */
@@ -206,6 +217,7 @@ public class User extends Dao {
 	public void addOneMap(TagMap tagMap){
 		uTagMap.add(tagMap);
 		nbTagMap++;
+		System.out.println("Add");
 	}
 	
 	// TODO : Enlever les variables temporaires
