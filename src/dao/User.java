@@ -175,6 +175,14 @@ public class User extends Dao {
 		return null;
 	}
 	
+	public Url getUrlByUri(String uri){
+		for(int i=0; i< uUrls.size(); i++){
+			if(uUrls.get(i).getuUri()==uri)
+				return uUrls.get(i);
+		}
+		return null;
+	}
+	
 	public List<TagMap> getuTagMap() {
 		return uTagMap;
 	}
