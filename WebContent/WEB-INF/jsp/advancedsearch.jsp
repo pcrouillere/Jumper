@@ -173,11 +173,7 @@
 	}
 	
 	a{
-		color : #COCOCO;
-		text-decoration : none;	
-	}
-	a p{
-		color : #COCOCO;
+		color : grey;
 		text-decoration : none;	
 	}
 	a:hover{
@@ -195,7 +191,7 @@
 	    border:2px solid #C0C0C0;
 		padding : 10px;
 		display:block;
-		top:137px;
+		top:106px;
 		right:4px;
 	}
 	
@@ -384,7 +380,7 @@ function addVisitToUrl(id){
 					  <canvas id="trush" class="mCanvas6" ></canvas>
 			   </div>
 				 <div> 
-				    <input  type="button" name ="Jump" value="Jump" onclick="searchTag()" id="butJump">
+				    <input  type="button" name ="Jump" value="Rechercher" onclick="searchTag()" id="butJump">
 				</div> 
 			</div>
 	</div> 
@@ -882,7 +878,7 @@ Drag.init(theHandle, theRoot);
 									}else{
 										textResult = "";
 										textResult += "<table>";
-										//textResult +="<caption>Resultat</caption>";
+										textResult +="<p>Pas de resultat</p>";
 										textResult += "</table>";
 									}
 								
