@@ -392,21 +392,29 @@ public class Action {
 		String siteUrl = req.getParameter("url");
 		String nomUrl = req.getParameter("nomUrl");
 		Url url = new Url(idUser, siteUrl, nomUrl, 0);
-		try {
-			url.addUrlToDBB();
-			url.setuId(url.getIdFromBDD());
-			User user = (User) this.parent.user();
-			user.addOneUrl(url);
-			response.setStatus(200);
-		} catch (MySQLIntegrityConstraintViolationException e) {
-			// URL existe d�j� dans la BDD
+		User userInstance = User.getInstance();
+		Url oldurl = userInstance.getUrlByUri(siteUrl);
+		if(oldurl==null) {
+			try {
+				url.addUrlToDBB();
+				url.setuId(url.getIdFromBDD());
+				User user = (User) this.parent.user();
+				user.addOneUrl(url);
+				response.setStatus(200);
+			} catch (MySQLIntegrityConstraintViolationException e) {
+				// URL existe d�j� dans la BDD
+				System.out.println("URL duppliquee");
+				response.setStatus(201);
+	
+			} catch (SQLException e) {
+				// erreur dans l'insertion a la BDD
+				e.printStackTrace();
+				response.setStatus(400);
+			}
+		}
+		else {
 			System.out.println("URL duppliquee");
 			response.setStatus(201);
-
-		} catch (SQLException e) {
-			// erreur dans l'insertion a la BDD
-			e.printStackTrace();
-			response.setStatus(400);
 		}
 
 		return req;
