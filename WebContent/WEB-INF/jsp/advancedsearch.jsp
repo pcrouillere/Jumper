@@ -365,9 +365,29 @@ function addVisitToUrl(id){
 						}
 						%>
 						<script>
+						
 						$( "#tag_name" ).autocomplete({
 		  				source: alltags
-		  				,autoFocus: true});
+		  				,autoFocus: true,
+		  				minLength: 0,
+		  				 select: function (e, b) {
+		  					e.preventDefault();
+		  					$("#tag_name").val("");
+		  					var ovalnew=new Tagoval("#"+b.item.value,0.5,0.5,2*Math.PI*Math.random(),0.2,1,Colors.random().rgb);
+							addoval(ovals,selectedpiece,ovalnew);
+							drawdynoval(ovalnew,layer,stage,stage.width(),stage.height());
+							drawovals(ovals, document.getElementById('layer1'));
+							drawallpieces(selectedpiece,ovals,canvas3);
+							//writeMessagedyn(allpiecestostring(ovals,selectedpiece));
+
+							layer.draw();
+				
+		  			    }
+		  				}).focus(function(){            
+		  					 $(this).autocomplete("search");
+		  		        });
+				
+					
 						</script>
 				
 				</div>
@@ -891,37 +911,4 @@ Drag.init(theHandle, theRoot);
 					}
 					</script>
 
-					<script language="javascript" type="text/javascript">
-						//Create new tag in the list
-						var element= document.getElementById("tag_name");
-						var count=1;
-						element.addEventListener('keypress',function(e){
-							//ajouter les tags dans la tag_list
-							if(element.value!="")
-							{
-								//check if the user has pressed enter
-								var key = e.which || e.keycode;
-								if(key==13)
-								{
-									/*var span=document.createElement('p');
-									span.draggable="true";
-									span.ondragstart="drag(event)";
-									var newlinktext=document.createTextNode("#"+element.value);
-									span.appendChild(newlinktext);
-									var tag_names= document.getElementById("tag_names");
-									tag_names.appendChild(span);*/	
-											
-									var ovalnew=new Tagoval("#"+element.value,0.5,0.5,2*Math.PI*Math.random(),0.2,0.5,Colors.random().rgb);
-									addoval(ovals,selectedpiece,ovalnew);
-									drawdynoval(ovalnew,layer,stage,stage.width(),stage.height());
-									drawovals(ovals, document.getElementById('layer1'));
-									drawallpieces(selectedpiece,ovals,canvas3);
-									//writeMessagedyn(allpiecestostring(ovals,selectedpiece));
-
-									layer.draw();
-									element.value="";
-								}
-							}
-						},false);
-
-					</script>
+				
