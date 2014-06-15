@@ -367,7 +367,12 @@ function addVisitToUrl(id){
 						<script>
 						
 						$( "#tag_name" ).autocomplete({
-		  				source: alltags
+		  				    source: function(request, response) {
+		  			        var results = $.ui.autocomplete.filter(alltags, request.term);
+
+		  			        response(results.slice(0, 10));
+		  			    }
+
 		  				,autoFocus: true,
 		  				minLength: 0,
 		  				 select: function (e, b) {
