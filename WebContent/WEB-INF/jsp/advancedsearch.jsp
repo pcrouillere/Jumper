@@ -209,7 +209,7 @@
 		color: #fff;
 		font-size: 15px;
 		padding: 15px 15px;
-		width : 75%;
+		width : 70%;
 	}
 	
 	#list_resultats{
